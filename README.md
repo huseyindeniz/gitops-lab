@@ -1,2 +1,3 @@
 # cicd-lab
-CI/CD Playground (K8S, Terraform, Arog CD, Helm, Github Workflows etc.)
+
+CI/CD Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
