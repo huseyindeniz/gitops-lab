@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: my-docker-repo/your-dotnet-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+resources: {}

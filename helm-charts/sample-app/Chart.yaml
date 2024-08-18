@@ -1,0 +1,5 @@
+apiVersion: v2
+name: sample-app
+description: A Helm chart for deploying a .NET Web API app
+version: 1.0.0
+appVersion: "1.0"

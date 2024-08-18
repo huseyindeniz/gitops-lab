@@ -46,4 +46,18 @@ terraform output -json argo_cd_admin_password
 
 ### Adding new applications to Argo CD
 
-TODO
+TODO: Find the best practice for: - Multi project - Multi env
+
+- projects under Argo CD could be used for envs.
+- namespaces could be used for projects.
+
+Example
+
+- terraform/sample-app/providers.tf: Configures the Helm provider.
+- terraform/sample-app/main.tf: Defines the Helm release.
+- terraform/sample-app/values.yaml: Custom values for Helm chart.
+- helm-charts/sample-app/Chart.yaml: Metadata for Helm chart.
+- helm-charts/sample-app/values.yaml: Default values (can be overridden).
+- helm-charts/sample-app/templates/deployment.yaml: Kubernetes Deployment.
+- helm-charts/sample-app/templates/service.yaml: Kubernetes Service.
+- helm-charts/sample-app/templates/\_helpers.tpl: Helper functions.
