@@ -50,8 +50,9 @@ TODO: Find the best practice for: - Multi project - Multi env
 
 - projects under Argo CD could be used for envs.
 - namespaces could be used for projects.
+- app of apps pattern, applicationsets, anti-patterns?
 
-Example
+  Example
 
 - terraform/sample-app/providers.tf: Configures the Helm provider.
 - terraform/sample-app/main.tf: Defines the Helm release.
@@ -61,3 +62,47 @@ Example
 - helm-charts/sample-app/templates/deployment.yaml: Kubernetes Deployment.
 - helm-charts/sample-app/templates/service.yaml: Kubernetes Service.
 - helm-charts/sample-app/templates/\_helpers.tpl: Helper functions.
+
+###
+
+1. Argo CD Projects for Environments
+
+   Define separate Argo CD projects for each environment (e.g., prod, staging, dev). Projects can enforce different access controls, resource quotas, and sync policies per environment.
+
+2. Namespaces for Projects
+
+   Use Kubernetes namespaces to segregate different projects within the same environment. Each namespace can have its own set of applications (microservices), ensuring isolation and clarity.
+
+3. App of Apps Pattern
+
+   Utilize the App of Apps pattern to group microservices for each project. This allows for managing a large number of microservices under a single Argo CD project per environment.
+
+4. ApplicationSets
+
+   ApplicationSets can dynamically generate Argo CD applications based on a template. This is useful for managing repetitive tasks across environments, such as deploying microservices or handling multiple regions.
+
+5. GitOps Integration
+
+   Use separate Git repositories or branches for each environment, with each Argo CD project tracking the appropriate branch or repository. This setup maintains clear separation of concerns.
+
+6. Argo CD Sync Waves and Hooks
+
+   Implement sync waves and hooks to control deployment order, ensuring that dependencies between microservices are respected during updates.
+
+###
+
+Helm and Terraform: Developers create Helm charts for the microservice, and Terraform manages Kubernetes resources like namespaces, roles, and CRDs.
+
+Argo CD Integration: Argo CD monitors the Git repository containing the Helm charts. When Terraform applies the infrastructure, Argo CD detects changes (e.g., new Helm chart) and automatically deploys the microservice.
+
+Image Automation: Use Argo CD’s Image Updater or similar tools to detect new Docker images and trigger redeployments.
+
+### Overview of the Process
+
+Here’s what we’ll do to achieve your goal:
+
+- Set Up the Dotnet Web API: Create a simple .NET Core Web API project.
+- Create a Helm Chart: Develop a Helm chart to package your application for Kubernetes deployment.
+- Configure Terraform: Use Terraform to manage Kubernetes resources and deploy the Helm chart.
+- Set Up Argo CD: Configure Argo CD to monitor your Git repository and automatically deploy changes.
+- Integrate Image Automation: Set up Argo CD to update the deployment automatically when a new Docker image is published.
