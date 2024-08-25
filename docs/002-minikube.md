@@ -117,5 +117,4 @@ minikube service list
 ```bash
 minikube addons enable yakd
 minikube service yakd-dashboard -n yakd-dashboard
-minik
 ```

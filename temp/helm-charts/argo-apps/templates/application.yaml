@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Release.Name }}-projects
+  namespace: {{ .Values.environments.staging.namespace }}
+spec:
+  project: {{ .Values.environments.staging.project }}
+  source:
+    repoURL: 'https://github.com/huseyindeniz/cicd-lab'
+    targetRevision: HEAD
+    path: 'apps'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: {{ .Values.environments.staging.namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

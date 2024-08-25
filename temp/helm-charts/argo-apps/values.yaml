@@ -1,0 +1,7 @@
+environments:
+  staging:
+    project: hdk-staging
+    namespace: argo-cd
+  production:
+    project: hdk-production
+    namespace: argo-cd

@@ -8,7 +8,61 @@
 - **Docker Hub Repo**: Set up a Docker Hub repository for storing Docker images.
 - **Helm**: Install and configure Helm for package management.
 
-### Argo CD Installation
+TODO: Update following sections
+
+## Step 1
+
+Create a k8s cluster with 3 nodes
+
+```bash
+minikube start --nodes 3 --cpus 3 --memory 8192
+```
+
+Start a tunnel (LoadBalancer needs this)
+
+```bash
+minikube tunnel
+```
+
+Installing Argo CD in the Cluster
+
+We can install Argo CD in our cluster using one of the following approaches:
+
+- Direct Installation with kubectl:
+  - We can run kubectl commands to apply the official Argo CD manifests.
+- Installation via Terraform:
+  - We can use Terraform to manage and deploy the necessary Kubernetes resources for Argo CD.
+- Installation via Helm and Terraform:
+  - We can use a Helm chart and manage it with Terraform’s helm_release resource for automated and parameterized installation.
+
+## Directory Structure
+
+```
+root-directory/
+├── terraform/
+│ ├── project-a/
+│ │ ├── staging/
+│ │ └── production/
+│ └── main.tf
+├── helm-charts/
+│ ├── argo-cd/
+│ └── project-a/
+│ ├── service1/
+│ ├── service2/
+│ └── database/
+├── argo-cd-apps/
+│ ├── app-of-apps/
+│ │ ├── staging/
+│ │ └── production/
+│ ├── applicationsets/
+│ │ ├── staging/
+│ │ └── production/
+└── docs/
+```
+
+## Step 2 ArgoCD Installation
+
+-
 
 The installations above are straightforward. Follow the official documentation for each tool.
 
@@ -106,3 +160,7 @@ Here’s what we’ll do to achieve your goal:
 - Configure Terraform: Use Terraform to manage Kubernetes resources and deploy the Helm chart.
 - Set Up Argo CD: Configure Argo CD to monitor your Git repository and automatically deploy changes.
 - Integrate Image Automation: Set up Argo CD to update the deployment automatically when a new Docker image is published.
+
+Argo CD Installation: Per project + environment (e.g., staging-project-a, production-project-a).
+Argo CD Projects: Organize microservices within each Argo CD installation.
+Teams: Managed via RBAC, allowing multiple teams to own multiple microservices across Argo CD projects. Argo CD projects help organize services, while RBAC provides flexible team ownership and access.
