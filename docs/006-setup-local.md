@@ -12,17 +12,54 @@ TODO: Update following sections
 
 ## Step 1
 
-Create a k8s cluster with 3 nodes
+Create a k8s cluster with 3 nodes (3cpus/4GB memory each)
 
 ```bash
-minikube start --nodes 3 --cpus 3 --memory 8192
+minikube start --nodes 3 --cpus 2 --memory 4096
 ```
 
-Start a tunnel (LoadBalancer needs this)
+## Step 2
+
+Enable ingress to access argo cd via url later
+
+```bash
+minikube addons enable ingress
+```
+
+## Step 3
+
+Start a tunnel (requests to localhost will be redirected to minikube)
 
 ```bash
 minikube tunnel
 ```
+
+## Step 4
+
+install Argo CD for project 001 staging (in $root/terraform/project-001/staging/ directory)
+
+```bash
+terraform init
+terraform apply
+```
+
+argo cd should be avaliable http://project001.staging.argocd.local
+and "admin" password could be retrieved by running
+
+```bash
+terraform output project_001_staging_argo_cd_admin_password
+```
+
+## Step 5
+
+TODO: decide app of apps, or applicationset or both in argo cd
+
+Hybrid approach seems logical.
+
+- app of apps could automatically detect new microservices under project 001 staging
+- applicationset could create same microservices in multiple staging envs.
+
+## obsolete notes
 
 Installing Argo CD in the Cluster
 
@@ -40,23 +77,11 @@ We can install Argo CD in our cluster using one of the following approaches:
 ```
 root-directory/
 ├── terraform/
-│ ├── project-a/
+│ ├── project-001/
 │ │ ├── staging/
 │ │ └── production/
-│ └── main.tf
 ├── helm-charts/
-│ ├── argo-cd/
-│ └── project-a/
-│ ├── service1/
-│ ├── service2/
-│ └── database/
-├── argo-cd-apps/
-│ ├── app-of-apps/
-│ │ ├── staging/
-│ │ └── production/
-│ ├── applicationsets/
-│ │ ├── staging/
-│ │ └── production/
+├── apps
 └── docs/
 ```
 

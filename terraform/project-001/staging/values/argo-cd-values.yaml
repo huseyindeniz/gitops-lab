@@ -6,17 +6,6 @@ server:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     pathType: Prefix
     hostname: project001.staging.argocd.local
-    rules:
-      - host: project001.staging.argocd.local
-        http:
-          paths:
-            - path: /
-              pathType: Prefix
-              backend:
-                service:
-                  name: project-001-staging-argo-cd-argocd-server
-                  port:
-                    number: 8080
   service:
     type: ClusterIP
   extraArgs:
