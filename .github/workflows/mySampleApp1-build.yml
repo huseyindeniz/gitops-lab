@@ -31,7 +31,7 @@ jobs:
           file: apps/my-sample-app-1/mySampleApp1.weatherForecast.API/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api:latest
+            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api:${{ github.sha }}:latest
             ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api:${{ github.sha }}
           
       - name: Log out from GitHub Container Registry
