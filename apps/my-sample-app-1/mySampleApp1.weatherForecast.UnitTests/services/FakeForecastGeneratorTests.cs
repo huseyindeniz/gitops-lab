@@ -3,7 +3,7 @@
 namespace mySampleApp1.weatherForecast.UnitTests.services
 {
     [Trait("Category", "Unit")]
-    [Trait("Microservice", "weatherForecast")]
+    [Trait("Service", "weatherForecast")]
     public class FakeForecastGeneratorTests
     {
         [Fact]
