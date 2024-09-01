@@ -5,6 +5,8 @@ using System.Text.Json;
 
 namespace mySampleApp1.weatherForecast.IntegrationTests
 {
+    [Trait("Category", "Integration")]
+    [Trait("Service", "weatherForecast")]
     public class WeatherForecastControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly HttpClient _client;
@@ -23,7 +25,7 @@ namespace mySampleApp1.weatherForecast.IntegrationTests
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+            Assert.Equal("application/json; charset=utf-8", response?.Content?.Headers?.ContentType?.ToString());
         }
 
         [Fact]
