@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'apps/my-sample-app-1/**'
+  workflow_dispatch:  # Allows manual triggering
+  
 jobs:
   build-weatherForecast-api:
     runs-on: ubuntu-latest
