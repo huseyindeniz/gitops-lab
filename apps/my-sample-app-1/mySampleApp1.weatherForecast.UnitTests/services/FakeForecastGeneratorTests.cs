@@ -1,13 +1,9 @@
-﻿using mySampleApp1.weatherForecast.Domain;
-using mySampleApp1.weatherForecast.Domain.services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using mySampleApp1.weatherForecast.Domain.services;
 
 namespace mySampleApp1.weatherForecast.UnitTests.services
 {
+    [Trait("Category", "Unit")]
+    [Trait("Microservice", "weatherForecasts")]
     public class FakeForecastGeneratorTests
     {
         [Fact]

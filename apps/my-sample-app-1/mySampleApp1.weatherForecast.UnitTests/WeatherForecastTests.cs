@@ -2,6 +2,8 @@ using mySampleApp1.weatherForecast.Domain;
 
 namespace mySampleApp1.weatherForecast.UnitTests
 {
+    [Trait("Category", "Unit")]
+    [Trait("Microservice", "weatherForecasts")]
     public class WeatherForecastTests
     {
         [Fact]
