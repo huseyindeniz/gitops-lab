@@ -3,7 +3,7 @@ using mySampleApp1.weatherForecast.Domain;
 namespace mySampleApp1.weatherForecast.UnitTests
 {
     [Trait("Category", "Unit")]
-    [Trait("Microservice", "weatherForecasts")]
+    [Trait("Microservice", "weatherForecast")]
     public class WeatherForecastTests
     {
         [Fact]
