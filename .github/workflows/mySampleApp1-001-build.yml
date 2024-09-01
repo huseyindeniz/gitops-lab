@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  mySampleApp1-build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
