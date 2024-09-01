@@ -26,10 +26,13 @@ jobs:
         run: dotnet build --configuration Release --no-restore apps/my-sample-app-1
 
       - name: Publish the application
-        run: dotnet publish --configuration Release --output ./output/apps/my-sample-app-1 --no-restore apps/my-sample-app-1
+        run: |
+          for project in $(find apps/my-sample-app-1 -name '*.csproj'); do
+            dotnet publish $project --configuration Release --no-restore
+          done
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: my-sample-app-1-artifacts
-          path: ./output/apps/my-sample-app-1
+          path: ./output
