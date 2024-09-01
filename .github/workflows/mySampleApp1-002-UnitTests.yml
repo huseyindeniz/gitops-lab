@@ -1,0 +1,39 @@
+name: MySampleApp1 - UnitTests
+
+on:
+  pull_request:
+    paths:
+      - 'apps/my-sample-app-1/**'
+  workflow_dispatch:  # Allows manual triggering
+  workflow_run:
+    workflows: ["MySampleApp1 - Build and Upload Artifacts"]
+    types:
+      - completed
+
+jobs:
+  unit-weatherForecast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: my-sample-app-1-artifacts
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Run Unit Tests for weatherForecast
+        run: |
+          dotnet test apps/my-sample-app-1/my-sample-app-1.sln --no-restore --configuration Release --filter "Category=Unit&Microservice=weatherForecast" --logger "trx;LogFileName=mySampleApp1-weatherForecastUnitTests.trx"
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: weatherForecast-test-results
+          path: '**/*.trx'
