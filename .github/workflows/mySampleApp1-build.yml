@@ -4,7 +4,13 @@ on:
   pull_request:
     paths:
       - 'apps/my-sample-app-1/**'
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
+    inputs:
+        environment:
+          description: 'Select the environment'
+          required: true
+          type: choice
+          options: ${{ vars.ENV_NAMES }}  # Dynamically use the environment variable
 
 jobs:
   build-weatherForecast-api:
@@ -35,8 +41,8 @@ jobs:
           file: apps/my-sample-app-1/mySampleApp1.weatherForecast.API/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-staging:latest
-            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-staging:${{ env.TIMESTAMP }}
+            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-{{github.event.inputs.environment}}:latest
+            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-{{github.event.inputs.environment}}:${{ env.TIMESTAMP }}
           
       - name: Log out from GitHub Container Registry
         run: docker logout ghcr.io
