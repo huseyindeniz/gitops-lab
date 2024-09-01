@@ -10,7 +10,7 @@ on:
           description: 'Select the environment'
           required: true
           type: choice
-          options: ${{ vars.ENV_NAMES }}  # Dynamically use the environment variable
+          options: ${{ env.ENV_NAMES }}  # Dynamically use the environment variable
 
 jobs:
   build-weatherForecast-api:
