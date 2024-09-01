@@ -5,15 +5,18 @@ on:
     paths:
       - 'apps/my-sample-app-1/**'
   workflow_dispatch:  # Allows manual triggering
-  
+    inputs:
+      environment: 
+        description: 'Select the environment'
+        required: true
+        type: choice
+        options: ${{ vars.ENV_NAMES }}  # Dynamic reference to the centralized variable
+
 jobs:
   build-weatherForecast-api:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Display available environments
-        run: "echo Available environments: ${{ vars.ENV_NAMES }}"
-        
+    steps:      
       - name: Checkout code
         uses: actions/checkout@v4
 
