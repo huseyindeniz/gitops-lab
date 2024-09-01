@@ -35,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: my-sample-app-1-artifacts
-          path: ./output
+          path: apps/my-sample-app-1/**/bin/Release/**
