@@ -4,19 +4,14 @@ on:
   pull_request:
     paths:
       - 'apps/my-sample-app-1/**'
-  workflow_dispatch:
-    inputs:
-        environment:
-          description: 'Select the environment'
-          required: true
-          type: choice
-          options: ${{ env.ENV_NAMES }}  # Dynamically use the environment variable
-
 jobs:
   build-weatherForecast-api:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Display available environments
+        run: "echo Available environments: ${{ vars.ENV_NAMES }}"
+        
       - name: Checkout code
         uses: actions/checkout@v4
 
