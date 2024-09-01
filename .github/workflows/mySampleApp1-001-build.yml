@@ -1,4 +1,4 @@
-name: MySampleApp1 - Build and Upload Artifacts
+name: MySampleApp1 - Build and push Docker images
 
 on:
   pull_request:
@@ -14,27 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          dotnet-version: '8.x'
-
-      - name: Restore dependencies
-        run: dotnet restore apps/my-sample-app-1/mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj
-
-      - name: Build the application
-        run: dotnet build --configuration Release --no-restore apps/my-sample-app-1/mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj
-
-      - name: Publish the application
-        run: dotnet publish apps/my-sample-app-1/mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj --configuration Release --no-restore
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         
-      - name: Prepare artifact for upload
+      - name: Build and push Docker image
         run: |
-          mkdir -p output  # Create a temporary output directory
-          cp -r apps/my-sample-app-1/mySampleApp1.weatherForecast.API/bin/Release/**/publish/* output/  # Copy all files from the publish directory to the output directory
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-sample-app-1-weatherforecast-api-artifacts
-          path: output/**
+          docker build -t ghcr.io/${{ github.repository }}/weatherforecast-api:latest -f apps/my-sample-app-1/mySampleApp1.weatherForecast.API/Dockerfile apps/my-sample-app-1/mySampleApp1.weatherForecast.API/
+          docker push ghcr.io/${{ github.repository }}/weatherforecast-api:latest
