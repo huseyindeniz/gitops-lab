@@ -27,10 +27,14 @@ jobs:
 
       - name: Publish the application
         run: dotnet publish apps/my-sample-app-1/mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj --configuration Release --no-restore
+        
+      - name: Prepare artifact for upload
+        run: |
+          mkdir -p output  # Create a temporary output directory
+          cp -r apps/my-sample-app-1/mySampleApp1.weatherForecast.API/bin/Release/**/publish/* output/  # Copy all files from the publish directory to the output directory
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: my-sample-app-1-weatherforecast-api-artifacts
-          path: apps/my-sample-app-1/mySampleApp1.weatherForecast.API/bin/Release/**/publish/**
-          strip-components: 3  # Remove three directory levels to flatten the structure
+          path: output/**
