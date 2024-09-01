@@ -1,0 +1,26 @@
+name: MySampleApp1 - 001 - PR Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'apps/my-sample-app-1/**'
+
+jobs:
+  pr-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Ensure branch is up to date
+        run: git fetch origin main && git diff --exit-code main
+
+      - name: Check for merge conflicts
+        run: git fetch origin main && git merge --no-commit --no-ff main
+
+      - name: Require code review approval
+        uses: actions/approve-pull-request-action@v2
+        with:
+          min_approvals: 1
