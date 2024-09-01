@@ -1,0 +1,35 @@
+name: MySampleApp1 - Build and Upload Artifacts
+
+on:
+  pull_request:
+    paths:
+      - 'apps/my-sample-app-1/**'
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      - name: Restore dependencies
+        run: dotnet restore apps/my-sample-app-1
+
+      - name: Build the application
+        run: dotnet build --configuration Release --no-restore apps/my-sample-app-1
+
+      - name: Publish the application
+        run: dotnet publish --configuration Release --output ./output/apps/my-sample-app-1 --no-restore apps/my-sample-app-1
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-sample-app-1-artifacts
+          path: ./output/apps/my-sample-app-1
