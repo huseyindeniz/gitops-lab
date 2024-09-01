@@ -33,3 +33,4 @@ jobs:
         with:
           name: my-sample-app-1-weatherforecast-api-artifacts
           path: apps/my-sample-app-1/mySampleApp1.weatherForecast.API/bin/Release/**/publish/**
+          strip-components: 3  # Remove three directory levels to flatten the structure
