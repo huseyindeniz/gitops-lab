@@ -24,6 +24,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.CR_PAT }}
           
+      - name: Get current timestamp
+        id: get_timestamp
+        run: echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+          
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -31,8 +35,8 @@ jobs:
           file: apps/my-sample-app-1/mySampleApp1.weatherForecast.API/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-${{ github.sha }}:latest
-            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-${{ github.sha }}
+            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-staging:latest
+            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api-staging:${{ env.TIMESTAMP }}
           
       - name: Log out from GitHub Container Registry
         run: docker logout ghcr.io
