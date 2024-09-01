@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5099"
+      "applicationUrl": "http://localhost:5054"
     },
     "https": {
       "commandName": "Project",
@@ -18,7 +18,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7026;http://localhost:5099"
+      "applicationUrl": "https://localhost:7279;http://localhost:5054"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -33,8 +33,11 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HTTPS_PORTS": "8081",
-        "ASPNETCORE_HTTP_PORTS": "8080"
+        "ASPNETCORE_HTTP_PORTS": "8080",
+        "ASPNETCORE_Kestrel__Certificates__Default__Path": "/app/certs/mySampleApp1.weatherForecast.API.pfx",
+        "ASPNETCORE_Kestrel__Certificates__Default__Password": "12345"
       },
       "publishAllPorts": true,
       "useSSL": true
@@ -45,8 +48,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51762",
-      "sslPort": 44315
+      "applicationUrl": "http://localhost:50551",
+      "sslPort": 44363
     }
   }
 }

@@ -1,5 +1,5 @@
 
-namespace mySampleApp1.Application.WebApi
+namespace mySampleApp1.weatherForecast.API
 {
     public class Program
     {
