@@ -23,6 +23,9 @@ jobs:
         with:
           dotnet-version: '8.x'
 
+      - name: Restore dependencies
+        run: dotnet restore apps/my-sample-app-1/my-sample-app-1.sln
+      
       - name: Run Unit Tests for weatherForecast
         run: |
           dotnet test apps/my-sample-app-1/my-sample-app-1.sln --no-restore --configuration Release --filter "Category=Unit&Microservice=weatherForecast" --logger "trx;LogFileName=mySampleApp1-weatherForecastUnitTests.trx"
