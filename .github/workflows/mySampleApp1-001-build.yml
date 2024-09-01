@@ -7,7 +7,7 @@ on:
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  build:
+  build-weatherForecast-api:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,19 +20,16 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Restore dependencies
-        run: dotnet restore apps/my-sample-app-1
+        run: dotnet restore apps/my-sample-app-1/mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj
 
       - name: Build the application
-        run: dotnet build --configuration Release --no-restore apps/my-sample-app-1
+        run: dotnet build --configuration Release --no-restore apps/my-sample-app-1/mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj
 
       - name: Publish the application
-        run: |
-          for project in $(find apps/my-sample-app-1 -name '*.csproj'); do
-            dotnet publish $project --configuration Release --no-restore
-          done
+        run: dotnet publish apps/my-sample-app-1/mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj --configuration Release --no-restore
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: my-sample-app-1-artifacts
-          path: apps/my-sample-app-1/**/bin/Release/net8.0/**/*
+          name: my-sample-app-1-weatherforecast-api-artifacts
+          path: ./output/**
