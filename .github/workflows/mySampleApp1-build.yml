@@ -23,8 +23,16 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.CR_PAT }}
-        
+          
       - name: Build and push Docker image
-        run: |
-          docker build -t ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api:latest -f apps/my-sample-app-1/mySampleApp1.weatherForecast.API/Dockerfile apps/my-sample-app-1/
-          docker push ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api:latest
+        uses: docker/build-push-action@v4
+        with:
+          context: apps/my-sample-app-1/
+          file: apps/my-sample-app-1/mySampleApp1.weatherForecast.API/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api:latest
+            ghcr.io/${{ github.repository }}/my-sample-app-1-weatherforecast-api:${{ github.sha }}
+          
+      - name: Log out from GitHub Container Registry
+        run: docker logout ghcr.io
