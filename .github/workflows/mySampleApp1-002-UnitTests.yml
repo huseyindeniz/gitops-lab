@@ -5,10 +5,6 @@ on:
     paths:
       - 'apps/my-sample-app-1/**'
   workflow_dispatch:  # Allows manual triggering
-  workflow_run:
-    workflows: ["MySampleApp1 - Build and Upload Artifacts"]
-    types:
-      - completed
 
 jobs:
   unit-weatherForecast:
@@ -28,7 +24,7 @@ jobs:
       
       - name: Run Unit Tests for weatherForecast
         run: |
-          dotnet test apps/my-sample-app-1/my-sample-app-1.sln --no-restore --configuration Release --filter "Category=Unit&Microservice=weatherForecast" --logger "trx;LogFileName=mySampleApp1-weatherForecastUnitTests.trx"
+          dotnet test apps/my-sample-app-1/my-sample-app-1.sln --no-restore --configuration Release --filter "Category=Unit&service=weatherForecast" --logger "trx;LogFileName=mySampleApp1-weatherForecastUnitTests.trx"
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
