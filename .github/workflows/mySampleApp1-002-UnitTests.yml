@@ -18,11 +18,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: my-sample-app-1-artifacts
-
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
