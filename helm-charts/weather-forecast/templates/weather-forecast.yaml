@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: weather-forecast
+  namespace: weather-forecast
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/huseyindeniz/cicd-lab
+    targetRevision: main
+    path: helm-charts/weather-forecast # Path to the Helm chart directory for app2
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: weather-forecast # Specify where to deploy
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
