@@ -1,1 +1,5 @@
-# Empty values file; required fields are enforced by values.schema.json
+appName: app-of-apps
+namespace: argo-cd-local
+repoURL: 'https://github.com/huseyindeniz/cicd-lab'
+targetRevision: main
+appsPath: helm-charts
