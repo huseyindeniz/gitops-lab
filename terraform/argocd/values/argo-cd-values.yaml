@@ -5,7 +5,7 @@ server:
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     pathType: Prefix
-    hostname: project001.staging.argocd.local
+    hostname: argocd.local
   service:
     type: ClusterIP
   extraArgs:

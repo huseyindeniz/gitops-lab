@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-forecast-webapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-forecast-webapi
+  template:
+    metadata:
+      labels:
+        app: weather-forecast-webapi
+    spec:
+      containers:
+        - image: ghcr.io/huseyindeniz/cicd-lab/my-sample-app-1-weatherforecast-api-stag-1:20240901205704
+          imagePullPolicy: Always
+          name: weather-forecast-webapi
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+          ports:
+            - name: wf-webapi
+              containerPort: 8080
