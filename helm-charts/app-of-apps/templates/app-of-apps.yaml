@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: { { .Values.appName } }
-  namespace: { { .Values.namespace } }
+  name: "{{ .Values.appName }}"
+  namespace: "{{ .Values.namespace }}"
 spec:
   project: default
   source:
@@ -13,7 +13,7 @@ spec:
       recurse: true
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: { { .Values.namespace } }
+    namespace: "{{ .Values.namespace }}"
   syncPolicy:
     automated:
       prune: true
