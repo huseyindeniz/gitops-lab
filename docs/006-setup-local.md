@@ -120,7 +120,7 @@ kubectl port-forward svc/argo-cd-argocd-server 8080:443 -n argo-cd
 Show initial admin password
 
 ```bash
-terraform output -json argo_cd_admin_password
+terraform output -json argo_cd_local_admin_password
 ```
 
 ### Adding new applications to Argo CD

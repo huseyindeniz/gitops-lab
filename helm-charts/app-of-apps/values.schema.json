@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "appName": {
+      "type": "string",
+      "description": "Name of the parent Argo CD application"
+    },
+    "namespace": {
+      "type": "string",
+      "description": "Namespace where the Argo CD application will reside"
+    },
+    "repoURL": {
+      "type": "string",
+      "description": "Git repository URL containing your applications"
+    },
+    "targetRevision": {
+      "type": "string",
+      "description": "Branch, tag, or commit to track"
+    },
+    "appsPath": {
+      "type": "string",
+      "description": "Path in the repo containing all child application directories"
+    }
+  },
+  "required": ["appName", "namespace", "repoURL", "targetRevision", "appsPath"]
+}
