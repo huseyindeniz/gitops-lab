@@ -1,6 +1,5 @@
 # Default values for the weather-forecast Helm chart
 
-namespace: project-001-weather-forecast  # Specify the namespace here
 repoURL: https://github.com/huseyindeniz/cicd-lab.git
 targetRevision: main
 chartPath: helm-charts/weather-forecast
@@ -15,26 +14,3 @@ image:
   repository: ghcr.io/huseyindeniz/cicd-lab/my-sample-app-1-weatherforecast-api-stag-1
   tag: "20240901205704"  # Or use a placeholder like latest
   pullPolicy: Always
-
-# Deployment configuration
-replicaCount: 2
-
-# Service configuration
-service:
-  enabled: true
-  type: LoadBalancer
-  port: 8080
-  targetPort: 8080
-
-# Environment variables for the container
-env:
-  ASPNETCORE_ENVIRONMENT: "Development"
-
-# Resource requests and limits (optional)
-resources:
-  requests:
-    cpu: "100m"
-    memory: "128Mi"
-  limits:
-    cpu: "200m"
-    memory: "256Mi"

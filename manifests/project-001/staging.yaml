@@ -21,7 +21,7 @@ spec:
         path: helm-charts/project-001/{{path.basename}}  # Dynamically use each directory
         helm:
           valueFiles:
-            - values.yaml
+            - values-staging.yaml
       destination:
         server: "https://kubernetes.default.svc"
         namespace: project-001-{{path.basename}}

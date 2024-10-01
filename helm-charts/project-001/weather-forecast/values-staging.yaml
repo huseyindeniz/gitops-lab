@@ -1,0 +1,26 @@
+# Default values for the weather-forecast Helm chart
+
+namespace: project-001-weather-forecast-staging  # Specify the namespace here
+
+# Deployment configuration
+replicaCount: 2
+
+# Service configuration
+service:
+  enabled: true
+  type: LoadBalancer
+  port: 8080
+  targetPort: 8080
+
+# Environment variables for the container
+env:
+  ASPNETCORE_ENVIRONMENT: "Development"
+
+# Resource requests and limits (optional)
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "200m"
+    memory: "256Mi"
