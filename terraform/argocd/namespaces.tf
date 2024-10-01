@@ -4,12 +4,6 @@ resource "kubernetes_namespace" "argo_cd_local" {
   }
 }
 
-resource "kubernetes_namespace" "project_001" {
-  metadata {
-    name = "project-001"
-  }
-}
-
 resource "kubernetes_namespace" "project_001_weather_forecast" {
   metadata {
     name = "project-001-weather-forecast"
