@@ -7,7 +7,7 @@ spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
     matchLabels:
-      app: {{ .Values.app.name }}
+      app: "{{ .Values.app.name }}"
   template:
     metadata:
       labels:
