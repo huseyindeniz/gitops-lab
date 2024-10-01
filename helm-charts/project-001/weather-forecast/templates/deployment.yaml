@@ -7,11 +7,11 @@ spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
     matchLabels:
-      app: "{{ .Values.app.name }}"
+      app: {{ .Values.app.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.app.name }}-dep
+        app: {{ .Values.app.name }}
     spec:
       containers:
         - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  # Dynamic image from values.yaml
