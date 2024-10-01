@@ -18,7 +18,7 @@ spec:
       source:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         targetRevision: main
-        path: helm-charts/{{path.basename}}  # Dynamically use each directory
+        path: helm-charts/project-001/{{path.basename}}  # Dynamically use each directory
         helm:
           valueFiles:
             - values.yaml
