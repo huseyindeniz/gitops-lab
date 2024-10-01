@@ -1,7 +1,21 @@
 # Default values for the weather-forecast Helm chart
 
 namespace: project-001-weather-forecast-staging  # Specify the namespace here
+repoURL: https://github.com/huseyindeniz/cicd-lab.git
+targetRevision: main
+chartPath: helm-charts/weather-forecast
+server: https://kubernetes.default.svc
 
+# Application name
+app:
+  name: weather-forecast
+
+# Image configuration
+image:
+  repository: ghcr.io/huseyindeniz/cicd-lab/my-sample-app-1-weatherforecast-api-stag-1
+  tag: "20240901205704"  # Or use a placeholder like latest
+  pullPolicy: Always
+  
 # Deployment configuration
 replicaCount: 2
 
