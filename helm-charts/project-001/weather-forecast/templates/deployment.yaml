@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weather-forecast-webapi
+  name: {{ .Values.app.name }}-webapi  # Use the name from values.yaml
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
     matchLabels:
-      app: weather-forecast-webapi
+      app: {{ .Values.app.name }}-webapi
   template:
     metadata:
       labels:
-        app: weather-forecast-webapi
+        app: {{ .Values.app.name }}-webapi
     spec:
       containers:
-        - image: ghcr.io/huseyindeniz/cicd-lab/my-sample-app-1-weatherforecast-api-stag-1:20240901205704
-          imagePullPolicy: Always
-          name: weather-forecast-webapi
+        - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  # Dynamic image from values.yaml
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          name: {{ .Values.app.name }}-webapi
           env:
             - name: ASPNETCORE_ENVIRONMENT
-              value: "Development"
+              value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
           ports:
             - name: wf-webapi
               containerPort: 8080

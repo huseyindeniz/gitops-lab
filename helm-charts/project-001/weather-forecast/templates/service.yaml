@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: weather-forecast-webapi
-  name: weather-forecast-webapi
+    name: {{ .Values.app.name }}-webapi
+  name: {{ .Values.app.name }}-webapi
 spec:
-  type: LoadBalancer
+  type: {{ .Values.service.type }}  # Reference service type from values.yaml
   ports:
     - protocol: "TCP"
-      port: 8080
-      targetPort: 8080
+      port: {{ .Values.service.port }}  # Reference service port
+      targetPort: {{ .Values.service.targetPort }}  # Reference target port
   selector:
-    app: weather-forecast-webapi
+    app: {{ .Values.app.name }}-webapi
