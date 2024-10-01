@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.app.name }}-webapi  # Use the name from values.yaml
+  namespace: {{ .Values.namespace }}  # Use the namespace variable here
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:

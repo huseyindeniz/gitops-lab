@@ -4,6 +4,7 @@ metadata:
   labels:
     name: {{ .Values.app.name }}-webapi
   name: {{ .Values.app.name }}-webapi
+  namespace: {{ .Values.namespace }}  # Use the namespace variable here
 spec:
   type: {{ .Values.service.type }}  # Reference service type from values.yaml
   ports:

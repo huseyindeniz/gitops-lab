@@ -1,5 +1,7 @@
 # Default values for the weather-forecast Helm chart
 
+namespace: weather-forecast  # Specify the namespace here
+
 # Application name
 app:
   name: weather-forecast
