@@ -24,7 +24,7 @@ spec:
             - values.yaml
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: argo-cd-local
+        namespace: project-001
       syncPolicy:
         automated:
           prune: true
