@@ -12,20 +12,12 @@ spec:
         revision: "{{ .Values.revision }}"
   template:
     metadata:
-      name: "{{ appName }}" # Uses ArgoCD's templating for unique app name
+      name: '{{ .metadata.name }}'
     spec:
       project: default
       source:
         repoURL: "{{ .Values.repoURL }}"
         targetRevision: "{{ .Values.revision }}"
-        path: "helm-charts/{{ appName }}"
+        path: '{{ .source.path }}'
         helm:
-          valueFiles:
-            - values.yaml
-      destination:
-        server: "https://kubernetes.default.svc"
-        namespace: "{{ namespace }}"
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+templa
