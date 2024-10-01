@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: weather-forecast
-  namespace: { { .Values.namespace } }
+  namespace: "{{ .Values.namespace }}"
 spec:
   project: default
   source:
@@ -11,7 +11,7 @@ spec:
     path: helm-charts/weather-forecast # Path to the Helm chart directory for app2
   destination:
     server: https://kubernetes.default.svc
-    namespace: { { .Values.namespace } }
+    namespace: "{{ .Values.namespace }}"
   syncPolicy:
     automated:
       prune: true
