@@ -1,5 +1,0 @@
-appSetName: microservices-appset
-repoURL: https://github.com/huseyindeniz/cicd-lab.git
-revision: main
-path: helm-charts/*
-namespace: argo-cd-local

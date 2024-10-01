@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: "{{ .Values.appSetName }}"
+  namespace: argo-cd-local
+spec:
+  generators:
+    - git:
+        repoURL: "{{ .Values.repoURL }}"
+        revision: "{{ .Values.revision }}"
+        directory:
+          path: "{{ .Values.path }}"
+  template:
+    metadata:
+      name: '{{ "{{path.basename}}" }}' # Dynamically names each application based on the directory name
+    spec:
+      project: default
+      source:
+        repoURL: "{{ .Values.repoURL }}"
+        targetRevision: "{{ .Values.revision }}"
+        path: '{{ .Values.path }}/{{ "{{path.basename}}" }}'
+        helm:
+          valueFiles:
+            - values.yaml
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: "{{ .Values.namespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
