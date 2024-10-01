@@ -12,7 +12,7 @@ spec:
         revision: "{{ .Values.revision }}"
   template:
     metadata:
-      name: "{{name}}"
+      name: "{{ .Values.appSetName }}-app"
     spec:
       project: default
       source:
@@ -24,7 +24,7 @@ spec:
             - values.yaml
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: "{{namespace}}"
+        namespace: "{{ .Values.namespace }}"
       syncPolicy:
         automated:
           prune: true
