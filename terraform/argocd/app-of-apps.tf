@@ -12,6 +12,9 @@ resource "kubernetes_manifest" "app_of_apps" {
         "repoURL"        = "https://github.com/huseyindeniz/cicd-lab.git"
         "targetRevision" = "main"
         "path"           = "helm-charts/appsets"
+        "directory" = {
+          "recurse" = true
+        }
       }
       "destination" = {
         "server"    = "https://kubernetes.default.svc"

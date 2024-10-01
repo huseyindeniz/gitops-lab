@@ -12,13 +12,13 @@ spec:
           path: helm-charts/project-001
   template:
     metadata:
-      name: "{{name}}"
+      name: '{{path.basename}}'  # Use the directory name as the application name
     spec:
       project: default
       source:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         targetRevision: main
-        path: helm-charts/project-001/{{name}}
+        path: helm-charts/project-001/{{path.basename}}  # Dynamically use each directory
         helm:
           valueFiles:
             - values.yaml
