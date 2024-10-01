@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         revision: main
         directories:
-          - path: helm-charts/project-001
+          - path: helm-charts/project-001/* # Use wildcard to detect all subdirectories
   template:
     metadata:
       name: '{{path.basename}}'  # Use the directory name as the application name
@@ -18,7 +18,7 @@ spec:
       source:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         targetRevision: main
-        path: '{{path}}'  # Use the generated path from the directory
+        path: helm-charts/project-001/{{path.basename}}  # Dynamically use each directory
         helm:
           valueFiles:
             - values.yaml
