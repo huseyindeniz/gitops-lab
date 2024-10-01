@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}-dep  # Use the name from values.yaml
+  name: {{ .Values.app.name }}  # Use the name from values.yaml
   namespace: {{ .Values.namespace }}  # Use the namespace variable here
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
     matchLabels:
-      app: {{ .Values.app.name }}-dep
+      app: {{ .Values.app.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.app.name }}-dep
+        app: {{ .Values.app.name }}
     spec:
       containers:
         - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  # Dynamic image from values.yaml
