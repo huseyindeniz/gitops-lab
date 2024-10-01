@@ -8,7 +8,7 @@ server: https://kubernetes.default.svc
 
 # Application name
 app:
-  name: weather-forecast
+  name: weather-forecast-staging
 
 # Image configuration
 image:
