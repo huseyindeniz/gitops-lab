@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: weather-forecast
-  namespace: weather-forecast
+  namespace: project-001-weather-forecast
 spec:
   project: default
   source:
