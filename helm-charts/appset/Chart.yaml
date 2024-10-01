@@ -1,0 +1,5 @@
+apiVersion: v2
+name: application-set
+description: Helm chart for creating ApplicationSet in ArgoCD
+version: 0.1.0
+appVersion: 1.0.0

@@ -1,5 +1,0 @@
-appName: app-of-apps
-namespace: argo-cd-local
-repoURL: 'https://github.com/huseyindeniz/cicd-lab'
-targetRevision: main
-appsPath: helm-charts

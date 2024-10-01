@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: "{{ .Values.appSetName }}"
+  namespace: "{{ .Values.namespace }}"
+spec:
+  generators:
+    - git:
+        repoURL: "{{ .Values.repoURL }}"
+        directory:
+          path: "{{ .Values.path }}"
+        revision: "{{ .Values.revision }}"
+  template:
+    metadata:
+      name: "{{name}}"
+    spec:
+      project: default
+      source:
+        repoURL: "{{ .Values.repoURL }}"
+        targetRevision: "{{ .Values.revision }}"
+        path: "helm-charts/{{name}}"
+        helm:
+          valueFiles:
+            - values.yaml
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
