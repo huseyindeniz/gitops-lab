@@ -12,8 +12,8 @@ app:
 
 # Image configuration
 image:
-  repository: ghcr.io/huseyindeniz/cicd-lab/my-sample-app-1-weatherforecast-api-stag-1
-  tag: "20240901205704"  # Or use a placeholder like latest
+  repository: huseyindeniz/my-sample-app-1-weatherforecast-api-stag-1
+  tag: "20241001183643"  # Or use a placeholder like latest
   pullPolicy: Always
   
 # Deployment configuration
