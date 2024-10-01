@@ -1,5 +1,0 @@
-appSetName: project-001-appset
-repoURL: https://github.com/huseyindeniz/cicd-lab.git
-revision: main
-path: helm-charts/project-001
-namespace: project-001

@@ -1,5 +1,0 @@
-apiVersion: v2
-name: project-001-appset
-description: Helm chart for deploying ApplicationSet for project-001
-version: 0.1.0
-appVersion: 1.0.0
