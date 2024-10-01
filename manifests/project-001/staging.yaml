@@ -12,7 +12,7 @@ spec:
           - path: helm-charts/project-001/* # Use wildcard to detect all subdirectories
   template:
     metadata:
-      name: '{{path.basename}}'  # Use the directory name as the application name
+      name: '{{path.basename}}-staging'  # Use the directory name as the application name
     spec:
       project: default
       source:
