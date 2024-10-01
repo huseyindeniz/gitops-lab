@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: weather-forecast
-  namespace: "{{ .Values.namespace }}"
+  name: { { .Values.app.name } } # Use the name from values.yaml
+  namespace: { { .Values.namespace } } # Use the namespace from values.yaml
 spec:
   project: default
   source:
-    repoURL: https://github.com/huseyindeniz/cicd-lab
-    targetRevision: main
-    path: helm-charts/weather-forecast # Path to the Helm chart directory for app2
+    repoURL: { { .Values.repoURL } } # Dynamic repo URL
+    targetRevision: { { .Values.targetRevision } } # Dynamic revision
+    path: { { .Values.chartPath } } # Path to the chart directory
   destination:
-    server: https://kubernetes.default.svc
-    namespace: "{{ .Values.namespace }}"
+    server: { { .Values.server } } # Dynamic server
+    namespace: { { .Values.namespace } } # Use the same namespace
   syncPolicy:
     automated:
       prune: true
