@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: { { .Values.app.name } } # Use the name from values.yaml
-  namespace: { { .Values.namespace } } # Use the namespace from values.yaml
+  name: {{ .Values.app.name }}-app # Use the name from values.yaml
+  namespace: {{ .Values.namespace }} # Use the namespace from values.yaml
 spec:
   project: default
   source:
-    repoURL: { { .Values.repoURL } } # Dynamic repo URL
-    targetRevision: { { .Values.targetRevision } } # Dynamic revision
-    path: { { .Values.chartPath } } # Path to the chart directory
+    repoURL: {{ .Values.repoURL }} # Dynamic repo URL
+    targetRevision: {{ .Values.targetRevision }} # Dynamic revision
+    path: {{ .Values.chartPath }} # Path to the chart directory
   destination:
-    server: { { .Values.server } } # Dynamic server
-    namespace: { { .Values.namespace } } # Use the same namespace
+    server: {{ .Values.server }} # Dynamic server
+    namespace: {{ .Values.namespace }} # Use the same namespace
   syncPolicy:
     automated:
       prune: true
