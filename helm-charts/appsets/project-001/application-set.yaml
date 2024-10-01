@@ -8,8 +8,7 @@ spec:
     - git:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         revision: main
-        directory:
-          path: helm-charts/project-001
+        path: helm-charts/project-001
   template:
     metadata:
       name: '{{path.basename}}'  # Use the directory name as the application name
