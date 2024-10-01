@@ -11,7 +11,7 @@ resource "kubernetes_manifest" "app_of_apps" {
       "source" = {
         "repoURL"        = "https://github.com/huseyindeniz/cicd-lab.git"
         "targetRevision" = "main"
-        "path"           = "helm-charts/appsets"
+        "path"           = "manifests"
         "directory" = {
           "recurse" = true
         }
