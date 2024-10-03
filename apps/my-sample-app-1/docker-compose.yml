@@ -1,0 +1,20 @@
+services:
+  postgres:
+    container_name: postgres-db
+    image: postgres:16
+
+  migration-bundle:
+    build:
+      context: .
+      dockerfile: migration-bundle/Dockerfile
+    image: ${DOCKER_REGISTRY-}my-sample-app-1-migration-bundle:latest
+    container_name: my-sample-app-1-migration-bundle
+
+  mysampleapp1.weatherforecast.api:
+    image: ${DOCKER_REGISTRY-}mysampleapp1weatherforecastapi
+    build:
+      context: .
+      dockerfile: mySampleApp1.weatherForecast.API/Dockerfile
+    depends_on:
+      - postgres
+      - migration-bundle

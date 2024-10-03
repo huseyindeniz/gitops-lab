@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using mySampleApp1.weatherForecast.API;
-using mySampleApp1.weatherForecast.Domain;
+using mySampleApp1.weatherForecast.Domain.Entities;
 using System.Text.Json;
 
 namespace mySampleApp1.weatherForecast.IntegrationTests

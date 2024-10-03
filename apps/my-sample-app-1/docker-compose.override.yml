@@ -1,0 +1,44 @@
+services:
+  postgres:
+    networks:
+      - mysampleapp1-network
+    environment:
+      POSTGRES_DB: dev-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  migration-bundle:
+    networks:
+      - mysampleapp1-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB__POSTGRES_HOST=postgres
+      - DB__POSTGRES_PORT=5432
+      - DB__POSTGRES_DB=dev-db
+      - DB__POSTGRES_USER=postgres
+      - DB__POSTGRES_PASSWORD=postgres
+
+  mysampleapp1.weatherforecast.api:
+    networks:
+      - mysampleapp1-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/mySampleApp1.weatherForecast.API.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=12345
+    ports:
+      - "5054:8080"
+      - "5055:8081"
+
+volumes:
+  postgres-data:
+
+networks:
+  mysampleapp1-network:
+    driver: bridge

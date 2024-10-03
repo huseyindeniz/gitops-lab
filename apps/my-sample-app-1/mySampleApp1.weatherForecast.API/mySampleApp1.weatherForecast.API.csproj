@@ -6,15 +6,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>5f2828c3-2e7b-45d1-ae4f-0eec62b1ffd5</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\mySampleApp1.weatherForecast.Domain\mySampleApp1.weatherForecast.Domain.csproj" />
+    <ProjectReference Include="..\mySampleApp1.weatherForecast.Infra\mySampleApp1.weatherForecast.Infra.csproj" />
   </ItemGroup>
 
 </Project>
