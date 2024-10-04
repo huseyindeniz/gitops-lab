@@ -7,20 +7,19 @@ spec:
   generators:
     - matrix:
         generators:
-          - variables:
-            - name: envConfig
+          - list:
               values:
                 - { name: stag-1, targetPort: 5001 }
                 - { name: stag-2, targetPort: 5002 }
-                - { name: stag-3, targetPort: 5003 }        
-          - git:
-              repoURL: https://github.com/huseyindeniz/cicd-lab.git
-              revision: main
-              directories:
-                - path: helm-charts/project-001/* # Use wildcard to detect all subdirectories
+                - { name: stag-3, targetPort: 5003 }
+    - git:
+        repoURL: https://github.com/huseyindeniz/cicd-lab.git
+        revision: main
+        directories:
+          - path: helm-charts/project-001/*
   template:
     metadata:
-      name: '{{path.basename}}-{{envConfig.environment}}'  # Use the directory name as the application name
+      name: '{{path.basename}}-{{list.name}}'  # Use the directory name as the application name
     spec:
       project: default
       source:
@@ -32,12 +31,12 @@ spec:
             - values-staging.yaml
           parameters:
             - name: environment
-              value: '{{envConfig.environment}}'
+              value: '{{list.name}}'
             - name: targetPort
-              value: '{{envConfig.targetPort}}'
+              value: '{{list.targetPort}}'
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: project-001-{{path.basename}}-{{envConfig.environment}}
+        namespace: project-001-{{path.basename}}-{{list.name}}
       syncPolicy:
         automated:
           prune: true
