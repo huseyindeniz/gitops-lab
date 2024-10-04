@@ -23,7 +23,7 @@ replicaCount: 2
 service:
   enabled: true
   type: LoadBalancer
-  port: 8080
+  targetPort: 8080
 
 # Environment variables for the container
 env:
