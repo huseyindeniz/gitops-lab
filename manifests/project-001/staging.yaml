@@ -5,13 +5,11 @@ metadata:
   namespace: argo-cd-local
 spec:
   generators:
-    - matrix:
-        generators:
-          - list:
-              values:
-                - { name: stag-1, targetPort: 5001 }
-                - { name: stag-2, targetPort: 5002 }
-                - { name: stag-3, targetPort: 5003 }
+    - list:
+        values:
+          - { name: stag-1, targetPort: 5001 }
+          - { name: stag-2, targetPort: 5002 }
+          - { name: stag-3, targetPort: 5003 }
     - git:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         revision: main
