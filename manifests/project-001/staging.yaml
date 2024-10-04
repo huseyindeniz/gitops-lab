@@ -14,13 +14,17 @@ spec:
                 - path: helm-charts/project-001/*  # Use wildcard to detect all subdirectories        
           - list:
               elements:
-                - { name: stag-1, targetPort: 5001 }
-                - { name: stag-2, targetPort: 5002 }
-                - { name: stag-3, targetPort: 5003 }
+              - envName: stag-1
+                envTargetPort: 5001
+              - envName: stag-2
+                envTargetPort: 5002
+              - envName: stag-3
+                envTargetPort: 5003
   goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: '{{.path.basename}}-{{.list.name}}'  # Use the directory name and environment as the application name
+      name: '{{.path.basename}}-{{.envName}}'  # Use the directory name and environment as the application name
       finalizers:
       - resources-finalizer.argocd.argoproj.io
     spec:
@@ -34,12 +38,12 @@ spec:
             - values-staging.yaml
           parameters:
             - name: environment
-              value: '{{.list.name}}'  # Access the environment name from the list
+              value: '{{.envName}}'  # Access the environment name from the list
             - name: targetPort
-              value: '{{.list.targetPort}}'  # Access the target port from the list
+              value: '{{.envTargetPort}}'  # Access the target port from the list
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: 'project-001-{{.path.basename}}-{{.list.name}}'  # Use the environment suffix in the namespace
+        namespace: 'project-001-{{.path.basename}}-{{.envName}}'  # Use the environment suffix in the namespace
       syncPolicy:
         automated:
           prune: true
