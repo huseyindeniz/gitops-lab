@@ -4,33 +4,21 @@ resource "kubernetes_namespace" "argo_cd_local" {
   }
 }
 
+locals {
+  project001weatherforecastns = "project-001-weather-forecast"
+}
+
 resource "kubernetes_namespace" "project_001_weather_forecast" {
   metadata {
-    name = "project-001-weather-forecast"
+    name = local.project001weatherforecastns
   }
 }
 
-resource "kubernetes_namespace" "project_001_weather_forecast_staging" {
-  metadata {
-    name = "project-001-weather-forecast-staging"
-  }
-}
+resource "kubernetes_namespace" "project_001_weather_forecast_env" {
+  for_each = { for env in var.env_names : env.name => env }
 
-resource "kubernetes_namespace" "project_001_weather_forecast_stag_1" {
   metadata {
-    name = "project-001-weather-forecast-stag-1"
-  }
-}
-
-resource "kubernetes_namespace" "project_001_weather_forecast_stag_2" {
-  metadata {
-    name = "project-001-weather-forecast-stag-2"
-  }
-}
-
-resource "kubernetes_namespace" "project_001_weather_forecast_stag_3" {
-  metadata {
-    name = "project-001-weather-forecast-stag-3"
+    name = "${local.project001weatherforecastns}-${each.value.name}" # Construct the namespace name
   }
 }
 
