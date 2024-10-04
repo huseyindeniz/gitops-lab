@@ -18,8 +18,6 @@ spec:
                 envPort: 5001
               - envName: stag-2
                 envPort: 5002
-              - envName: stag-3
-                envPort: 5003
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
