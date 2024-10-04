@@ -21,12 +21,14 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}-{{list.name}}'  # Use the directory name and environment as the application name
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
     spec:
       project: default
       source:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         targetRevision: main
-        path: helm-charts/project-001/{{path.basename}}  # Dynamically use each directory
+        path: 'helm-charts/project-001/{{path.basename}}'  # Dynamically use each directory
         helm:
           valueFiles:
             - values-staging.yaml
@@ -37,7 +39,7 @@ spec:
               value: '{{list.targetPort}}'  # Access the target port from the list
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: project-001-{{path.basename}}-{{list.name}}  # Use the environment suffix in the namespace
+        namespace: 'project-001-{{path.basename}}-{{list.name}}'  # Use the environment suffix in the namespace
       syncPolicy:
         automated:
           prune: true
