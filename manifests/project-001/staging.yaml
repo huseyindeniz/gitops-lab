@@ -8,7 +8,7 @@ spec:
     - matrix:
         generators:
           - list:
-              values:
+              elements:
                 - { name: stag-1, targetPort: 5001 }
                 - { name: stag-2, targetPort: 5002 }
                 - { name: stag-3, targetPort: 5003 }
