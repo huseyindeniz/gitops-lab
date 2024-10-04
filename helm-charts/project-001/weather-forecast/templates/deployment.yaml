@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}  # Use the name from values.yaml
-  namespace: {{ .Values.namespace }}  # Use the namespace variable here
+  name: {{ .Values.app.name }}-{{ .Values.environment }}  # Use the name from values.yaml
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
     matchLabels:
-      app: {{ .Values.app.name }}
+      app: {{ .Values.app.name }}-{{ .Values.environment }}
   template:
     metadata:
       labels:
-        app: {{ .Values.app.name }}
+        app: {{ .Values.app.name }}-{{ .Values.environment }}
     spec:
       containers:
-        - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  # Dynamic image from values.yaml
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # Dynamic image from values.yaml
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          name: {{ .Values.app.name }}-webapi
+          name: {{ .Values.app.name }}-{{ .Values.environment }}-webapi
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}

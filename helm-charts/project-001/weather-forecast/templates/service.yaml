@@ -2,14 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: {{ .Values.app.name }}-svc
-  name: {{ .Values.app.name }}-svc
-  namespace: {{ .Values.namespace }}  # Use the namespace variable here
+    name: {{ .Values.app.name }}-{{ .Values.environment }}-svc
+  name: {{ .Values.app.name }}-{{ .Values.environment }}-svc
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
 spec:
   type: {{ .Values.service.type }}  # Reference service type from values.yaml
   ports:
     - protocol: "TCP"
       port: {{ .Values.service.port }}  # Reference service port
-      targetPort: {{ .Values.service.targetPort }}  # Reference target port
+      targetPort: {{ .Values.targetPort }}  # Reference target port
   selector:
-    app: {{ .Values.app.name }}
+    app: {{ .Values.app.name }}-{{ .Values.environment }}

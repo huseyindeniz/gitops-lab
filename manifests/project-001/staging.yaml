@@ -5,14 +5,22 @@ metadata:
   namespace: argo-cd-local
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/huseyindeniz/cicd-lab.git
-        revision: main
-        directories:
-          - path: helm-charts/project-001/* # Use wildcard to detect all subdirectories
+    - matrix:
+        variables:
+          - name: envConfig
+            values:
+              - { name: stag-1, targetPort: 5001 }
+              - { name: stag-2, targetPort: 5002 }
+              - { name: stag-3, targetPort: 5003 }
+        generators:
+          - git:
+              repoURL: https://github.com/huseyindeniz/cicd-lab.git
+              revision: main
+              directories:
+                - path: helm-charts/project-001/* # Use wildcard to detect all subdirectories
   template:
     metadata:
-      name: '{{path.basename}}-staging'  # Use the directory name as the application name
+      name: '{{path.basename}}-{{envConfig.environment}}'  # Use the directory name as the application name
     spec:
       project: default
       source:
@@ -22,9 +30,14 @@ spec:
         helm:
           valueFiles:
             - values-staging.yaml
+          parameters:
+            - name: environment
+              value: '{{envConfig.environment}}'
+            - name: targetPort
+              value: '{{envConfig.targetPort}}'
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: project-001-{{path.basename}}-staging
+        namespace: project-001-{{path.basename}}-{{envConfig.environment}}
       syncPolicy:
         automated:
           prune: true

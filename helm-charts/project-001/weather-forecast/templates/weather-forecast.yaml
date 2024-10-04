@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.app.name }}-app # Use the name from values.yaml
-  namespace: {{ .Values.namespace }} # Use the namespace from values.yaml
+  name: {{ .Values.app.name }}-{{ .Values.environment }}-app # Use the name from values.yaml
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }} # Use the namespace from values.yaml
 spec:
   project: default
   source:
@@ -11,7 +11,7 @@ spec:
     path: {{ .Values.chartPath }} # Path to the chart directory
   destination:
     server: {{ .Values.server }} # Dynamic server
-    namespace: {{ .Values.namespace }} # Use the same namespace
+    namespace: {{ .Values.namespace }}-{{ .Values.environment }} # Use the same namespace
   syncPolicy:
     automated:
       prune: true
