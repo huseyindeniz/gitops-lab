@@ -5,18 +5,19 @@ metadata:
   namespace: argo-cd-local
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/huseyindeniz/cicd-lab.git
-        revision: main
-        directories:
-          - path: helm-charts/project-001/*  # Use wildcard to detect all subdirectories
     - matrix:
-        variables:
-          - name: envConfig
-            values:
-              - { name: stag-1, targetPort: 8080 }
-              - { name: stag-2, targetPort: 8081 }
-              - { name: stag-3, targetPort: 8082 }
+        generators:
+          - variables:
+            - name: envConfig
+              values:
+                - { name: stag-1, targetPort: 5001 }
+                - { name: stag-2, targetPort: 5002 }
+                - { name: stag-3, targetPort: 5003 }        
+          - git:
+              repoURL: https://github.com/huseyindeniz/cicd-lab.git
+              revision: main
+              directories:
+                - path: helm-charts/project-001/* # Use wildcard to detect all subdirectories
   template:
     metadata:
       name: '{{path.basename}}-{{envConfig.environment}}'  # Use the directory name as the application name
