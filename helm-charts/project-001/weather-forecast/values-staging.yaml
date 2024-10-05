@@ -13,9 +13,10 @@ app:
 # Image configuration
 image:
   repository: huseyindeniz/my-sample-app-1-weatherforecast-api
-  tag: "latest"  # Or use a placeholder like latest
+  tag: "20241005160437"  # Or use a placeholder like latest
+  migrationTag: "20241005160343"
   pullPolicy: Always
-  
+
 # Deployment configuration
 replicaCount: 2
 

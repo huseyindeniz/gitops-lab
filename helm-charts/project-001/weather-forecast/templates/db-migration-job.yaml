@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: migration
-          image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.image.tag }} 
+          image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.image.migrationTag }} 
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: ASPNETCORE_ENVIRONMENT
