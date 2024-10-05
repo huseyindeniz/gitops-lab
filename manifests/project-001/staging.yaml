@@ -25,8 +25,8 @@ spec:
       name: '{{.path.basename}}-{{.envName}}'  # Use the directory name and environment as the application name
       annotations:
         argocd-image-updater.argoproj.io/image-list: app-container=huseyindeniz/my-sample-app-1-weatherforecast-api-{{.envName}},migration-container=huseyindeniz/my-sample-app-1-weatherforecast-migration-{{.envName}}
-        argocd-image-updater.argoproj.io/app-container.update-strategy: name # Or semver if you use versioning
-        argocd-image-updater.argoproj.io/migration-container.update-strategy: name # Or semver if you use versioning
+        argocd-image-updater.argoproj.io/app-container.update-strategy: "name" # Or semver if you use versioning
+        argocd-image-updater.argoproj.io/migration-container.update-strategy: "name" # Or semver if you use versioning
         argocd-image-updater.argoproj.io/app-container.tag-regex: '^\d{14}$' # Matches YYYYMMDDHHMMSS format
         argocd-image-updater.argoproj.io/migration-container.tag-regex: '^\d{14}$' # Matches YYYYMMDDHHMMSS format
     spec:
