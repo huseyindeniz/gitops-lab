@@ -19,7 +19,7 @@ resource "kubernetes_secret" "project_001_weather_forecast_postgres_password_sec
   }
 
   data = {
-    POSTGRES_PASSWORD = "random_string.project_001_weather_forecast_postgres_password[${each.value.name}].password.result" # Reference the generated password
+    POSTGRES_PASSWORD = base64encode(random_password.project_001_weather_forecast_postgres_password[each.value.name].result) # Reference the generated password
   }
 
   type = "Opaque"
