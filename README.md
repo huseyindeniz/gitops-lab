@@ -16,3 +16,7 @@ CI/CD Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - [ ] Configure auto image updater
 - [ ] automate deployment of PRs
 - [ ] rollback ?
+- [ ] aws
+- [ ] aks
+- [ ] gke
+- [ ] doks
