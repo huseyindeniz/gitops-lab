@@ -29,10 +29,7 @@ spec:
             - name: DB__POSTGRES_USER
               value: {{ .Values.namespace }}-{{ .Values.environment }}-user
             - name: DB__POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-password-{{ .Values.environment }}  # Exact match to the secret name
-                  key: POSTGRES_PASSWORD  # The key inside the secret
+              value: "12345"
           ports:
             - name: wf-webapi
               containerPort: 8080

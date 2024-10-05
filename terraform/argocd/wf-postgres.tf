@@ -94,7 +94,7 @@ resource "helm_release" "project_001_weather_forecast_postgres" {
         enabled = true
       }
       postgresqlUsername = "${local.project001weatherforecastns}-${each.value.name}-user"
-      postgresqlPassword = random_password.project_001_weather_forecast_postgres_password[each.key].result
+      postgresqlPassword = "12345"
       postgresqlDatabase = "${local.project001weatherforecastns}-${each.value.name}-db"
       service = {
         port = 5432
