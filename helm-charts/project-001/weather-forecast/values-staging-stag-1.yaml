@@ -2,5 +2,5 @@
 
 # Image configuration
 image:
-  tag: ""  # Or use a placeholder like latest
-  migrationTag: ""
+  tag: "20241005160437"  # Or use a placeholder like latest
+  migrationTag: "20241005160343"
