@@ -2,15 +2,17 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Set the working directory in the container
-WORKDIR /src
+WORKDIR /app
 
-# Copy the project files and restore dependencies
-COPY ["mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj", "mySampleApp1.weatherForecast.API/"]
-RUN dotnet restore "./mySampleApp1.weatherForecast.API/mySampleApp1.weatherForecast.API.csproj"
+# Copy files
+COPY . .
+
+# Restore the .NET project dependencies
+WORKDIR /app/mySampleApp1.weatherForecast.API
+RUN dotnet restore mySampleApp1.weatherForecast.API.csproj
 
 # Build the EF Core migration bundle
-# Set the working directory for building the app
-WORKDIR "/src/mySampleApp1.weatherForecast.API"
+WORKDIR /app
 
 # Install dotnet-ef tool globally
 RUN dotnet tool install -g dotnet-ef
@@ -27,7 +29,7 @@ FROM mcr.microsoft.com/dotnet/runtime-deps:8.0 AS final
 WORKDIR /app
 
 # Copy the bundle executable from the build stage
-COPY --from=build /src/migrations-bundle .
+COPY --from=build /app/migrations-bundle .
 
 # Grant execute permissions if necessary (for Linux)
 RUN chmod +x ./migrations-bundle
