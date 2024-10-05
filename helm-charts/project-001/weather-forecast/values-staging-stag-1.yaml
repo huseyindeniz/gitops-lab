@@ -1,0 +1,6 @@
+# Default values for the weather-forecast Helm chart
+
+# Image configuration
+image:
+  tag: "20241005160437"  # Or use a placeholder like latest
+  migrationTag: "20241005160343"

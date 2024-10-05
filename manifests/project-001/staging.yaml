@@ -30,6 +30,7 @@ spec:
         helm:
           valueFiles:
             - values-staging.yaml
+            - 'values-staging-{{.envName}}.yaml'
           parameters:
             - name: environment
               value: '{{.envName}}'  # Access the environment name from the list
