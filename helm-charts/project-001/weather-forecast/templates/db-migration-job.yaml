@@ -3,6 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.app.name }}-{{ .Values.environment }}-migration
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
   labels:
     app: {{ .Values.app.name }}-{{ .Values.environment }}-migration
   annotations:
