@@ -14,7 +14,7 @@ CI/CD Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - ✅ Create/Configure github actions
 - ✅ Configure multi stating env for a specific app
 - ✅ Configure helm hook for db migration before application itself deployed
-- ❌ Install/Configure argocd-image-updater (it doesn't support any namespace)
+- ❌ Install/Configure argocd-image-updater ([it doesn't support app in any namespace scenario yet](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
 - 🔲 Install/Configure flux for auto image updates
 - 🔲 automate deployment of PRs
 - 🔲 rollback ?
