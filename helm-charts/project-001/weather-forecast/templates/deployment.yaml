@@ -12,6 +12,11 @@ spec:
     metadata:
       labels:
         app: {{ .Values.app.name }}-{{ .Values.environment }}
+    annotations:
+      # argocd-image-updater annotations
+      argocd-image-updater.argoproj.io/image-list: app-container={{ .Values.image.repository }}-{{ .Values.environment }}
+      argocd-image-updater.argoproj.io/app-container.update-strategy: "name"  # Use 'name' strategy to fetch the latest build by tag
+      argocd-image-updater.argoproj.io/app-container.tag-regex: "^\\d{14}$"  # Regex for timestamp-based tags
     spec:
       containers:
         - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # Dynamic image from values.yaml

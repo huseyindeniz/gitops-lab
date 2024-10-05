@@ -7,8 +7,13 @@ metadata:
   labels:
     app: {{ .Values.app.name }}-{{ .Values.environment }}-migration
   annotations:
+    # Helm hook annotations
     "helm.sh/hook": "pre-install,pre-upgrade"
     "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
+    # argocd-image-updater annotations
+    argocd-image-updater.argoproj.io/image-list: migration-container={{ .Values.image.repository }}-migration-{{ .Values.environment }}
+    argocd-image-updater.argoproj.io/migration-container.update-strategy: "name"  # Use 'name' strategy to fetch the latest build by tag
+    argocd-image-updater.argoproj.io/migration-container.tag-regex: "^\\d{14}$"  # Regex for timestamp-based tags    
 spec:
   template:
     spec:
