@@ -1,6 +1,6 @@
 # Default values for the weather-forecast Helm chart
 
-namespace: project-001-weather-forecast  # Specify the namespace here
+namespace: project-001-wf  # Specify the namespace here
 repoURL: https://github.com/huseyindeniz/cicd-lab.git
 targetRevision: main
 chartPath: helm-charts/weather-forecast

@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "argo_cd_local" {
 }
 
 locals {
-  project001weatherforecastns = "project-001-weather-forecast"
+  project001weatherforecastns = "project-001-wf"
 }
 
 resource "kubernetes_namespace" "project_001_weather_forecast" {
