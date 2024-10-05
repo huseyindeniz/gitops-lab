@@ -93,9 +93,11 @@ resource "helm_release" "project_001_weather_forecast_postgres" {
       volumePermissions = {
         enabled = true
       }
-      postgresqlUsername = "${local.project001weatherforecastns}-${each.value.name}-user"
-      postgresqlPassword = "12345"
-      postgresqlDatabase = "${local.project001weatherforecastns}-${each.value.name}-db"
+      auth = {
+        username = "${local.project001weatherforecastns}-${each.value.name}-user"
+        password = base64encode(random_password.project_001_weather_forecast_postgres_password[each.value.name].result)
+        database = "${local.project001weatherforecastns}-${each.value.name}-db"
+      }
       service = {
         port = 5432
       }
