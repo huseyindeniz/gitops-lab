@@ -20,6 +20,19 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
+            - name: DB__POSTGRES_HOST
+              value: 'localhost'
+            - name: POSTGRES_PORT
+              value: 5432
+            - name: POSTGRES_DB
+              value: {{ .Values.namespace }}-{{ .Values.environment }}-db
+            - name: POSTGRES_USER
+              value: {{ .Values.namespace }}-{{ .Values.environment }}-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password-{{ .Values.environment }}  # Exact match to the secret name
+                  key: POSTGRES_PASSWORD  # The key inside the secret
           ports:
             - name: wf-webapi
               containerPort: 8080
