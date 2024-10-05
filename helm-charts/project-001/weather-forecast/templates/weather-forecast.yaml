@@ -3,12 +3,6 @@ kind: Application
 metadata:
   name: {{ .Values.app.name }}-{{ .Values.environment }}-app # Use the name from values.yaml
   namespace: {{ .Values.namespace }}-{{ .Values.environment }} # Use the namespace from values.yaml
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: app-container=huseyindeniz/my-sample-app-1-weatherforecast-api-{{.Values.environment}},migration-container=huseyindeniz/my-sample-app-1-weatherforecast-migration-{{.Values.environment}}
-    argocd-image-updater.argoproj.io/app-container.update-strategy: name # Or semver if you use versioning
-    argocd-image-updater.argoproj.io/migration-container.update-strategy: name # Or semver if you use versioning
-    argocd-image-updater.argoproj.io/app-container.tag-regex: '^\d{14}$' # Matches YYYYMMDDHHMMSS format
-    argocd-image-updater.argoproj.io/migration-container.tag-regex: '^\d{14}$' # Matches YYYYMMDDHHMMSS format
 spec:
   project: default
   source:
