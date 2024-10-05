@@ -21,7 +21,7 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
             - name: DB__POSTGRES_HOST
-              value: 'localhost'
+              value: project-001-wf-postgres-{{ .Values.environment }}-postgresql
             - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_DB
