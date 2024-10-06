@@ -31,3 +31,15 @@ The primary goal of this repository is to build a comprehensive GitOps playgroun
 - 🔲 aks (vpc and cluster creation is ready)
 - 🔲 gke (vpc and cluster creation is ready)
 - 🔲 doks
+
+## Note on Database Migrations in Kubernetes and EF Core Migration Bundles
+
+While working through how to handle database migrations in Kubernetes, I found it to be more challenging than expected. The main issue is that migrations need to be completed before any application pods are re-deployed to keep the schema in sync. Since Kubernetes doesn't have a built-in way to enforce dependencies between deployments, it can be tricky to control the correct order of operations.
+
+Initially, I explored using Argo CD hooks to solve this problem. However, I found that they don't fully address the dependency issue, as they don't enforce a strict sequence between running the migrations and updating the application pods. This could potentially lead to race conditions, where the application is deployed before the migrations finish.
+
+Through further experimentation, I discovered that Helm hooks worked better for this scenario. Helm hooks allowed me to ensure that the migrations were applied before any application pods were deployed or updated. In essence, this moved the solution to the application layer within the Helm charts, helping me manage the order of operations effectively.
+
+Additionally, I used Entity Framework (EF) Core Migration Bundles to make the process smoother. These bundles are self-contained executables that include all necessary migration logic, making it easier to apply migrations in any environment without needing the EF CLI tools or a full development setup. Combining EF Core migration bundles with Helm hooks felt like a natural fit within a GitOps workflow, providing a consistent and version-controlled way to apply schema changes alongside application updates.
+
+This approach worked well for my case, ensuring that database migrations were correctly managed within the CI/CD pipeline and reducing deployment risks in Kubernetes environments. There may be other solutions out there, but this combination of Helm hooks and EF Core migration bundles was the one that solved the problem effectively for me.
