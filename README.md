@@ -2,6 +2,15 @@
 
 CI/CD Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
+## Goals
+The primary goal of this repository is to build a comprehensive GitOps playground, integrating tools and platforms like Kubernetes, Terraform, Argo CD, Helm, and GitHub Workflows, with a focus on the following:
+
+* **Establishing a Manageable Database Migration Infrastructure in the Cloud**\
+ The core objective is to implement an effective GitOps approach for database migration using the Entity Framework (EF) Core code-first strategy. This includes:
+  - Seamlessly managing migrations and schema changes across multiple cloud environments within a GitOps workflow.
+  - Ensuring that database migration processes are integrated into the CI/CD pipeline in an automated, declarative, and version-controlled manner.
+  - Applying best practices for versioning and automating the deployment of database changes across various cloud platforms (AWS, AKS, GKE, DOKS).
+        
 ## TODO
 
 - ✅ Install/Configure minikube
