@@ -1,6 +1,6 @@
 # cicd-lab
 
-CI/CD Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
+Gitops Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ## Goals
 The primary goal of this repository is to build a comprehensive GitOps playground, integrating tools and platforms like Kubernetes, Terraform, Argo CD, Helm, and GitHub Workflows, with a focus on the following:
