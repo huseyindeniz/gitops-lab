@@ -10,6 +10,25 @@ variable "kubeconfig_context" {
   default = "minikube"
 }
 
+variable "flux_github_token" {
+  description = "Flux GitHub token"
+  sensitive   = true
+  type        = string
+  default     = ""
+}
+
+variable "flux_github_org" {
+  description = "Flux GitHub organization"
+  type        = string
+  default     = ""
+}
+
+variable "flux_github_repository" {
+  description = "Flux GitHub repository"
+  type        = string
+  default     = ""
+}
+
 variable "env_names" {
   description = "List of environment configurations for the project"
   type = list(object({
@@ -35,3 +54,4 @@ variable "db_user" {
   type        = string
   default     = "myuser" # Default database user
 }
+

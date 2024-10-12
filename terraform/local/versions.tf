@@ -14,5 +14,13 @@ terraform {
       source  = "hashicorp/random"
       version = "~> 3.0"
     }
+    flux = {
+      source  = "fluxcd/flux"
+      version = ">= 1.4"
+    }
+    github = {
+      source  = "integrations/github"
+      version = ">= 6.1"
+    }
   }
 }
