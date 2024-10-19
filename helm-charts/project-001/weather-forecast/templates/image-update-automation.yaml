@@ -10,7 +10,7 @@ spec:
     name: flux-system
     namespace: flux-system
   update:
-    strategy: Setters  # Use the "Setters" strategy to update the deployment without committing changes to Git
+    strategy: Setters  # This tells Flux to update Kubernetes resources directly
   git:
     commit:
       author:
@@ -20,6 +20,3 @@ spec:
       branch: main  # Your Git branch (but we will not commit or push)
     commitTemplate:
       message: '[skip ci] Update image for weather-forecast'
-    ignoreChanges:  # This option prevents committing/pushing to Git
-      paths:
-        - '*'
