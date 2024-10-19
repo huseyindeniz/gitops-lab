@@ -17,6 +17,4 @@ spec:
         email: "automation@flux-system"
         name: flux
     push:
-      branch: main  # Your Git branch (but we will not commit or push)
-    commitTemplate:
-      message: '[skip ci] Update image for weather-forecast'
+      branch: main  # Your Git branch
