@@ -12,7 +12,13 @@ image:
   pullPolicy: Always
 
 # Deployment configuration
-replicaCount: 2
+# replicaCount: 2
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80  # The average CPU utilization target for auto-scaling
+  targetMemoryUtilizationPercentage: 75  # The average memory utilization target for auto-scaling
 
 # Service configuration
 service:
