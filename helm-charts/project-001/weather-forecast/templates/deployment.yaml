@@ -6,7 +6,7 @@ metadata:
   annotations:
     fluxcd.io/automated: "true"  # Enable automatic updates
     image.toolkit.fluxcd.io/container.image: "{{ .Release.Name }}-webapi"  # Track this container image
-    image.toolkit.fluxcd.io/image-ref: "flux-system:"{{ .Release.Name }}-imagepolicy  # Reference to the ImagePolicy
+    image.toolkit.fluxcd.io/image-ref: "flux-system:{{ .Release.Name }}-imagepolicy"  # Reference to the ImagePolicy
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
