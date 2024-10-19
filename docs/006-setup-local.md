@@ -6,6 +6,7 @@
 - **Minikube**: Set up Minikube to create a local Kubernetes cluster.
 - **GitHub Repo**: Create or use an existing GitHub repository to store your code, Helm charts, Terraform configurations, etc.
 - **Docker Hub Repo**: Set up a Docker Hub repository for storing Docker images.
+- **Terraform**: Install and configure Terraform.
 - **Helm**: Install and configure Helm for package management.
 
 TODO: Update following sections
@@ -20,10 +21,12 @@ minikube start --nodes 3 --cpus 2 --memory 4096
 
 ## Step 2
 
-Enable ingress to access argo cd via url later
+Enable addons
 
 ```bash
 minikube addons enable ingress
+minikube addons enable metrics-server
+minikube addons enable dashboard
 ```
 
 ## Step 3
