@@ -24,7 +24,7 @@ spec:
     metadata:
       name: '{{.path.basename}}-{{.envName}}'  # Use the directory name and environment as the application name
       annotations:
-        fluxcd.io/automated: "true"  # Enable automatic updates
+        image.toolkit.fluxcd.io/automated: "true"  # Enable automatic updates
         image.toolkit.fluxcd.io/container.image: '{{.path.basename}}-{{.envName}}-webapi'  # Track this container image
         image.toolkit.fluxcd.io/image-ref: 'project-001-wf-{{.envName}}:{{.path.basename}}-{{.envName}}-imagepolicy'  # Reference to the ImagePolicy
     #     argocd-image-updater.argoproj.io/image-list: app-container=huseyindeniz/my-sample-app-1-weatherforecast-api-{{.envName}}, migration-container=huseyindeniz/my-sample-app-1-weatherforecast-migration-{{.envName}}

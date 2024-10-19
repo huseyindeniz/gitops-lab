@@ -13,3 +13,5 @@ spec:
   policy:
     numerical:
       order: asc
+status:
+  latestImage: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}
