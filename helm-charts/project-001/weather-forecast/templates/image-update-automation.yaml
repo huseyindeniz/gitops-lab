@@ -1,0 +1,24 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: {{ .Release.Name }}--image-update
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: huseyindeniz/gitops-lab
+  update:
+    strategy: Setters  # Use the "Setters" strategy to update the deployment without committing changes to Git
+  git:
+    commit:
+      author:
+        email: "automation@flux-system"
+        name: flux
+    push:
+      branch: main  # Your Git branch (but we will not commit or push)
+    commitTemplate:
+      message: '[skip ci] Update image for weather-forecast'
+    ignoreChanges:  # This option prevents committing/pushing to Git
+      paths:
+        - '*'
