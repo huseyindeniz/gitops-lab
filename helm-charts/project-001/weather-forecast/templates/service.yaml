@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: {{ .Release.Name }}-svc
   labels:
-    name: {{ .Release.Name }}-{{ .Values.environment }}-svc
-  name: {{ .Release.Name }}-{{ .Values.environment }}-svc
+    name: {{ .Release.Name }}-svc
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
 spec:
   type: {{ .Values.service.type }}  # Reference service type from values.yaml

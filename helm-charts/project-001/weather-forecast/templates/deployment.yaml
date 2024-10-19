@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.environment }}  # Use the name from values.yaml
+  name: {{ .Release.Name }}  # Use the name from values.yaml
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
   annotations:
     fluxcd.io/automated: "true"  # Enable automatic updates
