@@ -2,7 +2,6 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
   name: {{ .Release.Name }}-imagerepository
-  namespace: {{ .Values.namespace }}-{{ .Values.environment }}
 spec:
   image: {{ .Values.image.repository }}-{{ .Values.environment }}
   interval: 5m  # Check for new images every 5 minutes
