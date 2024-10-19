@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: {{ .Release.Name }}-imagerepository
+  name: {{ .Release.Name }}-{{ .Values.environment }}-imagerepository
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}
 spec:
   image: {{ .Values.image.repository }}-{{ .Values.environment }}
