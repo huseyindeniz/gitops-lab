@@ -5,8 +5,8 @@ metadata:
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
   annotations:
     fluxcd.io/automated: "true"  # Enable automatic updates
-    image.toolkit.fluxcd.io/container.image: "{{ .Release.Name }}-{{ .Values.environment }}-webapi"  # Track this container image
-    image.toolkit.fluxcd.io/image-ref: {{ .Release.Name }}-{{ .Values.environment }}-imagepolicy  # Reference to the ImagePolicy
+    image.toolkit.fluxcd.io/container.image: "{{ .Release.Name }}-webapi"  # Track this container image
+    image.toolkit.fluxcd.io/image-ref: {{ .Release.Name }}-imagepolicy  # Reference to the ImagePolicy
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
@@ -18,9 +18,9 @@ spec:
         app: {{ .Release.Name }}-{{ .Values.environment }}
     spec:
       containers:
-        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # {"$imagepolicy": "{{ .Release.Name }}-{{ .Values.environment }}-imagepolicy" }
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # {"$imagepolicy": "{{ .Release.Name }}-imagepolicy" }
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          name: {{ .Release.Name }}-{{ .Values.environment }}-webapi
+          name: {{ .Release.Name }}-webapi
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
