@@ -26,7 +26,7 @@ spec:
       annotations:
         fluxcd.io/automated: "true"  # Enable automatic updates
         image.toolkit.fluxcd.io/container.image: '{{.path.basename}}-{{.envName}}-webapi'  # Track this container image
-        image.toolkit.fluxcd.io/image-ref: 'flux-system:{{.path.basename}}-{{.envName}}-imagepolicy'  # Reference to the ImagePolicy
+        image.toolkit.fluxcd.io/image-ref: 'project-001-wf-{{.envName}}:{{.path.basename}}-{{.envName}}-imagepolicy'  # Reference to the ImagePolicy
     #     argocd-image-updater.argoproj.io/image-list: app-container=huseyindeniz/my-sample-app-1-weatherforecast-api-{{.envName}}, migration-container=huseyindeniz/my-sample-app-1-weatherforecast-migration-{{.envName}}
     #     argocd-image-updater.argoproj.io/app-container.update-strategy: alphabetical # Or semver if you use versioning
     #     argocd-image-updater.argoproj.io/migration-container.update-strategy: alphabetical # Or semver if you use versioning
