@@ -18,7 +18,7 @@ spec:
         app: {{ .Release.Name }}-{{ .Values.environment }}
     spec:
       containers:
-        - image: {{ .Values.image.repository }}-{{ .Values.environment }}  # {"$imagepolicy": "{{ .Values.namespace }}-{{ .Values.environment }}:{{ .Release.Name }}-imagepolicy"}
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # {"$imagepolicy": "{{ .Values.namespace }}-{{ .Values.environment }}:{{ .Release.Name }}-imagepolicy"}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: {{ .Release.Name }}-webapi
           env:
