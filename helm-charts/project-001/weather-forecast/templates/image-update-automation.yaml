@@ -7,7 +7,7 @@ spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
-    name: huseyindeniz/gitops-lab
+    name: flux
   update:
     strategy: Setters  # Use the "Setters" strategy to update the deployment without committing changes to Git
   git:
