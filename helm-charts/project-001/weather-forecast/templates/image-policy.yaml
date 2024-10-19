@@ -7,6 +7,9 @@ metadata:
 spec:
   imageRepositoryRef:
     name: {{ .Release.Name }}-{{ .Values.environment }}-imagerepository
+  filterTags:
+    pattern: '^\d{14}$'  # Matches exactly 14 digits
+    extract: '$0'  # Extracts the full 14-digit tag
   policy:
     numerical:
       order: asc
