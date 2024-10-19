@@ -11,10 +11,3 @@ spec:
     namespace: flux-system
   update:
     strategy: Setters  # This tells Flux to update Kubernetes resources directly
-  git:
-    commit:
-      author:
-        email: "automation@flux-system"
-        name: flux
-    push:
-      branch: main  # Your Git branch
