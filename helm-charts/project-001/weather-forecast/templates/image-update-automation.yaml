@@ -7,7 +7,8 @@ spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
-    name: flux
+    name: flux_git_repo
+    namespace: flux-system
   update:
     strategy: Setters  # Use the "Setters" strategy to update the deployment without committing changes to Git
   git:
