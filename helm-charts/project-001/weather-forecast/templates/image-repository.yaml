@@ -5,4 +5,4 @@ metadata:
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}
 spec:
   image: {{ .Values.image.repository }}-{{ .Values.environment }}
-  interval: 1m  # Check for new images every minute
+  interval: 5m  # Check for new images every 5 minutes
