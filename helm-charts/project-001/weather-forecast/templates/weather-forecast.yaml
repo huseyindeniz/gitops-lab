@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.app.name }}-{{ .Values.environment }}-app # Use the name from values.yaml
+  name: {{ .Release.Name }}-{{ .Values.environment }}-app # Use the name from values.yaml
   namespace: {{ .Values.namespace }}-{{ .Values.environment }} # Use the namespace from values.yaml
 spec:
   project: default

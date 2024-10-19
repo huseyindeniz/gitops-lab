@@ -6,10 +6,6 @@ targetRevision: main
 chartPath: helm-charts/weather-forecast
 server: https://kubernetes.default.svc
 
-# Application name
-app:
-  name: weather-forecast
-
 # Image configuration
 image:
   repository: huseyindeniz/my-sample-app-1-weatherforecast-api

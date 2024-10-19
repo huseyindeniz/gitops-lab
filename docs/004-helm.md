@@ -94,6 +94,13 @@ Lint a Chart
 helm lint {chart-directory}
 ```
 
+Render a file for debugging
+
+```bash
+helm template weather-forecast ./ --show-only templates/image-repository.yaml --values values-staging.yaml --values value
+s-staging-stag-1.yaml --set environment=stag-1
+```
+
 ## Additional Resources
 
 [Helm Official Documentation](https://helm.sh/docs/intro/install/)

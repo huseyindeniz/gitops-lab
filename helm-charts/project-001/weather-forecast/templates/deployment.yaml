@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}-{{ .Values.environment }}  # Use the name from values.yaml
+  name: {{ .Release.Name }}-{{ .Values.environment }}  # Use the name from values.yaml
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
+  annotations:
+    fluxcd.io/automated: "true"  # Enable automatic updates
+    image.toolkit.fluxcd.io/container.image: "{{ .Release.Name }}-{{ .Values.environment }}-webapi"  # Track this container image
+    image.toolkit.fluxcd.io/image-ref: {{ .Release.Name }}-{{ .Values.environment }}-imagepolicy  # Reference to the ImagePolicy
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
     matchLabels:
-      app: {{ .Values.app.name }}-{{ .Values.environment }}
+      app: {{ .Release.Name }}-{{ .Values.environment }}
   template:
     metadata:
       labels:
-        app: {{ .Values.app.name }}-{{ .Values.environment }}
+        app: {{ .Release.Name }}-{{ .Values.environment }}
     spec:
       containers:
-        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # Dynamic image from values.yaml
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # {"$imagepolicy": "{{ .Release.Name }}-{{ .Values.environment }}-imagepolicy" }
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          name: {{ .Values.app.name }}-{{ .Values.environment }}-webapi
+          name: {{ .Release.Name }}-{{ .Values.environment }}-webapi
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}

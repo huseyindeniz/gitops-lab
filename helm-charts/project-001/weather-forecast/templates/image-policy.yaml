@@ -1,0 +1,12 @@
+# templates/imagepolicy.yaml
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.environment }}-imagepolicy
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}
+spec:
+  imageRepositoryRef:
+    name: {{ .Release.Name }}-{{ .Values.environment }}-imagerepository
+  policy:
+    numerical:
+      order: asc
