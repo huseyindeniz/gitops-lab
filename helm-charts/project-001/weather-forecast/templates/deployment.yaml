@@ -6,7 +6,7 @@ metadata:
   annotations:
     image.toolkit.fluxcd.io/automated: "true"  # Enable automatic updates
     image.toolkit.fluxcd.io/container.image: {{ .Release.Name }}-webapi  # Track this container image
-    image.toolkit.fluxcd.io/image-ref: {{ .Values.namespace }}:{{ .Release.Name }}-imagepolicy'  # Reference to the ImagePolicy  
+    image.toolkit.fluxcd.io/image-ref: {{ .Values.namespace }}:{{ .Release.Name }}-imagepolicy  # Reference to the ImagePolicy  
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         # - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}
-        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # {"$imagepolicy": "{{ .Values.namespace }}:{{ .Release.Name }}-{{ .Values.environment }}-imagepolicy"}
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # {"$imagepolicy": "{{ .Values.namespace }}-{{ .Values.environment }}:{{ .Release.Name }}-{{ .Values.environment }}-imagepolicy"}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: {{ .Release.Name }}-webapi
           env:
