@@ -9,12 +9,12 @@ spec:
         elements:
         - envName: stag-1
           envPort: 5001
-          imgTag: 20241005160437 # {"$imagepolicy": "flux-system:weather-forecast-stag-1-imagepolicy:tag"}
-          imgMigrationTag: 20241005160343
+          imgTag: '20241005160437' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-imagepolicy:tag"}
+          imgMigrationTag: '20241005160343'
         - envName: stag-2
           envPort: 5002
-          imgTag: 20241005183213 # {"$imagepolicy": "flux-system:weather-forecast-stag-2-imagepolicy:tag"}
-          imgMigrationTag: 20241005183118                
+          imgTag: '20241005183213' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-imagepolicy:tag"}
+          imgMigrationTag: '20241005183118'              
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
