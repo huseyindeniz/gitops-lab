@@ -15,6 +15,9 @@ spec:
     checkout:
       ref:
         branch: main
+    commit:
+      author:
+        name: "git"
     push:
       branch: main
 
