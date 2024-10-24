@@ -14,7 +14,7 @@ spec:
         app: {{ .Release.Name }}-{{ .Values.environment }}
     spec:
       containers:
-        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ quote .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: {{ .Release.Name }}-webapi
           env:
