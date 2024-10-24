@@ -6,23 +6,23 @@ metadata:
 spec:
   interval: 1m
 
-  # Reference your Flux bootstrap GitRepository (this won't make any commits)
   sourceRef:
     kind: GitRepository
-    name: flux-system  # Name of your Flux bootstrap Git repository
-    namespace: flux-system  # Adjust if your GitRepository is in another namespace
+    name: flux-system
+    namespace: flux-system
 
   git:
     checkout:
       ref:
-        branch: main  # Branch of your Flux bootstrap repo
+        branch: main
     commit:
       author:
         name: "FluxCD Image Updater"
         email: "flux-bot@yourcompany.com"
     push:
-      branch: main  # Even though this is here, no actual commits will be made
+      branch: main
 
   update:
+    path: "flux/local"
     strategy:
       type: Setters
