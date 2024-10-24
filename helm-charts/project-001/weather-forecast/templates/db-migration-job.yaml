@@ -5,7 +5,7 @@
 #   name: {{ .Release.Name }}-migration
 #   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
 #   labels:
-#     app: {{ .Release.Name }}-{{ .Values.environment }}-migration
+#     app: {{ .Release.Name }}-migration
 #   annotations:
 #     # Helm hook annotations
 #     # "helm.sh/hook": "pre-install,pre-upgrade"

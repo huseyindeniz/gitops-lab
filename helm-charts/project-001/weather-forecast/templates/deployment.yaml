@@ -11,11 +11,11 @@ spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Values.environment }}
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Values.environment }}
+        app: {{ .Release.Name }}
     spec:
       containers:
         - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}
