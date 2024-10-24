@@ -23,5 +23,5 @@ spec:
       branch: main
 
   update:
-    path: "flux/local"
+    path: "flux/local/applications/{{ .Release.Name }}/values.yaml"
     strategy: Setters
