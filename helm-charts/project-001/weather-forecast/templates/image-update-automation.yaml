@@ -18,6 +18,7 @@ spec:
     commit:
       author:
         name: "git"
+        email: "huseyindenizkivrak@gmail.com"
     push:
       branch: main
 
