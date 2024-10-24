@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: project-001-weather-forecast-appset
+  namespace: argo-cd-local
+spec:
+  generators:  
+    - list:
+        elements:
+        - envName: stag-1
+          envPort: 5001
+          imgTag: 20241005160437 # {"$imagepolicy": "flux-system:weather-forecast-stag-1-imagepolicy:tag"}
+          imgMigrationTag: 20241005160343
+        - envName: stag-2
+          envPort: 5002
+          imgTag: 20241005183213 # {"$imagepolicy": "flux-system:weather-forecast-stag-2-imagepolicy:tag"}
+          imgMigrationTag: 20241005183118                
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  template:
+    metadata:
+      name: 'weather-forecast-{{.envName}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/huseyindeniz/cicd-lab.git
+        targetRevision: main
+        path: 'helm-charts/project-001/weather-forecast'
+        helm:
+          valueFiles:
+            - values-staging.yaml
+          valuesObject:
+            environment: '{{.envName}}'
+            port: '{{.envPort}}'
+            image: 
+              tag: '{{.imgTag}}'
+              migrationTag: '{{.imgMigrationTag}}'
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: 'project-001-weather-forecast-{{.envName}}'  # Use the environment suffix in the namespace
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false

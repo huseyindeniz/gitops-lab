@@ -2,11 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}  # Use the name from values.yaml
-  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
-  annotations:
-    image.toolkit.fluxcd.io/automated: "true"  # Enable automatic updates
-    image.toolkit.fluxcd.io/container.image: {{ .Release.Name }}-webapi  # Track this container image
-    image.toolkit.fluxcd.io/image-ref: flux-system:{{ .Release.Name }}-imagepolicy  # Reference to the ImagePolicy  
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here  
 spec:
   replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
   selector:
@@ -18,7 +14,7 @@ spec:
         app: {{ .Release.Name }}-{{ .Values.environment }}
     spec:
       containers:
-        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}  # {"$imagepolicy": "flux-system:{{ .Release.Name }}-{{ .Values.environment }}-imagepolicy:tag"}
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: {{ .Release.Name }}-webapi
           env:
