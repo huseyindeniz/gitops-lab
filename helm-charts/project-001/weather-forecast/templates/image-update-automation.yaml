@@ -15,10 +15,6 @@ spec:
     checkout:
       ref:
         branch: main
-    commit:
-      author:
-        name: "FluxCD Image Updater"
-        email: "flux-bot@yourcompany.com"
     push:
       branch: main
 
