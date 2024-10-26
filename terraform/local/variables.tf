@@ -29,6 +29,12 @@ variable "flux_github_repository" {
   default     = ""
 }
 
+variable "flux_path" {
+  description = "Flux path"
+  type        = string
+  default     = ""
+}
+
 variable "env_names" {
   description = "List of environment configurations for the project"
   type        = list(string)
