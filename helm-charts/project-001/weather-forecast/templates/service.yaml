@@ -12,4 +12,4 @@ spec:
       port: {{ .Values.port }}  # Reference service port
       targetPort: {{ .Values.service.targetPort }}  # Reference target port
   selector:
-    app: {{ .Release.Name }}-{{ .Values.environment }}
+    app: {{ .Release.Name }}
