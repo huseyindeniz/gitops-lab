@@ -12,7 +12,7 @@ image:
   pullPolicy: Always
 
 # Deployment configuration
-# replicaCount: 2
+replicaCount: 2
 hpa:
   enabled: true
   minReplicas: 1
