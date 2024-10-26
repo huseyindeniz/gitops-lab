@@ -66,14 +66,14 @@ Follow these steps to update your application and database with minimal effort.
    Commit the updated code and migration files.
 4. **Submit a Pull Request**  
     Open a PR to merge your changes.
-   That's it! Once the PR is merged, the automated pipeline will handle the rest: (TODO: workflow is working with manual trigger currently)
+   That's it! Once the PR is created, the automated pipeline will handle the rest: (TODO: workflow is working with manual trigger currently)
 
 ### Automated Pipeline
 
 1. **GitHub Workflow**: Builds and publishes the Docker images for your updated application.
 2. **Flux**: Detects the new image tags and automatically updates the application manifest.
 3. **ArgoCD**: Syncs the latest changes from the manifest to the Kubernetes cluster.
-4. **Migration Job Deployment**: Deploys the job with the latest application image tag.
+4. **Migration Job Deployment**: Deploys the job with the latest application migration image tag.
 5. **Helm Hook**: Triggers the migration job execution.
 6. **EF Core Migration Execution**: The job runs the EF Core migration bundle on the database.
 7. **Application Deployment**: After the job finishes, ArgoCD deploys the updated application pod with the latest image.
