@@ -1,37 +1,37 @@
-# # Migration Job Template (migration-job.yaml)
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   name: {{ .Release.Name }}-migration
-#   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
-#   labels:
-#     app: {{ .Release.Name }}-migration
-#   annotations:
-#     # Helm hook annotations
-#     # "helm.sh/hook": "pre-install,pre-upgrade"
-#     # "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
-# spec:
-#   template:
-#     spec:
-#       containers:
-#         - name: migration
-#           image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.image.migrationTag }}
-#           imagePullPolicy: {{ .Values.image.pullPolicy }}
-#           env:
-#             - name: ASPNETCORE_ENVIRONMENT
-#               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
-#             - name: DB__POSTGRES_HOST
-#               value: project-001-wf-postgres-{{ .Values.environment }}-postgresql
-#             - name: DB__POSTGRES_PORT
-#               value: "5432"
-#             - name: DB__POSTGRES_DB
-#               value: {{ .Values.namespace }}-{{ .Values.environment }}-db
-#             - name: DB__POSTGRES_USER
-#               value: {{ .Values.namespace }}-{{ .Values.environment }}-user
-#             - name: DB__POSTGRES_PASSWORD
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: postgres-password-{{ .Values.environment }}  # Exact match to the secret name
-#                   key: POSTGRES_PASSWORD  # The key inside the secret
-#       restartPolicy: Never
-#   backoffLimit: 1
+# Migration Job Template (migration-job.yaml)
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-migration
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
+  labels:
+    app: {{ .Release.Name }}-migration
+  annotations:
+    # Helm hook annotations
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+spec:
+  template:
+    spec:
+      containers:
+        - name: migration
+          image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.image.migrationTag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
+            - name: DB__POSTGRES_HOST
+              value: project-001-wf-postgres-{{ .Values.environment }}-postgresql
+            - name: DB__POSTGRES_PORT
+              value: "5432"
+            - name: DB__POSTGRES_DB
+              value: {{ .Values.namespace }}-{{ .Values.environment }}-db
+            - name: DB__POSTGRES_USER
+              value: {{ .Values.namespace }}-{{ .Values.environment }}-user
+            - name: DB__POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password-{{ .Values.environment }}  # Exact match to the secret name
+                  key: POSTGRES_PASSWORD  # The key inside the secret
+      restartPolicy: Never
+  backoffLimit: 1
