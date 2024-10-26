@@ -1,27 +1,27 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImageUpdateAutomation
-metadata:
-  name: {{ .Release.Name }}-imageupdateautomation
-  namespace: flux-system
-spec:
-  interval: 1m
+# apiVersion: image.toolkit.fluxcd.io/v1beta2
+# kind: ImageUpdateAutomation
+# metadata:
+#   name: {{ .Release.Name }}-imageupdateautomation
+#   namespace: flux-system
+# spec:
+#   interval: 1m
 
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system
 
-  git:
-    checkout:
-      ref:
-        branch: main
-    commit:
-      author:
-        name: "git"
-        email: "huseyindenizkivrak@gmail.com"
-    push:
-      branch: main
+#   git:
+#     checkout:
+#       ref:
+#         branch: main
+#     commit:
+#       author:
+#         name: "git"
+#         email: "huseyindenizkivrak@gmail.com"
+#     push:
+#       branch: main
 
-  update:
-    path: "flux/local/applications/{{ .Release.Name }}/values.yaml"
-    strategy: Setters
+#   update:
+#     path: "flux/local/applications/{{ .Release.Name }}/values.yaml"
+#     strategy: Setters

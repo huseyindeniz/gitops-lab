@@ -5,9 +5,9 @@ resource "github_repository" "flux_git_repo" {
   auto_init   = true # This is extremely important as flux_bootstrap_git will not work without a repository that has been initialised
 }
 
-resource "flux_bootstrap_git" "flux_bootstrap" {
-  embedded_manifests = true
-  path               = "flux/local"
-  components_extra   = ["image-reflector-controller", "image-automation-controller"]
-  depends_on         = [github_repository.flux_git_repo]
-}
+# resource "flux_bootstrap_git" "flux_bootstrap" {
+#   embedded_manifests = true
+#   path               = "flux/local"
+#   components_extra   = ["image-reflector-controller", "image-automation-controller"]
+#   depends_on         = [github_repository.flux_git_repo]
+# }
