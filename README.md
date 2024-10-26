@@ -45,11 +45,17 @@ Additionally, I used Entity Framework (EF) Core Migration Bundles to make the pr
 
 This approach worked well for my case, ensuring that database migrations were correctly managed within the CI/CD pipeline and reducing deployment risks in Kubernetes environments. There may be other solutions out there, but this combination of Helm hooks and EF Core migration bundles was the one that solved the problem effectively for me.
 
+ArgoCD Overview
+
 ![ArgoCD Overview](./docs/images/screenshots/argo-001.png)
+
+ArgoCD App View
 
 ![ArgoCD App View](./docs/images/screenshots/argo-002.png)
 
-![Migration Example](./docs/images/screenshots/migration-example.gif)
+Migration Demo
+
+![Migration Demo](./docs/images/screenshots/migration-example.gif)
 
 # Developer Workflow
 
