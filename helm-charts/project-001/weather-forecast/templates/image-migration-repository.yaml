@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: {{ .Release.Name }}-imageMigrationRepository
+  name: {{ .Release.Name }}-image-migration-repository
   namespace: flux-system
 spec:
   image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}

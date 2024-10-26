@@ -1,11 +1,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: {{ .Release.Name }}-imagePolicy
+  name: {{ .Release.Name }}-image-policy
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: {{ .Release.Name }}-imageRepository
+    name: {{ .Release.Name }}-image-repository
   filterTags:
     pattern: '^\d{14}$'  # Matches exactly 14 digits
     extract: '$0'  # Extracts the full 14-digit tag
