@@ -15,10 +15,10 @@ resource "kubernetes_namespace" "project_001_weather_forecast" {
 }
 
 resource "kubernetes_namespace" "project_001_weather_forecast_env" {
-  for_each = { for env in var.env_names : env.name => env }
+  for_each = toset(var.env_names)
 
   metadata {
-    name = "${local.project001weatherforecastns}-${each.value.name}" # Construct the namespace name
+    name = "${local.project001weatherforecastns}-${each.value}" # Construct the namespace name
   }
 }
 

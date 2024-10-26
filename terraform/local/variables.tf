@@ -31,10 +31,7 @@ variable "flux_github_repository" {
 
 variable "env_names" {
   description = "List of environment configurations for the project"
-  type = list(object({
-    name = string
-    port = number
-  }))
+  type        = list(string)
 }
 
 variable "storage_size" {

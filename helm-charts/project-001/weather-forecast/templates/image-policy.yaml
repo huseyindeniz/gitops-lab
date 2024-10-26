@@ -1,15 +1,14 @@
-# templates/imagepolicy.yaml
-# apiVersion: image.toolkit.fluxcd.io/v1beta1
-# kind: ImagePolicy
-# metadata:
-#   name: {{ .Release.Name }}-imagepolicy
-#   namespace: flux-system
-# spec:
-#   imageRepositoryRef:
-#     name: {{ .Release.Name }}-imagerepository
-#   filterTags:
-#     pattern: '^\d{14}$'  # Matches exactly 14 digits
-#     extract: '$0'  # Extracts the full 14-digit tag
-#   policy:
-#     numerical:
-#       order: asc
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: {{ .Release.Name }}-imagepolicy
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: {{ .Release.Name }}-imagerepository
+  filterTags:
+    pattern: '^\d{14}$'  # Matches exactly 14 digits
+    extract: '$0'  # Extracts the full 14-digit tag
+  policy:
+    numerical:
+      order: asc

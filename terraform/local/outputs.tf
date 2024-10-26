@@ -9,11 +9,11 @@ output "argo_cd_local_admin_password" {
 
 output "project_001_weather_forecast_db_info" {
   value = {
-    for env_key, env in { for env in var.env_names : env.name => env } :
-    env_key => {
-      db_name     = "${local.project001weatherforecastns}-${env_key}-db"
-      db_user     = "${local.project001weatherforecastns}_${env_key}-user"
-      db_password = random_password.project_001_weather_forecast_postgres_password[env_key].result
+    for env in var.env_names :
+    env => {
+      db_name     = "${local.project001weatherforecastns}-${env}-db"
+      db_user     = "${local.project001weatherforecastns}_${env}-user"
+      db_password = random_password.project_001_weather_forecast_postgres_password[env].result
     }
   }
 
