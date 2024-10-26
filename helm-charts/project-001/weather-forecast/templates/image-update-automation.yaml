@@ -23,5 +23,5 @@ spec:
       branch: main
 
   update:
-    path: ./applications/project-001/staging-weather-forecast.yaml
+    path: /applications/project-001/staging-weather-forecast.yaml
     strategy: Setters
