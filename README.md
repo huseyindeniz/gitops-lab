@@ -49,6 +49,8 @@ This approach worked well for my case, ensuring that database migrations were co
 
 ![ArgoCD App View](./docs/images/screenshots/argo-002.png)
 
+![Migration Example](./docs/images/screenshots/migration-example.gif)
+
 # Developer Workflow
 
 Follow these steps to update your application and database with minimal effort.
