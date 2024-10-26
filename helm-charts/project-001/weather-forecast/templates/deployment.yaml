@@ -4,7 +4,9 @@ metadata:
   name: {{ .Release.Name }}  # Use the name from values.yaml
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here  
 spec:
-  replicas: {{ .Values.replicaCount }}  # Use replicaCount from values.yaml
+  {{- if not .Values.hpa.enabled }}
+  replicas: {{ .Values.replicaCount  | default 1 }}  # Use replicaCount from values.yaml
+  {{- end }}
   selector:
     matchLabels:
       app: {{ .Release.Name }}
