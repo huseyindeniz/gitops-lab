@@ -8,8 +8,8 @@ metadata:
     app: {{ .Release.Name }}-migration
   annotations:
     # Helm hook annotations
-    "helm.sh/hook": "pre-install,pre-upgrade"
-    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
+    # "helm.sh/hook": "pre-install,pre-upgrade"
+    # "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
 spec:
   template:
     spec:
