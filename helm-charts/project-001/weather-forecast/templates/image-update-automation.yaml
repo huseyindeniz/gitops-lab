@@ -23,5 +23,5 @@ spec:
       branch: main
 
   update:
-    path: "/manifests/project-001/{{ .Release.Name }}.yaml"
+    path: "../../../../manifests/project-001/{{ .Release.Name }}.yaml"
     strategy: Setters
