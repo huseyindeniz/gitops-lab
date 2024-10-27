@@ -1,0 +1,42 @@
+@startuml
+title Automated DB Migration Pipeline - Activity Diagram
+
+start
+
+:Modify your entities;
+:Create a migration;
+note right
+Use the .NET CLI to create the migration
+end note
+
+:Commit your changes;
+:Submit a Pull Request;
+
+note right
+That's it! Once the PR is created, the automated pipeline will handle the rest. 
+(TODO: Workflow is currently on manual trigger)
+end note
+
+:GitHub Workflow triggers build;
+:Build and publish Docker image;
+
+:Flux detects new image tag;
+:Update application manifest;
+
+:ArgoCD detects manifest changes;
+if (Helm Hook exists?) then
+  -[yes]-> :ArgoCD waits for migration job to complete;
+  :ArgoCD deploys migration job;
+  :Migration job runs EF Core migrations on the database;
+  :Migration job completes;
+else
+  -[no]-> :No Helm Hook detected, proceed directly;
+endif
+
+:ArgoCD deploys updated application pod;
+:Kubernetes cluster is updated with the latest application;
+
+:Update complete - application and database are up-to-date;
+
+stop
+@enduml

@@ -85,28 +85,6 @@ Migration Demo
 
 Follow these steps to update your application and database with minimal effort.
 
-### Steps to Update
+### Automated DB Migration Pipeline
 
-1. **Modify Your Entities**  
-   Make changes to your application's entities as needed.
-2. **Create a Migration**  
-   Use the `.NET` CLI to create a migration for your database schema updates.
-   ```bash
-   dotnet ef migrations add <MigrationName> --project ./mySampleApp1.weatherForecast.Infra --startup-project ./mySampleApp1.weatherForecast.API
-   ```
-3. **Commit Your Changes**  
-   Commit the updated code and migration files.
-4. **Submit a Pull Request**  
-    Open a PR to merge your changes.
-   That's it! Once the PR is created, the automated pipeline will handle the rest: (TODO: workflow is working with manual trigger currently)
-
-### Automated Pipeline
-
-1. **GitHub Workflow**: Builds and publishes the Docker image with the latest application code.
-2. **Flux**: Detects the newly published Docker image tag and automatically updates the application manifest with the latest image version.
-3. **ArgoCD**: Continuously monitors the application manifest. Once the manifest update is detected, ArgoCD syncs the changes to the Kubernetes cluster but waits for any pre-deployment jobs to complete before deploying the application.
-4. **Migration Job Deployment**: ArgoCD deploys a migration job to the Kubernetes cluster, using the latest application migration image tag.
-5. **Helm Hook**: Triggers the migration job, initiating the database migration process.
-6. **EF Core Migration Execution**: The migration job runs the EF Core migration commands on the database to apply schema changes.
-7. **Application Deployment**: After the migration job successfully completes, ArgoCD proceeds to deploy the updated application pod with the latest Docker image.
-8. **Update Complete**: Both the application and the database schema are now up-to-date and aligned with the latest version.
+![Automated DB Migration Pipeline](./docs/diagrams/docs/db-migration-flow.svg)
