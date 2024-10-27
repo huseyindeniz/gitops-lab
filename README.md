@@ -4,13 +4,30 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ## Goals
 
-The primary goal of this repository is to build a comprehensive GitOps playground, integrating tools and platforms like Kubernetes, Terraform, Argo CD, Helm, and GitHub Workflows, with a focus on the following:
+The primary objective of this repository is to build a robust GitOps playground, integrating tools and platforms like Kubernetes, Terraform, Argo CD, Helm, and GitHub Workflows. This environment will support a wide array of operational goals, including:
 
-- **Establishing a Manageable Database Migration Infrastructure in the Cloud**\
-  The core objective is to implement an effective GitOps approach for database migration using the Entity Framework (EF) Core code-first strategy. This includes:
-  - Seamlessly managing migrations and schema changes across multiple cloud environments within a GitOps workflow.
-  - Ensuring that database migration processes are integrated into the CI/CD pipeline in an automated, declarative, and version-controlled manner.
-  - Applying best practices for versioning and automating the deployment of database changes across various cloud platforms (AWS, AKS, GKE, DOKS).
+- **Establishing a Manageable Database Migration Infrastructure in the Cloud**
+  Implement an effective GitOps-based strategy for database migrations using EF Core, supporting seamless migrations and schema management across multiple cloud environments.
+- **Deploying and Configuring Core Infrastructure Components**:
+  Set up Kubernetes clusters on AWS, AKS, GKE, and DOKS, with necessary networking (VPC) and cluster resources for multi-cloud testing and management.
+- **Automating Deployment and Updates through GitOps**:
+  Utilize Argo CD, Flux, and GitHub Actions to achieve automated, continuous deployments, including version-controlled database changes and application updates.
+- **Implementing Advanced Deployment Strategies**:
+  Configure canary and blue/green deployments for production environments, ensuring safe and controlled application rollouts.
+- **Ensuring Robust Rollback and Conflict Management**:
+  Define rollback mechanisms and scenarios for managing conflicting and large database migrations to ensure application reliability.
+- **Setting Up Multi-Environment Support**:
+  Establish and manage staging, testing, and production environments for a sample application with tailored Helm charts and manifests.
+- **Integrating Image Update Automation**:
+  Configure image update automation tools, such as Argo CD Image Updater and Flux, to manage app deployments based on image tags.
+- **Enhancing Observability and Monitoring**:
+  Integrate monitoring solutions like Prometheus and Grafana for real-time performance tracking, alerting, and visualization across deployments.
+- **Automating PR Deployment and Workflow Management**:
+  Set up PR deployment automation via Slack for enhanced collaboration and streamlined deployment notifications.
+- **Enabling AI/ML Pipeline Deployment**:
+  Develop workflows and environments that support AI training and inference pipeline deployments, with GPU resources if applicable.
+- **Conducting Load and Performance Testing**:
+  Implement load testing mechanisms to ensure system resilience and performance under various load conditions.
 
 ## TODO
 
@@ -64,7 +81,7 @@ Migration Demo
 
 ![Migration Demo](./docs/images/screenshots/migration-example.gif)
 
-# Developer Workflow
+## Developer Workflow
 
 Follow these steps to update your application and database with minimal effort.
 
