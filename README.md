@@ -6,7 +6,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 The primary objective of this repository is to build a robust GitOps playground, integrating tools and platforms like Kubernetes, Terraform, Argo CD, Helm, and GitHub Workflows. This environment will support a wide array of operational goals, including:
 
-- **Establishing a Manageable Database Migration Infrastructure in the Cloud**
+- **Establishing a Manageable Database Migration Infrastructure in the Cloud**:
   Implement an effective GitOps-based strategy for database migrations using EF Core, supporting seamless migrations and schema management across multiple cloud environments.
 - **Deploying and Configuring Core Infrastructure Components**:
   Set up Kubernetes clusters on AWS, AKS, GKE, and DOKS, with necessary networking (VPC) and cluster resources for multi-cloud testing and management.
