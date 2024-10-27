@@ -2,6 +2,8 @@
 
 GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
+**Warning**: Latest db migration with 5m records testing on stag-2 is crashing whole cluster :D I'll investigate later.
+
 ## Goals
 
 The primary objective of this repository is to build a robust GitOps playground, integrating tools and platforms like Kubernetes, Terraform, Argo CD, Helm, and GitHub Workflows. This environment will support a wide array of operational goals, including:
