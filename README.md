@@ -31,6 +31,10 @@ The primary goal of this repository is to build a comprehensive GitOps playgroun
 - 🔲 conflicting migration scenario
 - 🔲 huge and busy db migration scenario
 - 🔲 gpu/ai training/inference pipeline scenario
+- 🔲 monitoring (prometheus, grafana)
+- 🔲 canary prod deployment setup
+- 🔲 blue/green prod deployment setup
+- 🔲 load test
 - 🔲 aws (vpc and cluster creation is ready)
 - 🔲 aks (vpc and cluster creation is ready)
 - 🔲 gke (vpc and cluster creation is ready)
