@@ -14,7 +14,7 @@ spec:
           - envName: stag-2
             envPort: 5002
             imgTag: '20241026134504' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-policy:tag"}
-            imgMigrationTag: '20241026134414' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-migration-policy:tag"}
+            imgMigrationTag: '20241027145014' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-migration-policy:tag"}
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
