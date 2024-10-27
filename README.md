@@ -26,8 +26,11 @@ The primary goal of this repository is to build a comprehensive GitOps playgroun
 - ✅ Configure helm hook for db migration before application itself deployed
 - ❌ Install/Configure argocd-image-updater ([it doesn't support app in any namespace scenario yet](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
 - ✅ Install/Configure flux for auto image updates
-- 🔲 automate deployment of PRs
-- 🔲 rollback ?
+- 🔲 automate deployment of PRs via Slack
+- 🔲 rollback scenario
+- 🔲 conflicting migration scenario
+- 🔲 huge and busy db migration scenario
+- 🔲 gpu/ai training/inference pipeline scenario
 - 🔲 aws (vpc and cluster creation is ready)
 - 🔲 aks (vpc and cluster creation is ready)
 - 🔲 gke (vpc and cluster creation is ready)
@@ -88,7 +91,3 @@ Follow these steps to update your application and database with minimal effort.
 8. **Update Complete**: Both the application and the database are now up-to-date.
 
 This workflow allows seamless application and database updates with minimal manual steps.
-
-TODO:
-
-- Check the flow for conflicting db migration cases.
