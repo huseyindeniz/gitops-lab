@@ -85,6 +85,12 @@ Migration Demo
 
 Follow these steps to update your application and database with minimal effort.
 
-### Automated DB Migration Pipeline
+### Adding new migration
+
+```bash
+dotnet ef migrations add <MigrationName> --project ./mySampleApp1.weatherForecast.Infra --startup-project ./mySampleApp1.weatherForecast.API
+```
+
+### Automated DB Migration Pipeline Flow
 
 ![Automated DB Migration Pipeline](./docs/diagrams/docs/db-migration-flow.svg)

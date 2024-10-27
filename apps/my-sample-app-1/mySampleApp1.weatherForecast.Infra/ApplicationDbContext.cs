@@ -18,7 +18,7 @@ namespace mySampleApp1.weatherForecast.Infra
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             // Seed data using extension method
-            modelBuilder.SeedInitialData();
+            // modelBuilder.SeedInitialData();
 
         }
     }
