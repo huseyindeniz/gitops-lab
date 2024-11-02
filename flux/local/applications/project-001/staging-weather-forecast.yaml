@@ -43,3 +43,5 @@ spec:
           prune: true
           selfHeal: true
           allowEmpty: false
+        syncOptions:
+          - SkipHooksOnError=true  # Ensures Argo CD skips retries if a Helm hook fails
