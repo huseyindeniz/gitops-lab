@@ -37,7 +37,7 @@ spec:
           requests:
               cpu: 200m
               memory: 1Gi
-            limits:
+          limits:
               cpu: 300m
               memory: 2Gi
       restartPolicy: Never
