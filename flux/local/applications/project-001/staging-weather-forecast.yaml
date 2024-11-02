@@ -9,7 +9,7 @@ spec:
         elements:
           - envName: stag-1
             envPort: 5001
-            imgTag: '20241024193459' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
+            imgTag: '20241102134151' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
             imgMigrationTag: '20241102134058' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-migration-policy:tag"}
           - envName: stag-2
             envPort: 5002
