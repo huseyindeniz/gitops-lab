@@ -41,4 +41,4 @@ spec:
                 cpu: 600m
                 memory: 4Gi
       restartPolicy: Never
-  backoffLimit: 1
+  backoffLimit: 0  # Ensure no retries on failure
