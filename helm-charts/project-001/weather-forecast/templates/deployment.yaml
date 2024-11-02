@@ -4,10 +4,7 @@ metadata:
   name: {{ .Release.Name }}  # Use the name from values.yaml
   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
   labels:
-    app: {{ .Release.Name }}-migration  
-  annotations:
-    "helm.sh/hook": "post-install,post-upgrade"
-    "helm.sh/hook-delete-policy": "hook-succeeded,hook-failed"
+    app: {{ .Release.Name }}-migration
 spec:
   {{- if not .Values.hpa.enabled }}
   replicas: {{ .Values.replicaCount  | default 1 }}  # Use replicaCount from values.yaml
