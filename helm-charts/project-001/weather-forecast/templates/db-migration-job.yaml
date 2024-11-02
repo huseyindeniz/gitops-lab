@@ -33,5 +33,12 @@ spec:
                 secretKeyRef:
                   name: postgres-password-{{ .Values.environment }}  # Exact match to the secret name
                   key: POSTGRES_PASSWORD  # The key inside the secret
+                    resources:
+          requests:
+              cpu: 200m
+              memory: 1Gi
+            limits:
+              cpu: 300m
+              memory: 2Gi
       restartPolicy: Never
   backoffLimit: 1

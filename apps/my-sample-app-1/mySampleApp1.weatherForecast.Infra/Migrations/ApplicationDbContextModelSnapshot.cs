@@ -22,7 +22,7 @@ namespace mySampleApp1.weatherForecast.Infra.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("mySampleApp1.weatherForecast.Domain.Entities.WeatherForecast", b =>
+            modelBuilder.Entity("mySampleApp1.weatherForecast.Domain.WeatherForecast", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,6 +47,43 @@ namespace mySampleApp1.weatherForecast.Infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeatherForecasts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateOnly(2024, 10, 4),
+                            Summary = "Sweltering",
+                            TemperatureC = 35
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateOnly(2024, 10, 5),
+                            Summary = "Cool",
+                            TemperatureC = 37
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateOnly(2024, 10, 6),
+                            Summary = "Chilly",
+                            TemperatureC = 9
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateOnly(2024, 10, 7),
+                            Summary = "Freezing",
+                            TemperatureC = -9
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Date = new DateOnly(2024, 10, 8),
+                            Summary = "Warm",
+                            TemperatureC = 51
+                        });
                 });
 #pragma warning restore 612, 618
         }
