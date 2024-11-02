@@ -26,7 +26,7 @@ spec:
               value: "5432"
             - name: DB__POSTGRES_DB
               value: {{ .Values.namespace }}-{{ .Values.environment }}-db
-            - name: DB__POSTGRES_USER
+            - name: FORCE_FAILURE # DB__POSTGRES_USER
               value: {{ .Values.namespace }}-{{ .Values.environment }}-user
             - name: DB__POSTGRES_PASSWORD
               valueFrom:
