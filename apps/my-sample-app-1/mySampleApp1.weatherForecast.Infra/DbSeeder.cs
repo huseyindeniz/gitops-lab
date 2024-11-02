@@ -5,28 +5,12 @@ namespace mySampleApp1.weatherForecast.Infra
 {
     public static class DbSeeder
     {
-        public static readonly string[] Summaries = new[]
-{
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         public static void SeedInitialData(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<WeatherForecast>().HasData(
-                Enumerable
-                    .Range(1, 5)
-                    .Select(index =>
-                        new WeatherForecast(
-                            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                            Random.Shared.Next(-20, 55),
-                            Summaries[Random.Shared.Next(Summaries.Length)]
-                        )
-                        {
-                            Id = index // Set the Id explicitly
-                        }
-                    )
-                    .ToList()
-            );
+            // add initial db data here by using modelBuilder.Entity<EntityName>().HasData
+            // do not use dynamic column values
+            // otherwise ef core thinks that entity records has changed and it'll try to insert new records in next migration
+
         }
 
     }
