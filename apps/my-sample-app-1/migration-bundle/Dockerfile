@@ -34,22 +34,28 @@ COPY --from=build /app/migrations-bundle .
 # Grant execute permissions if necessary (for Linux)
 RUN chmod +x ./migrations-bundle
 
-# Set the entrypoint to handle different scenarios based on arguments
-ENTRYPOINT ["/bin/sh", "-c", \
-    'CONNECTION_STRING="Host=$DB__POSTGRES_HOST;Port=$DB__POSTGRES_PORT;Database=$DB__POSTGRES_DB;Username=$DB__POSTGRES_USER;Password=$DB__POSTGRES_PASSWORD"; \
-    if [ "$ASPNETCORE_ENVIRONMENT" = "Development" ]; then \
-    echo "Using connection string: $CONNECTION_STRING"; \
-    fi; \
-    if [ -z "$1" ]; then \
-    echo "Error: No arguments provided. Exiting with error."; \
-    exit 1; \
-    elif [ "$1" = "apply" ]; then \
-    echo "Applying all migrations..."; \
-    ./migrations-bundle --connection "$CONNECTION_STRING"; \
-    elif [ "$1" = "reset" ]; then \
-    echo "Resetting database to initial state (no migrations)..."; \
-    ./migrations-bundle --connection "$CONNECTION_STRING" --target 0; \
-    else \
-    echo "Rolling back to migration: $1"; \
-    ./migrations-bundle --connection "$CONNECTION_STRING" --target "$1"; \
-    fi']
+# Create the entrypoint script dynamically
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'CONNECTION_STRING="Host=$DB__POSTGRES_HOST;Port=$DB__POSTGRES_PORT;Database=$DB__POSTGRES_DB;Username=$DB__POSTGRES_USER;Password=$DB__POSTGRES_PASSWORD"' >> /app/entrypoint.sh && \
+    echo 'if [ "$ASPNETCORE_ENVIRONMENT" = "Development" ]; then' >> /app/entrypoint.sh && \
+    echo '  echo "Using connection string: $CONNECTION_STRING"' >> /app/entrypoint.sh && \
+    echo 'fi' >> /app/entrypoint.sh && \
+    echo 'if [ -z "$1" ]; then' >> /app/entrypoint.sh && \
+    echo '  echo "Error: No arguments provided. Exiting with error."' >> /app/entrypoint.sh && \
+    echo '  exit 1' >> /app/entrypoint.sh && \
+    echo 'elif [ "$1" = "apply" ]; then' >> /app/entrypoint.sh && \
+    echo '  echo "Applying all migrations..."' >> /app/entrypoint.sh && \
+    echo '  ./migrations-bundle --connection "$CONNECTION_STRING"' >> /app/entrypoint.sh && \
+    echo 'elif [ "$1" = "reset" ]; then' >> /app/entrypoint.sh && \
+    echo '  echo "Resetting database to initial state (no migrations)..."' >> /app/entrypoint.sh && \
+    echo '  ./migrations-bundle --connection "$CONNECTION_STRING" --target 0' >> /app/entrypoint.sh && \
+    echo 'else' >> /app/entrypoint.sh && \
+    echo '  echo "Rolling back to migration: $1"' >> /app/entrypoint.sh && \
+    echo '  ./migrations-bundle --connection "$CONNECTION_STRING" --target "$1"' >> /app/entrypoint.sh && \
+    echo 'fi' >> /app/entrypoint.sh
+
+# Grant execute permissions for the entrypoint script and migrations bundle
+RUN chmod +x /app/entrypoint.sh /app/migrations-bundle
+
+# Set the custom entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]
