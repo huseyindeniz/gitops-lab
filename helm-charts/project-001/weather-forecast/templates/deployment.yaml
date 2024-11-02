@@ -2,7 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}  # Use the name from values.yaml
-  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here  
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
+  labels:
+    app: {{ .Release.Name }}-migration  
+  annotations:
+    "helm.sh/hook": "post-install,post-upgrade"
+    "helm.sh/hook-delete-policy": "hook-succeeded,hook-failed"
 spec:
   {{- if not .Values.hpa.enabled }}
   replicas: {{ .Values.replicaCount  | default 1 }}  # Use replicaCount from values.yaml
