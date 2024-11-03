@@ -34,7 +34,7 @@ spec:
               value: "5432"
             - name: DB__POSTGRES_DB
               value: {{ .Values.namespace }}-{{ .Values.environment }}-db
-            {{- if eq .Values.environment "stag-2" }}
+            {{- if eq .Values.environment "stag-3" }}
             - name: FORCE_FAILURE
               value: "true"
             {{- else }}
