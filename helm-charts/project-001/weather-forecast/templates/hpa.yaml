@@ -20,7 +20,7 @@ spec:
           averageUtilization: {{ .Values.hpa.targetCPUUtilizationPercentage }}
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: {{ .Values.hpa. }}    # Scale down delay (in seconds)
+      stabilizationWindowSeconds: {{ .Values.hpa.stabilizationWindowSeconds }}    # Scale down delay (in seconds)
       policies:
         - type: {{ .Values.hpa.scaleDownType }}
           value: {{ .Values.hpa.scaleDownValue }}                      # Scale down by 1 pod at a time
