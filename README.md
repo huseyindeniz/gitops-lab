@@ -67,8 +67,7 @@ Initially, I explored using Argo CD hooks to solve this problem. However, I foun
 
 ~~Additionally, I used Entity Framework (EF) Core Migration Bundles to make the process smoother. These bundles are self-contained executables that include all necessary migration logic, making it easier to apply migrations in any environment without needing the EF CLI tools or a full development setup. Combining EF Core migration bundles with Helm hooks felt like a natural fit within a GitOps workflow, providing a consistent and version-controlled way to apply schema changes alongside application updates.~~
 
-~~This approach worked well for my case, ensuring that database migrations were correctly managed within the CI/CD pipeline and reducing deployment risks in Kubernetes environments. There may be other solutions out there, but this combination of Helm hooks and EF Core migration bundles was the one that solved the problem effectively for me.
-~~
+~~This approach worked well for my case, ensuring that database migrations were correctly managed within the CI/CD pipeline and reducing deployment risks in Kubernetes environments. There may be other solutions out there, but this combination of Helm hooks and EF Core migration bundles was the one that solved the problem effectively for me.~~
 
 **Update**: Using Helm hooks alongside ArgoCD didn't work as smoothly as I had hoped. Currently, I'm handling the migration job by running the dotnet ef database update command, which requires the solution to be built each time. Unfortunately, building the solution on every job run is time-consuming. Additionally, any resource update within the same application triggers the migration job to run again. While the job itself is idempotent and doesn’t alter the database, waiting for it to complete with each resource change adds unnecessary delays.
 
