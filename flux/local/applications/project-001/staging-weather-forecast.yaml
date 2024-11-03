@@ -35,7 +35,8 @@ spec:
             - values-staging.yaml
           valuesObject:
             environment: '{{.envName}}'
-            port: '{{.envPort}}'
+            service:
+              port: '{{.envPort}}'
             env:
               MIGRATION_ACTION: '{{ .migrationAction }}'
               TARGET_MIGRATION: '{{ .targetMigration }}'
