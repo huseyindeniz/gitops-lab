@@ -24,7 +24,7 @@ spec:
       policies:
         - type: {{ .Values.hpa.scaleDownType }}
           value: {{ .Values.hpa.scaleDownValue }}                      # Scale down by 1 pod at a time
-          periodSeconds: {{ .Values.hpa.60 }}             # Allow scale down every 60 seconds
+          periodSeconds: {{ .Values.hpa.scaleDownPeriodSeconds }}             # Allow scale down every 60 seconds
     scaleUp:
       policies:
         - type: {{ .Values.hpa.scaleUpType }}
