@@ -23,10 +23,10 @@ spec:
               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
             # Specify the migration action (apply, reset, or rollback)
             - name: MIGRATION_ACTION
-              value: "{{ .Values.env.MIGRATION_ACTION }}"
+              value: {{ .Values.env.MIGRATION_ACTION }}
             # Specify the target migration for rollback, if needed
             - name: TARGET_MIGRATION
-              value: "{{ .Values.env.TARGET_MIGRATION | default('') }}"  # Optional, only for rollback
+              value: {{ .Values.env.TARGET_MIGRATION }}  # Optional, only for rollback
             # PostgreSQL connection details
             - name: DB__POSTGRES_HOST
               value: project-001-wf-postgres-{{ .Values.environment }}-postgresql
