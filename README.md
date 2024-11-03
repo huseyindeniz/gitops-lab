@@ -2,8 +2,6 @@
 
 GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
-**Warning**: Latest db migration with 5m records testing on stag-2 is crashing whole cluster :D I'll investigate later.
-
 ## Goals
 
 The primary objective of this repository is to build a robust GitOps playground, integrating tools and platforms like Kubernetes, Terraform, Argo CD, Helm, and GitHub Workflows. This environment will support a wide array of operational goals, including:
@@ -65,11 +63,16 @@ While working through how to handle database migrations in Kubernetes, I found i
 
 Initially, I explored using Argo CD hooks to solve this problem. However, I found that they don't fully address the dependency issue, as they don't enforce a strict sequence between running the migrations and updating the application pods. This could potentially lead to race conditions, where the application is deployed before the migrations finish.
 
-Through further experimentation, I discovered that Helm hooks worked better for this scenario. Helm hooks allowed me to ensure that the migrations were applied before any application pods were deployed or updated. In essence, this moved the solution to the application layer within the Helm charts, helping me manage the order of operations effectively.
+~~Through further experimentation, I discovered that Helm hooks worked better for this scenario. Helm hooks allowed me to ensure that the migrations were applied before any application pods were deployed or updated. In essence, this moved the solution to the application layer within the Helm charts, helping me manage the order of operations effectively.~~
 
-Additionally, I used Entity Framework (EF) Core Migration Bundles to make the process smoother. These bundles are self-contained executables that include all necessary migration logic, making it easier to apply migrations in any environment without needing the EF CLI tools or a full development setup. Combining EF Core migration bundles with Helm hooks felt like a natural fit within a GitOps workflow, providing a consistent and version-controlled way to apply schema changes alongside application updates.
+~~Additionally, I used Entity Framework (EF) Core Migration Bundles to make the process smoother. These bundles are self-contained executables that include all necessary migration logic, making it easier to apply migrations in any environment without needing the EF CLI tools or a full development setup. Combining EF Core migration bundles with Helm hooks felt like a natural fit within a GitOps workflow, providing a consistent and version-controlled way to apply schema changes alongside application updates.~~
 
-This approach worked well for my case, ensuring that database migrations were correctly managed within the CI/CD pipeline and reducing deployment risks in Kubernetes environments. There may be other solutions out there, but this combination of Helm hooks and EF Core migration bundles was the one that solved the problem effectively for me.
+~~This approach worked well for my case, ensuring that database migrations were correctly managed within the CI/CD pipeline and reducing deployment risks in Kubernetes environments. There may be other solutions out there, but this combination of Helm hooks and EF Core migration bundles was the one that solved the problem effectively for me.
+~~
+
+**Update**: Using Helm hooks alongside ArgoCD didn't work as smoothly as I had hoped. Currently, I'm handling the migration job by running the dotnet ef database update command, which requires the solution to be built each time. Unfortunately, building the solution on every job run is time-consuming. Additionally, any resource update within the same application triggers the migration job to run again. While the job itself is idempotent and doesn’t alter the database, waiting for it to complete with each resource change adds unnecessary delays.
+
+If EF Core bundles supported a target migration option like dotnet ef database update, it would address this issue by eliminating the need for a build step on each run. This could be worth proposing as a feature request in the EF Core GitHub repository.
 
 ArgoCD Overview
 
