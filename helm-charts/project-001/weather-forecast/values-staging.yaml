@@ -34,7 +34,6 @@ hpa:
 service:
   enabled: true
   type: LoadBalancer
-  port: ""
   targetPort: 8080
 
 # Environment variables for the container
