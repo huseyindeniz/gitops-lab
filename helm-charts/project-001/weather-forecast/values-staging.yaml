@@ -10,6 +10,10 @@ server: https://kubernetes.default.svc
 image:
   repository: huseyindeniz/my-sample-app-1-weatherforecast-api
   pullPolicy: Always
+  tag: ""
+  migrationTag: ""
+  interval: "5m"
+  updateInterval: "1m"
 
 # Deployment configuration
 # replicaCount: 1
@@ -18,22 +22,40 @@ hpa:
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 50  # The average CPU utilization target for auto-scaling
+  stabilizationWindowSeconds: 60
+  scaleDownType: "Pod"
+  scaleDownValue: 1
+  scaleDownPeriodSeconds: 60 
+  scaleUpType: "Percent"
+  scaleUpValue: 100
+  scaleUpPeriodSeconds: 15 
 
 # Service configuration
 service:
   enabled: true
   type: LoadBalancer
+  port: 
   targetPort: 8080
 
 # Environment variables for the container
 env:
   ASPNETCORE_ENVIRONMENT: "Development"
+  MIGRATION_ACTION: "apply"
+  TARGET_MIGRATION: ""
 
 # Resource requests and limits (optional)
 resources:
-  requests:
-    cpu: "100m"
-    memory: "128Mi"
-  limits:
-    cpu: "200m"
-    memory: "256Mi"
+  app:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+  migration:
+    requests:
+      cpu: "200m"
+      memory: "1Gi"
+    limits:
+      cpu: "600m"
+      memory: "4Gi"

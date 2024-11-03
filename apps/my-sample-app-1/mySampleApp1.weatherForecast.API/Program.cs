@@ -46,7 +46,9 @@ namespace mySampleApp1.weatherForecast.API
 
             // Register ApplicationDbContext
             builder.Services.AddDbContextPool<ApplicationDbContext>(
-                options => options.UseNpgsql(connString));
+                options => options.UseNpgsql(connString, npgsqlOptions =>
+                npgsqlOptions.CommandTimeout(600)
+            ));
 
             // Register Repositories
             builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();

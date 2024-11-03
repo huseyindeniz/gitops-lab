@@ -11,7 +11,6 @@ metadata:
     "helm.sh/hook": "pre-install,pre-upgrade"
     "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
 spec:
-  ttlSecondsAfterFinished: 600
   template:
     spec:
       containers:
@@ -22,6 +21,13 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
+            # Specify the migration action (apply, reset, or rollback)
+            - name: MIGRATION_ACTION
+              value: "{{ .Values.env.MIGRATION_ACTION }}"
+            # Specify the target migration for rollback, if needed
+            - name: TARGET_MIGRATION
+              value: "{{ .Values.env.TARGET_MIGRATION | default('') }}"  # Optional, only for rollback
+            # PostgreSQL connection details
             - name: DB__POSTGRES_HOST
               value: project-001-wf-postgres-{{ .Values.environment }}-postgresql
             - name: DB__POSTGRES_PORT
@@ -42,10 +48,10 @@ spec:
                   key: POSTGRES_PASSWORD  # The key inside the secret
           resources:
             requests:
-                cpu: 200m
-                memory: 1Gi
+              cpu: {{ .Values.resources.migration.requests.cpu }}
+              memory: {{ .Values.resources.migration.requests.memory }}
             limits:
-                cpu: 600m
-                memory: 4Gi
+              cpu: {{ .Values.resources.migration.limits.cpu }}
+              memory: {{ .Values.resources.migration.limits.memory }}
       restartPolicy: Never
   backoffLimit: 0  # Ensure no retries on failure

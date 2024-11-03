@@ -39,11 +39,11 @@ spec:
                   key: POSTGRES_PASSWORD  # The key inside the secret
           ports:
             - name: wf-webapi
-              containerPort: 8080
+              containerPort: {{ .Values.service.targetPort }}
           resources:
             requests:
-              cpu: {{ .Values.resources.requests.cpu }}
-              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.app.requests.cpu }}
+              memory: {{ .Values.resources.app.requests.memory }}
             limits:
-              cpu: {{ .Values.resources.limits.cpu }}
-              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.app.limits.cpu }}
+              memory: {{ .Values.resources.app.limits.memory }}

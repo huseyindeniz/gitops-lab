@@ -5,4 +5,4 @@ metadata:
   namespace: flux-system
 spec:
   image: {{ .Values.image.repository }}-{{ .Values.environment }}
-  interval: 5m  # Check for new images every 5 minutes
+  interval: {{ .Values.image.interval }}  # Check for new images every interval minutes

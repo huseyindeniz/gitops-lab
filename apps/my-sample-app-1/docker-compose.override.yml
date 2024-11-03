@@ -22,7 +22,9 @@ services:
       - DB__POSTGRES_DB=dev-db
       - DB__POSTGRES_USER=postgres
       - DB__POSTGRES_PASSWORD=postgres
-
+      - MIGRATION_ACTION=apply
+      - TARGET_MIGRATION=
+      
   mysampleapp1.weatherforecast.api:
     networks:
       - mysampleapp1-network

@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-image-update-automation
   namespace: flux-system
 spec:
-  interval: 1m
+  interval: {{ .Values.image.updateInterval }}
 
   sourceRef:
     kind: GitRepository
@@ -17,7 +17,7 @@ spec:
         branch: main
     commit:
       author:
-        name: "git"
+        name: "flux"
         email: "huseyindenizkivrak@gmail.com"
     push:
       branch: main

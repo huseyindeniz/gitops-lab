@@ -9,6 +9,8 @@
 
         public int TemperatureC { get; private set; }
 
+        public string? Source { get; set; }
+
         public string? Summary { get; private set; }
 
         public WeatherForecast(DateOnly date, int temperatureC, string? summary)

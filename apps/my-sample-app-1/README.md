@@ -35,3 +35,9 @@ Generate db update bundle (on prod)
 ```bash
 dotnet ef migrations bundle --self-contained --output ./migrations-bundle --project mySampleApp1.weatherForecast.Infra --startup-project mySampleApp1.weatherForecast.API
 ```
+
+Testing in local docker
+
+```bash
+docker compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --force-recreate --build -d
+```

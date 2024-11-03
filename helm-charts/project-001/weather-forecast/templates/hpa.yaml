@@ -20,14 +20,14 @@ spec:
           averageUtilization: {{ .Values.hpa.targetCPUUtilizationPercentage }}
   behavior:
     scaleDown:
-      stabilizationWindowSeconds: 60    # Scale down delay (in seconds)
+      stabilizationWindowSeconds: {{ .Values.hpa. }}    # Scale down delay (in seconds)
       policies:
-        - type: Pods
-          value: 1                      # Scale down by 1 pod at a time
-          periodSeconds: 60             # Allow scale down every 60 seconds
+        - type: {{ .Values.hpa.scaleDownType }}
+          value: {{ .Values.hpa.scaleDownValue }}                      # Scale down by 1 pod at a time
+          periodSeconds: {{ .Values.hpa.60 }}             # Allow scale down every 60 seconds
     scaleUp:
       policies:
-        - type: Percent
-          value: 100                    # Scale up by doubling pods if needed
-          periodSeconds: 15             # Allow scaling up every 15 seconds
+        - type: {{ .Values.hpa.scaleUpType }}
+          value: {{ .Values.hpa.scaleUpValue }}                    # Scale up by doubling pods if needed
+          periodSeconds: {{ .Values.hpa.scaleUpPeriodSeconds }}             # Allow scaling up every 15 seconds
 {{- end }}

@@ -38,6 +38,11 @@ namespace mySampleApp1.weatherForecast.Infra.Mappings
                 .IsRequired();
 
             builder
+                .Property(b => b.Source)
+                .HasColumnName("Source")
+                .HasMaxLength(50);
+
+            builder
                 .Property(b => b.Summary)
                 .HasColumnName("Summary")
                 .HasMaxLength(200);
