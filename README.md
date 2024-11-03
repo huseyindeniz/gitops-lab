@@ -85,6 +85,12 @@ Migration Demo
 
 ![Migration Demo](./docs/images/screenshots/migration-example.gif)
 
+Long Running DB Migration Job
+
+![Long Running DB Migration Job 1](./docs/images/screenshots/long-mig-001.png)
+
+![Long Running DB Migration Job 2](./docs/images/screenshots/long-mig-002.png)
+
 ## Developer Workflow
 
 Follow these steps to update your application and database with minimal effort.
