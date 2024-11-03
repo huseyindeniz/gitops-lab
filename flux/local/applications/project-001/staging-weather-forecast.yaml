@@ -1,54 +1,54 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: ApplicationSet
-# metadata:
-#   name: project-001-weather-forecast-appset
-#   namespace: argo-cd-local
-# spec:
-#   generators:
-#     - list:
-#         elements:
-#           - envName: stag-1
-#             envPort: 5001
-#             imgTag: '20241103132600' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
-#             imgMigrationTag: '20241103132513' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-migration-policy:tag"}
-#             migrationAction: "reset" # apply, reset, rollback
-#             targetMigration: "" # if rollback selected, set target migration name
-#           - envName: stag-2
-#             envPort: 5002
-#             imgTag: '20241103132550' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-policy:tag"}
-#             imgMigrationTag: '20241103132507' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-migration-policy:tag"}
-#             migrationAction: "reset" # apply, reset, rollback
-#             targetMigration: "" # if rollback selected, set target migration name
-#   goTemplate: true
-#   goTemplateOptions: ["missingkey=error"]
-#   template:
-#     metadata:
-#       name: 'weather-forecast-{{.envName}}'
-#     spec:
-#       project: default
-#       source:
-#         repoURL: https://github.com/huseyindeniz/cicd-lab.git
-#         targetRevision: main
-#         path: 'helm-charts/project-001/weather-forecast'
-#         helm:
-#           valueFiles:
-#             - values-staging.yaml
-#           valuesObject:
-#             environment: '{{.envName}}'
-#             port: '{{.envPort}}'
-#             env:
-#               MIGRATION_ACTION: '{{ .migrationAction }}'
-#               TARGET_MIGRATION: '{{ .targetMigration }}'
-#             image:
-#               tag: '{{ .imgTag }}'
-#               migrationTag: '{{ .imgMigrationTag }}'
-#       destination:
-#         server: "https://kubernetes.default.svc"
-#         namespace: 'project-001-weather-forecast-{{.envName}}' # Use the environment suffix in the namespace
-#       syncPolicy:
-#         automated:
-#           prune: true
-#           selfHeal: true
-#           allowEmpty: false
-#         syncOptions:
-#           - SkipHooksOnError=true # Ensures Argo CD skips retries if a Helm hook fails
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: project-001-weather-forecast-appset
+  namespace: argo-cd-local
+spec:
+  generators:
+    - list:
+        elements:
+          - envName: stag-1
+            envPort: 5001
+            imgTag: '20241103132600' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
+            imgMigrationTag: '20241103132513' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-migration-policy:tag"}
+            migrationAction: "reset" # apply, reset, rollback
+            targetMigration: "" # if rollback selected, set target migration name
+          - envName: stag-2
+            envPort: 5002
+            imgTag: '20241103132550' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-policy:tag"}
+            imgMigrationTag: '20241103132507' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-migration-policy:tag"}
+            migrationAction: "reset" # apply, reset, rollback
+            targetMigration: "" # if rollback selected, set target migration name
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  template:
+    metadata:
+      name: 'weather-forecast-{{.envName}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/huseyindeniz/cicd-lab.git
+        targetRevision: main
+        path: 'helm-charts/project-001/weather-forecast'
+        helm:
+          valueFiles:
+            - values-staging.yaml
+          valuesObject:
+            environment: '{{.envName}}'
+            port: '{{.envPort}}'
+            env:
+              MIGRATION_ACTION: '{{ .migrationAction }}'
+              TARGET_MIGRATION: '{{ .targetMigration }}'
+            image:
+              tag: '{{ .imgTag }}'
+              migrationTag: '{{ .imgMigrationTag }}'
+      destination:
+        server: "https://kubernetes.default.svc"
+        namespace: 'project-001-weather-forecast-{{.envName}}' # Use the environment suffix in the namespace
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - SkipHooksOnError=true # Ensures Argo CD skips retries if a Helm hook fails
