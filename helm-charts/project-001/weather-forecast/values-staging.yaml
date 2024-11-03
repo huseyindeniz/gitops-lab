@@ -23,7 +23,7 @@ hpa:
   maxReplicas: 3
   targetCPUUtilizationPercentage: 50  # The average CPU utilization target for auto-scaling
   stabilizationWindowSeconds: 60
-  scaleDownType: "Pod"
+  scaleDownType: "Pods"
   scaleDownValue: 1
   scaleDownPeriodSeconds: 60 
   scaleUpType: "Percent"
