@@ -46,12 +46,12 @@ The primary objective of this repository is to build a robust GitOps playground,
 - 🔲 automate deployment of PRs via Slack
 - 🔲 rollback scenario
 - 🔲 conflicting migration scenario
-- 🔲 huge and busy db migration scenario
+- ✅ huge and/or busy db migration scenario
 - 🔲 gpu/ai training/inference pipeline scenario
 - 🔲 monitoring (prometheus, grafana)
 - 🔲 canary prod deployment setup
 - 🔲 blue/green prod deployment setup
-- 🔲 load test
+- ✅ load test
 - 🔲 aws (vpc and cluster creation is ready)
 - 🔲 aks (vpc and cluster creation is ready)
 - 🔲 gke (vpc and cluster creation is ready)

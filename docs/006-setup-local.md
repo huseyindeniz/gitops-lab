@@ -59,13 +59,11 @@ terraform output argo_cd_local_admin_password
 
 ## Enabling VPA
 
-to install vpa, use WSL in windows
+if you are using Windows, run the following in WSL
 
 ```bash
 git clone https://github.com/kubernetes/autoscaler.git
-cd ./autoscaler
-git checkout vpa-release-0.8
-cd vertical-pod-autoscaler/
+cd ./autoscaler/vertical-pod-autoscaler/
 ./hack/vpa-up.sh
 ```
 
