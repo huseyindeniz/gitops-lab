@@ -30,6 +30,15 @@ hpa:
   scaleUpValue: 100
   scaleUpPeriodSeconds: 15 
 
+vpa:
+  enabled: true
+  updateMode: "Auto"                         # VPA update mode (Options: Off, Initial, Auto, Recreate)
+  minAllowedCPU: "100m"                       # Minimum CPU resource for auto-scaling
+  minAllowedMemory: "128Mi"                   # Minimum memory resource for auto-scaling
+  maxAllowedCPU: "500m"                       # Maximum CPU resource for auto-scaling
+  maxAllowedMemory: "1Gi"                     # Maximum memory resource for auto-scaling
+  controlledValues: "RequestsAndLimits"       # Specifies whether VPA controls RequestsOnly or RequestsAndLimits
+
 # Service configuration
 service:
   enabled: true
