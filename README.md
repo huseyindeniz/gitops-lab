@@ -48,7 +48,7 @@ The primary objective of this repository is to build a robust GitOps playground,
 - 🔲 conflicting migration scenario
 - ✅ huge and/or busy db migration scenario
 - 🔲 gpu/ai training/inference pipeline scenario
-- 🔲 monitoring (prometheus, grafana)
+- ✅ monitoring (prometheus + grafana)
 - 🔲 canary prod deployment setup
 - 🔲 blue/green prod deployment setup
 - ✅ load test

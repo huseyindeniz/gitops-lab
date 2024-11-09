@@ -114,6 +114,12 @@ terraform providers lock -upgrade
 terraform version
 ```
 
+## debug
+
+```bash
+export TF_LOG=DEBUG
+```
+
 ## Managing Kubernetes Resources with Terraform vs. kubectl
 
 **Key Differences**

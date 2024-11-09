@@ -16,7 +16,8 @@ image:
   updateInterval: "1m"
 
 # Deployment configuration
-# replicaCount: 1
+replicaCount: 1
+
 hpa:
   enabled: true
   minReplicas: 1

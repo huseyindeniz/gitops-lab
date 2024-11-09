@@ -22,8 +22,8 @@ resource "kubernetes_namespace" "project_001_weather_forecast_env" {
   }
 }
 
-# resource "kubernetes_namespace" "monitoring" {
-#   metadata {
-#     name = "monitoring"
-#   }
-# }
+resource "kubernetes_namespace" "monitoring" {
+  metadata {
+    name = "monitoring"
+  }
+}

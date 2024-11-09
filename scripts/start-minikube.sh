@@ -9,5 +9,4 @@ minikube addons enable dashboard
 minikube addons enable ingress
 
 # Start the Minikube tunnel and keep it running in the foreground
-echo "Starting Minikube tunnel... (Keep this terminal open)"
-minikube tunnel
+echo "you can run minikube tunnel now"
