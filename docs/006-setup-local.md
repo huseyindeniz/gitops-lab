@@ -55,12 +55,32 @@ terraform output argo_cd_local_admin_password
 
 ## Step 5
 
-TODO: decide app of apps, or applicationset or both in argo cd
+...
 
-Hybrid approach seems logical.
+## Enabling VPA
 
-- app of apps could automatically detect new microservices under project 001 staging
-- applicationset could create same microservices in multiple staging envs.
+to install vpa, use WSL in windows
+
+```bash
+git clone https://github.com/kubernetes/autoscaler.git
+cd ./autoscaler
+git checkout vpa-release-0.8
+cd vertical-pod-autoscaler/
+./hack/vpa-up.sh
+```
+
+verify installation
+
+```bash
+kubectl get pods -n kube-system | grep vpa
+kubectl get crds | grep verticalpodautoscaler
+```
+
+uninstall
+
+```bash
+./hack/vpa-down.sh
+```
 
 ## obsolete notes
 
