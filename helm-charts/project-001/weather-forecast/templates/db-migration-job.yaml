@@ -1,57 +1,57 @@
-# # Migration Job Template (migration-job.yaml)
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   name: {{ .Release.Name }}-migration
-#   namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
-#   labels:
-#     app: {{ .Release.Name }}-migration
-#   annotations:
-#     # Helm hook annotations
-#     # "helm.sh/hook": "pre-install,pre-upgrade"
-#     # "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
-# spec:
-#   template:
-#     spec:
-#       containers:
-#         - name: migration
-#           image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.image.migrationTag }}
-#           imagePullPolicy: {{ .Values.image.pullPolicy }}
-#           args: ["reset"]
-#           env:
-#             - name: ASPNETCORE_ENVIRONMENT
-#               value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
-#             # Specify the migration action (apply, reset, or rollback)
-#             - name: MIGRATION_ACTION
-#               value: {{ .Values.env.MIGRATION_ACTION }}
-#             # Specify the target migration for rollback, if needed
-#             - name: TARGET_MIGRATION
-#               value: {{ .Values.env.TARGET_MIGRATION }}  # Optional, only for rollback
-#             # PostgreSQL connection details
-#             - name: DB__POSTGRES_HOST
-#               value: project-001-wf-postgres-{{ .Values.environment }}-postgresql
-#             - name: DB__POSTGRES_PORT
-#               value: "5432"
-#             - name: DB__POSTGRES_DB
-#               value: {{ .Values.namespace }}-{{ .Values.environment }}-db
-#             {{- if eq .Values.environment "stag-3" }}
-#             - name: FORCE_FAILURE
-#               value: "true"
-#             {{- else }}
-#             - name: DB__POSTGRES_USER
-#               value: {{ .Values.namespace }}-{{ .Values.environment }}-user
-#             {{- end }}
-#             - name: DB__POSTGRES_PASSWORD
-#               valueFrom:
-#                 secretKeyRef:
-#                   name: postgres-password-{{ .Values.environment }}  # Exact match to the secret name
-#                   key: POSTGRES_PASSWORD  # The key inside the secret
-#           resources:
-#             requests:
-#               cpu: {{ .Values.resources.migration.requests.cpu }}
-#               memory: {{ .Values.resources.migration.requests.memory }}
-#             limits:
-#               cpu: {{ .Values.resources.migration.limits.cpu }}
-#               memory: {{ .Values.resources.migration.limits.memory }}
-#       restartPolicy: Never
-#   backoffLimit: 0  # Ensure no retries on failure
+# Migration Job Template (migration-job.yaml)
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-migration
+  namespace: {{ .Values.namespace }}-{{ .Values.environment }}  # Use the namespace variable here
+  labels:
+    app: {{ .Release.Name }}-migration
+  annotations:
+    # Helm hook annotations
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+spec:
+  template:
+    spec:
+      containers:
+        - name: migration
+          image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.image.migrationTag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["reset"]
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: {{ .Values.env.ASPNETCORE_ENVIRONMENT }}
+            # Specify the migration action (apply, reset, or rollback)
+            - name: MIGRATION_ACTION
+              value: {{ .Values.env.MIGRATION_ACTION }}
+            # Specify the target migration for rollback, if needed
+            - name: TARGET_MIGRATION
+              value: {{ .Values.env.TARGET_MIGRATION }}  # Optional, only for rollback
+            # PostgreSQL connection details
+            - name: DB__POSTGRES_HOST
+              value: project-001-wf-postgres-{{ .Values.environment }}-postgresql
+            - name: DB__POSTGRES_PORT
+              value: "5432"
+            - name: DB__POSTGRES_DB
+              value: {{ .Values.namespace }}-{{ .Values.environment }}-db
+            {{- if eq .Values.environment "stag-3" }}
+            - name: FORCE_FAILURE
+              value: "true"
+            {{- else }}
+            - name: DB__POSTGRES_USER
+              value: {{ .Values.namespace }}-{{ .Values.environment }}-user
+            {{- end }}
+            - name: DB__POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password-{{ .Values.environment }}  # Exact match to the secret name
+                  key: POSTGRES_PASSWORD  # The key inside the secret
+          resources:
+            requests:
+              cpu: {{ .Values.resources.migration.requests.cpu }}
+              memory: {{ .Values.resources.migration.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.migration.limits.cpu }}
+              memory: {{ .Values.resources.migration.limits.memory }}
+      restartPolicy: Never
+  backoffLimit: 0  # Ensure no retries on failure
