@@ -1,15 +1,18 @@
-environment: "your-env-name"
-namespace: "your-app-namespace"          # Base namespace for deployments
+environment: "prod"
+namespace: "project-001-wf"          # Base namespace for deployments
 
 config:
-  ASPNETCORE_ENVIRONMENT: "Development"             # Add any application-specific configurations here
+  ASPNETCORE_ENVIRONMENT: "Development"   # Add any application-specific configurations here
 
 argo:
-  repoURL: "https://github.com/your-org/your-repo"  # Repository URL for your chart
+  repoURL: https://github.com/huseyindeniz/cicd-lab.git  # Repository URL for your chart
   targetRevision: "main"                            # Git branch or tag to deploy
-  chartPath: "path/to/chart"                        # Path to the chart directory in the repo
+  chartPath: "helm-charts/dotnet-core-webapi"                        # Path to the chart directory in the repo
   server: "https://kubernetes.default.svc" 
   
+# Deployment configuration
+replicaCount: 2
+
 hpa:
   enabled: true
   minReplicas: 2
@@ -35,20 +38,18 @@ service:
 
 ingress:
   enabled: false
-  host: "example.com"                   # Set to your domain
+  host: "wf.local"                   # Set to your domain
   annotations: {}                       # Add any specific annotations
   tls: false                            # Toggle for enabling TLS
   tlsSecret: ""                         # Specify TLS secret if TLS is enabled
 
+image:
+  repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"          # Main application image
+  tag: "latest"
+
 imageRepository:
   namespace: "flux-system"
   interval: "1m0s"
-
-image:
-  app:
-    repository: "your-docker-repo/app-image"          # Main application image
-  migration:
-    repository: "your-docker-repo/migration-job"      # Migration job image
 
 imagePolicy:
   namespace: "flux-system"
@@ -68,16 +69,13 @@ imagePolicy:
 imageUpdateAutomation:
   namespace: "flux-system"
   interval: "5m0s"
-  gitRepository: "my-git-repo"
+  gitRepository: "https://github.com/huseyindeniz/cicd-lab.git"
   branch: "main"
-  authorEmail: "your-email@example.com"
-  authorName: "Automation Bot"
+  authorEmail: "huseyindenizkivrak@gmail.com"
+  authorName: "Flux Automation Bot"
 
 migration:
-  enabled: true
-  image:
-    repository: "your-docker-repo/migration-job"
-    tag: "latest"
+  enabled: false
   action: "apply"
   targetMigration: ""
   resources:
@@ -92,6 +90,5 @@ database:
   host: "your-database-host"
   port: "5432"
   name: "your-database-name"
-  secretName: "db-credentials-secret"
-  userKey: "db-user"
+  user: "db-user"
   passwordKey: "db-password"
