@@ -17,8 +17,8 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+        - image: {{ .Values.image.repository }}-{{ .Values.environment }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          name: {{ .Release.Name }}-webapi
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
