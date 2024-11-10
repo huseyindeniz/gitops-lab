@@ -1,3 +1,4 @@
+{{- if .Values.vpa.enabled }}
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
@@ -8,15 +9,18 @@ spec:
   targetRef:
     apiVersion: "apps/v1"
     kind: Deployment
-    name: {{ include "dotnet-core-webapi.fullname" . }}
+    name: {{ .Release.Name }}
   updatePolicy:
-    updateMode: {{ .Values.vpa.updateMode }}
+    updateMode: "{{ .Values.vpa.updateMode | default "Auto" }}"   # Options: Off, Initial, Auto, Recreate
   resourcePolicy:
     containerPolicies:
-      - containerName: {{ .Chart.Name }}
+      - containerName: "*"
         minAllowed:
-          cpu: {{ .Values.vpa.minAllowed.cpu }}
-          memory: {{ .Values.vpa.minAllowed.memory }}
+          cpu: {{ .Values.vpa.minAllowedCPU }}
+          memory: {{ .Values.vpa.minAllowedMemory }}
         maxAllowed:
-          cpu: {{ .Values.vpa.maxAllowed.cpu }}
-          memory: {{ .Values.vpa.maxAllowed.memory }}
+          cpu: {{ .Values.vpa.maxAllowedCPU }}
+          memory: {{ .Values.vpa.maxAllowedMemory }}
+        controlledResources: ["cpu", "memory"]
+        controlledValues: "{{ .Values.vpa.controlledValues | default "RequestsAndLimits" }}" # Options: RequestsOnly, RequestsAndLimits
+{{- end }}
