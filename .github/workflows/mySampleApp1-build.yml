@@ -13,7 +13,8 @@ on:
         options:
           - stag-1
           - stag-2
-          - stag-3
+          - prod-canary
+          - prod-bluegreen
 
 jobs:
   # Step 1: Build and push migration image
@@ -53,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: apps/my-sample-app-1/
-          file: apps/my-sample-app-1/migration-bundle/Dockerfile
+          file: apps/my-sample-app-1/migration-bundle/weather-forecast/Dockerfile
           push: true
           tags: |
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-weatherforecast-api-migration-${{env.SELECTED_ENV}}:latest
