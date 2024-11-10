@@ -9,7 +9,26 @@ argo:
   targetRevision: "main"                            # Git branch or tag to deploy
   chartPath: "path/to/chart"                        # Path to the chart directory in the repo
   server: "https://kubernetes.default.svc" 
-  
+
+replicaCount: 1
+
+# Resource requests and limits (optional)
+resources:
+  app:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+  migration:
+    requests:
+      cpu: "200m"
+      memory: "1Gi"
+    limits:
+      cpu: "600m"
+      memory: "4Gi"
+
 hpa:
   enabled: true
   minReplicas: 2
@@ -82,18 +101,11 @@ migration:
     tag: "latest"
   action: "apply"
   targetMigration: ""
-  resources:
-    limits:
-      cpu: "500m"
-      memory: "512Mi"
-    requests:
-      cpu: "250m"
-      memory: "256Mi"
 
 database:
   host: "your-database-host"
   port: "5432"
   name: "your-database-name"
+  user: "db-user"
   secretName: "db-credentials-secret"
-  userKey: "db-user"
   passwordKey: "db-password"

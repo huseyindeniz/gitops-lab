@@ -1,22 +1,22 @@
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: { { include "dotnet-core-webapi.fullname" . } }
-  namespace: { { include "dotnet-core-webapi.namespace" . } }
-  labels: { { - include "dotnet-core-webapi.labels" . | nindent 4 } }
+  name: {{ include "dotnet-core-webapi.fullname" . }}""
+  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+  labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
 spec:
   targetRef:
     apiVersion: "apps/v1"
     kind: Deployment
-    name: { { include "dotnet-core-webapi.fullname" . } }
+    name: {{ include "dotnet-core-webapi.fullname" . }}
   updatePolicy:
-    updateMode: "{{ .Values.vpa.updateMode }}"
+    updateMode: {{ .Values.vpa.updateMode }}
   resourcePolicy:
     containerPolicies:
-      - containerName: "{{ .Chart.Name }}"
+      - containerName: {{ .Chart.Name }}
         minAllowed:
-          cpu: { { .Values.vpa.minAllowed.cpu } }
-          memory: { { .Values.vpa.minAllowed.memory } }
+          cpu: {{ .Values.vpa.minAllowed.cpu }}
+          memory: {{ .Values.vpa.minAllowed.memory }}
         maxAllowed:
-          cpu: { { .Values.vpa.maxAllowed.cpu } }
-          memory: { { .Values.vpa.maxAllowed.memory } }
+          cpu: {{ .Values.vpa.maxAllowed.cpu }}
+          memory: {{ .Values.vpa.maxAllowed.memory }}

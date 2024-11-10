@@ -1,27 +1,27 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: { { include "dotnet-core-webapi.fullname" . } }
-  namespace: { { include "dotnet-core-webapi.namespace" . } }
-  labels: { { - include "dotnet-core-webapi.labels" . | nindent 4 } }
+  name: {{ include "dotnet-core-webapi.fullname" . }}""
+  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+  labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: { { include "dotnet-core-webapi.fullname" . } }
-  minReplicas: { { .Values.hpa.minReplicas } }
-  maxReplicas: { { .Values.hpa.maxReplicas } }
+    name: {{ include "dotnet-core-webapi.fullname" . }}
+  minReplicas: {{ .Values.hpa.minReplicas }}
+  maxReplicas: {{ .Values.hpa.maxReplicas }}
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: { { .Values.hpa.targetCPUUtilizationPercentage } }
+          averageUtilization: {{ .Values.hpa.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
           averageUtilization:
-            { { .Values.hpa.targetMemoryUtilizationPercentage } }
+            {{ .Values.hpa.targetMemoryUtilizationPercentage }}
