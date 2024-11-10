@@ -27,12 +27,24 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: { { .Values.environment | quote } }
-            # Database connection string placeholder
-            - name: ConnectionStrings__DefaultConnection
+            # Directly use non-sensitive database connection values
+            - name: DB_HOST
+              value: { { .Values.database.host } }
+            - name: DB_PORT
+              value: { { .Values.database.port | default "5432" } }
+            - name: DB_NAME
+              value: { { .Values.database.name } }
+            # Sensitive database credentials from Secret
+            - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   name: { { .Values.database.secretName } }
-                  key: { { .Values.database.secretKey } }
+                  key: { { .Values.database.userKey } }
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: { { .Values.database.secretName } }
+                  key: { { .Values.database.passwordKey } }
           resources:
             limits:
               cpu: { { .Values.resources.limits.cpu } }

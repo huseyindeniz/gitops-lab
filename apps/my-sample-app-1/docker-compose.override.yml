@@ -17,11 +17,11 @@ services:
       - mysampleapp1-network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - DB__POSTGRES_HOST=postgres
-      - DB__POSTGRES_PORT=5432
-      - DB__POSTGRES_DB=dev-db
-      - DB__POSTGRES_USER=postgres
-      - DB__POSTGRES_PASSWORD=postgres
+      - DB__HOST=postgres
+      - DB__PORT=5432
+      - DB__DB=dev-db
+      - DB__USER=postgres
+      - DB__PASSWORD=postgres
       - MIGRATION_ACTION=apply
       - TARGET_MIGRATION=
       

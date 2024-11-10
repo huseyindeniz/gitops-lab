@@ -20,11 +20,11 @@ namespace mySampleApp1.weatherForecast.API
 
             var dbConf = builder.Configuration.GetSection("DB");
             var connStringBuilder = new StringBuilder();
-            connStringBuilder.Append($"server={dbConf["POSTGRES_HOST"]};");
-            connStringBuilder.Append($"port={dbConf["POSTGRES_PORT"]};");
-            connStringBuilder.Append($"database={dbConf["POSTGRES_DB"]};");
-            connStringBuilder.Append($"userid={dbConf["POSTGRES_USER"]};");
-            connStringBuilder.Append($"password={dbConf["POSTGRES_PASSWORD"]};");
+            connStringBuilder.Append($"server={dbConf["HOST"]};");
+            connStringBuilder.Append($"port={dbConf["PORT"]};");
+            connStringBuilder.Append($"database={dbConf["DB"]};");
+            connStringBuilder.Append($"userid={dbConf["USER"]};");
+            connStringBuilder.Append($"password={dbConf["PASSWORD"]};");
             var connString = connStringBuilder.ToString();
             Console.WriteLine(connString);
 
