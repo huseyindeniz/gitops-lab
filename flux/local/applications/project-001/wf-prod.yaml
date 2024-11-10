@@ -11,7 +11,7 @@ spec:
             servicePort: 6001
             imgTag: '20241110161656' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
             imgMigrationTag: '20241110161611' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
-            migrationAction: "apply" # apply, reset, rollback 
+            migrationAction: 'apply' # apply, reset, rollback 
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -36,11 +36,11 @@ spec:
               tag: '{{ .imgTag }}'
             migration:
               migrationTag: '{{ .imgMigrationTag }}'
-              action: '{{ .migrationAction }}'
+              action: "{{ .migrationAction }}"
               targetMigration: '{{ .targetMigration }}'
             database: 
               host: 'project-001-wf-postgres-{{ .envName }}-postgresql'
-              port: '5432'
+              port: "5432"
               name: 'project-001-wf-{{ .envName }}-db'
               user: 'project-001-wf-{{ .envName }}-user'
               secretName: 'postgres-password-{{ .envName }}'
