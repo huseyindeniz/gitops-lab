@@ -23,5 +23,5 @@ spec:
       branch: main
 
   update:
-    path: flux/local/applications/project-001/staging-weather-forecast.yaml
+    path: flux/local/applications/project-001/wf-staging.yaml
     strategy: Setters
