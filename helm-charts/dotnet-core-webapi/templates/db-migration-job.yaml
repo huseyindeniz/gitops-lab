@@ -16,7 +16,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: db-migration
-          image: "{{ .Values.migration.image.repository }}:{{ .Values.migration.image.tag | default .Chart.AppVersion }}"
+          image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.image.migrationTag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: ASPNETCORE_ENVIRONMENT
