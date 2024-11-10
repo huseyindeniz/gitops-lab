@@ -31,7 +31,7 @@ spec:
             - name: DB_HOST
               value: {{ .Values.database.host }}
             - name: DB_PORT
-              value: {{ .Values.database.port | default "5432" }}
+              value: "{{ .Values.database.port | default "5432" }}"
             - name: DB_NAME
               value: {{ .Values.database.name }}
             - name: DB_USER
