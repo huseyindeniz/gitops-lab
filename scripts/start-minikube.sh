@@ -1,4 +1,4 @@
-# # Start Minikube with 3 nodes, 4 CPUs, and 8GB of memory in the "test-cluster" profile
+# Start Minikube with 3 nodes, 4 CPUs, and 8GB of memory in the "test-cluster" profile
 minikube start --nodes 3 --cpus 4 --memory 8192 -p test-cluster
 
 # Enable necessary addons

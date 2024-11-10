@@ -1,0 +1,1 @@
+minikube stop -p test-cluster
