@@ -10,11 +10,6 @@ metadata:
     "helm.sh/hook": "pre-install,pre-upgrade"
     "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
 spec:
-  replicas: {{ .Values.replicaCount }}
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: {{ include "dotnet-core-webapi.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}  
   template:
     metadata:
       labels:
