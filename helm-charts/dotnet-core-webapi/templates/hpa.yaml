@@ -1,3 +1,4 @@
+{{- if .Values.hpa.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -18,10 +19,17 @@ spec:
         target:
           type: Utilization
           averageUtilization: {{ .Values.hpa.targetCPUUtilizationPercentage }}
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: Utilization
-          averageUtilization:
-            {{ .Values.hpa.targetMemoryUtilizationPercentage }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: {{ .Values.hpa.stabilizationWindowSeconds }}    # Scale down delay (in seconds)
+      policies:
+        - type: {{ .Values.hpa.scaleDownType }}
+          value: {{ .Values.hpa.scaleDownValue }}                      # Scale down by 1 pod at a time
+          periodSeconds: {{ .Values.hpa.scaleDownPeriodSeconds }}             # Allow scale down every 60 seconds
+    scaleUp:
+      policies:
+        - type: {{ .Values.hpa.scaleUpType }}
+          value: {{ .Values.hpa.scaleUpValue }}                    # Scale up by doubling pods if needed
+          periodSeconds: {{ .Values.hpa.scaleUpPeriodSeconds }}             # Allow scaling up every 15 seconds
+{{- end }}
+
