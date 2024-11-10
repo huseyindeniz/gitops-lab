@@ -64,10 +64,7 @@ imageRepository:
   interval: "1m0s"
 
 image:
-  app:
-    repository: "your-docker-repo/app-image"          # Main application image
-  migration:
-    repository: "your-docker-repo/migration-job"      # Migration job image
+    repository: "your-docker-repo/app-image"
 
 imagePolicy:
   namespace: "flux-system"
