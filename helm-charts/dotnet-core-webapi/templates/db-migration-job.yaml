@@ -42,10 +42,10 @@ spec:
               value: {{ .Values.migration.targetMigration | default "" | quote }}
           resources:
             limits:
-              cpu: {{ .Values.migration.resources.limits.cpu }}
-              memory: {{ .Values.migration.resources.limits.memory }}
+              cpu: {{ .Values.migration.resources.migration.limits.cpu }}
+              memory: {{ .Values.migration.resources.migration.limits.memory }}
             requests:
-              cpu: {{ .Values.migration.resources.requests.cpu }}
-              memory: {{ .Values.migration.resources.requests.memory }}
+              cpu: {{ .Values.migration.resources.migration.requests.cpu }}
+              memory: {{ .Values.migration.resources.migration.requests.memory }}
     backoffLimit: 0  # Ensure no retries on failure
 {{- end }}

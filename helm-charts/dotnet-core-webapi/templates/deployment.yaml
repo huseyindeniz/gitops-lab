@@ -44,8 +44,8 @@ spec:
                   key: "{{ .Values.database.passwordKey }}"
           resources:
             limits:
-              cpu: "{{ .Values.resources.limits.cpu }}"
-              memory: "{{ .Values.resources.limits.memory }}"
+              cpu: "{{ .Values.resources.app.limits.cpu }}"
+              memory: "{{ .Values.resources.app.limits.memory }}"
             requests:
-              cpu: "{{ .Values.resources.requests.cpu }}"
-              memory: "{{ .Values.resources.requests.memory }}"
+              cpu: "{{ .Values.resources.app.requests.cpu }}"
+              memory: "{{ .Values.resources.app.requests.memory }}"
