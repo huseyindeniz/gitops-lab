@@ -9,7 +9,7 @@ spec:
   targetRef:
     apiVersion: "apps/v1"
     kind: Deployment
-    name: {{ .Release.Name }}
+    name: {{ .Release.Name }}-deployment
   updatePolicy:
     updateMode: "{{ .Values.vpa.updateMode | default "Auto" }}"   # Options: Off, Initial, Auto, Recreate
   resourcePolicy:
