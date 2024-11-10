@@ -1,6 +1,6 @@
 {{/* Generates the full name of the release, including namespace and environment */}}
 {{- define "dotnet-core-webapi.fullname" -}}
-{{- printf "%s-%s" .Release.Name .Values.environment | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/* Generates a common set of labels for resources */}}
