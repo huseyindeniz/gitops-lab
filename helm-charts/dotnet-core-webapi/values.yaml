@@ -72,6 +72,8 @@ imageUpdateAutomation:
   branch: "main"
   authorEmail: "your-email@example.com"
   authorName: "Automation Bot"
+  updatePath: "path to your manifest" # Path for updates
+  strategy: "Setters"
 
 migration:
   enabled: true

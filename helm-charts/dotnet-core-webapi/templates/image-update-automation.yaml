@@ -17,6 +17,9 @@ spec:
         email: "{{ .Values.imageUpdateAutomation.authorEmail }}"
         name: "{{ .Values.imageUpdateAutomation.authorName }}"
       messageTemplate: "Updating app image to {{ .Values.image.app.repository }}:{{ .Values.image.app.tag }}"
+  update:
+    path: {{ .Values.imageUpdateAutomation.updatePath }}      # Path for update
+    strategy: {{ .Values.imageUpdateAutomation.strategy }}     # Update strategy
 
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
@@ -38,3 +41,6 @@ spec:
         email: "{{ .Values.imageUpdateAutomation.authorEmail }}"
         name: "{{ .Values.imageUpdateAutomation.authorName }}"
       messageTemplate: "Updating migration job image to {{ .Values.image.migration.repository }}:{{ .Values.image.migration.tag }}"
+  update:
+    path: {{ .Values.imageUpdateAutomation.updatePath }}      # Path for update
+    strategy: {{ .Values.imageUpdateAutomation.strategy }}     # Update strategy

@@ -28,7 +28,7 @@ resources:
     limits:
       cpu: "600m"
       memory: "4Gi"
-      
+
 hpa:
   enabled: true
   minReplicas: 2
@@ -89,6 +89,8 @@ imageUpdateAutomation:
   branch: "main"
   authorEmail: "huseyindenizkivrak@gmail.com"
   authorName: "Flux Automation Bot"
+  updatePath: "flux/local/applications/project-001/wf-prod.yaml" # Path for updates
+  strategy: "Setters"
 
 migration:
   enabled: false
