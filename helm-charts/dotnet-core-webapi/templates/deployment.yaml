@@ -1,51 +1,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: { { include "dotnet-core-webapi.fullname" . } }
-  namespace: { { include "dotnet-core-webapi.namespace" . } }
-  labels: { { - include "dotnet-core-webapi.labels" . | nindent 4 } }
+  name: "{{ include "dotnet-core-webapi.fullname" . }}"
+  namespace: "{{ include "dotnet-core-webapi.namespace" . }}"
+  labels: "{{ - include "dotnet-core-webapi.labels" . | nindent 4 }}"
 spec:
-  replicas: { { .Values.replicaCount } }
+  replicas: "{{ .Values.replicaCount }}"
   selector:
     matchLabels:
-      app.kubernetes.io/name: { { include "dotnet-core-webapi.name" . } }
-      app.kubernetes.io/instance: { { .Release.Name } }
+      app.kubernetes.io/name: "{{ include "dotnet-core-webapi.name" . }}"
+      app.kubernetes.io/instance: "{{ .Release.Name }}"
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: { { include "dotnet-core-webapi.name" . } }
-        app.kubernetes.io/instance: { { .Release.Name } }
+        app.kubernetes.io/name: "{{ include "dotnet-core-webapi.name" . }}"
+        app.kubernetes.io/instance: "{{ .Release.Name }}"
     spec:
       containers:
-        - name: { { .Chart.Name } }
+        - name: "{{ .Chart.Name }}"
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: { { .Values.image.pullPolicy } }
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
           ports:
             - name: http
-              containerPort: { { .Values.service.port } }
+              containerPort: "{{ .Values.service.port }}"
               protocol: TCP
           env:
             - name: ASPNETCORE_ENVIRONMENT
-              value: { { .Values.config.ASPNETCORE_ENVIRONMENT | quote } }
+              value: "{{ .Values.config.ASPNETCORE_ENVIRONMENT | quote }}"
             # Directly use non-sensitive database connection values
             - name: DB_HOST
-              value: { { .Values.database.host } }
+              value: "{{ .Values.database.host }}"
             - name: DB_PORT
-              value: { { .Values.database.port | default "5432" } }
+              value: "{{ .Values.database.port | default "5432" }}"
             - name: DB_NAME
-              value: { { .Values.database.name } }
+              value: "{{ .Values.database.name }}"
             - name: DB_USER
-              value: { { .Values.database.user } }
+              value: "{{ .Values.database.user }}"
             # Sensitive database credentials from Secret
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: { { .Values.database.secretName } }
-                  key: { { .Values.database.passwordKey } }
+                  name: "{{ .Values.database.secretName }}"
+                  key: "{{ .Values.database.passwordKey }}"
           resources:
             limits:
-              cpu: { { .Values.resources.limits.cpu } }
-              memory: { { .Values.resources.limits.memory } }
+              cpu: "{{ .Values.resources.limits.cpu }}"
+              memory: "{{ .Values.resources.limits.memory }}"
             requests:
-              cpu: { { .Values.resources.requests.cpu } }
-              memory: { { .Values.resources.requests.memory } }
+              cpu: "{{ .Values.resources.requests.cpu }}"
+              memory: "{{ .Values.resources.requests.memory }}"
