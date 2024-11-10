@@ -35,7 +35,7 @@ spec:
             image:
               tag: '{{ .imgTag }}'
             migration:
-              migrationTag: '{{ .imgMigrationTag }}'
+              tag: '{{ .imgMigrationTag }}'
               action: "{{ .migrationAction }}"
               targetMigration: '{{ .targetMigration }}'
             database: 
