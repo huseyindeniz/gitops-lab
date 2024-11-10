@@ -19,7 +19,7 @@ image:
 replicaCount: 1
 
 hpa:
-  enabled: true
+  enabled: false
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 50  # The average CPU utilization target for auto-scaling
@@ -32,7 +32,7 @@ hpa:
   scaleUpPeriodSeconds: 15 
 
 vpa:
-  enabled: true
+  enabled: false
   updateMode: "Auto"                         # VPA update mode (Options: Off, Initial, Auto, Recreate)
   minAllowedCPU: "100m"                       # Minimum CPU resource for auto-scaling
   minAllowedMemory: "128Mi"                   # Minimum memory resource for auto-scaling
