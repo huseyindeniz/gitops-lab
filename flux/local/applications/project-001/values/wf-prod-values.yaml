@@ -61,6 +61,7 @@ ingress:
 
 image:
   repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"
+  pullPolicy: Always
   
 imageRepository:
   namespace: "flux-system"

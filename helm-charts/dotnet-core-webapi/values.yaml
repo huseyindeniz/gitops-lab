@@ -64,7 +64,8 @@ imageRepository:
   interval: "1m0s"
 
 image:
-    repository: "your-docker-repo/app-image"
+  repository: "your-docker-repo/app-image"
+  pullPolicy: Always
 
 imagePolicy:
   namespace: "flux-system"
