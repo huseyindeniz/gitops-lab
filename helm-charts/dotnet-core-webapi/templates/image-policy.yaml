@@ -1,0 +1,30 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: {{ .Release.Name }}-app-image-policy
+  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+spec:
+  imageRepositoryRef:
+    name: {{ .Release.Name }}-app-image-repository
+  filterTags:
+    pattern: {{ .Values.imagePolicy.app.filterTags.pattern | quote }}
+    extract: {{ .Values.imagePolicy.app.filterTags.extract | quote }}
+  policy:
+    numerical:
+      order: {{ .Values.imagePolicy.app.policy.order }}
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: {{ .Release.Name }}-migration-image-policy
+  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+spec:
+  imageRepositoryRef:
+    name: {{ .Release.Name }}-migration-image-repository
+  filterTags:
+    pattern: {{ .Values.imagePolicy.migration.filterTags.pattern | quote }}
+    extract: {{ .Values.imagePolicy.migration.filterTags.extract | quote }}
+  policy:
+    numerical:
+      order: {{ .Values.imagePolicy.migration.policy.order }}

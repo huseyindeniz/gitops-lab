@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { include "dotnet-core-webapi.fullname" . } }
+  namespace: { { include "dotnet-core-webapi.namespace" . } }
+  labels: { { - include "dotnet-core-webapi.labels" . | nindent 4 } }
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: { { include "dotnet-core-webapi.name" . } }
+      app.kubernetes.io/instance: { { .Release.Name } }
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: { { include "dotnet-core-webapi.name" . } }
+        app.kubernetes.io/instance: { { .Release.Name } }
+    spec:
+      containers:
+        - name: { { .Chart.Name } }
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: { { .Values.image.pullPolicy } }
+          ports:
+            - name: http
+              containerPort: { { .Values.service.port } }
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: { { .Values.environment | quote } }
+            # Database connection string placeholder
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: { { .Values.database.secretName } }
+                  key: { { .Values.database.secretKey } }
+          resources:
+            limits:
+              cpu: { { .Values.resources.limits.cpu } }
+              memory: { { .Values.resources.limits.memory } }
+            requests:
+              cpu: { { .Values.resources.requests.cpu } }
+              memory: { { .Values.resources.requests.memory } }

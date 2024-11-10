@@ -1,0 +1,24 @@
+apiVersion: v2
+name: dotnet-core-webapi
+description: A Helm chart for deploying a .NET Core Web API with EF Core database migrations
+type: application
+version: 0.1.0                # Increment this version with changes to Helm templates
+appVersion: "1.0.0"           # Set this to match the version of your .NET Core application
+
+annotations:
+  category: "web application"
+  supported: "true"
+  maintainer: "Hüseyin Deniz KIVRAK <huseyindenizkivrak@gmail.com>"
+  argocd.argoproj.io/sync-wave: "0"
+
+keywords:
+  - dotnet
+  - webapi
+  - ef-core
+  - helm
+
+# Uncomment and customize if the chart requires dependencies like a database
+# dependencies:
+#   - name: postgres
+#     version: "11.3.0"
+#     repository: "https://charts.bitnami.com/bitnami"

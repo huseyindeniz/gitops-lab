@@ -1,0 +1,97 @@
+environment: "Development"
+namespace: "your-app-namespace"          # Base namespace for deployments
+
+config:
+  exampleKey: "exampleValue"             # Add any application-specific configurations here
+
+argo:
+  repoURL: "https://github.com/your-org/your-repo"  # Repository URL for your chart
+  targetRevision: "main"                            # Git branch or tag to deploy
+  chartPath: "path/to/chart"                        # Path to the chart directory in the repo
+  server: "https://kubernetes.default.svc" 
+  
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+vpa:
+  enabled: true
+  updateMode: "Auto"
+  minAllowed:
+    cpu: "100m"
+    memory: "128Mi"
+  maxAllowed:
+    cpu: "2000m"
+    memory: "4Gi"
+
+service:
+  type: LoadBalancer                # Options: ClusterIP, NodePort, LoadBalancer
+  port: 80                          # External port for the service
+  targetPort: 8080                  # Internal port the app listens on
+  annotations: {}                   # Optional, e.g., annotations for load balancers or service meshes
+
+ingress:
+  enabled: false
+  host: "example.com"                   # Set to your domain
+  annotations: {}                       # Add any specific annotations
+  tls: false                            # Toggle for enabling TLS
+  tlsSecret: ""                         # Specify TLS secret if TLS is enabled
+
+imageRepository:
+  namespace: "flux-system"
+  interval: "1m0s"
+
+image:
+  app:
+    repository: "your-docker-repo/app-image"          # Main application image
+  migration:
+    repository: "your-docker-repo/migration-job"      # Migration job image
+
+imagePolicy:
+  namespace: "flux-system"
+  app:
+    filterTags:
+      pattern: "^\\d{14}$"
+      extract: "$0"
+    policy:
+      order: "asc"
+  migration:
+    filterTags:
+      pattern: "^\\d{14}$"
+      extract: "$0"
+    policy:
+      order: "asc"
+
+imageUpdateAutomation:
+  namespace: "flux-system"
+  interval: "5m0s"
+  gitRepository: "my-git-repo"
+  branch: "main"
+  authorEmail: "your-email@example.com"
+  authorName: "Automation Bot"
+
+migration:
+  enabled: true
+  image:
+    repository: "your-docker-repo/migration-job"
+    tag: "latest"
+  action: "apply"
+  targetMigration: ""
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+
+database:
+  host: "your-database-host"
+  port: "5432"
+  name: "your-database-name"
+  secretName: "db-credentials-secret"
+  userKey: "db-user"
+  passwordKey: "db-password"

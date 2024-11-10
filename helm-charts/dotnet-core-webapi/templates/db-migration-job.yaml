@@ -1,0 +1,54 @@
+{{- if .Values.migration.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "dotnet-core-webapi.fullname" . }}-db-migration
+  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+  labels:
+    {{- include "dotnet-core-webapi.labels" . | nindent 4 }}
+  annotations:
+    # Helm hook annotations
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: db-migration
+          image: "{{ .Values.migration.image.repository }}:{{ .Values.migration.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: {{ .Values.environment | quote }}
+            # Directly use non-sensitive database connection values
+            - name: DB_HOST
+              value: {{ .Values.database.host }}
+            - name: DB_PORT
+              value: {{ .Values.database.port | default "5432" }}
+            - name: DB_NAME
+              value: {{ .Values.database.name }}
+            # Sensitive database credentials from Secret
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.secretName }}
+                  key: {{ .Values.database.userKey }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.secretName }}
+                  key: {{ .Values.database.passwordKey }}
+            - name: MIGRATION_ACTION
+              value: {{ .Values.migration.action | quote }}
+            - name: TARGET_MIGRATION
+              value: {{ .Values.migration.targetMigration | default "" | quote }}
+          resources:
+            limits:
+              cpu: {{ .Values.migration.resources.limits.cpu }}
+              memory: {{ .Values.migration.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.migration.resources.requests.cpu }}
+              memory: {{ .Values.migration.resources.requests.memory }}
+    backoffLimit: 0  # Ensure no retries on failure
+{{- end }}
