@@ -55,6 +55,11 @@ terraform output argo_cd_local_admin_password
 
 ## Step 5
 
+persistance volume folders:
+
+/tmp/hostpath-provisioner
+/var/lib/minikube/hostpath-provisioner
+
 ...
 
 ## Enabling VPA
