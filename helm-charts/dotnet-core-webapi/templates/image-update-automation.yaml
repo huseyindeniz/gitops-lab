@@ -5,33 +5,12 @@ metadata:
   namespace: {{ include "dotnet-core-webapi.namespace" . }}
 spec:
   interval: {{ .Values.imageUpdateAutomation.interval }}
-  sourceRef:
-    kind: GitRepository
-    name: {{ .Values.imageUpdateAutomation.gitRepository }}
-  git:
-    checkout:
-      ref:
-        branch: {{ .Values.imageUpdateAutomation.branch }}
-    commit:
-      author:
-        email: "{{ .Values.imageUpdateAutomation.authorEmail }}"
-        name: "{{ .Values.imageUpdateAutomation.authorName }}"
-      messageTemplate: "Updating app image to {{ .Values.image.app.repository }}:{{ .Values.image.app.tag }}"
-  update:
-    path: {{ .Values.imageUpdateAutomation.updatePath }}      # Path for update
-    strategy: {{ .Values.imageUpdateAutomation.strategy }}     # Update strategy
 
----
-apiVersion: image.toolkit.fluxcd.io/v1beta1
-kind: ImageUpdateAutomation
-metadata:
-  name: {{ .Release.Name }}-migration-image-automation
-  namespace: {{ include "dotnet-core-webapi.namespace" . }}
-spec:
-  interval: {{ .Values.imageUpdateAutomation.interval }}
   sourceRef:
     kind: GitRepository
-    name: {{ .Values.imageUpdateAutomation.gitRepository }}
+    name: flux-system
+    namespace: flux-system
+    
   git:
     checkout:
       ref:
@@ -40,7 +19,6 @@ spec:
       author:
         email: "{{ .Values.imageUpdateAutomation.authorEmail }}"
         name: "{{ .Values.imageUpdateAutomation.authorName }}"
-      messageTemplate: "Updating migration job image to {{ .Values.image.migration.repository }}:{{ .Values.image.migration.tag }}"
   update:
     path: {{ .Values.imageUpdateAutomation.updatePath }}      # Path for update
     strategy: {{ .Values.imageUpdateAutomation.strategy }}     # Update strategy
