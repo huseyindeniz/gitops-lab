@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: project-001-weather-forecast-appset
+  name: project-001-weather-forecast-appset-staging
   namespace: argo-cd-local
 spec:
   generators:
