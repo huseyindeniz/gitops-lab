@@ -30,12 +30,19 @@ resources:
       memory: "4Gi"
 
 hpa:
-  enabled: false
+  enabled: true
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
-
+  stabilizationWindowSeconds: 60
+  scaleDownType: "Pods"
+  scaleDownValue: 1
+  scaleDownPeriodSeconds: 60 
+  scaleUpType: "Percent"
+  scaleUpValue: 100
+  scaleUpPeriodSeconds: 15
+  
 vpa:
   enabled: false
   updateMode: "Auto"
