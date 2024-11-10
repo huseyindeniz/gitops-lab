@@ -4,8 +4,7 @@ kind: Job
 metadata:
   name: {{ include "dotnet-core-webapi.fullname" . }}-db-migration
   namespace: {{ include "dotnet-core-webapi.namespace" . }}
-  labels:
-    {{- include "dotnet-core-webapi.labels" . | nindent 4 }}
+  labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
   annotations:
     # Helm hook annotations
     "helm.sh/hook": "pre-install,pre-upgrade"
