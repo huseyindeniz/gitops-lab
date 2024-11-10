@@ -12,7 +12,23 @@ argo:
   
 # Deployment configuration
 replicaCount: 2
-
+# Resource requests and limits (optional)
+resources:
+  app:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+  migration:
+    requests:
+      cpu: "200m"
+      memory: "1Gi"
+    limits:
+      cpu: "600m"
+      memory: "4Gi"
+      
 hpa:
   enabled: true
   minReplicas: 2
