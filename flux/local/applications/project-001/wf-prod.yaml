@@ -9,8 +9,8 @@ spec:
         elements:
           - envName: prod-bluegreen
             servicePort: 6001
-            imgTag: '20241110161656' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
-            imgMigrationTag: '20241110161611' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-migration-policy:tag"}
+            imgTag: '20241110161656' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-image-policy:tag"}
+            imgMigrationTag: '20241110161611' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-image-migration-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback 
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
