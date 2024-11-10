@@ -2,7 +2,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
   name: {{ .Release.Name }}-app-image-policy
-  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+  namespace: flux-system
 spec:
   imageRepositoryRef:
     name: {{ .Release.Name }}-app-image-repository
@@ -18,7 +18,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
   name: {{ .Release.Name }}-migration-image-policy
-  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+  namespace: flux-system
 spec:
   imageRepositoryRef:
     name: {{ .Release.Name }}-migration-image-repository

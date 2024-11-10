@@ -2,7 +2,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
   name: {{ .Release.Name }}-app-image-automation
-  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+  namespace: flux-system
 spec:
   interval: {{ .Values.imageUpdateAutomation.interval }}
 
