@@ -19,7 +19,7 @@ image:
 replicaCount: 1
 
 hpa:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 50  # The average CPU utilization target for auto-scaling
