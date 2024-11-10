@@ -8,14 +8,12 @@ spec:
     - list:
         elements:
           - envName: stag-1
-            envFile: "flux/local/applications/project-001/wf-staging-values.yaml"
             envPort: 5001
             imgTag: '20241103132600' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
             imgMigrationTag: '20241103132513' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-migration-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
-            envFile: "flux/local/applications/project-001/wf-staging-values.yaml"
             envPort: 5002
             imgTag: '20241103132550' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-policy:tag"}
             imgMigrationTag: '20241103132507' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-migration-policy:tag"}
@@ -34,8 +32,8 @@ spec:
         path: 'helm-charts/project-001/weather-forecast'
         helm:
           valueFiles:
-            - values-staging.yaml
-            - '{{ .envFile }}'
+            - values.yaml
+            - $valuesRef/flux/local/applications/project-001/wf-staging-values.yaml
           valuesObject:
             environment: '{{.envName}}'
             service:
