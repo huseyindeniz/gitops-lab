@@ -1,4 +1,4 @@
-# Default values for the weather-forecast Helm chart
+# Staging env values for the weather-forecast app
 
 namespace: project-001-wf  # Specify the namespace here
 repoURL: https://github.com/huseyindeniz/cicd-lab.git

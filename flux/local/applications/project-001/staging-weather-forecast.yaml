@@ -33,6 +33,7 @@ spec:
         helm:
           valueFiles:
             - values-staging.yaml
+            - $valuesRef/flux/local/applications/project-001/wf-staging-values.yaml
           valuesObject:
             environment: '{{.envName}}'
             service:
