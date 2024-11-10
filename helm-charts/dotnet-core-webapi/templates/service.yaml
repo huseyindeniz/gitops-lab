@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "dotnet-core-webapi.fullname" . }}
+  name: {{ include "dotnet-core-webapi.fullname" . }}-service
   namespace: {{ include "dotnet-core-webapi.namespace" . }}
   labels:
     {{- include "dotnet-core-webapi.labels" . | nindent 4 }}

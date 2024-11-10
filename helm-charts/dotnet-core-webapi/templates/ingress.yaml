@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "dotnet-core-webapi.fullname" . }}
+  name: {{ include "dotnet-core-webapi.fullname" . }}-ingress
   namespace: {{ include "dotnet-core-webapi.namespace" . }}
   labels:
     {{- include "dotnet-core-webapi.labels" . | nindent 4 }}

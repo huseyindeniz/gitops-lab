@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dotnet-core-webapi.fullname" . }}''
+  name: {{ include "dotnet-core-webapi.fullname" . }}-deployment
   namespace: {{ include "dotnet-core-webapi.namespace" . }}
   labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
 spec:
