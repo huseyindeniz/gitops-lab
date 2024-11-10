@@ -30,14 +30,14 @@ resources:
       memory: "4Gi"
 
 hpa:
-  enabled: true
+  enabled: false
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
 vpa:
-  enabled: true
+  enabled: false
   updateMode: "Auto"
   minAllowed:
     cpu: "100m"
@@ -62,7 +62,7 @@ ingress:
 image:
   repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"
   pullPolicy: Always
-  
+
 imageRepository:
   namespace: "flux-system"
   interval: "1m0s"
