@@ -7,7 +7,7 @@ variable "kubeconfig_path" {
 
 variable "kubeconfig_context" {
   type    = string
-  default = "minikube"
+  default = "test-cluster"
 }
 
 variable "flux_github_token" {

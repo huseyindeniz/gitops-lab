@@ -2,14 +2,7 @@ prometheus:
   persistance:
     enabled: true
     existingClaim: prometheus_pvc
-  retention: 7d
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 500m
-    limits:
-      memory: 1Gi
-      cpu: 1 
+  retention: 7d 
   ingress:
     enabled: true
     ingressClassName: nginx
@@ -19,16 +12,18 @@ grafana:
   adminPassword: 12345aA.
   persistence:
     enabled: true
-    existingClaim: grafana-pvc
-  resources:
-    requests:
-      memory: 500Mi
-      cpu: 250m
-    limits:
-      memory: 1Gi
-      cpu: 500m    
+    existingClaim: grafana-pvc   
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
       - grafana.local
+
+kubeStateMetrics:
+  enabled: true
+
+nodeExporter:
+  enabled: true
+
+alertmanager:
+  enabled: true
