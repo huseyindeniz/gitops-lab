@@ -40,7 +40,7 @@ spec:
               targetMigration: '{{ .targetMigration }}'
             database: 
               host: 'project-001-wf-postgres-{{ .envName }}-postgresql'
-              port: 5432
+              port: "5432"
               name: 'project-001-wf-{{ .envName }}-db'
               user: 'project-001-wf-{{ .envName }}-user'
               secretName: 'postgres-password-{{ .envName }}'
