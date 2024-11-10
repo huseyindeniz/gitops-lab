@@ -60,8 +60,10 @@ ingress:
   tlsSecret: ""                         # Specify TLS secret if TLS is enabled
 
 image:
-  repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"          # Main application image
-  tag: "latest"
+  app:
+    repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"          # Main application image
+  migration:
+    repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"      # Migration job image
 
 imageRepository:
   namespace: "flux-system"
