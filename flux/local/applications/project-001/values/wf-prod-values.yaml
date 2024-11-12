@@ -60,7 +60,7 @@ service:
   annotations: {}                   # Optional, e.g., annotations for load balancers or service meshes
 
 ingress:
-  enabled: false
+  enabled: true
   host: "wf.local"                   # Set to your domain
   annotations: {}                       # Add any specific annotations
   tls: false                            # Toggle for enabling TLS
