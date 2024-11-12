@@ -15,7 +15,7 @@ spec:
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
             envPort: 5002
-            imgTag: '20241103132550' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-policy:tag"}
+            imgTag: '20241112181043' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-policy:tag"}
             imgMigrationTag: '20241112180957' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-migration-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
