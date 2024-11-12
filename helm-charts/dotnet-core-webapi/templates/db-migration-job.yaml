@@ -50,5 +50,5 @@ spec:
             requests:
               cpu: {{ .Values.resources.migration.requests.cpu }}
               memory: {{ .Values.resources.migration.requests.memory }}
-    backoffLimit: 0  # Ensure no retries on failure
+  backoffLimit: 0  # Ensure no retries on failure
 {{- end }}
