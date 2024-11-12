@@ -16,7 +16,6 @@ spec:
         app.kubernetes.io/name: {{ include "dotnet-core-webapi.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}  
     spec:
-      restartPolicy: Never
       containers:
         - name: db-migration
           image: {{ .Values.image.repository }}-migration-{{ .Values.environment }}:{{ .Values.migration.tag | default .Chart.AppVersion }}
@@ -50,5 +49,6 @@ spec:
             requests:
               cpu: {{ .Values.resources.migration.requests.cpu }}
               memory: {{ .Values.resources.migration.requests.memory }}
+      restartPolicy: Never
   backoffLimit: 0  # Ensure no retries on failure
 {{- end }}
