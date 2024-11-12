@@ -10,7 +10,7 @@ spec:
           - envName: prod-bluegreen
             servicePort: 6001
             imgTag: '20241110161656' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
-            imgMigrationTag: '20241110161611' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
+            imgMigrationTag: '20241112170359' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
             migrationAction: 'apply' # apply, reset, rollback 
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
@@ -38,16 +38,15 @@ spec:
               tag: '{{ .imgMigrationTag }}'
               action: "{{ .migrationAction }}"
               targetMigration: '{{ .targetMigration }}'
-            database: 
+            database:
               host: 'project-001-wf-postgres-{{ .envName }}-postgresql'
               port: "5432"
               name: 'project-001-wf-{{ .envName }}-db'
               user: 'project-001-wf-{{ .envName }}-user'
               secretName: 'postgres-password-{{ .envName }}'
               passwordKey: "POSTGRES_PASSWORD"
-              
       destination:
-        server: "https://kubernetes.default.svc" 
+        server: "https://kubernetes.default.svc"
         namespace: 'project-001-weather-forecast-{{ .envName }}' # Use the environment suffix in the namespace
       syncPolicy:
         automated:
