@@ -34,7 +34,7 @@ resource "kubernetes_persistent_volume" "project_001_weather_forecast_postgres_p
   }
 
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
 
     capacity = {
       storage = var.storage_size # Size of the persistent volume
@@ -45,6 +45,9 @@ resource "kubernetes_persistent_volume" "project_001_weather_forecast_postgres_p
         path = "/mnt/data/postgres-${each.value}" # Path on the host for local development
       }
     }
+
+    persistent_volume_reclaim_policy = "Delete"
+
   }
 
   depends_on = [kubernetes_namespace.project_001_weather_forecast_env]
@@ -60,7 +63,7 @@ resource "kubernetes_persistent_volume_claim" "project_001_weather_forecast_post
   }
 
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
 
     resources {
       requests = {
