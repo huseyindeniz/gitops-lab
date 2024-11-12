@@ -28,16 +28,16 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ .Values.config.ASPNETCORE_ENVIRONMENT | quote }}
             # Directly use non-sensitive database connection values
-            - name: DB_HOST
+            - name: DB__HOST
               value: {{ .Values.database.host }}
-            - name: DB_PORT
+            - name: DB__PORT
               value: "{{ .Values.database.port | default "5432" }}"
-            - name: DB_NAME
+            - name: DB__NAME
               value: {{ .Values.database.name }}
-            - name: DB_USER
+            - name: DB__USER
               value: {{ .Values.database.user }}
             # Sensitive database credentials from Secret
-            - name: DB_PASSWORD
+            - name: DB__PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.database.secretName }}
