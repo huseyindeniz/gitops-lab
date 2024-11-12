@@ -19,7 +19,7 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 # Set environment variables for DB connection
 ENV DB__HOST=""
 ENV DB__PORT="5432"
-ENV DB__DB=""
+ENV DB__NAME=""
 ENV DB__USER=""
 ENV DB__PASSWORD=""
 ENV MIGRATION_ACTION=""

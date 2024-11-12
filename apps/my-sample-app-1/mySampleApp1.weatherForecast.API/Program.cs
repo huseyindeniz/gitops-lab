@@ -22,7 +22,7 @@ namespace mySampleApp1.weatherForecast.API
             var connStringBuilder = new StringBuilder();
             connStringBuilder.Append($"server={dbConf["HOST"]};");
             connStringBuilder.Append($"port={dbConf["PORT"]};");
-            connStringBuilder.Append($"database={dbConf["DB"]};");
+            connStringBuilder.Append($"database={dbConf["NAME"]};");
             connStringBuilder.Append($"userid={dbConf["USER"]};");
             connStringBuilder.Append($"password={dbConf["PASSWORD"]};");
             var connString = connStringBuilder.ToString();

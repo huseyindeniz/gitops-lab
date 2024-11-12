@@ -19,12 +19,12 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - DB__HOST=postgres
       - DB__PORT=5432
-      - DB__DB=dev-db
+      - DB__NAME=dev-db
       - DB__USER=postgres
       - DB__PASSWORD=postgres
       - MIGRATION_ACTION=apply
       - TARGET_MIGRATION=
-      
+
   mysampleapp1.weatherforecast.api:
     networks:
       - mysampleapp1-network
