@@ -9,7 +9,7 @@ spec:
         elements:
           - envName: stag-1
             envPort: 5001
-            imgTag: '20241103132600' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
+            imgTag: '20241112181319' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
             imgMigrationTag: '20241103132513' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-migration-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
