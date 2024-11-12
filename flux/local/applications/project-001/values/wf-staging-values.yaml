@@ -1,58 +1,17 @@
-# Staging env values for the weather-forecast app
+environment: "prod"
+namespace: "project-001-wf"          # Base namespace for deployments
 
-namespace: project-001-wf  # Specify the namespace here
-repoURL: https://github.com/huseyindeniz/cicd-lab.git
-targetRevision: main
-chartPath: helm-charts/weather-forecast
-server: https://kubernetes.default.svc
+config:
+  ASPNETCORE_ENVIRONMENT: "Development"   # Add any application-specific configurations here
 
-# Image configuration
-image:
-  repository: huseyindeniz/my-sample-app-1-weatherforecast-api
-  pullPolicy: Always
-  tag: ""
-  migrationTag: ""
-  interval: "5m"
-  updateInterval: "1m"
-
+argo:
+  repoURL: https://github.com/huseyindeniz/cicd-lab.git  # Repository URL for your chart
+  targetRevision: "main"                            # Git branch or tag to deploy
+  chartPath: "helm-charts/dotnet-core-webapi"                        # Path to the chart directory in the repo
+  server: "https://kubernetes.default.svc" 
+  
 # Deployment configuration
 replicaCount: 1
-
-hpa:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 50  # The average CPU utilization target for auto-scaling
-  stabilizationWindowSeconds: 60
-  scaleDownType: "Pods"
-  scaleDownValue: 1
-  scaleDownPeriodSeconds: 60 
-  scaleUpType: "Percent"
-  scaleUpValue: 100
-  scaleUpPeriodSeconds: 15 
-
-vpa:
-  enabled: true
-  updateMode: "Auto"                         # VPA update mode (Options: Off, Initial, Auto, Recreate)
-  minAllowedCPU: "100m"                       # Minimum CPU resource for auto-scaling
-  minAllowedMemory: "128Mi"                   # Minimum memory resource for auto-scaling
-  maxAllowedCPU: "500m"                       # Maximum CPU resource for auto-scaling
-  maxAllowedMemory: "1Gi"                     # Maximum memory resource for auto-scaling
-  controlledValues: "RequestsAndLimits"       # Specifies whether VPA controls RequestsOnly or RequestsAndLimits
-
-# Service configuration
-service:
-  enabled: true
-  type: LoadBalancer
-  port: 5000
-  targetPort: 8080
-
-# Environment variables for the container
-env:
-  ASPNETCORE_ENVIRONMENT: "Development"
-  MIGRATION_ACTION: "apply"
-  TARGET_MIGRATION: ""
-
 # Resource requests and limits (optional)
 resources:
   app:
@@ -69,3 +28,92 @@ resources:
     limits:
       cpu: "600m"
       memory: "4Gi"
+
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+  stabilizationWindowSeconds: 60
+  scaleDownType: "Pods"
+  scaleDownValue: 1
+  scaleDownPeriodSeconds: 60 
+  scaleUpType: "Percent"
+  scaleUpValue: 100
+  scaleUpPeriodSeconds: 15
+  
+vpa:
+  enabled: true
+  updateMode: "Auto"
+  minAllowed:
+    cpu: "100m"
+    memory: "128Mi"
+  maxAllowed:
+    cpu: "2000m"
+    memory: "4Gi"
+
+service:
+  type: LoadBalancer                # Options: ClusterIP, NodePort, LoadBalancer
+  port: 80                          # External port for the service
+  targetPort: 8080                  # Internal port the app listens on
+  annotations: {}                   # Optional, e.g., annotations for load balancers or service meshes
+
+ingress:
+  enabled: false
+  host: "wf.local"                   # Set to your domain
+  annotations: {}                       # Add any specific annotations
+  tls: false                            # Toggle for enabling TLS
+  tlsSecret: ""                         # Specify TLS secret if TLS is enabled
+
+image:
+  repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"
+  pullPolicy: Always
+
+imageRepository:
+  namespace: "flux-system"
+  interval: "1m0s"
+
+imagePolicy:
+  namespace: "flux-system"
+  app:
+    filterTags:
+      pattern: "^\\d{14}$"
+      extract: "$0"
+    policy:
+      order: "asc"
+  migration:
+    filterTags:
+      pattern: "^\\d{14}$"
+      extract: "$0"
+    policy:
+      order: "asc"
+
+imageUpdateAutomation:
+  namespace: "flux-system"
+  interval: "5m0s"
+  gitRepository: "https://github.com/huseyindeniz/cicd-lab.git"
+  branch: "main"
+  authorEmail: "huseyindenizkivrak@gmail.com"
+  authorName: "Flux Automation Bot"
+  updatePath: "flux/local/applications/project-001/wf-prod.yaml" # Path for updates
+  strategy: "Setters"
+
+migration:
+  enabled: true
+  action: "apply"
+  targetMigration: ""
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+
+database:
+  host: "your-database-host"
+  port: "5432"
+  name: "your-database-name"
+  user: "db-user"
+  passwordKey: "db-password"

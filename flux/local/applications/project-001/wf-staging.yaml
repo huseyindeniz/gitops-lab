@@ -1,23 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: project-001-weather-forecast-appset-staging
+  name: project-001-weather-forecast-appset-prod
   namespace: argo-cd-local
 spec:
   generators:
     - list:
         elements:
           - envName: stag-1
-            envPort: 5001
-            imgTag: '20241103132600' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-policy:tag"}
-            imgMigrationTag: '20241103132513' # {"$imagepolicy": "flux-system:weather-forecast-stag-1-image-migration-policy:tag"}
-            migrationAction: "apply" # apply, reset, rollback
+            servicePort: 5001
+            imgTag: '20241112181319' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
+            imgMigrationTag: '20241112181220' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
+            migrationAction: 'reset' # apply, reset, rollback 
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
-            envPort: 5002
-            imgTag: '20241103132550' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-policy:tag"}
-            imgMigrationTag: '20241103132507' # {"$imagepolicy": "flux-system:weather-forecast-stag-2-image-migration-policy:tag"}
-            migrationAction: "apply" # apply, reset, rollback
+            servicePort: 5002
+            imgTag: '20241112181043' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
+            imgMigrationTag: '20241112180957' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
+            migrationAction: 'reset' # apply, reset, rollback 
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -29,24 +29,31 @@ spec:
       source:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         targetRevision: main
-        path: 'helm-charts/project-001/weather-forecast'
+        path: 'helm-charts/dotnet-core-webapi'
         helm:
           valueFiles:
             - values.yaml
-            - $valuesRef/flux/local/applications/project-001/values/wf-staging-values.yaml
+            - $valuesRef/flux/local/applications/project-001/values/wf-prod-values.yaml
           valuesObject:
-            environment: '{{.envName}}'
+            environment: '{{ .envName }}'
             service:
-              port: '{{.envPort}}'
-            env:
-              MIGRATION_ACTION: '{{ .migrationAction }}'
-              TARGET_MIGRATION: '{{ .targetMigration }}'
+              port: '{{ .servicePort }}'
             image:
               tag: '{{ .imgTag }}'
-              migrationTag: '{{ .imgMigrationTag }}'
+            migration:
+              tag: '{{ .imgMigrationTag }}'
+              action: "{{ .migrationAction }}"
+              targetMigration: '{{ .targetMigration }}'
+            database:
+              host: 'project-001-wf-postgres-{{ .envName }}-postgresql'
+              port: "5432"
+              name: 'project-001-wf-{{ .envName }}-db'
+              user: 'project-001-wf-{{ .envName }}-user'
+              secretName: 'postgres-password-{{ .envName }}'
+              passwordKey: "POSTGRES_PASSWORD"
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: 'project-001-weather-forecast-{{.envName}}' # Use the environment suffix in the namespace
+        namespace: 'project-001-weather-forecast-{{ .envName }}' # Use the environment suffix in the namespace
       syncPolicy:
         automated:
           prune: true
