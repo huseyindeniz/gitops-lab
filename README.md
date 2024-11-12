@@ -91,6 +91,10 @@ Long Running DB Migration Job
 
 ![Long Running DB Migration Job 2](./docs/images/screenshots/long-mig-002.png)
 
+Sample Prometheus+Grafana Dashboard
+
+![Sample Prometheus+Grafana Dashboard](./docs/images/screenshots/grafana-dashboard-001.png)
+
 ## Developer Workflow
 
 Follow these steps to update your application and database with minimal effort.

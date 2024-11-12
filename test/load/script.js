@@ -5,7 +5,7 @@ export const options = {
   // A number specifying the number of VUs to run concurrently.
   vus: 250,
   // A string specifying the total duration of the test run.
-  duration: '2m',
+  duration: '5m',
 
   // The following section contains configuration options for execution of this
   // test script in Grafana Cloud.
@@ -55,5 +55,9 @@ export const options = {
 //
 export default function () {
   http.get('http://localhost:5001/WeatherForecast');
+  sleep(1);
+  http.get('http://localhost:5002/WeatherForecast');
+  sleep(1);
+  http.get('http://localhost:6001/WeatherForecast');
   sleep(1);
 }
