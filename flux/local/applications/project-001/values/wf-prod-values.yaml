@@ -44,7 +44,7 @@ hpa:
   scaleUpPeriodSeconds: 15
   
 vpa:
-  enabled: true
+  enabled: false
   updateMode: "Auto"
   minAllowed:
     cpu: "100m"
