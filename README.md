@@ -50,7 +50,7 @@ The primary objective of this repository is to build a robust GitOps playground,
 - 🔲 gpu/ai training/inference pipeline scenario
 - ✅ monitoring (prometheus + grafana)
 - 🔲 canary prod deployment setup
-- 🔲 blue/green prod deployment setup
+- ✅ blue/green prod deployment setup
 - ✅ load test
 - 🔲 aws (vpc and cluster creation is ready)
 - 🔲 aks (vpc and cluster creation is ready)
@@ -90,6 +90,12 @@ Long Running DB Migration Job
 ![Long Running DB Migration Job 1](./docs/images/screenshots/long-mig-001.png)
 
 ![Long Running DB Migration Job 2](./docs/images/screenshots/long-mig-002.png)
+
+Blue-Green Deployment
+
+![Blue-Green Deployment 1](./docs/images/screenshots/blue-green-001.png)
+
+![Blue-Green Deployment 2](./docs/images/screenshots/blue-green-002.png)
 
 Sample Prometheus+Grafana Dashboard
 
