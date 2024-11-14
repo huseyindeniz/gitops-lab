@@ -21,8 +21,8 @@ spec:
             servicePreviewPort: 6004
             host: "wf-prod-canary.local"
             strategy: "canary" # standard, bluegreen, canary
-            imgTag: '20241114185553' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
-            imgMigrationTag: '20241114185458' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
+            imgTag: '20241114182338' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
+            imgMigrationTag: '20241114182250' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
             migrationAction: 'apply' # apply, reset, rollback 
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
