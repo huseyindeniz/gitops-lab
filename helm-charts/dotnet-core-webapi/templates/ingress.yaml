@@ -19,7 +19,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "dotnet-core-webapi.fullname" . }}
+                name: {{ include "dotnet-core-webapi.fullname" . }}-service
                 port:
                   number: {{ .Values.service.port }}
   {{- if .Values.ingress.tls }}
