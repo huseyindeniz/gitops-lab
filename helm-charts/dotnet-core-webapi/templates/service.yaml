@@ -1,3 +1,4 @@
+# Active Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -19,3 +20,30 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "dotnet-core-webapi.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+
+---
+
+{{- if eq .Values.strategy "bluegreen" }}
+# Preview Service for Blue-Green Deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dotnet-core-webapi.fullname" . }}-service-preview
+  namespace: {{ include "dotnet-core-webapi.namespace" . }}
+  labels:
+    {{- include "dotnet-core-webapi.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.service.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.previewPort }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "dotnet-core-webapi.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

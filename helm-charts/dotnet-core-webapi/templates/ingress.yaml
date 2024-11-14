@@ -12,6 +12,7 @@ metadata:
     {{- end }}
 spec:
   rules:
+    # Rule for active service (standard or blue in blue-green)
     - host: {{ .Values.ingress.host }}
       http:
         paths:
@@ -22,10 +23,26 @@ spec:
                 name: {{ include "dotnet-core-webapi.fullname" . }}-service
                 port:
                   number: {{ .Values.service.port }}
+    {{- if eq .Values.strategy "bluegreen" }}
+    # Rule for preview service (green in blue-green)
+    - host: preview-{{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "dotnet-core-webapi.fullname" . }}-service-preview
+                port:
+                  number: {{ .Values.service.port }}
+    {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
     - hosts:
         - {{ .Values.ingress.host }}
+        {{- if eq .Values.strategy "bluegreen" }}
+        - {{ .Values.ingress.previewHost }}
+        {{- end }}        
       secretName: {{ .Values.ingress.tlsSecret }}
   {{- end }}
 {{- end }}
