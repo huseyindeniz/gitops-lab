@@ -99,7 +99,7 @@ imageUpdateAutomation:
   strategy: "Setters"
 
 migration:
-  enabled: true
+  enabled: false
   action: "apply"
   targetMigration: ""
   resources:
