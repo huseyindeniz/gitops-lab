@@ -119,7 +119,9 @@ database:
 
 # Configuration for blue-green deployment
 blueGreen:
-  autoPromotionEnabled: false
+  autoPromotionEnabled: true
+  autoPromotionSeconds: 600
+  previewReplicaCount: 1
 
 # Configuration for canary deployment
 canary:
