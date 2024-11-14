@@ -30,7 +30,7 @@ resources:
       memory: "4Gi"
 
 hpa:
-  enabled: false
+  enabled: true
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
@@ -44,7 +44,7 @@ hpa:
   scaleUpPeriodSeconds: 15
   
 vpa:
-  enabled: false
+  enabled: true
   updateMode: "Auto"
   minAllowed:
     cpu: "100m"
@@ -60,7 +60,7 @@ service:
   annotations: {}                   # Optional, e.g., annotations for load balancers or service meshes
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}                       # Add any specific annotations
   tls: false                            # Toggle for enabling TLS
   tlsSecret: ""                         # Specify TLS secret if TLS is enabled
@@ -99,7 +99,7 @@ imageUpdateAutomation:
   strategy: "Setters"
 
 migration:
-  enabled: false
+  enabled: true
   action: "apply"
   targetMigration: ""
   resources:
