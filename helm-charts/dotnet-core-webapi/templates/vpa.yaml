@@ -15,7 +15,6 @@ spec:
     kind: Rollout
     {{ end }}
     name: {{ .Release.Name }}-deployment
-    name: {{ .Release.Name }}-deployment
   updatePolicy:
     updateMode: "{{ .Values.vpa.updateMode | default "Auto" }}"   # Options: Off, Initial, Auto, Recreate
   resourcePolicy:
