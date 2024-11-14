@@ -49,7 +49,8 @@ The primary objective of this repository is to build a robust GitOps playground,
 - ✅ huge and/or busy db migration scenario
 - 🔲 gpu/ai training/inference pipeline scenario
 - ✅ monitoring (prometheus + grafana)
-- 🔲 canary prod deployment setup
+- ✅ Install/Configure argo-rollouts
+- ✅ canary prod deployment setup
 - ✅ blue/green prod deployment setup
 - ✅ load test
 - 🔲 aws (vpc and cluster creation is ready)
@@ -73,31 +74,41 @@ Initially, I explored using Argo CD hooks to solve this problem. However, I foun
 
 If EF Core bundles supported a target migration option like dotnet ef database update, it would address this issue by eliminating the need for a build step on each run. This could be worth proposing as a feature request in the EF Core GitHub repository.
 
-ArgoCD Overview
+## Screenshots
+
+### ArgoCD Overview
 
 ![ArgoCD Overview](./docs/images/screenshots/argo-001.png)
 
-ArgoCD App View
+### ArgoCD App View
 
 ![ArgoCD App View](./docs/images/screenshots/argo-002.png)
 
-Migration Demo
+### Migration Demo
 
 ![Migration Demo](./docs/images/screenshots/migration-example.gif)
 
-Long Running DB Migration Job
+### Long Running DB Migration Job
 
 ![Long Running DB Migration Job 1](./docs/images/screenshots/long-mig-001.png)
 
 ![Long Running DB Migration Job 2](./docs/images/screenshots/long-mig-002.png)
 
-Blue-Green Deployment
+### Blue-Green Deployment
 
 ![Blue-Green Deployment 1](./docs/images/screenshots/blue-green-001.png)
 
 ![Blue-Green Deployment 2](./docs/images/screenshots/blue-green-002.png)
 
-Sample Prometheus+Grafana Dashboard
+### Canary Deployment
+
+![Canary Deployment 1](./docs/images/screenshots/canary-001.png)
+
+![Canary Deployment 2](./docs/images/screenshots/canary-002.png)
+
+![Canary Deployment 3](./docs/images/screenshots/canary-003.png)
+
+### Sample Prometheus+Grafana Dashboard
 
 ![Sample Prometheus+Grafana Dashboard](./docs/images/screenshots/grafana-dashboard-001.png)
 
