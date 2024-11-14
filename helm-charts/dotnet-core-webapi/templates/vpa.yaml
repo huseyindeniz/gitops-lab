@@ -7,10 +7,11 @@ metadata:
   labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
 spec:
   targetRef:
-    apiVersion: "apps/v1"
     {{ if eq .Values.strategy "standard" }}
+    apiVersion: apps/v1
     kind: Deployment
     {{ else }}
+    apiVersion: argoproj.io/v1alpha1
     kind: Rollout
     {{ end }}
     name: {{ .Release.Name }}-deployment
