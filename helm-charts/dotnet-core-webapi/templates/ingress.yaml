@@ -34,7 +34,7 @@ spec:
               service:
                 name: {{ include "dotnet-core-webapi.fullname" . }}-service-preview
                 port:
-                  number: {{ .Values.service.port }}
+                  number: {{ .Values.service.previewPort }}
     {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
