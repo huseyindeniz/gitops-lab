@@ -7,8 +7,13 @@ metadata:
   labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
   annotations:
     # Helm hook annotations
-    "helm.sh/hook": "pre-install,pre-upgrade"
-    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+    # "helm.sh/hook": "pre-install,pre-upgrade"
+    # "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+    # Argocd hook annotations
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/hook-retry: "2"
+    argocd.argoproj.io/sync-options: SkipOnNoMatch=true  
 spec:
   template:
     metadata:
