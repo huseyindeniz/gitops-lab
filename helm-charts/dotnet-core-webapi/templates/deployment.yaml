@@ -1,5 +1,10 @@
+{{ if eq .Values.strategy "standard" }}
 apiVersion: apps/v1
 kind: Deployment
+{{ else }}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+{{ end }}
 metadata:
   name: {{ include "dotnet-core-webapi.fullname" . }}-deployment
   namespace: {{ include "dotnet-core-webapi.namespace" . }}
@@ -49,3 +54,19 @@ spec:
             requests:
               cpu: {{ .Values.resources.app.requests.cpu }}
               memory: {{ .Values.resources.app.requests.memory }}
+{{- if eq .Values.strategy "bluegreen" }}
+  strategy:
+    blueGreen:
+      activeService: {{ include "dotnet-core-webapi.fullname" . }}-active
+      previewService: {{ include "dotnet-core-webapi.fullname" . }}-preview
+      autoPromotionEnabled: {{ .Values.blueGreen.autoPromotionEnabled }}
+      autoPromotionSeconds: {{ .Values.blueGreen.autoPromotionSeconds }}
+      previewReplicaCount: {{ .Values.blueGreen.previewReplicaCount }}
+{{- else if eq .Values.strategy "canary" }}
+  strategy:
+    canary:
+      steps:
+{{- range .Values.canary.steps }}
+        - {{ toYaml . | nindent 10 }}
+{{- end }}
+{{- end }}
