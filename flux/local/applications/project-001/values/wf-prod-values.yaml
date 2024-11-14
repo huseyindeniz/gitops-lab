@@ -60,7 +60,7 @@ service:
   annotations: {}                   # Optional, e.g., annotations for load balancers or service meshes
 
 ingress:
-  enabled: true
+  enabled: false
   annotations: {}                       # Add any specific annotations
   tls: false                            # Toggle for enabling TLS
   tlsSecret: ""                         # Specify TLS secret if TLS is enabled
