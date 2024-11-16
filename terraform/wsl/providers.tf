@@ -1,7 +1,7 @@
 # providers.tf for shared providers config
 
 provider "kubernetes" {
-  host           = "https://127.0.0.1:54962"
+  host           = "https://127.0.0.1:52289"
   config_path    = var.kubeconfig_path
   config_context = var.kubeconfig_context
 }
