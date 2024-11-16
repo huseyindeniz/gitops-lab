@@ -47,7 +47,7 @@ The primary objective of this repository is to build a robust GitOps playground,
 - 🔲 rollback scenario
 - 🔲 conflicting migration scenario
 - ✅ huge and/or busy db migration scenario
-- 🔲 gpu/ai training/inference pipeline scenario
+- ✅ gpu support for ai/ml training/inference pipeline scenario
 - ✅ monitoring (prometheus + grafana)
 - ✅ Install/Configure argo-rollouts
 - ✅ canary prod deployment setup
@@ -107,6 +107,10 @@ If EF Core bundles supported a target migration option like dotnet ef database u
 ![Canary Deployment 2](./docs/images/screenshots/canary-002.png)
 
 ![Canary Deployment 3](./docs/images/screenshots/canary-003.png)
+
+### GPU Support
+
+![GPU Support](./docs/images/screenshots/gpu-001.png)
 
 ### Sample Prometheus+Grafana Dashboard
 
