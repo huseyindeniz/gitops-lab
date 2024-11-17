@@ -16,7 +16,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
   - Multi-staging environments and production rollouts (blue-green and canary) using Argo Rollouts and Helm
   - Automated database migrations and easy rollback mechanisms
   - Support for GPU-based workloads and AI/ML pipelines
-  - Multi-cloud deployments (AWS, AKS, GKE, DOKS) with Terraform and Kubernetes manifests
+  - Multi-cloud deployments (AKS, EKS, GKE, DOKS) with Terraform and Kubernetes manifests
 
 - **Enhanced Observability**:  
   Monitor deployments and performance with Prometheus and Grafana.
@@ -59,15 +59,15 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 - **Install and Configure CLI Tools**:
 
-  - ✅ AWS CLI
-  - ✅ Azure CLI
+  - ✅ aws CLI
+  - ✅ az CLI
   - ✅ gcloud CLI
   - 🔲 doctl CLI
 
 - **Integrate CLI Tools with `kubectl`**:
 
-  - ✅ Configure AWS CLI in `kubectl` profiles
-  - ✅ Configure Azure CLI in `kubectl` profiles
+  - ✅ Configure aws CLI in `kubectl` profiles
+  - ✅ Configure az CLI in `kubectl` profiles
   - ✅ Configure gcloud CLI in `kubectl` profiles
   - 🔲 Configure doctl CLI in `kubectl` profiles
 
@@ -75,7 +75,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
   - ✅ Create Minikube Windows cluster(Local)
   - ✅ Create Minikube WSL cluster (GPU support enabled)(Local)
-  - ✅ Create AWS cluster (VPC and cluster creation via Terraform)
+  - ✅ Create EKS cluster (VPC and cluster creation via Terraform)
   - ✅ Create AKS cluster (VPC and cluster creation via Terraform)
   - ✅ Create GKE cluster (VPC and cluster creation via Terraform)
   - 🔲 Create DOKS cluster (VPC and cluster creation via Terraform)
@@ -83,8 +83,8 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - **Integrate Clusters with ArgoCD**:
   - 🔲 Add Windows Minikube cluster to Local ArgoCD
   - 🔲 Install ArgoCD on DOKS (Remote ArgoCD)
-  - 🔲 Add AWS cluster to Remote ArgoCD
   - 🔲 Add AKS cluster to Remote ArgoCD
+  - 🔲 Add EKS cluster to Remote ArgoCD
   - 🔲 Add GKE cluster to Remote ArgoCD
 
 ### Enhanced Observability
