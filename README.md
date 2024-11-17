@@ -104,6 +104,16 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 - ✅ GPU support for AI/ML training and inference pipelines
 
+### Blockchain
+
+- 🔲 Deploy a stateful Avalanche Node on the cloud using Kubernetes StatefulSets.
+- 🔲 Deploy a stable Avalanche CLI environment on the cloud, accessible via SSH for managing Avalanche Subnets and network operations.
+
+### Gaming
+
+- 🔲 Install Colyseus Server on the Kubernetes cluster to manage and deploy multiplayer game servers.
+- 🔲 Deploy a Phaser 3 game that uses the Colyseus client to interact with the Colyseus server for proper testing and demonstration of multiplayer functionality.
+
 ## Note on Database Migrations in Kubernetes
 
 Handling database migrations in Kubernetes was initially challenging due to the lack of built-in mechanisms to enforce dependency order between deployments. To address this, I now use **Argo CD hooks** to run migrations before application pods are updated, ensuring the database schema is always in sync with the application.
@@ -191,3 +201,4 @@ dotnet ef migrations add <MigrationName> --project ./mySampleApp1.weatherForecas
 - [BDD notes](https://github.com/huseyindeniz/gitops-lab/wiki/BDD)
 - [AI/ML Workloads notes](https://github.com/huseyindeniz/gitops-lab/wiki/AI-ML-Workloads)
 - [Blockchain notes](https://github.com/huseyindeniz/gitops-lab/wiki/Blockchain)
+- [Colyseus notes](https://github.com/huseyindeniz/gitops-lab/wiki/Colyseus)
