@@ -103,6 +103,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 ### AI/ML Support
 
 - ✅ GPU support for AI/ML training and inference pipelines
+- 🔲 Include a sample AI/ML application that demonstrates both training and inference pipelines using GPU support.
 
 ### Blockchain
 
