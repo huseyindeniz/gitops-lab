@@ -167,3 +167,20 @@ dotnet ef migrations add <MigrationName> --project ./mySampleApp1.weatherForecas
 ### Automated DB Migration Pipeline Flow
 
 ![Automated DB Migration Pipeline](./docs/diagrams/docs/db-migration-flow.svg)
+
+## More Info
+
+- [Intro](https://github.com/huseyindeniz/gitops-lab/wiki)
+- [Kubernetes notes](https://github.com/huseyindeniz/gitops-lab/wiki/Kubernetes)
+- [Minikube notes](https://github.com/huseyindeniz/gitops-lab/wiki/Minikube)
+- [Terraform notes](https://github.com/huseyindeniz/gitops-lab/wiki/Terraform)
+- [Helm notes](https://github.com/huseyindeniz/gitops-lab/wiki/Helm)
+- [Argo CD notes](https://github.com/huseyindeniz/gitops-lab/wiki/Argo-CD)
+- [Argo Rollouts notes](https://github.com/huseyindeniz/gitops-lab/wiki/Argo-Rollouts)
+- [Argo Workflows notes](https://github.com/huseyindeniz/gitops-lab/wiki/Argo-Workflows)
+- [Flux notes](https://github.com/huseyindeniz/gitops-lab/wiki/Flux)
+- [Local env setup notes](https://github.com/huseyindeniz/gitops-lab/wiki/Local-Env)
+- [AKS setup notes](https://github.com/huseyindeniz/gitops-lab/wiki/AKS)
+- [EKS setup notes](https://github.com/huseyindeniz/gitops-lab/wiki/EKS)
+- [GKE setup notes](https://github.com/huseyindeniz/gitops-lab/wiki/GKE)
+- [DOKS setup notes](https://github.com/huseyindeniz/gitops-lab/wiki/DOKS)
