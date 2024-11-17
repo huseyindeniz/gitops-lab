@@ -28,10 +28,10 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ### Install and Configure Tools
 
-- ✅ Minikube
+- ✅ Minikube (Windows cluster and WSL cluster with GPU support)
 - ✅ Terraform
 - ✅ Helm
-- ✅ Argo CD
+- ✅ Local Argo CD (hosted on the WSL cluster)
 - ❌ Argo CD Image Updater ([awaiting namespace support](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
 - ✅ Flux for automated image updates
 - ✅ Argo Rollouts
@@ -57,10 +57,35 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ### Multi-Cloud Deployments
 
-- 🔲 AWS (VPC and cluster creation is ready)
-- 🔲 AKS (VPC and cluster creation is ready)
-- 🔲 GKE (VPC and cluster creation is ready)
-- 🔲 DOKS
+- **Install and Configure CLI Tools**:
+
+  - ✅ AWS CLI
+  - ✅ Azure CLI
+  - ✅ gcloud CLI
+  - 🔲 doctl CLI
+
+- **Integrate CLI Tools with `kubectl`**:
+
+  - ✅ Configure AWS CLI in `kubectl` profiles
+  - ✅ Configure Azure CLI in `kubectl` profiles
+  - ✅ Configure gcloud CLI in `kubectl` profiles
+  - 🔲 Configure doctl CLI in `kubectl` profiles
+
+- **Cluster Setup**:
+
+  - ✅ Create Minikube Windows cluster(Local)
+  - ✅ Create Minikube WSL cluster (GPU support enabled)(Local)
+  - ✅ Create AWS cluster (VPC and cluster creation via Terraform)
+  - ✅ Create AKS cluster (VPC and cluster creation via Terraform)
+  - ✅ Create GKE cluster (VPC and cluster creation via Terraform)
+  - 🔲 Create DOKS cluster (VPC and cluster creation via Terraform)
+
+- **Integrate Clusters with ArgoCD**:
+  - 🔲 Add Windows Minikube cluster to Local ArgoCD
+  - 🔲 Install ArgoCD on DOKS (Remote ArgoCD)
+  - 🔲 Add AWS cluster to Remote ArgoCD
+  - 🔲 Add AKS cluster to Remote ArgoCD
+  - 🔲 Add GKE cluster to Remote ArgoCD
 
 ### Enhanced Observability
 
