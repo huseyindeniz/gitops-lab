@@ -65,7 +65,7 @@ imageRepository:
 
 image:
   repository: "your-docker-repo/app-image"
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePolicy:
   namespace: "flux-system"
