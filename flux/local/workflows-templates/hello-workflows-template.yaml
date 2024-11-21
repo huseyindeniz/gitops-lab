@@ -24,7 +24,12 @@ spec:
       container:
         image: alpine:latest
         command: [echo]
-        args: ["Hello, World!"]
+        args: ["echo 'Hello, World!' > /tmp/hello.txt"]
+      outputs:
+        parameters:
+          - name: result
+            valueFrom:
+              path: /tmp/hello.txt
 
     - name: echo-date
       container:
