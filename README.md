@@ -157,6 +157,10 @@ A potential improvement would be for EF Core migration bundles to support target
 
 ![Canary Deployment 3](./docs/images/screenshots/canary-003.png)
 
+### Hello Argo Workflows
+
+![Hello Argo Workflows](./docs/images/screenshots/hello-workflows.gif)
+
 ### GPU Support
 
 ![GPU Support](./docs/images/screenshots/gpu-001.png)
