@@ -16,7 +16,7 @@ spec:
             template: echo-parallel
         - - name: conditional-step
             template: conditional-echo
-            when: "{{steps.hello.outputs.result}} == 'Hello, World!'"
+            when: "{{steps.hello.status}} == Succeeded"
         - - name: goodbye
             template: echo-goodbye
 
@@ -24,12 +24,7 @@ spec:
       container:
         image: alpine:latest
         command: [sh, -c]
-        args: ["echo 'Hello, World!' > /tmp/hello.txt"]
-      outputs:
-        parameters:
-          - name: result
-            valueFrom:
-              path: /tmp/hello.txt
+        args: ["echo 'Hello, World!'"]
 
     - name: echo-date
       container:
