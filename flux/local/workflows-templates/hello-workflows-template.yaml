@@ -16,7 +16,7 @@ spec:
             template: echo-parallel
         - - name: conditional-step
             template: conditional-echo
-            when: "{{steps.echo-hello.outputs.result}} == 'Hello, World!'"
+            when: "{{steps.hello.outputs.result}} == 'Hello, World!'"
         - - name: goodbye
             template: echo-goodbye
 
