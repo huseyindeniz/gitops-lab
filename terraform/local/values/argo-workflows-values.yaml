@@ -1,4 +1,6 @@
 server:
+  authModes:
+    - server
   ingress:
     enabled: true
     ingressClassName: nginx

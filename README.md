@@ -35,7 +35,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - ❌ Argo CD Image Updater ([awaiting namespace support](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
 - ✅ Flux for automated image updates
 - ✅ Argo Rollouts
-- 🔲 Argo Workflows
+- ✅ Argo Workflows
 
 ### Automate and Manage Infrastructure
 
