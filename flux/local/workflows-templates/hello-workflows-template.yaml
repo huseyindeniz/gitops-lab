@@ -12,9 +12,8 @@ spec:
             template: echo-hello
         - - name: print-date
             template: echo-date
-        - - name: parallel-step
+          - name: parallel-step
             template: echo-parallel
-            parallelism: 2
         - - name: conditional-step
             template: conditional-echo
             when: "{{steps.print-date.outputs.result}} == 'success'"
