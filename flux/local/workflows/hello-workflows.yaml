@@ -1,9 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Workflow
+kind: WorkflowTemplate
 metadata:
-  name: hello-workflows
+  name: hello-workflows-template
 spec:
-  suspend: true # suspend workflow execution. we'll run it from argo workflows ui
   entrypoint: hello-workflows
   templates:
     - name: hello-workflows
