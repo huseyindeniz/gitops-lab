@@ -7,6 +7,14 @@ output "argo_cd_local_admin_password" {
   sensitive   = true
 }
 
+
+# Output the Argo Workflows token
+output "argo_workflows_service_account_token" {
+  description = "The Argo Workflows token"
+  value       = data.kubernetes_secret.argo_workflows_token.data["token"]
+  sensitive   = true
+}
+
 output "project_001_weather_forecast_db_info" {
   value = {
     for env in var.env_names :

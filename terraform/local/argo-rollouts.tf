@@ -6,4 +6,5 @@ resource "helm_release" "argo_rollouts" {
   atomic          = true
   cleanup_on_fail = true
   values          = [file("${path.module}/values/argo-rollouts-values.yaml")]
+  depends_on      = [helm_release.argo_cd_local]
 }
