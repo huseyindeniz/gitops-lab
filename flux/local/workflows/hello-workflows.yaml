@@ -3,6 +3,7 @@ kind: Workflow
 metadata:
   name: hello-workflows
 spec:
+  suspend: true # suspend workflow execution. we'll run it from argo workflows ui
   entrypoint: hello-workflows
   templates:
     - name: hello-workflows
