@@ -23,7 +23,7 @@ spec:
     - name: echo-hello
       container:
         image: alpine:latest
-        command: [echo]
+        command: [sh, -c]
         args: ["echo 'Hello, World!' > /tmp/hello.txt"]
       outputs:
         parameters:
