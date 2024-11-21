@@ -11,7 +11,7 @@ resource "kubernetes_manifest" "argo_root_workflows" {
       "source" = {
         "repoURL"        = "https://github.com/huseyindeniz/cicd-lab.git"
         "targetRevision" = "main"
-        "path"           = "${var.flux_path}/workflows"
+        "path"           = "${var.flux_path}/workflows-templates"
         "directory" = {
           "recurse" = true
         }
