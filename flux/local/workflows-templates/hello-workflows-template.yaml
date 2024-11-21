@@ -12,6 +12,12 @@ spec:
             template: echo-hello
         - - name: print-date
             template: echo-date
+        - - name: parallel-step
+            template: echo-parallel
+            parallelism: 2
+        - - name: conditional-step
+            template: conditional-echo
+            when: "{{steps.print-date.outputs.result}} == 'success'"
         - - name: goodbye
             template: echo-goodbye
 
@@ -25,6 +31,18 @@ spec:
       container:
         image: alpine:latest
         command: [date]
+
+    - name: echo-parallel
+      container:
+        image: alpine:latest
+        command: [sh, -c]
+        args: ["echo 'Parallel step 1'; sleep 1"]
+
+    - name: conditional-echo
+      container:
+        image: alpine:latest
+        command: [echo]
+        args: ["Conditional step executed!"]
 
     - name: echo-goodbye
       container:
