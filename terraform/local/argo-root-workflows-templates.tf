@@ -3,7 +3,7 @@ resource "kubernetes_manifest" "argo_root_workflows" {
     "apiVersion" = "argoproj.io/v1alpha1"
     "kind"       = "Application"
     "metadata" = {
-      "name"      = "argo-root-workflows"
+      "name"      = "argo-root-workflows-templates"
       "namespace" = kubernetes_namespace.argo_cd_local.metadata[0].name
     }
     "spec" = {

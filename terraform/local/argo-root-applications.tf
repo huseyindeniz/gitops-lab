@@ -1,9 +1,9 @@
-resource "kubernetes_manifest" "app_of_apps" {
+resource "kubernetes_manifest" "argo_root_applications" {
   manifest = {
     "apiVersion" = "argoproj.io/v1alpha1"
     "kind"       = "Application"
     "metadata" = {
-      "name"      = "app-of-apps"
+      "name"      = "argo-root-applications"
       "namespace" = kubernetes_namespace.argo_cd_local.metadata[0].name
     }
     "spec" = {
