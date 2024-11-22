@@ -1,6 +1,6 @@
 # RANDOM PASSWORD
 resource "random_password" "project_001_weather_forecast_postgres_password" {
-  for_each = toset(var.env_names) # Generate a password for each environment
+  for_each = { for env in local.envs : env.name => env } # Generate a password for each environment
 
   length  = 16   # Length of the password
   special = true # Include special characters
@@ -11,15 +11,15 @@ resource "random_password" "project_001_weather_forecast_postgres_password" {
 
 # PASSWORD SECRET
 resource "kubernetes_secret" "project_001_weather_forecast_postgres_password_secret" {
-  for_each = toset(var.env_names) # Create a secret for each environment
+  for_each = { for env in local.envs : env.name => env } # Create a secret for each environment
 
   metadata {
-    name      = "postgres-password-${each.value}"                    # Name of the secret based on environment
-    namespace = "${local.project001weatherforecastns}-${each.value}" # Use the appropriate namespace
+    name      = "postgres-password-${each.value.name}"                    # Name of the secret based on environment
+    namespace = "${local.project001weatherforecastns}-${each.value.name}" # Use the appropriate namespace
   }
 
   data = {
-    POSTGRES_PASSWORD = base64encode(random_password.project_001_weather_forecast_postgres_password[each.value].result) # Reference the generated password
+    POSTGRES_PASSWORD = base64encode(random_password.project_001_weather_forecast_postgres_password[each.value.name].result) # Reference the generated password
   }
 
   type = "Opaque"
@@ -27,10 +27,10 @@ resource "kubernetes_secret" "project_001_weather_forecast_postgres_password_sec
 
 # PV
 resource "kubernetes_persistent_volume" "project_001_weather_forecast_postgres_pv" {
-  for_each = toset(var.env_names) # Iterate over environment names
+  for_each = { for env in local.envs : env.name => env } # Iterate over environment names
 
   metadata {
-    name = "${local.project001weatherforecastns}-postgres-pv-${each.value}" # Name the PV based on the environment
+    name = "${local.project001weatherforecastns}-postgres-pv-${each.value.name}" # Name the PV based on the environment
   }
 
   spec {
@@ -42,7 +42,7 @@ resource "kubernetes_persistent_volume" "project_001_weather_forecast_postgres_p
 
     persistent_volume_source {
       host_path {
-        path = "/mnt/data/postgres-${each.value}" # Path on the host for local development
+        path = "/mnt/data/postgres-${each.value.name}" # Path on the host for local development
       }
     }
 
@@ -55,11 +55,11 @@ resource "kubernetes_persistent_volume" "project_001_weather_forecast_postgres_p
 
 # PVC
 resource "kubernetes_persistent_volume_claim" "project_001_weather_forecast_postgres_pvc" {
-  for_each = toset(var.env_names) # Iterate over environment names
+  for_each = { for env in local.envs : env.name => env } # Iterate over environment names
 
   metadata {
-    name      = "${local.project001weatherforecastns}-postgres-pvc-${each.value}" # Name the PVC based on the environment
-    namespace = "${local.project001weatherforecastns}-${each.value}"              # Use the appropriate namespace
+    name      = "${local.project001weatherforecastns}-postgres-pvc-${each.value.name}" # Name the PVC based on the environment
+    namespace = "${local.project001weatherforecastns}-${each.value.name}"              # Use the appropriate namespace
   }
 
   spec {
@@ -78,10 +78,10 @@ resource "kubernetes_persistent_volume_claim" "project_001_weather_forecast_post
 }
 
 resource "helm_release" "project_001_weather_forecast_postgres" {
-  for_each = toset(var.env_names)
+  for_each = { for env in local.envs : env.name => env }
 
-  name            = "${local.project001weatherforecastns}-postgres-${each.value}"
-  namespace       = "${local.project001weatherforecastns}-${each.value}"
+  name            = "${local.project001weatherforecastns}-postgres-${each.value.name}"
+  namespace       = "${local.project001weatherforecastns}-${each.value.name}"
   repository      = "https://charts.bitnami.com/bitnami"
   chart           = "postgresql"
   version         = "12.1.10"
@@ -90,16 +90,16 @@ resource "helm_release" "project_001_weather_forecast_postgres" {
     yamlencode({
       primary = {
         persistence = {
-          existingClaim = "${local.project001weatherforecastns}-postgres-pvc-${each.value}"
+          existingClaim = "${local.project001weatherforecastns}-postgres-pvc-${each.value.name}"
         }
       }
       volumePermissions = {
         enabled = true
       }
       auth = {
-        username = "${local.project001weatherforecastns}-${each.value}-user"
-        password = base64encode(random_password.project_001_weather_forecast_postgres_password[each.value].result)
-        database = "${local.project001weatherforecastns}-${each.value}-db"
+        username = "${local.project001weatherforecastns}-${each.value.name}-user"
+        password = base64encode(random_password.project_001_weather_forecast_postgres_password[each.value.name].result)
+        database = "${local.project001weatherforecastns}-${each.value.name}-db"
       }
       service = {
         port = 5432

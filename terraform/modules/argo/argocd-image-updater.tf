@@ -3,7 +3,7 @@
 
 # resource "helm_release" "argocd_image_updater" {
 #   name       = "argocd-image-updater"
-#   namespace  = kubernetes_namespace.argo_cd_local.metadata[0].name
+#   namespace  = kubernetes_namespace.argo_cd.metadata[0].name
 #   repository = "https://argoproj.github.io/argo-helm"
 #   chart      = "argocd-image-updater"
 #   version    = "0.11.0" # Use the latest or preferred version

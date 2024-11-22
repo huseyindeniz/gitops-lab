@@ -10,34 +10,35 @@ variable "kubeconfig_context" {
   default = "test-cluster"
 }
 
-variable "flux_github_token" {
-  description = "Flux GitHub token"
-  sensitive   = true
+variable "argo_namespace" {
+  description = "The name of the Argo CD namespace"
   type        = string
-  default     = ""
+  default     = "argo-cd-local"
 }
 
 variable "flux_github_org" {
   description = "Flux GitHub organization"
   type        = string
-  default     = ""
+  default     = "huseyindeniz"
 }
 
 variable "flux_github_repository" {
   description = "Flux GitHub repository"
   type        = string
-  default     = ""
+  default     = "gitops-lab"
 }
 
 variable "flux_path" {
   description = "Flux path"
   type        = string
-  default     = ""
+  default     = "flux/local"
 }
 
-variable "env_names" {
-  description = "List of environment configurations for the project"
-  type        = list(string)
+variable "flux_github_token" {
+  description = "Flux GitHub token"
+  sensitive   = true
+  type        = string
+  default     = ""
 }
 
 variable "storage_size" {
@@ -49,12 +50,12 @@ variable "storage_size" {
 variable "db_name" {
   description = "Name of the PostgreSQL database"
   type        = string
-  default     = "mydatabase" # Default database name
+  default     = "" # Default database name
 }
 
 variable "db_user" {
   description = "User for the PostgreSQL database"
   type        = string
-  default     = "myuser" # Default database user
+  default     = "" # Default database user
 }
 

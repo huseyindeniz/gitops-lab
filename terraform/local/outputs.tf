@@ -1,27 +1,23 @@
-# outputs.tf for Argo CD
-
-# Output the Argo CD admin password
+# Access the outputs from the Argo module
 output "argo_cd_local_admin_password" {
   description = "The Argo CD initial admin password"
-  value       = data.kubernetes_secret.argo_cd_local_admin_secret.data["password"]
+  value       = module.argo.argo_cd_admin_password
   sensitive   = true
 }
 
-
-# Output the Argo Workflows token
 output "argo_workflows_service_account_token" {
   description = "The Argo Workflows token"
-  value       = data.kubernetes_secret.argo_workflows_token.data["token"]
+  value       = module.argo.argo_workflows_service_account_token
   sensitive   = true
 }
 
 output "project_001_weather_forecast_db_info" {
   value = {
-    for env in var.env_names :
-    env => {
-      db_name     = "${local.project001weatherforecastns}-${env}-db"
-      db_user     = "${local.project001weatherforecastns}_${env}-user"
-      db_password = random_password.project_001_weather_forecast_postgres_password[env].result
+    for env in local.envs :
+    env.name => {
+      db_name     = "${local.project001weatherforecastns}-${env.name}-db"
+      db_user     = "${local.project001weatherforecastns}_${env.name}-user"
+      db_password = random_password.project_001_weather_forecast_postgres_password[env.name].result
     }
   }
 

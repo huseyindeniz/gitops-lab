@@ -2,9 +2,9 @@ resource "helm_release" "argo_workflows" {
   name       = "argo-workflows"
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-workflows"
-  namespace  = kubernetes_namespace.argo_cd_local.metadata[0].name
-  values     = [file("${path.module}/values/argo-workflows-values.yaml")]
-  depends_on = [helm_release.argo_cd_local]
+  namespace  = kubernetes_namespace.argo_cd.metadata[0].name
+  values     = [file(var.argo_workflows_values_file)]
+  depends_on = [helm_release.argo_cd]
 }
 
 resource "kubernetes_cluster_role_binding" "argo_workflows_sa_binding" {
@@ -21,7 +21,7 @@ resource "kubernetes_cluster_role_binding" "argo_workflows_sa_binding" {
   subject {
     kind      = "ServiceAccount"
     name      = "argo-workflows-sa"
-    namespace = kubernetes_namespace.argo_cd_local.metadata[0].name
+    namespace = kubernetes_namespace.argo_cd.metadata[0].name
   }
 
   depends_on = [helm_release.argo_workflows]
@@ -30,7 +30,7 @@ resource "kubernetes_cluster_role_binding" "argo_workflows_sa_binding" {
 resource "kubernetes_secret" "argo_workflows_service_account_token" {
   metadata {
     name      = "argo-workflows.service-account-token"
-    namespace = kubernetes_namespace.argo_cd_local.metadata[0].name
+    namespace = kubernetes_namespace.argo_cd.metadata[0].name
     annotations = {
       "kubernetes.io/service-account.name" = "argo-workflows-sa"
     }
@@ -43,7 +43,7 @@ resource "kubernetes_secret" "argo_workflows_service_account_token" {
 data "kubernetes_secret" "argo_workflows_token" {
   metadata {
     name      = "argo-workflows.service-account-token"
-    namespace = kubernetes_namespace.argo_cd_local.metadata[0].name
+    namespace = kubernetes_namespace.argo_cd.metadata[0].name
   }
-  depends_on = [helm_release.argo_workflows]
+  depends_on = [kubernetes_secret.argo_workflows_service_account_token]
 }

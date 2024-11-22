@@ -4,7 +4,7 @@ resource "kubernetes_manifest" "argo_root_workflows" {
     "kind"       = "Application"
     "metadata" = {
       "name"      = "argo-root-workflows-templates"
-      "namespace" = kubernetes_namespace.argo_cd_local.metadata[0].name
+      "namespace" = var.argo_namespace
     }
     "spec" = {
       "project" = "default"
@@ -18,7 +18,7 @@ resource "kubernetes_manifest" "argo_root_workflows" {
       }
       "destination" = {
         "server"    = "https://kubernetes.default.svc"
-        "namespace" = kubernetes_namespace.argo_cd_local.metadata[0].name
+        "namespace" = var.argo_namespace
       }
       "syncPolicy" = {
         "automated" = {
@@ -28,4 +28,5 @@ resource "kubernetes_manifest" "argo_root_workflows" {
       }
     }
   }
+  depends_on = [module.argo, flux_bootstrap_git.flux_bootstrap]
 }

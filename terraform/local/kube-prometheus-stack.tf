@@ -82,7 +82,7 @@ resource "helm_release" "prometheus" {
   create_namespace = false
 
   values = [
-    file("${path.module}/values/kube-prometheus-stack-values.yaml")
+    file("${path.root}/values/kube-prometheus-stack-values.yaml")
   ]
   depends_on = [kubernetes_persistent_volume_claim.prometheus_pvc, kubernetes_persistent_volume_claim.grafana_pvc]
 }
