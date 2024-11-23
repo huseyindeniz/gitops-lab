@@ -5,34 +5,24 @@ module "local_argo" {
   argo_rollouts_values_file  = "${path.module}/values/argo-rollouts-values.yaml"
   argo_workflows_values_file = "${path.module}/values/argo-workflows-values.yaml"
 
+  argo_cd_applications_source_repo_url    = "https://github.com/${var.flux_github_org}/${var.flux_github_repository}.git"
+  argo_cd_applications_source_repo_path   = "${var.flux_path}/applications"
+  argo_cd_applications_destination_server = "https://kubernetes.default.svc"
+
+  argo_workflows_templates_source_repo_url    = "https://github.com/${var.flux_github_org}/${var.flux_github_repository}.git"
+  argo_workflows_templates_source_repo_path   = "${var.flux_path}/workflows-templates"
+  argo_workflows_templates_destination_server = "https://kubernetes.default.svc"
+
   providers = {
     kubernetes = kubernetes
     helm       = helm
   }
 }
 
-# module "project001" {
-#   source                      = "../modules/project001"
-#   env_list                    = local.envs
-#   app_ns_prefix_project001_wf = "project-001-wf-local"
+module "project001" {
+  source                      = "../modules/project001"
+  env_list                    = local.envs
+  app_ns_prefix_project001_wf = "project-001-wf-local"
 
-#   depends_on = [module.local_argo]
-# }
-
-# resource "kubernetes_namespace" "project_001_weather_forecast_stag_3" {
-#   metadata {
-#     name = "project-001-wf-stag-3"
-#   }
-# }
-
-# module "project_001_wf_stag_3_postgresql" {
-#   source               = "../modules/postgresql"
-#   resources_prefix     = "project-001-wf-stag-3"
-#   postgresql_namespace = "project-001-wf-stag-3"
-#   db_name              = "db"
-#   db_user              = "user"
-#   db_port              = 5432
-#   storage_size         = "1Gi"
-#   pv_path              = "/mnt/data/project-001-wf-stag-3"
-#   depends_on           = [kubernetes_namespace.project_001_weather_forecast_stag_3]
-# }
+  depends_on = [module.local_argo.argo_cd_release]
+}

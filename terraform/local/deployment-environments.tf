@@ -15,11 +15,11 @@ resource "kubernetes_config_map" "deployment_environments" {
       },
       {
         name = "prod-bluegreen"
-        type = "prod"
+        type = "production"
       },
       {
         name = "prod-canary"
-        type = "prod"
+        type = "production"
       }
     ])
   }

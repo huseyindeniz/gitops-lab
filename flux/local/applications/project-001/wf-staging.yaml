@@ -10,7 +10,7 @@ spec:
           - configMap:
               name: weather_forecast_db_ready_environments
               namespace: project-001-weather-forecast
-              key: envName
+              key: environments
     - list:
         elements:
           - envName: stag-1

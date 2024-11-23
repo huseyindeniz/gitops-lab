@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "project_001_weather_forecast" {
   metadata {
-    name = "project-001-weather-forecast"
+    name = var.app_ns_prefix_project001_wf
   }
 }
 

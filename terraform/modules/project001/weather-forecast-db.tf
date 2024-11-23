@@ -17,15 +17,20 @@ module "weather_forecast_postgresql" {
 
 # Create ConfigMap after PostgreSQL is ready
 resource "kubernetes_config_map" "weather_forecast_db_ready_environments" {
-  for_each = module.weather_forecast_postgresql
-
   metadata {
-    name      = "${var.app_ns_prefix_project001_wf}-${each.key}-db-ready-environment" # Dynamic name based on environment
+    name      = "${var.app_ns_prefix_project001_wf}-db-ready-environments"
     namespace = var.app_ns_prefix_project001_wf
   }
 
   data = {
-    "envName" = each.key # Example key indicating the database is ready
+    environments = jsonencode(
+      [
+        for env, module_data in module.weather_forecast_postgresql :
+        {
+          envName = env
+        }
+      ]
+    )
   }
 
   depends_on = [
