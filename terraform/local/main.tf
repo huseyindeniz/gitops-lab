@@ -10,3 +10,21 @@ module "argo" {
     helm       = helm
   }
 }
+
+resource "kubernetes_namespace" "project_001_weather_forecast_stag_3" {
+  metadata {
+    name = "project-001-wf-stag-3"
+  }
+}
+
+# module "project_001_wf_stag_3_postgresql" {
+#   source               = "../modules/postgresql"
+#   resources_prefix     = "project-001-wf-stag-3"
+#   postgresql_namespace = "project-001-wf-stag-3"
+#   db_name              = "db"
+#   db_user              = "user"
+#   db_port              = 5432
+#   storage_size         = "1Gi"
+#   pv_path              = "/mnt/data/project-001-wf-stag-3"
+#   depends_on           = [kubernetes_namespace.project_001_weather_forecast_stag_3]
+# }

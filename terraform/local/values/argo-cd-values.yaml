@@ -10,19 +10,3 @@ server:
     type: ClusterIP
   extraArgs:
     - --insecure
-
-controller:
-  replicaCount: 1
-
-repoServer:
-  replicaCount: 1
-
-applicationSet:
-  enabled: true
-
-rbac:
-  policy: |
-    g, admin, role:admin
-
-crds:
-  install: true

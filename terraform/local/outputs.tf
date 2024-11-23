@@ -11,6 +11,12 @@ output "argo_workflows_service_account_token" {
   sensitive   = true
 }
 
+# output "project_001_weather_forecast_stag_3_db_info" {
+#   description = "Stag 3 postgre info"
+#   value       = module.project_001_wf_stag_3_postgresql.postgresql_db_info
+#   sensitive   = true
+# }
+
 output "project_001_weather_forecast_db_info" {
   value = {
     for env in local.envs :

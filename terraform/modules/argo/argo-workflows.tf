@@ -3,7 +3,10 @@ resource "helm_release" "argo_workflows" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-workflows"
   namespace  = kubernetes_namespace.argo_cd.metadata[0].name
-  values     = [file(var.argo_workflows_values_file)]
+  values = [
+    file("${path.module}/values/argo-workflows-values.yaml"),
+    var.argo_workflows_values_file != "" ? file(var.argo_workflows_values_file) : null
+  ]
   depends_on = [helm_release.argo_cd]
 }
 

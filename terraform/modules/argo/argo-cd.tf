@@ -5,7 +5,10 @@ resource "helm_release" "argo_cd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
   namespace  = kubernetes_namespace.argo_cd.metadata[0].name
-  values     = [file(var.argo_cd_values_file)]
+  values = [
+    file("${path.module}/values/argo-cd-values.yaml"),
+    var.argo_cd_values_file != "" ? file(var.argo_cd_values_file) : null
+  ]
   depends_on = [kubernetes_namespace.argo_cd]
 }
 
