@@ -3,16 +3,13 @@ kind: ApplicationSet
 metadata:
   name: project-001-weather-forecast-appset-staging
   namespace: argo-cd-local
-  annotations:
-    argocd.argoproj.io/skip-dry-run-on-application-set: "true"
 spec:
   generators:
     - list:
-        from:
-          - configMap:
-              name: weather_forecast_db_ready_environments
-              namespace: project-001-weather-forecast
-              key: environments
+        - configMap:
+            name: weather_forecast_db_ready_environments
+            namespace: project-001-weather-forecast
+            key: environments
     - list:
         elements:
           - envName: stag-1
