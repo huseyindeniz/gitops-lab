@@ -6,6 +6,7 @@ metadata:
 spec:
   generators:
     - list:
+      from:
         - configMap:
             name: weather_forecast_db_ready_environments
             namespace: project-001-weather-forecast
