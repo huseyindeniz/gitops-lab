@@ -6,64 +6,70 @@ metadata:
 spec:
   generators:
     - list:
+        from:
+          - configMap:
+              name: weather_forecast_db_ready_environments
+              namespace: project-001-weather-forecast
+              key: envName
+    - list:
         elements:
           - envName: prod-bluegreen
             servicePort: 6001
             servicePreviewPort: 6002
             host: "wf-prod-bg.local"
             strategy: "bluegreen" # standard, bluegreen, canary
-            imgTag: '20241114182338' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
-            imgMigrationTag: '20241114182250' # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
-            migrationAction: 'apply' # apply, reset, rollback 
+            imgTag: "20241114182338" # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
+            imgMigrationTag: "20241114182250" # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
+            migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: prod-canary
             servicePort: 6003
             servicePreviewPort: 6004
             host: "wf-prod-canary.local"
             strategy: "canary" # standard, bluegreen, canary
-            imgTag: '20241114193704' # {"$imagepolicy": "flux-system:weather-forecast-prod-canary-app-image-policy:tag"}
-            imgMigrationTag: '20241114193621' # {"$imagepolicy": "flux-system:weather-forecast-prod-canary-migration-image-policy:tag"}
-            migrationAction: 'apply' # apply, reset, rollback 
+            imgTag: "20241114193704" # {"$imagepolicy": "flux-system:weather-forecast-prod-canary-app-image-policy:tag"}
+            imgMigrationTag: "20241114193621" # {"$imagepolicy": "flux-system:weather-forecast-prod-canary-migration-image-policy:tag"}
+            migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: 'weather-forecast-{{.envName}}'
+      name: "weather-forecast-{{.envName}}"
     spec:
       project: default
       source:
         repoURL: https://github.com/huseyindeniz/cicd-lab.git
         targetRevision: main
-        path: 'helm-charts/dotnet-core-webapi'
+        path: "helm-charts/dotnet-core-webapi"
         helm:
           valueFiles:
             - values.yaml
             - $valuesRef/flux/local/applications/project-001/values/wf-prod-values.yaml
           valuesObject:
-            environment: '{{ .envName }}'
-            strategy: '{{ .strategy }}'
+            environment: "{{ .envName }}"
+            strategy: "{{ .strategy }}"
             service:
-              port: '{{ .servicePort }}'
-              previewPort: '{{ .servicePreviewPort }}'
+              port: "{{ .servicePort }}"
+              previewPort: "{{ .servicePreviewPort }}"
             ingress:
-              host: '{{ .host }}'
+              host: "{{ .host }}"
             image:
-              tag: '{{ .imgTag }}'
+              tag: "{{ .imgTag }}"
             migration:
-              tag: '{{ .imgMigrationTag }}'
+              tag: "{{ .imgMigrationTag }}"
               action: "{{ .migrationAction }}"
-              targetMigration: '{{ .targetMigration }}'
+              targetMigration: "{{ .targetMigration }}"
             database:
-              host: 'project-001-wf-postgres-{{ .envName }}-postgresql'
+              host: "project-001-wf-postgres-{{ .envName }}-postgresql"
               port: "5432"
-              name: 'project-001-wf-{{ .envName }}-db'
-              user: 'project-001-wf-{{ .envName }}-user'
-              secretName: 'postgres-password-{{ .envName }}'
+              name: "project-001-wf-{{ .envName }}-db"
+              user: "project-001-wf-{{ .envName }}-user"
+              secretName: "postgres-password-{{ .envName }}"
               passwordKey: "POSTGRES_PASSWORD"
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: 'project-001-weather-forecast-{{ .envName }}' # Use the environment suffix in the namespace
+        namespace: "project-001-weather-forecast-{{ .envName }}" # Use the environment suffix in the namespace
       syncPolicy:
         automated:
           prune: true

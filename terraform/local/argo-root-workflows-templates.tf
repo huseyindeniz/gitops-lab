@@ -28,5 +28,5 @@ resource "kubernetes_manifest" "argo_root_workflows" {
       }
     }
   }
-  depends_on = [module.argo, flux_bootstrap_git.flux_bootstrap]
+  depends_on = [module.local_argo, flux_bootstrap_git.flux_bootstrap]
 }

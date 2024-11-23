@@ -1,4 +1,4 @@
-module "argo" {
+module "local_argo" {
   source                     = "../modules/argo" # Reference to the argo module
   argo_namespace             = var.argo_namespace
   argo_cd_values_file        = "${path.module}/values/argo-cd-values.yaml"
@@ -11,11 +11,19 @@ module "argo" {
   }
 }
 
-resource "kubernetes_namespace" "project_001_weather_forecast_stag_3" {
-  metadata {
-    name = "project-001-wf-stag-3"
-  }
-}
+# module "project001" {
+#   source                      = "../modules/project001"
+#   env_list                    = local.envs
+#   app_ns_prefix_project001_wf = "project-001-wf-local"
+
+#   depends_on = [module.local_argo]
+# }
+
+# resource "kubernetes_namespace" "project_001_weather_forecast_stag_3" {
+#   metadata {
+#     name = "project-001-wf-stag-3"
+#   }
+# }
 
 # module "project_001_wf_stag_3_postgresql" {
 #   source               = "../modules/postgresql"
