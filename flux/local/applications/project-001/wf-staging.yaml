@@ -33,7 +33,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: "weather-forecast-{{.envName}}"
+      name: "project-001-wf-{{.envName}}"
     spec:
       project: default
       source:
