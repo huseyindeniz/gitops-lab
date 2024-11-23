@@ -19,7 +19,7 @@ provider "flux" {
   git = {
     url = "https://github.com/${var.flux_github_org}/${var.flux_github_repository}.git"
     http = {
-      username = "git" # This can be any string when using a personal access token
+      username = "Flux" # This can be any string when using a personal access token
       password = var.flux_github_token
     }
     branch = "main"
