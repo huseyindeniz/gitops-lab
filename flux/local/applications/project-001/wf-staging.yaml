@@ -43,7 +43,7 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - $valuesRef/flux/local/applications/project-001/values/wf-prod-values.yaml
+            - $valuesRef/flux/local/applications/project-001/values/wf-staging-values.yaml
           valuesObject:
             environment: "{{ .envName }}"
             strategy: "{{ .strategy }}"
