@@ -1,11 +1,11 @@
 environment: "prod"
-namespace: "project-001-wf" # Base namespace for deployments
+namespace: "project-001-wf-local" # Base namespace for deployments
 
 config:
   ASPNETCORE_ENVIRONMENT: "Development" # Add any application-specific configurations here
 
 argo:
-  repoURL: https://github.com/huseyindeniz/cicd-lab.git # Repository URL for your chart
+  repoURL: https://github.com/huseyindeniz/gitops-lab.git # Repository URL for your chart
   targetRevision: "main" # Git branch or tag to deploy
   chartPath: "helm-charts/dotnet-core-webapi" # Path to the chart directory in the repo
   server: "https://kubernetes.default.svc"
@@ -91,11 +91,11 @@ imagePolicy:
 imageUpdateAutomation:
   namespace: "flux-system"
   interval: "5m0s"
-  gitRepository: "https://github.com/huseyindeniz/cicd-lab.git"
+  gitRepository: "https://github.com/huseyindeniz/gitops-lab.git"
   branch: "main"
   authorEmail: "huseyindenizkivrak@gmail.com"
   authorName: "Flux Automation Bot"
-  updatePath: "flux/local/applications/project-001/wf-prod.yaml" # Path for updates
+  updatePath: "flux/local/applications/project-001/wf-staging.yaml" # Path for updates
   strategy: "Setters"
 
 migration:
