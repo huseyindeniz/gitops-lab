@@ -2,7 +2,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: gpu-test-job
-  namespace: argo-cd-wsl
 spec:
   template:
     spec:
