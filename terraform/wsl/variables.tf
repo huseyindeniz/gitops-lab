@@ -7,7 +7,37 @@ variable "kubeconfig_path" {
 
 variable "kubeconfig_context" {
   type    = string
-  default = "minikube"
+  default = "wsl-cluster"
+}
+
+variable "argo_namespace" {
+  description = "The name of the Argo CD namespace"
+  type        = string
+  default     = "argo-cd-wsl"
+}
+
+variable "monitoring_namespace" {
+  description = "The name of the monitoring namespace"
+  type        = string
+  default     = "monitoring-wsl"
+}
+
+variable "flux_github_org" {
+  description = "Flux GitHub organization"
+  type        = string
+  default     = "huseyindeniz"
+}
+
+variable "flux_github_repository" {
+  description = "Flux GitHub repository"
+  type        = string
+  default     = "gitops-lab"
+}
+
+variable "flux_path" {
+  description = "Flux path"
+  type        = string
+  default     = "flux/wsl"
 }
 
 variable "flux_github_token" {
@@ -15,46 +45,5 @@ variable "flux_github_token" {
   sensitive   = true
   type        = string
   default     = ""
-}
-
-variable "flux_github_org" {
-  description = "Flux GitHub organization"
-  type        = string
-  default     = ""
-}
-
-variable "flux_github_repository" {
-  description = "Flux GitHub repository"
-  type        = string
-  default     = ""
-}
-
-variable "flux_path" {
-  description = "Flux path"
-  type        = string
-  default     = ""
-}
-
-variable "env_names" {
-  description = "List of environment configurations for the project"
-  type        = list(string)
-}
-
-variable "storage_size" {
-  description = "Size of the storage for the PostgreSQL database"
-  type        = string
-  default     = "1Gi"
-}
-
-variable "db_name" {
-  description = "Name of the PostgreSQL database"
-  type        = string
-  default     = "mydatabase" # Default database name
-}
-
-variable "db_user" {
-  description = "User for the PostgreSQL database"
-  type        = string
-  default     = "myuser" # Default database user
 }
 

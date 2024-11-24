@@ -1,29 +1,13 @@
 prometheus:
-  persistance:
-    enabled: true
-    existingClaim: prometheus_pvc
-  retention: 7d 
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
-      - prometheus.local
+      - prometheus.wsl
 grafana:
   adminPassword: 12345aA.
-  persistence:
-    enabled: true
-    existingClaim: grafana-pvc   
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
-      - grafana.local
-
-kubeStateMetrics:
-  enabled: true
-
-nodeExporter:
-  enabled: true
-
-alertmanager:
-  enabled: true
+      - grafana.wsl

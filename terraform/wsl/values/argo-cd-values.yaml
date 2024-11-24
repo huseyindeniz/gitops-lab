@@ -5,24 +5,8 @@ server:
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     pathType: Prefix
-    hostname: argocd.local
+    hostname: argocd.wsl
   service:
     type: ClusterIP
   extraArgs:
     - --insecure
-
-controller:
-  replicaCount: 1
-
-repoServer:
-  replicaCount: 1
-
-applicationSet:
-  enabled: true
-
-rbac:
-  policy: |
-    g, admin, role:admin
-
-crds:
-  install: true

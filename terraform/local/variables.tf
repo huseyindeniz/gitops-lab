@@ -7,19 +7,13 @@ variable "kubeconfig_path" {
 
 variable "kubeconfig_context" {
   type    = string
-  default = "test-cluster"
+  default = "local-cluster"
 }
 
 variable "argo_namespace" {
   description = "The name of the Argo CD namespace"
   type        = string
-  default     = "argo-cd-local"
-}
-
-variable "monitoring_namespace" {
-  description = "The name of the monitoring namespace"
-  type        = string
-  default     = "monitoring-local"
+  default     = "argo-cd-wsl"
 }
 
 variable "flux_github_org" {

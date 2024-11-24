@@ -8,7 +8,7 @@ server:
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
     hosts:
-      - argoworkflows.local
+      - argoworkflows.wsl
     paths:
       - /
     pathType: Prefix
