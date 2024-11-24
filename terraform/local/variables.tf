@@ -16,6 +16,12 @@ variable "argo_namespace" {
   default     = "argo-cd-local"
 }
 
+variable "monitoring_namespace" {
+  description = "The name of the monitoring namespace"
+  type        = string
+  default     = "monitoring-local"
+}
+
 variable "flux_github_org" {
   description = "Flux GitHub organization"
   type        = string

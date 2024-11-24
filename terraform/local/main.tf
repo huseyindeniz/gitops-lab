@@ -19,6 +19,24 @@ module "local_argo" {
   }
 }
 
+module "local_monitoring" {
+  source                            = "../modules/monitoring"
+  namespace                         = var.monitoring_namespace
+  kube_prometheus_stack_values_file = "${path.module}/values/kube-prometheus-stack-values.yaml"
+
+  prometheus_volume_config = {
+    storage_capacity = "2Gi"
+    storage_request  = "1Gi"
+    host_path        = "mnt/data/prometheus"
+  }
+
+  grafana_volume_config = {
+    storage_capacity = "2Gi"
+    storage_request  = "1Gi"
+    host_path        = "mnt/data/prometheus"
+  }
+}
+
 module "project001" {
   source                      = "../modules/project001"
   env_list                    = local.envs
