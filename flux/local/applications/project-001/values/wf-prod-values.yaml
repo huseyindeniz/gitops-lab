@@ -1,15 +1,15 @@
 environment: "prod"
-namespace: "project-001-wf"          # Base namespace for deployments
+namespace: "project-001-wf-local" # Base namespace for deployments
 
 config:
-  ASPNETCORE_ENVIRONMENT: "Development"   # Add any application-specific configurations here
+  ASPNETCORE_ENVIRONMENT: "Development" # Add any application-specific configurations here
 
 argo:
-  repoURL: https://github.com/huseyindeniz/cicd-lab.git  # Repository URL for your chart
-  targetRevision: "main"                            # Git branch or tag to deploy
-  chartPath: "helm-charts/dotnet-core-webapi"                        # Path to the chart directory in the repo
-  server: "https://kubernetes.default.svc" 
-  
+  repoURL: https://github.com/huseyindeniz/gitops-lab.git # Repository URL for your chart
+  targetRevision: "main" # Git branch or tag to deploy
+  chartPath: "helm-charts/dotnet-core-webapi" # Path to the chart directory in the repo
+  server: "https://kubernetes.default.svc"
+
 # Deployment configuration
 replicaCount: 2
 # Resource requests and limits (optional)
@@ -38,11 +38,11 @@ hpa:
   stabilizationWindowSeconds: 60
   scaleDownType: "Pods"
   scaleDownValue: 1
-  scaleDownPeriodSeconds: 60 
+  scaleDownPeriodSeconds: 60
   scaleUpType: "Percent"
   scaleUpValue: 100
   scaleUpPeriodSeconds: 15
-  
+
 vpa:
   enabled: true
   updateMode: "Auto"
@@ -54,16 +54,16 @@ vpa:
     memory: "4Gi"
 
 service:
-  type: LoadBalancer                # Options: ClusterIP, NodePort, LoadBalancer
-  port: 80                          # External port for the service
-  targetPort: 8080                  # Internal port the app listens on
-  annotations: {}                   # Optional, e.g., annotations for load balancers or service meshes
+  type: LoadBalancer # Options: ClusterIP, NodePort, LoadBalancer
+  port: 80 # External port for the service
+  targetPort: 8080 # Internal port the app listens on
+  annotations: {} # Optional, e.g., annotations for load balancers or service meshes
 
 ingress:
   enabled: true
-  annotations: {}                       # Add any specific annotations
-  tls: false                            # Toggle for enabling TLS
-  tlsSecret: ""                         # Specify TLS secret if TLS is enabled
+  annotations: {} # Add any specific annotations
+  tls: false # Toggle for enabling TLS
+  tlsSecret: "" # Specify TLS secret if TLS is enabled
 
 image:
   repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"
@@ -91,7 +91,7 @@ imagePolicy:
 imageUpdateAutomation:
   namespace: "flux-system"
   interval: "5m0s"
-  gitRepository: "https://github.com/huseyindeniz/cicd-lab.git"
+  gitRepository: "https://github.com/huseyindeniz/gitops-lab.git"
   branch: "main"
   authorEmail: "huseyindenizkivrak@gmail.com"
   authorName: "Flux Automation Bot"
@@ -127,9 +127,9 @@ blueGreen:
 canary:
   steps:
     - setWeight: 25
-    - pause: 
+    - pause:
         duration: 300
     - setWeight: 50
-    - pause: 
+    - pause:
         duration: 300
     - setWeight: 100
