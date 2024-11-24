@@ -1,32 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: project-001-weather-forecast-appset-staging
+  name: project-001-wf-local-appset-staging
   namespace: argo-cd-local
 spec:
   generators:
-    - list:
-      from:
-        - configMap:
-            name: weather_forecast_db_ready_environments
-            namespace: project-001-weather-forecast
-            key: environments
     - list:
         elements:
           - envName: stag-1
             servicePort: 5001
             host: "wf-stag-1.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "20241112181319" # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
-            imgMigrationTag: "20241112181220" # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
+            imgTag: "20241112181319" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-1-app-image-policy:tag"}
+            imgMigrationTag: "20241112181220" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-1-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
             servicePort: 5002
             host: "wf-stag-2.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "20241112181043" # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-app-image-policy:tag"}
-            imgMigrationTag: "20241112180957" # {"$imagepolicy": "flux-system:weather-forecast-prod-bluegreen-migration-image-policy:tag"}
+            imgTag: "20241112181043" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-2-app-image-policy:tag"}
+            imgMigrationTag: "20241112180957" # {"$imagepolicy": "flux-system:project-001-wf-local-prod-stag-2-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
@@ -37,7 +31,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/huseyindeniz/cicd-lab.git
+        repoURL: https://github.com/huseyindeniz/gitops-lab.git
         targetRevision: main
         path: "helm-charts/dotnet-core-webapi"
         helm:

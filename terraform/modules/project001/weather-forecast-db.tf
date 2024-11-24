@@ -34,7 +34,6 @@ resource "kubernetes_config_map" "weather_forecast_db_ready_environments" {
   }
 
   depends_on = [
-    module.weather_forecast_postgresql,
-    kubernetes_namespace.project_001_weather_forecast
+    module.weather_forecast_postgresql
   ]
 }
