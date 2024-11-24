@@ -3,11 +3,11 @@ prometheus:
     enabled: true
     ingressClassName: nginx
     hosts:
-      - prometheus.wsl
+      - prometheus.local
 grafana:
   adminPassword: 12345aA.
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
-      - grafana.wsl
+      - grafana.local

@@ -13,7 +13,13 @@ variable "kubeconfig_context" {
 variable "argo_namespace" {
   description = "The name of the Argo CD namespace"
   type        = string
-  default     = "argo-cd-wsl"
+  default     = "argo-cd-local"
+}
+
+variable "monitoring_namespace" {
+  description = "The name of the monitoring namespace"
+  type        = string
+  default     = "monitoring-local"
 }
 
 variable "flux_github_org" {

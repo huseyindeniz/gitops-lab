@@ -1,16 +1,12 @@
 server:
-  authModes:
-    - server
-    - client
   ingress:
     enabled: true
     ingressClassName: nginx
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    hosts:
-      - argoworkflows.wsl
-    paths:
-      - /
     pathType: Prefix
-    tls: []
-  serviceType: ClusterIP
+    hostname: argocd.local
+  service:
+    type: ClusterIP
+  extraArgs:
+    - --insecure

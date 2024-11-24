@@ -1,7 +1,7 @@
 # helm repo add argo https://argoproj.github.io/argo-helm
 # helm repo update
 resource "helm_release" "argo_cd" {
-  name       = "argo-cd-local"
+  name       = "argo-cd-wsl"
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
   namespace  = kubernetes_namespace.argo_cd.metadata[0].name

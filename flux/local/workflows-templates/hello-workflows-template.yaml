@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
   name: hello-workflows-template
-  namespace: argo-cd-wsl
+  namespace: argo-cd-local
 spec:
   entrypoint: hello-workflows
   templates:
