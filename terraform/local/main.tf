@@ -34,18 +34,15 @@ module "local_monitoring" {
   }
 }
 
-# module "project001" {
-#   source                      = "../modules/project001"
-#   env_list                    = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
-#   app_ns_prefix_project001_wf = "project-001-wf-local"
+module "project001" {
+  source                      = "../modules/project001"
+  env_list                    = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
+  app_ns_prefix_project001_wf = "project-001-wf-local"
 
-#   providers = {
-#     kubernetes = kubernetes
-#     helm       = helm
-#   }
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+  }
 
-#   depends_on = [
-#     kubernetes_manifest.argo_root_applications,
-#     data.kubernetes_config_map.deployment_environments
-#   ]
-# }
+  depends_on = [data.kubernetes_config_map.deployment_environments]
+}

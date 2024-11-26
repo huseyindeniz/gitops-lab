@@ -1,0 +1,1 @@
+minikube unpause -p wsl-cluster
