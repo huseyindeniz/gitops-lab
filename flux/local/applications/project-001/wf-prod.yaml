@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: project-001-wf-local-appset-prod
-  namespace: argo-cd-local
+  namespace: argo-local
 spec:
   generators:
     - list:

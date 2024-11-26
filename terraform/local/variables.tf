@@ -13,7 +13,7 @@ variable "kubeconfig_context" {
 variable "argo_namespace" {
   description = "The name of the Argo CD namespace"
   type        = string
-  default     = "argo-cd-local"
+  default     = "argo-local"
 }
 
 variable "monitoring_namespace" {

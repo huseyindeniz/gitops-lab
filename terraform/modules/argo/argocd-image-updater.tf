@@ -13,7 +13,7 @@
 #       config = {
 #         argocd = {
 #           # Set the server address for Argo CD, matching the internal ClusterIP
-#           serverAddress = "http://argo-cd-local-argocd-server.argo-cd-local.svc.cluster.local:80"
+#           serverAddress = "http://argo-local-argocd-server.argo-local.svc.cluster.local:80"
 #           insecure      = true
 #           plaintext     = true
 #         }
