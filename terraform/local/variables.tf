@@ -44,24 +44,10 @@ variable "flux_github_token" {
   description = "Flux GitHub token"
   sensitive   = true
   type        = string
-  default     = ""
 }
 
-variable "storage_size" {
-  description = "Size of the storage for the PostgreSQL database"
+variable "wsl_cluster_bearer_token" {
+  description = "WSL Cluster Bearer Token"
+  sensitive   = true
   type        = string
-  default     = "1Gi"
 }
-
-variable "db_name" {
-  description = "Name of the PostgreSQL database"
-  type        = string
-  default     = "" # Default database name
-}
-
-variable "db_user" {
-  description = "User for the PostgreSQL database"
-  type        = string
-  default     = "" # Default database user
-}
-

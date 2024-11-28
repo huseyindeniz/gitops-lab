@@ -22,5 +22,9 @@ terraform {
       source  = "integrations/github"
       version = ">= 6.1"
     }
+    argocd = {
+      source  = "argoproj-labs/argocd"
+      version = "7.1.0"
+    }
   }
 }

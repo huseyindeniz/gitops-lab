@@ -30,3 +30,10 @@ provider "github" {
   owner = var.flux_github_org
   token = var.flux_github_token
 }
+
+provider "argocd" {
+  server_addr = "argocd.local"
+  username    = "admin"
+  password    = module.local_argo.argo_cd_admin_password
+  insecure    = true
+}
