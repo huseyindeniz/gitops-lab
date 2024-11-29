@@ -31,7 +31,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - ✅ Minikube (Windows cluster and WSL cluster with GPU support)
 - ✅ Terraform
 - ✅ Helm
-- ✅ Local Argo CD (hosted on the WSL cluster)
+- ✅ Local Argo CD
 - ❌ Argo CD Image Updater ([awaiting namespace support](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
 - ✅ Flux for automated image updates
 - ✅ Argo Rollouts
@@ -74,14 +74,14 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - **Cluster Setup**:
 
   - ✅ Create Minikube Windows cluster(Local)
-  - ✅ Create Minikube WSL cluster (GPU support enabled)(Local)
+  - ✅ Create Minikube WSL cluster (GPU support enabled)
   - ✅ Create EKS cluster (VPC and cluster creation via Terraform)
   - ✅ Create AKS cluster (VPC and cluster creation via Terraform)
   - ✅ Create GKE cluster (VPC and cluster creation via Terraform)
   - 🔲 Create DOKS cluster (VPC and cluster creation via Terraform)
 
 - **Integrate Clusters with ArgoCD**:
-  - 🔲 Add Windows Minikube cluster to Local ArgoCD
+  - ✅ Add WSL Minikube cluster to Local ArgoCD
   - 🔲 Install ArgoCD on DOKS (Remote ArgoCD)
   - 🔲 Add AKS cluster to Remote ArgoCD
   - 🔲 Add EKS cluster to Remote ArgoCD
