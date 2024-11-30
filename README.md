@@ -121,14 +121,6 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - 🔲 Install Colyseus Server on the Kubernetes cluster to manage and deploy multiplayer game servers.
 - 🔲 Deploy a Phaser 3 game that uses the Colyseus client to interact with the Colyseus server for proper testing and demonstration of multiplayer functionality.
 
-## Note on Database Migrations in Kubernetes
-
-Handling database migrations in Kubernetes was initially challenging due to the lack of built-in mechanisms to enforce dependency order between deployments. To address this, I now use **Argo CD hooks** to run migrations before application pods are updated, ensuring the database schema is always in sync with the application.
-
-While the solution works effectively, some limitations remain. For example, migrations are triggered with every resource update in the application, which can be time-consuming due to the need to rebuild the solution for each run. Despite this, the process is idempotent, ensuring database integrity without causing conflicts.
-
-A potential improvement would be for EF Core migration bundles to support targeting specific migrations without requiring a full build. This would streamline the process and reduce delays, making it a valuable feature for future updates.
-
 ## Demonstrations and Scenarios
 
 ### ArgoCD Overview
@@ -188,6 +180,14 @@ dotnet ef migrations add <MigrationName> --project ./mySampleApp1.weatherForecas
 ### Automated DB Migration Pipeline Flow
 
 ![Automated DB Migration Pipeline](./docs/diagrams/docs/db-migration-flow.svg)
+
+### Note on Database Migrations in Kubernetes
+
+Handling database migrations in Kubernetes was initially challenging due to the lack of built-in mechanisms to enforce dependency order between deployments. To address this, I now use **Argo CD hooks** to run migrations before application pods are updated, ensuring the database schema is always in sync with the application.
+
+While the solution works effectively, some limitations remain. For example, migrations are triggered with every resource update in the application, which can be time-consuming due to the need to rebuild the solution for each run. Despite this, the process is idempotent, ensuring database integrity without causing conflicts.
+
+A potential improvement would be for EF Core migration bundles to support targeting specific migrations without requiring a full build. This would streamline the process and reduce delays, making it a valuable feature for future updates.
 
 ## More Info
 
