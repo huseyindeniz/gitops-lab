@@ -11,4 +11,4 @@ minikube addons enable ingress -p local-cluster
 # Prompt the user to run the Minikube tunnel
 echo "Cluster setup is complete."
 echo "Run 'minikube tunnel -p local-cluster' to start the Minikube tunnel if needed."
-echo "Run 'minikube dashboard -p wsl-cluster' to access kubernetes dashboard"
+echo "Run 'minikube dashboard -p local-cluster' to access kubernetes dashboard"

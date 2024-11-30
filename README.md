@@ -24,6 +24,18 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - **Load Testing**:  
   Validate system resilience and scalability under heavy traffic.
 
+## Tools
+
+| **Tool Name**      | **Classification**                    | **Use Case**                                                                               |
+| ------------------ | ------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Argo CD**        | Kubernetes Operator (GitOps)          | Synchronizes Kubernetes applications with Git repositories (declarative deployment)        |
+| **Terraform**      | Infrastructure as Code (IaC)          | Manages Kubernetes resources and cloud infrastructure (provisioning, lifecycle management) |
+| **Argo Rollouts**  | Deployment Strategies                 | Manages advanced deployment strategies (e.g., canary, blue-green) in Kubernetes            |
+| **Flux**           | Continuous Deployment                 | Automates container image tag updates in Git repositories                                  |
+| **Helm**           | Application Packaging                 | Manages Kubernetes applications with packaged charts (configurable, reusable deployments)  |
+| **GitHub Actions** | CI/CD Pipelines (Build, Test, Deploy) | Automates CI workflows for unit tests, integration tests, PR policies, etc.                |
+| **Argo Workflows** | CI/CD Pipeline Orchestration          | Orchestrates and manages multi-step, complex workflows across CI/CD pipelines              |
+
 ## TODO
 
 ### Install and Configure Tools
