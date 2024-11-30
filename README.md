@@ -40,18 +40,37 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ### Install and Configure Tools
 
-- ✅ Minikube (Windows cluster and WSL cluster with GPU support)
-- ✅ Terraform
-- ✅ Helm
-- ✅ Local Argo CD
-- ❌ Argo CD Image Updater ([awaiting namespace support](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
-- ✅ Flux for automated image updates
-- ✅ Argo Rollouts
-- ✅ Argo Workflows
+- ✅ Minikube (windows and wsl)
+- ✅ Terraform (windows and wsl)
+- ✅ Helm (windows and wsl)
+- ✅ aws CLI (on windows)
+- ✅ az CLI (on windows)
+- ✅ gcloud CLI (on windows)
+- 🔲 doctl CLI (on windows)
+
+- **Cluster Setup**:
+
+  - ✅ Create local-cluster via windows minikube
+  - ✅ Create wsl-cluster via wsl minikube
+  - ✅ Configure aws CLI in `kubectl` profiles
+  - ✅ Configure az CLI in `kubectl` profiles
+  - ✅ Configure gcloud CLI in `kubectl` profiles
+  - 🔲 Configure doctl CLI in `kubectl` profiles
+  - ✅ Create EKS cluster (VPC and cluster creation via Terraform)
+  - ✅ Create AKS cluster (VPC and cluster creation via Terraform)
+  - ✅ Create GKE cluster (VPC and cluster creation via Terraform)
+  - 🔲 Create DOKS cluster (VPC and cluster creation via Terraform)
 
 ### Automate and Manage Infrastructure
 
-- ✅ Create/Configure **app of apps/root app** in Argo CD
+- ✅ Install Argo CD (on local-cluster)
+- ❌ Argo CD Image Updater ([awaiting namespace support](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
+- ✅ Install Flux for automated image updates (on local-cluster)
+- ✅ Install Argo Rollouts (on local-cluster)
+- ✅ Install Argo Workflows (on local-cluster)
+- ✅ Create/Configure **app of apps/root app** for applications in Argo CD
+- ✅ Create/Configure **app of apps/root app** for workflow templates in Argo CD
+- ✅ Create/Configure **app of apps/root app** for wsl applications in Argo CD
 - ✅ Create/Configure application set manifest for a sample app
 - ✅ Create/Configure a generic .NET app Helm chart and use it for a service in the sample app
 - ✅ Configure GitHub Actions for CI/CD
@@ -67,34 +86,9 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - 🔲 Address and test conflicting database migration scenarios
 - 🔲 Configure Argo Workflows for orchestrating CI/CD processes
 
-### Multi-Cloud Deployments
-
-- **Install and Configure CLI Tools**:
-
-  - ✅ aws CLI
-  - ✅ az CLI
-  - ✅ gcloud CLI
-  - 🔲 doctl CLI
-
-- **Integrate CLI Tools with `kubectl`**:
-
-  - ✅ Configure aws CLI in `kubectl` profiles
-  - ✅ Configure az CLI in `kubectl` profiles
-  - ✅ Configure gcloud CLI in `kubectl` profiles
-  - 🔲 Configure doctl CLI in `kubectl` profiles
-
-- **Cluster Setup**:
-
-  - ✅ Create Minikube Windows cluster(Local)
-  - ✅ Create Minikube WSL cluster (GPU support enabled)
-  - ✅ Create EKS cluster (VPC and cluster creation via Terraform)
-  - ✅ Create AKS cluster (VPC and cluster creation via Terraform)
-  - ✅ Create GKE cluster (VPC and cluster creation via Terraform)
-  - 🔲 Create DOKS cluster (VPC and cluster creation via Terraform)
-
 - **Integrate Clusters with ArgoCD**:
-  - ✅ Add WSL Minikube cluster to Local ArgoCD
-  - 🔲 Install ArgoCD on DOKS (Remote ArgoCD)
+  - ✅ Add wsl-cluster to Argo
+  - 🔲 Install Argo CD on DOKS (Remote ArgoCD)
   - 🔲 Add AKS cluster to Remote ArgoCD
   - 🔲 Add EKS cluster to Remote ArgoCD
   - 🔲 Add GKE cluster to Remote ArgoCD
