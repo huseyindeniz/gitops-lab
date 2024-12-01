@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs", // Use commonjs for compatibility with Node.js
+    "target": "ES6", // Target ES6 for modern JavaScript
+    "esModuleInterop": true, // Ensure compatibility with non-ES6 modules
+    "moduleResolution": "node", // Use Node.js module resolution
+    "strict": true, // Enable strict type checking
+    "skipLibCheck": true, // Skip type checking for library files
+    "forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+    "outDir": "./dist", // Output compiled JavaScript files to the 'dist' folder
+    "allowJs": true // Allow JavaScript files alongside TypeScript files
+  },
+  "include": [
+    "**/*.ts" // Include all TypeScript files in the 'tests' directory
+  ]
+}

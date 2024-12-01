@@ -6,7 +6,7 @@ services:
   migration-bundle:
     build:
       context: .
-      dockerfile: migration-bundle/Dockerfile
+      dockerfile: migration-bundle/weather-forecast/Dockerfile
     image: ${DOCKER_REGISTRY-}my-sample-app-1-migration-bundle:latest
     container_name: my-sample-app-1-migration-bundle
 

@@ -23,6 +23,8 @@ namespace mySampleApp1.weatherForecast.API.Controllers
         }
 
         [HttpGet(Name = "GetAllWeatherForecasts")]
+        [ProducesResponseType(typeof(IEnumerable<WeatherForecastViewModel>), StatusCodes.Status200OK)] // For successful retrieval
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For server errors
         public async Task<ActionResult<IEnumerable<WeatherForecastViewModel>>> GetAll()
         {
             var forecasts = await _weatherForecastService.GetAllForecastsAsync();
@@ -31,6 +33,9 @@ namespace mySampleApp1.weatherForecast.API.Controllers
         }
 
         [HttpGet("{id}", Name = "GetWeatherForecastById")]
+        [ProducesResponseType(typeof(WeatherForecastViewModel), StatusCodes.Status200OK)] // For successful retrieval
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // When the forecast is not found
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For server errors
         public async Task<ActionResult<WeatherForecastViewModel>> GetById(int id)
         {
             var forecast = await _weatherForecastService.GetForecastByIdAsync(id);
@@ -42,6 +47,9 @@ namespace mySampleApp1.weatherForecast.API.Controllers
         }
 
         [HttpPost(Name = "CreateWeatherForecast")]
+        [ProducesResponseType(typeof(WeatherForecastResponseModel), StatusCodes.Status201Created)] // For successful creation
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] // For invalid input
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For server errors
         public async Task<ActionResult> Create([FromBody] WeatherForecastCreateOrUpdateModel model)
         {
             if (!ModelState.IsValid)
@@ -49,10 +57,23 @@ namespace mySampleApp1.weatherForecast.API.Controllers
 
             var forecastDTO = _mapper.Map<WeatherForecastDTO>(model);
             var forecastId = await _weatherForecastService.AddForecastAsync(forecastDTO);
-            return CreatedAtRoute("GetWeatherForecastById", new { id = forecastId }, model);
+
+            var response = new WeatherForecastResponseModel
+            {
+                Id = forecastId,
+                Date = model.Date,
+                TemperatureC = model.TemperatureC,
+                Summary = model.Summary
+            };
+
+            return CreatedAtRoute("GetWeatherForecastById", new { id = forecastId }, response);
         }
 
         [HttpPut("{id}", Name = "UpdateWeatherForecast")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)] // For successful update
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] // For invalid input
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // When the forecast is not found
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For server errors
         public async Task<ActionResult> Update(int id, [FromBody] WeatherForecastCreateOrUpdateModel model)
         {
             if (!ModelState.IsValid)
@@ -69,6 +90,9 @@ namespace mySampleApp1.weatherForecast.API.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteWeatherForecast")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)] // For successful deletion
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // When the forecast is not found
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For server errors
         public async Task<ActionResult> Delete(int id)
         {
             var existingForecast = await _weatherForecastService.GetForecastByIdAsync(id);

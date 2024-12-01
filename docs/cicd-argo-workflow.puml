@@ -1,0 +1,54 @@
+@startuml
+title "Staging Deployment CI/CD Pipeline via Argo Workflows State Diagram"
+
+' Define states
+state IDLE : System is idle, waiting for actions
+state WORKFLOW_PENDING_START : PR created, waiting for workflow start
+state WORKFLOW_STARTING : Argo Workflows starting workflow
+state PR_POLICY_CHECKING : Argo Workflows checking PR policy
+state PR_POLICY_FAILED : PR policy check failed
+state PR_POLICY_PASSED : PR policy check passed
+state UNIT_TESTS_RUNNING : GitHub Actions running unit tests (triggered by Argo Workflows)
+state UNIT_TESTS_FAILED : Unit tests failed
+state INTEGRATION_TESTS_RUNNING : GitHub Actions running integration tests (triggered by Argo Workflows)
+state INTEGRATION_TESTS_FAILED : Integration tests failed
+state TESTS_PASSED : All tests passed
+state IMAGE_PUBLISHING : GitHub Actions publishing Docker image
+state DEPLOYMENT_PENDING : Argo CD detecting new image
+state DEPLOYMENT_IN_PROGRESS : Argo CD deploying new version
+state DEPLOYMENT_SUCCESSFUL : Deployment completed successfully
+state BA_TESTS_RUNNING : Argo Workflows running BA tests
+state BA_TESTS_FAILED : BA tests failed
+state BA_TESTS_PASSED : BA tests passed
+state COMPLETED : PR staging deployment is successfull
+state WORKFLOW_CANCELLED : Workflow cancelled
+
+' Define the flow
+[*] --> IDLE
+IDLE --> WORKFLOW_PENDING_START : Developer creates a new PR
+WORKFLOW_PENDING_START --> WORKFLOW_STARTING : Developer starts workflow with environment name input
+WORKFLOW_STARTING --> PR_POLICY_CHECKING : Argo Workflows triggers PR policy check
+PR_POLICY_CHECKING --> PR_POLICY_FAILED : PR policy failed
+PR_POLICY_FAILED --> WORKFLOW_PENDING_START : Developer resolves issues and retries workflow
+PR_POLICY_CHECKING --> PR_POLICY_PASSED : PR policy passed
+PR_POLICY_PASSED --> UNIT_TESTS_RUNNING : Argo Workflows triggers GitHub Actions to run unit tests
+UNIT_TESTS_RUNNING --> UNIT_TESTS_FAILED : Unit tests failed
+UNIT_TESTS_FAILED --> UNIT_TESTS_RUNNING : Developer retries unit tests
+UNIT_TESTS_FAILED --> WORKFLOW_CANCELLED : Developer cancels the workflow
+UNIT_TESTS_RUNNING --> INTEGRATION_TESTS_RUNNING : Unit tests pass, trigger integration tests
+INTEGRATION_TESTS_RUNNING --> INTEGRATION_TESTS_FAILED : Integration tests failed
+INTEGRATION_TESTS_FAILED --> INTEGRATION_TESTS_RUNNING : Developer retries integration tests
+INTEGRATION_TESTS_FAILED --> WORKFLOW_CANCELLED : Developer cancels the workflow
+INTEGRATION_TESTS_RUNNING --> TESTS_PASSED : Integration tests pass
+TESTS_PASSED --> IMAGE_PUBLISHING : Argo Workflows triggers GitHub Actions to publish Docker image
+IMAGE_PUBLISHING --> DEPLOYMENT_PENDING : Argo CD detects new image
+DEPLOYMENT_PENDING --> DEPLOYMENT_IN_PROGRESS : Argo CD starts deployment
+DEPLOYMENT_IN_PROGRESS --> DEPLOYMENT_SUCCESSFUL : Deployment complete
+DEPLOYMENT_SUCCESSFUL --> BA_TESTS_RUNNING : Argo Workflows triggers BA tests
+BA_TESTS_RUNNING --> BA_TESTS_FAILED : BA tests failed
+BA_TESTS_FAILED --> BA_TESTS_RUNNING : Developer retries BA tests
+BA_TESTS_FAILED --> WORKFLOW_CANCELLED : Developer cancels the workflow
+BA_TESTS_RUNNING --> BA_TESTS_PASSED : BA tests pass
+BA_TESTS_PASSED --> COMPLETED : Workflow completes successfully
+
+@enduml

@@ -33,7 +33,7 @@ namespace mySampleApp1.weatherForecast.Infra.Repositories
             return await _context.Set<WeatherForecast>()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(wf => wf.Id == id);
-        }
+        }   
 
         public async Task AddAsync(WeatherForecast weatherForecast)
         {

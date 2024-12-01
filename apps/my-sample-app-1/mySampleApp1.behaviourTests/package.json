@@ -1,0 +1,24 @@
+{
+  "name": "mysampleapp1.behaviourtests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js test",
+    "test:local": "cross-env NODE_ENV=local cucumber-js test",
+    "test:docker": "cross-env NODE_ENV=docker cucumber-js test",
+    "test:stag-1": "cross-env NODE_ENV=stag-1 cucumber-js test",
+    "test:stag-2": "cross-env NODE_ENV=stag-2 cucumber-js test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.1.0",
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "ts-node": "^10.9.2"
+  }
+}
