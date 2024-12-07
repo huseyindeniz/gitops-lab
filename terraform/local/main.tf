@@ -1,3 +1,7 @@
+module "local_cert_manager" {
+  source = "../modules/cert-manager"
+}
+
 module "local_argo" {
   source                     = "../modules/argo" # Reference to the argo module
   argo_namespace             = var.argo_namespace
