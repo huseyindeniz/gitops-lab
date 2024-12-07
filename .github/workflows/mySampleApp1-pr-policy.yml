@@ -15,33 +15,42 @@ on:
 
 jobs:
   pr-policy:
-    name: PR Policy
+    name: PR Policy Check
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Check if Unit Tests Passed
         run: |
-          unit_tests_status=$(echo "${{ github.event.workflow_run.conclusion }}" | grep 'UnitTests')
-          if [[ "$unit_tests_status" != "success" ]]; then
-            echo "Unit Tests failed. Aborting."
-            exit 1
+          unit_tests_status="${{ github.event.workflow_run.workflow }}"
+          if [[ "$unit_tests_status" == "MySampleApp1 - UnitTests" ]]; then
+            if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
+              echo "Unit Tests failed. Aborting."
+              exit 1
+            fi
           fi
 
       - name: Check if Integration Tests Passed
         run: |
-          integration_tests_status=$(echo "${{ github.event.workflow_run.conclusion }}" | grep 'IntegrationTests')
-          if [[ "$integration_tests_status" != "success" ]]; then
-            echo "Integration Tests failed. Aborting."
-            exit 1
+          integration_tests_status="${{ github.event.workflow_run.workflow }}"
+          if [[ "$integration_tests_status" == "MySampleApp1 - IntegrationTests" ]]; then
+            if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
+              echo "Integration Tests failed. Aborting."
+              exit 1
+            fi
           fi
 
       - name: Check if Build and Publish Docker Images Passed
         run: |
-          build_docker_status=$(echo "${{ github.event.workflow_run.conclusion }}" | grep 'Build and push Docker images')
-          if [[ "$build_docker_status" != "success" ]]; then
-            echo "Build and Publish Docker Images failed. Aborting."
-            exit 1
+          build_docker_status="${{ github.event.workflow_run.workflow }}"
+          if [[ "$build_docker_status" == "MySampleApp1 - Build and push Docker images" ]]; then
+            if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
+              echo "Build and Publish Docker Images failed. Aborting."
+              exit 1
+            fi
           fi
 
-      - name: Set PR Status as Passed
+      - name: PR Policy Check Passed
         run: echo "All checks passed for PR #${{ github.event.pull_request.number }}. The PR is ready for further processing in the Argo workflows."
