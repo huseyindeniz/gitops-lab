@@ -1,4 +1,4 @@
-name: MySampleApp1 - PR Policy
+name: MySampleApp1 - PR Publish Policy
 
 on:
   pull_request:
@@ -9,13 +9,12 @@ on:
     workflows:
       - MySampleApp1 - UnitTests
       - MySampleApp1 - IntegrationTests
-      - MySampleApp1 - Build and push Docker images
     types:
       - completed
 
 jobs:
   pr-policy:
-    name: PR Policy Check
+    name: PR Publish Policy
     runs-on: ubuntu-latest
 
     steps:
@@ -38,16 +37,6 @@ jobs:
           if [[ "$integration_tests_status" == "MySampleApp1 - IntegrationTests" ]]; then
             if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
               echo "Integration Tests failed. Aborting."
-              exit 1
-            fi
-          fi
-
-      - name: Check if Build and Publish Docker Images Passed
-        run: |
-          build_docker_status="${{ github.event.workflow_run.workflow }}"
-          if [[ "$build_docker_status" == "MySampleApp1 - Build and push Docker images" ]]; then
-            if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
-              echo "Build and Publish Docker Images failed. Aborting."
               exit 1
             fi
           fi
