@@ -86,7 +86,7 @@ jobs:
           file: apps/my-sample-app-1/dotnet-services/mySampleApp1.weatherForecast.API/Dockerfile
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-weatherforecast-api-${{env.SELECTED_ENV}}:${{ env.TIMESTAMP }}
+            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-wf-api-${{env.SELECTED_ENV}}:${{ env.TIMESTAMP }}
 
       - name: Log out from Docker Hub
         run: docker logout docker.io
