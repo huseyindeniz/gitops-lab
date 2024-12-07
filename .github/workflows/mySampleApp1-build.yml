@@ -44,7 +44,7 @@ jobs:
           file: apps/my-sample-app-1/dotnet-services/migration-bundle/weather-forecast/Dockerfile
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.sha }}-${{ env.TIMESTAMP }}
+            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
       - name: Log out from Docker Hub
         run: docker logout docker.io
         
@@ -70,6 +70,6 @@ jobs:
           file: apps/my-sample-app-1/dotnet-services/mySampleApp1.weatherForecast.API/Dockerfile
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.sha }}-${{ env.TIMESTAMP }}
+            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
       - name: Log out from Docker Hub
         run: docker logout docker.io
