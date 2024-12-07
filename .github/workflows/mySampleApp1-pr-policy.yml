@@ -1,0 +1,23 @@
+name: MySampleApp1 - PR Policy
+
+on:
+  workflow_run:
+    workflows:
+      - MySampleApp1 - UnitTests
+      - MySampleApp1 - IntegrationTests
+      - MySampleApp1 - Build and push Docker images
+    types:
+      - completed
+
+jobs:
+  pr-policy-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check status of dependent workflows
+        run: |
+          if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
+            echo "One or more workflows failed."
+            exit 1
+          fi
+          echo "All workflows passed."
