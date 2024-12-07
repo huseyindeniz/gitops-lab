@@ -41,12 +41,11 @@ jobs:
       - name: Build and push migration Docker image
         uses: docker/build-push-action@v4
         with:
-          context: apps/my-sample-app-1/
-          file: apps/my-sample-app-1/migration-bundle/weather-forecast/Dockerfile
+          context: apps/my-sample-app-1/dotnet-services
+          file: apps/my-sample-app-1/dotnet-services/migration-bundle/weather-forecast/Dockerfile
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-weatherforecast-api-migration-${{env.SELECTED_ENV}}:latest
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-weatherforecast-api-migration-${{env.SELECTED_ENV}}:${{ env.TIMESTAMP }}
+            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-wf-api-migration-${{env.SELECTED_ENV}}:${{ env.TIMESTAMP }}
 
       - name: Log out from Docker Hub
         run: docker logout docker.io
@@ -83,11 +82,10 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: apps/my-sample-app-1/
-          file: apps/my-sample-app-1/mySampleApp1.weatherForecast.API/Dockerfile
+          context: apps/my-sample-app-1/dotnet-services
+          file: apps/my-sample-app-1/dotnet-services/mySampleApp1.weatherForecast.API/Dockerfile
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-weatherforecast-api-${{env.SELECTED_ENV}}:latest
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/my-sample-app-1-weatherforecast-api-${{env.SELECTED_ENV}}:${{ env.TIMESTAMP }}
 
       - name: Log out from Docker Hub
