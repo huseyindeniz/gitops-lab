@@ -1,9 +1,6 @@
 name: MySampleApp1 - Build and push Docker images
 
 on:
-  pull_request:
-    paths:
-      - "apps/my-sample-app-1/**"
   workflow_dispatch: # Allows manual triggering
     inputs:
       environment:
@@ -20,13 +17,7 @@ jobs:
       - name: Determine environment
         id: determine_env
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            # Automatically select the first environment option for pull requests
-            echo "SELECTED_ENV=$(echo '${{ vars.ENV_NAMES }}' | cut -d',' -f1)" >> $GITHUB_ENV
-          else
-            # Use the environment selected manually in workflow_dispatch
-            echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
-          fi
+          echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -43,7 +34,9 @@ jobs:
 
       - name: Get current timestamp
         id: get_timestamp
-        run: echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+        run: |
+          export LC_ALL=C
+          echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
 
       - name: Build and push migration Docker image
         uses: docker/build-push-action@v4
@@ -66,13 +59,7 @@ jobs:
       - name: Determine environment
         id: determine_env
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            # Automatically select the first environment option for pull requests
-            echo "SELECTED_ENV=$(echo '${{ vars.ENV_NAMES }}' | cut -d',' -f1)" >> $GITHUB_ENV
-          else
-            # Use the environment selected manually in workflow_dispatch
-            echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
-          fi
+          echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -89,7 +76,9 @@ jobs:
 
       - name: Get current timestamp
         id: get_timestamp
-        run: echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+        run: |
+          export LC_ALL=C
+          echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
