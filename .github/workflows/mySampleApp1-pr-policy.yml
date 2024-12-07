@@ -1,6 +1,10 @@
 name: MySampleApp1 - PR Policy
 
 on:
+  pull_request:
+    paths:
+      - 'apps/my-sample-app-1/**'
+  workflow_dispatch:  # Allows manual triggering
   workflow_run:
     workflows:
       - MySampleApp1 - UnitTests
@@ -10,14 +14,34 @@ on:
       - completed
 
 jobs:
-  pr-policy-check:
+  pr-policy:
+    name: PR Policy
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check status of dependent workflows
+      - name: Check if Unit Tests Passed
         run: |
-          if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
-            echo "One or more workflows failed."
+          unit_tests_status=$(echo "${{ github.event.workflow_run.conclusion }}" | grep 'UnitTests')
+          if [[ "$unit_tests_status" != "success" ]]; then
+            echo "Unit Tests failed. Aborting."
             exit 1
           fi
-          echo "All workflows passed."
+
+      - name: Check if Integration Tests Passed
+        run: |
+          integration_tests_status=$(echo "${{ github.event.workflow_run.conclusion }}" | grep 'IntegrationTests')
+          if [[ "$integration_tests_status" != "success" ]]; then
+            echo "Integration Tests failed. Aborting."
+            exit 1
+          fi
+
+      - name: Check if Build and Publish Docker Images Passed
+        run: |
+          build_docker_status=$(echo "${{ github.event.workflow_run.conclusion }}" | grep 'Build and push Docker images')
+          if [[ "$build_docker_status" != "success" ]]; then
+            echo "Build and Publish Docker Images failed. Aborting."
+            exit 1
+          fi
+
+      - name: Set PR Status as Passed
+        run: echo "All checks passed for PR #${{ github.event.pull_request.number }}."
