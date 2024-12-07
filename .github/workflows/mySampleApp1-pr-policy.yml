@@ -53,4 +53,5 @@ jobs:
           fi
 
       - name: PR Policy Check Passed
-        run: echo "All checks passed for PR #${{ github.event.pull_request.number }}. The PR is ready for further processing in the Argo workflows."
+        run: |
+          echo "All checks passed for PR #${{ github.event.pull_request.number }}. The PR is ready for further processing in the Argo workflows."
