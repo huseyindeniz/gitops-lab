@@ -9,12 +9,7 @@ on:
       environment:
         description: "Select the environment"
         required: true
-        type: choice
-        options:
-          - stag-1
-          - stag-2
-          - prod-canary
-          - prod-bluegreen
+        type: environment
 
 jobs:
   # Step 1: Build and push migration image
