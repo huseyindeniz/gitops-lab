@@ -8,3 +8,6 @@ jobs:
     runs-on: arc-runner
     steps:
     - run: echo "🎉 This job uses runner scale set runners!"
+    - run: |
+        echo "Checking if kubectl is working..."
+        kubectl version --short
