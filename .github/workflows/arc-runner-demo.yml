@@ -6,13 +6,15 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: arc-runner
     steps:
+      - name: greeting
+        run: echo "🎉 This job uses runner scale set runners!"
       - name: Set up kubectl
         uses: azure/setup-kubectl@v1
-        with:
-          version: 'latest'
       - name: Check if kubectl is working 
         run: |
-          echo "🎉 This job uses runner scale set runners!"
           echo "Checking if kubectl is working..."
           kubectl version
-          kubectl get namespaces
+      - name: Check if kubectl has access to apps
+        run: |
+          echo "Checking if kubectl has permissions to access project-001-wf-local resources"
+          kubectl get pods -n project-001-wf-local-stag-1
