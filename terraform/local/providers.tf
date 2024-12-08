@@ -18,10 +18,10 @@ provider "flux" {
     config_context = var.kubeconfig_context
   }
   git = {
-    url = "https://github.com/${var.flux_github_org}/${var.flux_github_repository}.git"
+    url = local.gitopslab_repo_url
     http = {
       username = "Local Flux" # This can be any string when using a personal access token
-      password = var.flux_github_token
+      password = var.flux_github_pat
     }
     branch = "main"
   }
@@ -29,7 +29,7 @@ provider "flux" {
 
 provider "github" {
   owner = var.flux_github_org
-  token = var.flux_github_token
+  token = var.flux_github_pat
 }
 
 provider "argocd" {
@@ -37,4 +37,8 @@ provider "argocd" {
   username    = "admin"
   password    = module.local_argo.argo_cd_admin_password
   insecure    = true
+}
+
+provider "kubectl" {
+
 }

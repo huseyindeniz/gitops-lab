@@ -40,8 +40,14 @@ variable "flux_path" {
   default     = "flux/local"
 }
 
-variable "flux_github_token" {
-  description = "Flux GitHub token"
+variable "flux_github_pat" {
+  description = "Flux GitHub PAT"
+  sensitive   = true
+  type        = string
+}
+
+variable "github_arc_pat" {
+  description = "GitHub arc PAT"
   sensitive   = true
   type        = string
 }

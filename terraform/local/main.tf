@@ -38,6 +38,22 @@ module "local_monitoring" {
   }
 }
 
+module "local_arc" {
+  source = "../modules/arc-runners"
+
+  github_repo_url = "https://github.com/${var.flux_github_org}/${var.flux_github_repository}"
+  github_arc_pat  = var.github_arc_pat
+
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+    kubectl    = kubectl
+  }
+
+  depends_on = [module.local_cert_manager]
+}
+
+
 module "project001" {
   source                      = "../modules/project001"
   env_list                    = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])

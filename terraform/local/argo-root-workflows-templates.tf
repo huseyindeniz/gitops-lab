@@ -8,7 +8,7 @@ resource "argocd_application" "argo_root_workflows" {
     project = "default"
 
     source {
-      repo_url        = "https://github.com/${var.flux_github_org}/${var.flux_github_repository}.git"
+      repo_url        = local.gitopslab_repo_url
       target_revision = "main"
       path            = "${var.flux_path}/workflows-templates"
       directory {
