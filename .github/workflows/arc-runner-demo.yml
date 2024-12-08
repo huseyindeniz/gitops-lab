@@ -7,7 +7,7 @@ jobs:
     runs-on: arc-runner
     steps:
       - name: Set up kubectl
-        uses: actions/setup-kubectl@v2
+        uses: azure/setup-kubectl@v1
         with:
           version: 'latest'
       - name: Check if kubectl is working 
