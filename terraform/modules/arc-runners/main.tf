@@ -29,9 +29,33 @@ resource "helm_release" "arc_scale_set" {
   namespace  = kubernetes_namespace.arc_systems.metadata[0].name
 
   depends_on = [
-    kubernetes_secret.runner_secret
+    helm_release.arc
   ]
 }
+
+// for local only
+# resource "helm_release" "dynamic_provision_volume_openebs" {
+#   name       = "openebs"
+#   chart      = "openebs"
+#   repository = "https://openebs.github.io/openebs"
+#   namespace  = "openebs"
+
+#   create_namespace = true
+# }
+
+# resource "kubernetes_storage_class" "dynamic_blob_storage" {
+#   metadata {
+#     name = "dynamic-blob-storage"
+#   }
+
+#   storage_provisioner = "kubernetes.io/host-path"
+
+#   parameters = {
+#     type = "hostPath"
+#   }
+
+#   volume_binding_mode = "Immediate"
+# }
 
 resource "helm_release" "arc_runner" {
   name       = "arc-runner"
@@ -44,12 +68,12 @@ resource "helm_release" "arc_runner" {
     yamlencode({
       githubConfigUrl = var.github_repo_url
       githubConfigSecret = {
-        github_token = var.github_arc_pat
+        github_token = kubernetes_secret.runner_secret.data["github_token"]
       }
     })
   ]
 
   depends_on = [
-    helm_release.arc
+    helm_release.arc_scale_set
   ]
 }

@@ -7,6 +7,7 @@ minikube start --nodes 3 --cpus 2 --memory 8192 --profile local-cluster --networ
 minikube addons enable metrics-server -p local-cluster
 minikube addons enable dashboard -p local-cluster
 minikube addons enable ingress -p local-cluster
+minikube addons enable storage-provisioner -p local-cluster
 
 # Prompt the user to run the Minikube tunnel
 echo "Cluster setup is complete."
