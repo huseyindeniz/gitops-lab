@@ -1,0 +1,25 @@
+name: Run Behaviour Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  behaviour-tests:
+    runs-on: arc-runner
+
+    steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'  # Updated Node.js version
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: ./apps/my-sample-app-1/dotnet-services/mySampleApp1.behaviourTests
+      
+    - name: Run tests
+      run: npm run test:stag-1
+      working-directory: ./apps/my-sample-app-1/dotnet-services/mySampleApp1.behaviourTests
