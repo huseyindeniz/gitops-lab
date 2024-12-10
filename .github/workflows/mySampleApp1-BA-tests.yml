@@ -1,4 +1,4 @@
-name: Run Behaviour Tests
+name: MySampleApp1 - BA Tests
 
 on:
   workflow_dispatch:
