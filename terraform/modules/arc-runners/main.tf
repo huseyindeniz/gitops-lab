@@ -77,3 +77,39 @@ resource "helm_release" "arc_runner" {
     helm_release.arc_scale_set
   ]
 }
+
+resource "kubernetes_cluster_role" "arc_runner_cluster_role" {
+  metadata {
+    name = "arc-runner-cluster-role"
+  }
+
+  rule {
+    api_groups = [""]
+    resources  = ["pods", "services", "configmaps"]
+    verbs      = ["get", "list"]
+  }
+
+  depends_on = [helm_release.arc_runner]
+}
+
+
+resource "kubernetes_cluster_role_binding" "arc_runner_cluster_role_binding" {
+  metadata {
+    name = "arc-runner-cluster-role-binding"
+  }
+
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = kubernetes_cluster_role.arc_runner_cluster_role.metadata[0].name
+  }
+
+  subject {
+    kind      = "ServiceAccount"
+    name      = "arc-runner-gha-rs-no-permission"
+    namespace = kubernetes_namespace.arc_runners.metadata[0].name
+  }
+
+  depends_on = [kubernetes_cluster_role.arc_runner_cluster_role]
+}
+
