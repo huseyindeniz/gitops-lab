@@ -8,7 +8,9 @@
     "test:local": "cross-env NODE_ENV=local cucumber-js test",
     "test:docker": "cross-env NODE_ENV=docker cucumber-js test",
     "test:stag-1": "cross-env NODE_ENV=stag-1 cucumber-js test",
-    "test:stag-2": "cross-env NODE_ENV=stag-2 cucumber-js test"
+    "test:stag-2": "cross-env NODE_ENV=stag-2 cucumber-js test",
+    "test:prod-canary": "cross-env NODE_ENV=prod-canary cucumber-js test",
+    "test:prod-bluegreen": "cross-env NODE_ENV=prod-bluegreen cucumber-js test"
   },
   "keywords": [],
   "author": "",
