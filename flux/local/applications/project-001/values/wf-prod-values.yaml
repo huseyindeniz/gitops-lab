@@ -77,13 +77,13 @@ imagePolicy:
   namespace: "flux-system"
   app:
     filterTags:
-      pattern: "^ci-\\d+-\\d{14}$"
+      pattern: "^ci-\\d+-(\\d{14})$"
       extract: "$2"
     policy:
       order: "asc"
   migration:
     filterTags:
-      pattern: "^ci-\\d+-\\d{14}$"
+      pattern: "^ci-\\d+-(\\d{14})$"
       extract: "$2"
     policy:
       order: "asc"
