@@ -73,25 +73,33 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - ✅ Create/Configure **app of apps/root app** for wsl applications in Argo CD
 - ✅ Create/Configure application set manifest for a sample app
 - ✅ Create/Configure a generic .NET app Helm chart and use it for a service in the sample app
-- ✅ Configure GitHub Actions for CI/CD
 - ✅ Configure multi-staging environments usable by all apps
+- ✅ Create/Configure Github Arc Runners
 
 ### Build a Comprehensive CI/CD Pipeline
 
-- ✅ Use GitHub Workflows for CI tasks (e.g., build, test, and Docker image pushes)
 - ✅ Manage application deployments via Argo CD and Helm
 - ✅ Automate database migrations with Argo hooks
-- 🔲 Automate PR-based deployment pipelines
 - 🔲 Define and implement rollback mechanisms
 - 🔲 Address and test conflicting database migration scenarios
-- 🔲 Configure Argo Workflows for orchestrating CI/CD processes
+- ❌ Configure Argo Workflows for orchestrating CI/CD pipeline (it seems arc runners will be enough)
+- **Use GitHub Workflows for CI tasks**
+
+  - ✅ Unit Tests (on github runners)
+  - ✅ Integration Tests (on github runners)
+  - 🔲 Fitness Tests (on github runners)
+  - ✅ BA Tests (on arc runners)
 
 - **Integrate Clusters with ArgoCD**:
+
   - ✅ Add wsl-cluster to Argo
   - 🔲 Install Argo CD on DOKS (Remote ArgoCD)
   - 🔲 Add AKS cluster to Remote ArgoCD
   - 🔲 Add EKS cluster to Remote ArgoCD
   - 🔲 Add GKE cluster to Remote ArgoCD
+
+- 🔲 Create a Staging CI/CD Pipeline
+- 🔲 Create a Production CI/CD Pipeline
 
 ### Enhanced Observability
 
@@ -199,6 +207,7 @@ A potential improvement would be for EF Core migration bundles to support target
 - [Argo CD notes](https://github.com/huseyindeniz/gitops-lab/wiki/Argo-CD)
 - [Argo Rollouts notes](https://github.com/huseyindeniz/gitops-lab/wiki/Argo-Rollouts)
 - [Argo Workflows notes](https://github.com/huseyindeniz/gitops-lab/wiki/Argo-Workflows)
+- [Github Actions notes](https://github.com/huseyindeniz/gitops-lab/wiki/Github-Actions)
 - [Flux notes](https://github.com/huseyindeniz/gitops-lab/wiki/Flux)
 - [Local env setup notes](https://github.com/huseyindeniz/gitops-lab/wiki/Local-Env)
 - [AKS setup notes](https://github.com/huseyindeniz/gitops-lab/wiki/AKS)
