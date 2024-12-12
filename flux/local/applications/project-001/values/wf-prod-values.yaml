@@ -66,7 +66,7 @@ ingress:
   tlsSecret: "" # Specify TLS secret if TLS is enabled
 
 image:
-  repository: "huseyindeniz/my-sample-app-1-weatherforecast-api"
+  repository: "huseyindeniz/msa1-wf-api"
   pullPolicy: IfNotPresent
 
 imageRepository:
@@ -77,14 +77,14 @@ imagePolicy:
   namespace: "flux-system"
   app:
     filterTags:
-      pattern: "^\\d{14}$"
-      extract: "$0"
+      pattern: "^ci-\\d+-\\d{14}$"
+      extract: "$2"
     policy:
       order: "asc"
   migration:
     filterTags:
-      pattern: "^\\d{14}$"
-      extract: "$0"
+      pattern: "^ci-\\d+-\\d{14}$"
+      extract: "$2"
     policy:
       order: "asc"
 

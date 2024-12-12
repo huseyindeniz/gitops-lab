@@ -11,16 +11,16 @@ spec:
             servicePort: 5001
             host: "wf-stag-1.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "20241112181319" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-1-app-image-policy:tag"}
-            imgMigrationTag: "20241112181220" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-1-migration-image-policy:tag"}
+            imgTag: "ci-12213711766-20241207143633" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-1-app-image-policy:tag"}
+            imgMigrationTag: "ci-12213711766-20241207143544" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-1-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
             servicePort: 5002
             host: "wf-stag-2.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "20241112181043" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-2-app-image-policy:tag"}
-            imgMigrationTag: "20241112180957" # {"$imagepolicy": "flux-system:project-001-wf-local-prod-stag-2-migration-image-policy:tag"}
+            imgTag: "ci-12302208889-20241212180734" # {"$imagepolicy": "flux-system:project-001-wf-local-stag-2-app-image-policy:tag"}
+            imgMigrationTag: "ci-12302208889-20241212180648" # {"$imagepolicy": "flux-system:project-001-wf-local-prod-stag-2-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
