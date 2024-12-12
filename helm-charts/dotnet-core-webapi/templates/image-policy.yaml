@@ -26,5 +26,5 @@ spec:
     pattern: {{ .Values.imagePolicy.migration.filterTags.pattern | quote }}
     extract: {{ .Values.imagePolicy.migration.filterTags.extract | quote }}
   policy:
-    numerical:
+    string:
       order: {{ .Values.imagePolicy.migration.policy.order }}
