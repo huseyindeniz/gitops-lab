@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: {{ .Values.imageRepository.interval }}
-  image: {{ .Values.image.repository }}-{{ .Values.environment }}
+  image: {{ .Values.image.repository }}-api-{{ .Values.environment }}
 
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
