@@ -63,6 +63,4 @@ module "project001" {
     kubernetes = kubernetes
     helm       = helm
   }
-
-  depends_on = [data.kubernetes_config_map.deployment_environments]
 }

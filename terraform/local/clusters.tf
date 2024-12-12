@@ -1,4 +1,5 @@
 # resource "argocd_cluster" "wsl_cluster" {
+#   name = "wsl-cluster-local"
 #   server = "https://172.17.0.5:8443"
 
 #   config {

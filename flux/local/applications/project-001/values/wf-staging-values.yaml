@@ -66,7 +66,7 @@ ingress:
   tlsSecret: "" # Specify TLS secret if TLS is enabled
 
 image:
-  repository: "huseyindeniz/msa1-wf-api"
+  repository: "huseyindeniz/msa1-wf"
   pullPolicy: IfNotPresent
 
 imageRepository:

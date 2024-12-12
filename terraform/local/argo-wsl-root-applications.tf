@@ -17,7 +17,7 @@
 #     }
 
 #     destination {
-#       server    = "https://172.17.0.5:8443"
+#       server    = "wsl-cluster-local"
 #       namespace = "wsl-cluster"
 #     }
 
