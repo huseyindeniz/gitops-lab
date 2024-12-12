@@ -60,12 +60,17 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
   - ✅ Create AKS cluster (VPC and cluster creation via Terraform)
   - ✅ Create GKE cluster (VPC and cluster creation via Terraform)
   - 🔲 Create DOKS cluster (VPC and cluster creation via Terraform)
+  - ✅ Add wsl-cluster to ArgoCD
+  - 🔲 Install Argo CD on DOKS (Remote ArgoCD)
+  - 🔲 Add AKS cluster to Remote ArgoCD
+  - 🔲 Add EKS cluster to Remote ArgoCD
+  - 🔲 Add GKE cluster to Remote ArgoCD
 
 ### Automate and Manage Infrastructure
 
 - ✅ Install Argo CD (on local-cluster)
 - ❌ Argo CD Image Updater ([awaiting namespace support](https://github.com/argoproj-labs/argocd-image-updater/issues/601))
-- ✅ Install Flux for automated image updates (on local-cluster)
+  - ✅ Install Flux for automated image updates (on local-cluster)
 - ✅ Install Argo Rollouts (on local-cluster)
 - ✅ Install Argo Workflows (on local-cluster)
 - ✅ Create/Configure **app of apps/root app** for applications in Argo CD
@@ -89,14 +94,6 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
   - ✅ Integration Tests (on github runners)
   - 🔲 Fitness Tests (on github runners)
   - ✅ BA Tests (on arc runners)
-
-- **Integrate Clusters with ArgoCD**:
-
-  - ✅ Add wsl-cluster to Argo
-  - 🔲 Install Argo CD on DOKS (Remote ArgoCD)
-  - 🔲 Add AKS cluster to Remote ArgoCD
-  - 🔲 Add EKS cluster to Remote ArgoCD
-  - 🔲 Add GKE cluster to Remote ArgoCD
 
 - 🔲 Create a Staging CI/CD Pipeline
 - 🔲 Create a Production CI/CD Pipeline
