@@ -41,10 +41,9 @@ jobs:
       - name: Log out from Docker Hub
         run: docker logout docker.io
       - name: Add PR comment
-        if: ${{ github.event_name == 'pull_request' }}
         run: |
           gh pr comment ${{ github.event.pull_request.number }} \
-          --body "Published image: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/image_name:tag"
+          --body "Published image: msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
@@ -81,9 +80,8 @@ jobs:
       - name: Log out from Docker Hub
         run: docker logout docker.io
       - name: Add PR comment
-        if: ${{ github.event_name == 'pull_request' }}
         run: |
           gh pr comment ${{ github.event.pull_request.number }} \
-          --body "Published image: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/image_name:tag"
+          --body "Published image: msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
