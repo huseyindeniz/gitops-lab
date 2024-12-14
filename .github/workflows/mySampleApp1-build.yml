@@ -1,5 +1,9 @@
 name: MySampleApp1 - Build and push Docker images
 
+permissions:
+  pull-requests: write
+  contents: read
+  
 on:
   workflow_dispatch: # Allows manual triggering
     inputs:
