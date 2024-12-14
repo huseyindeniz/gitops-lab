@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:        
-  service-integration-test:
+  service-int-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -32,7 +32,7 @@ jobs:
       - name: Build the project
         run: dotnet build apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln --configuration Release --no-restore
     
-      - name: Run Unit Tests for ${{ matrix.service }}
+      - name: Run Integration Tests for ${{ matrix.service }}
         run: |
           dotnet test --no-restore --configuration Release --filter "Category=Integration&Service=weatherForecast" --logger "trx;LogFileName=mySampleApp1-wf-tests.integration.trx"
         working-directory: ${{ matrix.project_path }}
