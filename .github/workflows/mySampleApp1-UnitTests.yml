@@ -6,36 +6,9 @@ on:
       - 'apps/my-sample-app-1/dotnet-services/**'
   workflow_dispatch:
 
-jobs:
-  build:
+jobs:        
+  service-test:
     runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup .NET 9 SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.x'
-
-      - name: Restore dependencies
-        run: dotnet restore apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
-
-      - name: Build the project
-        run: dotnet build apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln --configuration Release --no-restore
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: |
-            **/bin/
-            **/obj/
-          
-  test:
-    runs-on: ubuntu-latest
-    needs: [build]
     strategy:
       matrix:
         service:
@@ -53,15 +26,14 @@ jobs:
         with:
           dotnet-version: '9.x'
           
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
+      - name: Restore dependencies
+        run: dotnet restore apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
+
+      - name: Build the project
+        run: dotnet build apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln --configuration Release --no-restore
     
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
-          pwd
-          ls -la
           chmod +x ./ci-test-run.sh
           bash ./ci-test-run.sh
         working-directory: ${{ matrix.project_path }}
