@@ -62,7 +62,7 @@ jobs:
           pwd
           chmod +x ./ci-test-run.sh
           bash ./ci-test-run.sh
-        working-directory: ${{ matrix.project_path }}
+        working-directory: $GITHUB_WORKSPACE/build-artifacts/${{ matrix.project_path }}
         
       - name: Upload Results for ${{ matrix.service }}
         uses: actions/upload-artifact@v4
