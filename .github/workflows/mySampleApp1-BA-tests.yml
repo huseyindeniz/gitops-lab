@@ -1,5 +1,9 @@
 name: MySampleApp1 - BA Tests
 
+permissions:
+  pull-requests: write
+  contents: read
+  
 on:
   workflow_dispatch:
 
