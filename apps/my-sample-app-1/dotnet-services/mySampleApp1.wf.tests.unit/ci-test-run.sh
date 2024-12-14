@@ -7,7 +7,7 @@ dotnet test \
     -p:CollectCoverage=true \
     -p:CoverletOutputFormat=cobertura \
     -p:CoverletOutput=./TestResults/coverage.cobertura.xml \
-    -p:Threshold=10 \
+    -p:Threshold=20 \
     -p:SkipAutoProps=true \
     --logger "trx;LogFileName=mySampleApp1-wf-tests.unit.trx" || exit 1
 
