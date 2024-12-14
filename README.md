@@ -2,8 +2,9 @@
 
 GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
-[![MySampleApp1 - UnitTests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-UnitTests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-UnitTests.yml)
-[![MySampleApp1 - IntegrationTests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-IntegrationTests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-IntegrationTests.yml)
+- [![MySampleApp1 - UnitTests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-UnitTests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-UnitTests.yml)
+- [![MySampleApp1 - IntegrationTests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-IntegrationTests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-IntegrationTests.yml)
+- [![MySampleApp1 - BA Tests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-BA-tests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-BA-tests.yml)
 
 ## Goals
 
