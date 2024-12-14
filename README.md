@@ -2,6 +2,8 @@
 
 GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
+[![MySampleApp1 - UnitTests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-UnitTests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-UnitTests.yml)
+
 ## Goals
 
 - **Automate and Manage Infrastructure**:  
