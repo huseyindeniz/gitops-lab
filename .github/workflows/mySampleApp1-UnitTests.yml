@@ -54,6 +54,10 @@ jobs:
         with:
           name: build-artifacts
 
+      - name: List contents of the project directory
+        run: |
+          ls -R ${{ matrix.project_path }}
+    
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
           chmod +x ./ci-test-run.sh
