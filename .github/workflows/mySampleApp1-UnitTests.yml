@@ -54,9 +54,8 @@ jobs:
         with:
           name: build-artifacts
 
-      - name: List contents of the project directory
-        run: |
-          ls -R ${{ matrix.project_path }}
+      - name: Print the contents of ci-test-run.sh
+        run: cat ${{ matrix.project_path }}/ci-test-run.sh
     
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
