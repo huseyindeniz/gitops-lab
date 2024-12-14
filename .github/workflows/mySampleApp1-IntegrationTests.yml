@@ -41,7 +41,7 @@ jobs:
           --no-build \
           --configuration Release \
           --filter "Category=Integration&Service=weatherForecast" \
-          --logger "trx;LogFileName=mySampleApp1-wf-tests.integration.trx"
+          --logger "trx;LogFileName=mySampleApp1-wf-tests.integration.trx" \
           --verbosity normal
         working-directory: ${{ matrix.project_path }}
         
