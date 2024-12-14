@@ -1,9 +1,6 @@
 name: MySampleApp1 - PR Publish Policy
 
 on:
-  pull_request:
-    paths:
-      - 'apps/my-sample-app-1/**'
   workflow_dispatch:  # Allows manual triggering
   workflow_run:
     workflows:
