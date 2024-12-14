@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:        
-  service-fitnes-test:
+  service-fitness-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
