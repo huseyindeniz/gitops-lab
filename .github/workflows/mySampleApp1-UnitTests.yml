@@ -40,6 +40,7 @@ jobs:
           dotnet test \
           --configuration=Release \
           --no-restore \
+          --no-build \
           --filter "Category=Unit&Service=weatherForecast" \
           --logger "trx;LogFileName=mySampleApp1-wf-tests.unit.trx" \
           --verbosity normal \
