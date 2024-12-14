@@ -1,5 +1,5 @@
 # Use .NET SDK for building and running EF commands
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 
 # Set the working directory in the container
 WORKDIR /app
