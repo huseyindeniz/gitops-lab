@@ -42,7 +42,7 @@ jobs:
           --no-restore \
           --filter "Category=Unit&Service=weatherForecast" \
           --logger "trx;LogFileName=mySampleApp1-wf-tests.unit.trx"
-          --verbosity normal
+          --verbosity normal \
           -p:CollectCoverage=true \
           -p:CoverletOutputFormat=cobertura \
           -p:CoverletOutput=TestResults/coverage.cobertura.xml \
