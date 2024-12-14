@@ -28,7 +28,10 @@ jobs:
       
       - name: Install dotnet-coverage globally
         run: dotnet tool install --global dotnet-coverage
-  
+
+      - name: Install Coverlet Console globally
+        run: dotnet tool install --global coverlet.console
+
       - name: Restore dependencies
         run: dotnet restore apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
 
