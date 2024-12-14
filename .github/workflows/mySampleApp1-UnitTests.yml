@@ -25,7 +25,10 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
-
+          
+      - name: Restore dependencies
+        run: dotnet restore apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
+        
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
           chmod +x ${{ matrix.project_path }}/ci-test-run.sh  # Make sure the shell script is executable
