@@ -40,7 +40,14 @@ jobs:
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
       - name: Log out from Docker Hub
         run: docker logout docker.io
-        
+      - name: Add PR comment
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+          --body "Published image: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/image_name:tag"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
    # Step 2: Build and push API image (depends on migration image)      
   publish-wf-api:
     runs-on: ubuntu-latest
@@ -73,3 +80,10 @@ jobs:
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
       - name: Log out from Docker Hub
         run: docker logout docker.io
+      - name: Add PR comment
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+          --body "Published image: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/image_name:tag"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
