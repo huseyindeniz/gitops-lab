@@ -21,20 +21,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
           
-      - name: Setup .NET 9 SDK
+      - name: Setup .NET 9
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
           
       - name: Restore dependencies
-        run: dotnet restore apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
+        run: dotnet restore
+        working-directory: ${{ matrix.project_path }}
 
       - name: Build the project
-        run: dotnet build apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ${{ matrix.project_path }}
     
       - name: Run Integration Tests for ${{ matrix.service }}
         run: |
-          dotnet test --no-restore --configuration Release --filter "Category=Integration&Service=weatherForecast" --logger "trx;LogFileName=mySampleApp1-wf-tests.integration.trx"
+          dotnet test \
+          --no-restore \
+          --no-build \
+          --configuration Release \
+          --filter "Category=Integration&Service=weatherForecast" \
+          --logger "trx;LogFileName=mySampleApp1-wf-tests.integration.trx"
+          --verbosity normal
         working-directory: ${{ matrix.project_path }}
         
       - name: Upload Results for ${{ matrix.service }}
