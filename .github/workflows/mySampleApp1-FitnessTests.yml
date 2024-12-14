@@ -1,0 +1,53 @@
+name: MySampleApp1 - FitnessTests
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/my-sample-app-1/dotnet-services/**'
+  workflow_dispatch:
+
+jobs:        
+  service-fitnes-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - weatherForecast
+        include:
+          - service: weatherForecast
+            project_path: apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.fitness
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+          
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ${{ matrix.project_path }}
+        
+      - name: Build the project
+        run: dotnet build --configuration Release --no-restore
+        working-directory: ${{ matrix.project_path }}
+    
+      - name: Run Fitness Tests for ${{ matrix.service }}
+        run: |
+          dotnet test \
+          --configuration=Release \
+          --no-restore \
+          --no-build \
+          --filter "Category=Fitness&Service=weatherForecast" \
+          --logger "trx;LogFileName=mySampleApp1-wf-tests.fitness.trx" \
+          --verbosity normal
+        working-directory: ${{ matrix.project_path }}
+        
+      - name: Upload Results for ${{ matrix.service }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.service }}-reports
+          path: ${{ matrix.project_path }}/TestResults/*.trx
