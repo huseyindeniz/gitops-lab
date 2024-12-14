@@ -8,6 +8,7 @@ dotnet test \
     -p:CoverletOutputFormat=cobertura \
     -p:CoverletOutput=TestResults/ \
     -p:Threshold=10 \
-    -p:SkipAutoProps=true || exit 1
+    -p:SkipAutoProps=true \
+    --logger "trx;LogFileName=mySampleApp1-wf-tests.unit.trx" || exit 1
 
 # use -p:ThresholdType=line/branch/method for individual thresholds
