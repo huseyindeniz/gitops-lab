@@ -30,7 +30,7 @@ jobs:
         run: dotnet restore apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
 
       - name: Build the project
-        run: dotnet apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
+        run: dotnet build apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
 
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
