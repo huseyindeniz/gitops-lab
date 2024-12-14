@@ -59,8 +59,9 @@ jobs:
     
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
+          pwd
           chmod +x ./ci-test-run.sh
-          ./ci-test-run.sh
+          bash ./ci-test-run.sh
         working-directory: ${{ matrix.project_path }}
         
       - name: Upload Results for ${{ matrix.service }}
