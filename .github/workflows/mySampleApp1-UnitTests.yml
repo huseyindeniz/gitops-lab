@@ -48,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.service }}-reports
-          path: ${{ matrix.project_path }}/TestResults/*.*
+          path: ${{ matrix.project_path }}/TestResults/*.trx
