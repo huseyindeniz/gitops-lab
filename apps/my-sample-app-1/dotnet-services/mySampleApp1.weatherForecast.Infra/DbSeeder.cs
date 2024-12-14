@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using mySampleApp1.weatherForecast.Domain.Entities;
 
 namespace mySampleApp1.weatherForecast.Infra

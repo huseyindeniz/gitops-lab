@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+
 using mySampleApp1.weatherForecast.API.Models;
 
 namespace mySampleApp1.weatherForecast.API.Validators

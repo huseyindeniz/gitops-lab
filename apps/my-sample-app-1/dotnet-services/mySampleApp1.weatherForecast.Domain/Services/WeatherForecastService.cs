@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using mySampleApp1.weatherForecast.Domain.DTOs;
 using mySampleApp1.weatherForecast.Domain.Entities;
 using mySampleApp1.weatherForecast.Domain.Interfaces;
@@ -49,7 +50,7 @@ namespace mySampleApp1.weatherForecast.Domain.Services
 
         public async Task DeleteForecastAsync(int id)
         {
-           await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(id);
         }
 
     }

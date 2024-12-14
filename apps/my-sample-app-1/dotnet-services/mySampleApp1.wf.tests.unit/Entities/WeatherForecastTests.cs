@@ -1,7 +1,8 @@
 using AutoFixture;
+
 using mySampleApp1.weatherForecast.Domain.Entities;
 
-namespace mySampleApp1.weatherForecast.UnitTests.Entities
+namespace mySampleApp1.wf.tests.unit.Entities
 {
     [Trait("Category", "Unit")]
     [Trait("Service", "weatherForecast")]

@@ -1,13 +1,16 @@
 
-using mySampleApp1.weatherForecast.Infra;
-using Microsoft.EntityFrameworkCore;
 using System.Text;
-using mySampleApp1.weatherForecast.Domain.Interfaces;
-using mySampleApp1.weatherForecast.Infra.Repositories;
-using mySampleApp1.weatherForecast.Domain.Services;
-using FluentValidation.AspNetCore;
-using mySampleApp1.weatherForecast.API.Validators;
+
 using FluentValidation;
+using FluentValidation.AspNetCore;
+
+using Microsoft.EntityFrameworkCore;
+
+using mySampleApp1.weatherForecast.API.Validators;
+using mySampleApp1.weatherForecast.Domain.Interfaces;
+using mySampleApp1.weatherForecast.Domain.Services;
+using mySampleApp1.weatherForecast.Infra;
+using mySampleApp1.weatherForecast.Infra.Repositories;
 
 namespace mySampleApp1.weatherForecast.API
 {

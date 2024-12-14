@@ -1,9 +1,13 @@
 using AutoMapper;
+
 using FluentAssertions;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Logging;
+
 using Moq;
+
 using mySampleApp1.weatherForecast.API;
 using mySampleApp1.weatherForecast.API.Controllers;
 using mySampleApp1.weatherForecast.API.MappingProfiles;
@@ -14,7 +18,7 @@ using mySampleApp1.weatherForecast.Domain.Interfaces;
 using mySampleApp1.weatherForecast.Domain.MappingProfiles;
 using mySampleApp1.weatherForecast.Domain.Services;
 
-namespace mySampleApp1.weatherForecast.IntegrationTests
+namespace mySampleApp1.wf.tests.integration
 {
     [Trait("Category", "Integration")]
     [Trait("Service", "weatherForecast")]

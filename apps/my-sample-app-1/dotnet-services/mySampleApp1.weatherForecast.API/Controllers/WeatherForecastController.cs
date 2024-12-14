@@ -1,5 +1,7 @@
 using AutoMapper;
+
 using Microsoft.AspNetCore.Mvc;
+
 using mySampleApp1.weatherForecast.API.Models;
 using mySampleApp1.weatherForecast.API.ViewModels;
 using mySampleApp1.weatherForecast.Domain.DTOs;

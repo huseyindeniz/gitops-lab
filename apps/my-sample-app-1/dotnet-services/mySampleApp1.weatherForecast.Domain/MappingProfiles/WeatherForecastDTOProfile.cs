@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using mySampleApp1.weatherForecast.Domain.DTOs;
 using mySampleApp1.weatherForecast.Domain.Entities;
 

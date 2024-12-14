@@ -1,14 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+﻿using System.Reflection;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace mySampleApp1.weatherForecast.Infra
 {
     public class ApplicationDbContext : DbContext
     {
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { 
-        
-        
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
