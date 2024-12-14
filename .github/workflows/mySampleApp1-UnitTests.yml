@@ -3,31 +3,46 @@ name: MySampleApp1 - UnitTests
 on:
   pull_request:
     paths:
-      - 'apps/my-sample-app-1/**'
-  workflow_dispatch:  # Allows manual triggering
+      - 'apps/my-sample-app-1/dotnet-services/**'
+  workflow_dispatch:
 
 jobs:
-  unit-weatherForecast:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - weatherForecast
+        include:
+          - service: weatherForecast
+            project_path: apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.unit
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET Core
+      - name: Setup .NET 9 SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
-
+          dotnet-version: '9.x'
+          
       - name: Restore dependencies
         run: dotnet restore apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln
-      
-      - name: Run Unit Tests for weatherForecast
+        
+      - name: Run Unit Tests for ${{ matrix.service }}
         run: |
-          dotnet test apps/my-sample-app-1/dotnet-services/my-sample-app-1.sln --no-restore --configuration Release --filter "Category=Unit&Service=weatherForecast" --logger "trx;LogFileName=mySampleApp1-weatherForecastUnitTests.trx"
-
-      - name: Upload Test Results
+          chmod +x ./ci-test-run.sh
+          ./ci-test-run.sh
+        working-directory: ${{ matrix.project_path }}
+        
+      - name: Upload Coverage Report for ${{ matrix.service }}
         uses: actions/upload-artifact@v4
         with:
-          name: weatherForecast-unit-test-results
-          path: '**/*.trx'
+          name: ${{ matrix.service }}-coverage-report
+          path: ${{ matrix.project_path }}/TestResults/coverage.cobertura.xml
+
+      - name: Upload Test Results for ${{ matrix.service }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.service }}-test-results
+          path: ${{ matrix.project_path }}/TestResults/*.trx
