@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:        
-  service-unit-test:
+  service-integration-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
