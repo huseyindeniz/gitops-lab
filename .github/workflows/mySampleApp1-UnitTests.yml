@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: apps/my-sample-app-1/dotnet-services
 
       - name: Setup .NET 9 SDK
         uses: actions/setup-dotnet@v4
@@ -30,7 +32,8 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            **/apps/my-sample-app-1/dotnet-services/
+            **/bin/
+            **/obj/
           
   test:
     runs-on: ubuntu-latest
@@ -44,6 +47,11 @@ jobs:
             project_path: apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.unit
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: apps/my-sample-app-1/dotnet-services
+          
       - name: Setup .NET 9 SDK
         uses: actions/setup-dotnet@v4
         with:
@@ -53,13 +61,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
-
-      - name: Print the contents of ci-test-run.sh
-        run: cat ${{ matrix.project_path }}/ci-test-run.sh
     
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
           pwd
+          ls -la
           chmod +x ./ci-test-run.sh
           bash ./ci-test-run.sh
         working-directory: ${{ matrix.project_path }}
