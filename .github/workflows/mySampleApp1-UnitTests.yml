@@ -30,7 +30,7 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            **/*
+            **/apps/my-sample-app-1/dotnet-services/
           
   test:
     runs-on: ubuntu-latest
@@ -44,6 +44,11 @@ jobs:
             project_path: apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.unit
 
     steps:
+      - name: Setup .NET 9 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+          
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
