@@ -7,6 +7,10 @@ on:
         description: "Select the environment"
         required: true
         type: environment
+      pr_number:
+        description: "Pull request number (required for comments)"
+        required: false
+        type: string
 
 jobs:
          
@@ -41,8 +45,9 @@ jobs:
       - name: Log out from Docker Hub
         run: docker logout docker.io
       - name: Add PR comment
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pr_number }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} \
+          gh pr comment ${{ github.event.inputs.pr_number }} \
           --body "Published image: msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -80,8 +85,9 @@ jobs:
       - name: Log out from Docker Hub
         run: docker logout docker.io
       - name: Add PR comment
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pr_number }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} \
+          gh pr comment ${{ github.event.inputs.pr_number }} \
           --body "Published image: msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
