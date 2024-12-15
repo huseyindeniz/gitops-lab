@@ -37,22 +37,12 @@ jobs:
     
       - name: Run Unit Tests for ${{ matrix.service }}
         run: |
-          dotnet test \
-          --configuration=Release \
-          --no-restore \
-          --no-build \
-          --filter "Category=Unit&Service=weatherForecast" \
-          --logger "trx;LogFileName=mySampleApp1-wf-tests.unit.trx" \
-          --verbosity normal \
-          -p:CollectCoverage=true \
-          -p:CoverletOutputFormat=cobertura \
-          -p:CoverletOutput=TestResults/coverage.cobertura.xml \
-          -p:Threshold=20 \
-          -p:SkipAutoProps=true
+          chmod +x ./ci-test-run.sh
+          bash ./ci-test-run.sh
         working-directory: ${{ matrix.project_path }}
         
       - name: Upload Results for ${{ matrix.service }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.service }}-reports
-          path: ${{ matrix.project_path }}/TestResults/*.trx
+          name: ${{ matrix.service }}-unit-reports
+          path: ${{ matrix.project_path }}/TestResults/*.*

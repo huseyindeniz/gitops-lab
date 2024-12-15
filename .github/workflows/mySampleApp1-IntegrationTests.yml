@@ -36,17 +36,12 @@ jobs:
     
       - name: Run Integration Tests for ${{ matrix.service }}
         run: |
-          dotnet test \
-          --no-restore \
-          --no-build \
-          --configuration Release \
-          --filter "Category=Integration&Service=weatherForecast" \
-          --logger "trx;LogFileName=mySampleApp1-wf-tests.integration.trx" \
-          --verbosity normal
+          chmod +x ./ci-test-run.sh
+          bash ./ci-test-run.sh
         working-directory: ${{ matrix.project_path }}
         
       - name: Upload Results for ${{ matrix.service }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.service }}-reports
+          name: ${{ matrix.service }}-integration-reports
           path: ${{ matrix.project_path }}/TestResults/*.trx

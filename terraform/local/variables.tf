@@ -57,3 +57,14 @@ variable "wsl_cluster_bearer_token" {
   sensitive   = true
   type        = string
 }
+
+variable "wsl_cluster_server" {
+  description = "WSL Cluster Server"
+  type        = string
+  default     = "https://172.17.0.5:8443"
+}
+
+variable "argo_cd_admin_password" {
+  sensitive = true
+  type      = string
+}

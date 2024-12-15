@@ -24,6 +24,9 @@ rbac:
   policy: |
     g, admin, role:admin
 
+notifications:
+  enabled: true
+
 crds:
   install: true
   keep: false

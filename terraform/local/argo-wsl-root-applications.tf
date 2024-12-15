@@ -17,7 +17,7 @@ resource "argocd_application" "argo_wsl_root_applications" {
     }
 
     destination {
-      server    = "https://172.17.0.5:8443"
+      server    = var.wsl_cluster_server
       namespace = "wsl-cluster"
     }
 

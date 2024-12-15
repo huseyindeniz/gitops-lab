@@ -1,6 +1,6 @@
 resource "argocd_cluster" "wsl_cluster" {
   name   = "wsl-cluster-local"
-  server = "https://172.17.0.5:8443"
+  server = var.wsl_cluster_server
 
   config {
     bearer_token = var.wsl_cluster_bearer_token
