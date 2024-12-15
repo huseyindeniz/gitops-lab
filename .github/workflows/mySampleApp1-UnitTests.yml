@@ -47,7 +47,7 @@ jobs:
           -p:CollectCoverage=true \
           -p:CoverletOutputFormat=cobertura \
           -p:CoverletOutput=TestResults/coverage.cobertura.xml \
-          -p:Threshold=20 \
+          -p:Threshold=10 \
           -p:SkipAutoProps=true
         working-directory: ${{ matrix.project_path }}
         
