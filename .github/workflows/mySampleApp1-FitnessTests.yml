@@ -37,13 +37,8 @@ jobs:
     
       - name: Run Fitness Tests for ${{ matrix.service }}
         run: |
-          dotnet test \
-          --configuration=Release \
-          --no-restore \
-          --no-build \
-          --filter "Category=Fitness&Service=weatherForecast" \
-          --logger "trx;LogFileName=mySampleApp1-wf-tests.fitness.trx" \
-          --verbosity normal
+          chmod +x ./ci-test-run.sh
+          bash ./ci-test-run.sh
         working-directory: ${{ matrix.project_path }}
         
       - name: Upload Results for ${{ matrix.service }}
