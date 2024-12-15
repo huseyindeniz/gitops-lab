@@ -44,5 +44,5 @@ jobs:
       - name: Upload Results for ${{ matrix.service }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.service }}-reports
+          name: ${{ matrix.service }}-unit-reports
           path: ${{ matrix.project_path }}/TestResults/*.*
