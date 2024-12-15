@@ -13,5 +13,5 @@ echo "Cluster setup is complete."
 echo "Run 'minikube tunnel -p wsl-cluster' to start the Minikube tunnel if needed."
 echo "Run 'minikube service yakd-dashboard -n yakd-dashboard -p wsl-cluster' to access yakd dashboard"
 
-kubectl port-forward --address=0.0.0.0 --context=wsl-cluster pod/kube-apiserver-wsl-cluster 6443:8443 -n kube-system
+# kubectl port-forward --address=0.0.0.0 --context=wsl-cluster pod/kube-apiserver-wsl-cluster 6443:8443 -n kube-system
 

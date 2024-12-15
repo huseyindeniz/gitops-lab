@@ -61,7 +61,7 @@ variable "wsl_cluster_bearer_token" {
 variable "wsl_cluster_server" {
   description = "WSL Cluster Server"
   type        = string
-  default     = "https://host.minikube.internal:6443"
+  default     = "https://172.17.0.5:8443"
 }
 
 variable "argo_cd_admin_password" {
