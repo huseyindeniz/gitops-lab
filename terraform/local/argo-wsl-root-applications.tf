@@ -17,7 +17,7 @@
 #     }
 
 #     destination {
-#       server    = "https://host.minikube.internal:8443"
+#       server    = var.wsl_cluster_server
 #       namespace = "wsl-cluster"
 #     }
 

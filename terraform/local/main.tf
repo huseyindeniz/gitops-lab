@@ -65,34 +65,34 @@ module "project001" {
   }
 }
 
-resource "kubernetes_config_map_v1" "argocd_notifications_cm" {
+# resource "kubernetes_config_map_v1" "argocd_notifications_cm" {
 
-  metadata {
-    name      = "project-001-wf-local-stag-2-notifications-cm"
-    namespace = "project-001-wf-local-stag-2"
-  }
+#   metadata {
+#     name      = "project-001-wf-local-stag-2-notifications-cm"
+#     namespace = "project-001-wf-local-stag-2"
+#   }
 
-  data = {
-    "template.trigger-ba-tests" = <<EOF
-webhook:
-  trigger-ba-tests:
-    method: POST
-    url: <GitHub-Actions-Repository-Dispatch-URL>
-    headers:
-      - name: Authorization
-        value: "token <GitHub-PAT>"
-      - name: Content-Type
-        value: application/json
-    body: |
-      {
-        "event_type": "ba-tests",
-        "client_payload": {
-          "app_name": "{{.app.metadata.name}}",
-          "env": "stag-2"
-          "image_tag": "{{.app.status.sync.revision}}"
-        }
-      }
-EOF
-  }
-}
+#   data = {
+#     "template.trigger-ba-tests" = <<EOF
+# webhook:
+#   trigger-ba-tests:
+#     method: POST
+#     url: <GitHub-Actions-Repository-Dispatch-URL>
+#     headers:
+#       - name: Authorization
+#         value: "token <GitHub-PAT>"
+#       - name: Content-Type
+#         value: application/json
+#     body: |
+#       {
+#         "event_type": "ba-tests",
+#         "client_payload": {
+#           "app_name": "{{.app.metadata.name}}",
+#           "env": "stag-2"
+#           "image_tag": "{{.app.status.sync.revision}}"
+#         }
+#       }
+# EOF
+#   }
+# }
 

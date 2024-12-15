@@ -1,6 +1,6 @@
 # resource "argocd_cluster" "wsl_cluster" {
 #   name   = "wsl-cluster-local"
-#   server = "https://host.minikube.internal:6443"
+#   server = var.wsl_cluster_server
 
 #   config {
 #     bearer_token = var.wsl_cluster_bearer_token
