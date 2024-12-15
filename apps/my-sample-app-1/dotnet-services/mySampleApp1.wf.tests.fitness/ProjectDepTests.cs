@@ -4,6 +4,8 @@ using NetArchTest.Rules;
 
 namespace mySampleApp1.wf.tests.fitness
 {
+    [Trait("Category", "Fitness")]
+    [Trait("Service", "weatherForecast")]
     public class ProjectDependencyTests
     {
         [Fact]
