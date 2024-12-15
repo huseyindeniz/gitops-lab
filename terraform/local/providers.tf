@@ -35,7 +35,7 @@ provider "github" {
 provider "argocd" {
   server_addr = "argocd.local"
   username    = "admin"
-  password    = module.local_argo.argo_cd_admin_password
+  password    = var.argo_cd_admin_password
   insecure    = true
 }
 

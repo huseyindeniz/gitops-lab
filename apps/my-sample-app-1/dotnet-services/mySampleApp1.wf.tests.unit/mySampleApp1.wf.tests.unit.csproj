@@ -10,6 +10,10 @@
     <ItemGroup>
         <PackageReference Include="AutoFixture.AutoMoq" Version="4.18.1" />
         <PackageReference Include="coverlet.collector" Version="6.0.2" />
+        <PackageReference Include="coverlet.msbuild" Version="6.0.2">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
         <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
