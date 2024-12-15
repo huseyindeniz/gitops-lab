@@ -1,17 +1,22 @@
 name: MySampleApp1 - BA Tests
 
-permissions:
-  pull-requests: write
-  contents: read
-  
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select the environment"
+        required: true
+        type: environment
 
 jobs:
   behaviour-tests:
     runs-on: arc-runner
 
     steps:
+    - name: Determine environment
+      run: |
+        echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+          
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
@@ -25,5 +30,5 @@ jobs:
       working-directory: ./apps/my-sample-app-1/dotnet-services/mySampleApp1.behaviourTests
       
     - name: Run tests
-      run: npm run test:stag-1
+      run: npm run test:${{env.SELECTED_ENV}}
       working-directory: ./apps/my-sample-app-1/dotnet-services/mySampleApp1.behaviourTests
