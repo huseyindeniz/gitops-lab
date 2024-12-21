@@ -36,6 +36,11 @@ jobs:
         id: time_calc
         run: echo "cutoff_time=$(date --utc --date='${{ inputs.last_day }}' +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
 
+      - name: Debug - Print all comments
+        run: |
+          echo "PR Comments:"
+          gh pr view "$PR_NUMBER" --json comments --jq '.comments | .[] | .body'
+    
       - name: Find Comment with Deployment tag
         id: fetch-recent-comments
         run: | 
