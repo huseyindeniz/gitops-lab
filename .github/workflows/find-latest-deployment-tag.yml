@@ -69,7 +69,7 @@ jobs:
               .createdAt > \"$LAST_DAY\" and \
               .author.login == \"github-actions\" and \
               (.body != null and .body != \"\") and \
-              (.body | test(\"Published image: msa1-wf-api-${{ inputs.env_name }}:ci-[0-9]+-[0-9]+\")) \
+              (.body | test(\"Published image: msa1-wf-api-${{ inputs.env_name }}:ci-\d+-\d+)) \
             ) | .body" | head -n 1)
 
           if [[ -z $VALID_COMMENT ]]; then
