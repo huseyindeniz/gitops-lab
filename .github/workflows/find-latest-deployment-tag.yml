@@ -40,7 +40,9 @@ jobs:
         run: |
           echo "PR Comments:"
           gh pr view "$PR_NUMBER" --json comments --jq '.comments | .[] | .body'
-    
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Find Comment with Deployment tag
         id: fetch-recent-comments
         run: | 
