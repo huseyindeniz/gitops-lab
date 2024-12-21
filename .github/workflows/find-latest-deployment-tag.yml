@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+
       - name: Get ISO timestamp for cutoff
         id: time_calc
         run: |
@@ -40,7 +40,7 @@ jobs:
           echo "Calculated cutoff time: $cutoff_time"
           echo "cutoff_time=$cutoff_time" >> $GITHUB_ENV
           echo "env_name is: ${{ inputs.env_name }}"
-          
+
       - name: Debug - Print all comments
         run: |
           echo "PR Comments (with createdAt, author, and date filter):"
@@ -53,16 +53,15 @@ jobs:
             ) | 
             "\(.createdAt) - \(.author.login): \(.body)"'
           echo "Cutoff time: ${{ env.cutoff_time }}"
-
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Find Comment with Deployment tag
         id: fetch-recent-comments
         run: |
           PR_NUMBER="${{ inputs.pr_number }}"
           LAST_DAY="${{ env.cutoff_time }}"
-        
+
           # Fetch latest comment matching the time condition, pattern, and author
           LATEST_VALID_COMMENT=$(gh pr view "$PR_NUMBER" --json comments --jq \
             ".comments | sort_by(.createdAt) | reverse | .[] | \
@@ -72,7 +71,7 @@ jobs:
               (.body | test(\"^Published image: msa1-wf-api-${{ inputs.env_name }}\")) \
             ) | .body"
           )
-        
+
           if [[ -z "$LATEST_VALID_COMMENT" ]]; then
             echo "No valid comment found."
             exit 1
