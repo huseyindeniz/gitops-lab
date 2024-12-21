@@ -42,8 +42,15 @@ jobs:
 
       - name: Debug - Print all comments
         run: |
-          echo "PR Comments:"
-          gh pr view "$PR_NUMBER" --json comments --jq '.comments | .[] | "\(.createdAt) - \(.author.login) - \(.body)"'
+          echo "PR Comments (with createdAt, author, and date filter):"
+          gh pr view "$PR_NUMBER" --json comments --jq '
+            .comments | 
+            .[] | 
+            select(
+              .createdAt > "${{ env.cutoff_time }}" 
+            ) | 
+            "\(.createdAt) - \(.author.login): \(.body)"'
+          echo "Cutoff time: ${{ env.cutoff_time }}"
 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
