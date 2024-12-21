@@ -19,4 +19,21 @@ jobs:
     name: Run Fitness Tests
     uses: ./.github/workflows/mySampleApp1-FitnessTests.yml
 
+  pr_status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set PR Status to Pending
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'pending',
+              context: 'CI/CD',
+              description: 'BA TESTS PENDING TO START',
+            });
+
     
