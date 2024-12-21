@@ -34,7 +34,11 @@ jobs:
       
       - name: Get ISO timestamp for cutoff
         id: time_calc
-        run: echo "cutoff_time=$(date --utc --date='${{ inputs.last_day }}' +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
+        run: |
+          # Get the cutoff time in UTC
+          cutoff_time=$(date --utc --date="${{ inputs.last_day }}" +%Y-%m-%dT%H:%M:%SZ)
+          echo "Calculated cutoff time: $cutoff_time"
+          echo "cutoff_time=$cutoff_time" >> $GITHUB_ENV
 
       - name: Debug - Print all comments
         run: |
