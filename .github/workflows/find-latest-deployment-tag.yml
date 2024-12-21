@@ -39,7 +39,8 @@ jobs:
       - name: Debug - Print all comments
         run: |
           echo "PR Comments:"
-          gh pr view "$PR_NUMBER" --json comments --jq '.comments | .[] | .body'
+          gh pr view "$PR_NUMBER" --json comments --jq '.comments | .[] | "\(.updatedAt) - \(.author.login): \(.body)"'
+
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
