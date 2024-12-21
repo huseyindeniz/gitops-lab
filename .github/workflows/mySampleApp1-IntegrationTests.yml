@@ -1,6 +1,7 @@
 name: MySampleApp1 - IntegrationTests
 
 on:
+  workflow_call:
   workflow_dispatch:
 
 jobs:        
