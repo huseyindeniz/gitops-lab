@@ -1,4 +1,4 @@
-name: Fetch PR Comment
+name: Find Latest Deployment Tag
 
 on:
   workflow_call:
@@ -29,6 +29,9 @@ jobs:
   search-deployment-tag:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
       - name: Get ISO timestamp for cutoff
         id: time_calc
         run: echo "cutoff_time=$(date --utc --date='${{ inputs.last_day }}' +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
