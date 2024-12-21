@@ -14,8 +14,17 @@ on:
         type: string
         default: 24 hours ago
   workflow_dispatch:
-    inputs: ${{ on.workflow_call.inputs }}
-    
+    inputs:
+      pr_number:
+        required: true
+        type: string
+      env_name:
+        required: true
+        type: string
+      last_day:
+        required: false
+        type: string
+        default: 24 hours ago
 jobs:
   search-deployment-tag:
     runs-on: ubuntu-latest
