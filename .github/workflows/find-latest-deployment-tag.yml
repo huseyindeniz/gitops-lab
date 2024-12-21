@@ -47,7 +47,7 @@ jobs:
             .comments | 
             .[] | 
             select(
-              .createdAt > "${{ env.cutoff_time }}" 
+              .createdAt > "${{ env.cutoff_time }}" and
               .author.login == "github-actions[bot]"
             ) | 
             "\(.createdAt) - \(.author.login): \(.body)"'
