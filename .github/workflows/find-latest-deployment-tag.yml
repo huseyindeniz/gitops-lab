@@ -77,7 +77,8 @@ jobs:
             exit 1
           else
             echo "Latest valid deployment tag found: $LATEST_VALID_COMMENT"
-            echo "comment_body=$LATEST_VALID_COMMENT" >> $GITHUB_ENV
+            TAG=$(echo "$LATEST_VALID_COMMENT" | grep -oP "(?<=^Published image: ).*")
+            echo "deployment_tag=$TAG" >> $GITHUB_ENV
           fi
 
         env:
