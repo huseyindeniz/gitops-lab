@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: apps/my-sample-app-1/dotnet-services
-          file: migration-bundle/weather-forecast/Dockerfile
+          file: apps/my-sample-app-1/dotnet-services/migration-bundle/weather-forecast/Dockerfile
           push: true
           tags: |
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
@@ -82,7 +82,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: apps/my-sample-app-1/dotnet-services
-          file: mySampleApp1.weatherForecast.API/Dockerfile
+          file: apps/my-sample-app-1/dotnet-services/mySampleApp1.weatherForecast.API/Dockerfile
           push: true
           tags: |
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
