@@ -70,7 +70,7 @@ jobs:
               .createdAt > \"$LAST_DAY\" and \
               .author.login == \"github-actions\" and \
               (.body | test("^Published image: msa1-wf-api-${{ inputs.env_name }}") ) \
-            ) | .body" | head -n 1)
+            ) | .body
 
           if [[ -z $LATEST_VALID_COMMENT ]]; then
             echo "No valid comment found."
