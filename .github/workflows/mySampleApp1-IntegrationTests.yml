@@ -1,9 +1,6 @@
 name: MySampleApp1 - IntegrationTests
 
 on:
-  pull_request:
-    paths:
-      - 'apps/my-sample-app-1/dotnet-services/**'
   workflow_dispatch:
 
 jobs:        

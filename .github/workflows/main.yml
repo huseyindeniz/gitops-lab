@@ -1,0 +1,22 @@
+name: MySampleApp1 - PR Policy
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/my-sample-app-1/dotnet-services/**'
+
+jobs:
+  runUnitTests:
+    name: Run Unit Tests
+    uses: ./.github/workflows/mySampleApp1-UnitTests.yml
+
+  runIntegrationTests:
+    name: Run Integration Tests
+    uses: ./.github/workflows/mySampleApp1-IntegrationTests.yml
+
+  runFitnessTests:
+    name: Run Fitness Tests
+    uses: ./.github/workflows/mySampleApp1-FitnessTests.yml
+
+    
