@@ -48,7 +48,7 @@ jobs:
             .[] | 
             select(
               .createdAt > "${{ env.cutoff_time }}" and
-              .author.login == "github-actions[bot]"
+              .author.login == "github-actions"
             ) | 
             "\(.createdAt) - \(.author.login): \(.body)"'
           echo "Cutoff time: ${{ env.cutoff_time }}"
