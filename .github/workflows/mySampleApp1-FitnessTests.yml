@@ -1,6 +1,7 @@
 name: MySampleApp1 - FitnessTests
 
 on:
+  workflow_call:
   workflow_dispatch:
 
 jobs:        
