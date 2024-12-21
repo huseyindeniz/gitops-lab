@@ -55,7 +55,7 @@ jobs:
             ".comments | sort_by(.createdAt) | reverse | .[] | \
             select( \
               .createdAt > \"$LAST_DAY\" and \
-              .author.login == \"github-actions[bot]\" and \
+              .author.login == \"github-actions\" and \
               (.body != null and .body != \"\") and \
               (.body | test(\"Published image: msa1-wf-api-${{ inputs.env_name }}:ci-[0-9]+-[0-9]+\")) \
             ) | .body" | head -n 1)
