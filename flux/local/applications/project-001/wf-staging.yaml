@@ -11,8 +11,8 @@ spec:
             servicePort: 5001
             host: "wf-stag-1.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "ci-12213711766-20241207143633" # {"$imagepolicy": "flux-system:project-001-wf-stag-1-app-image-policy:tag"}
-            imgMigrationTag: "ci-12213711766-20241207143544" # {"$imagepolicy": "flux-system:project-001-wf-stag-1-migration-image-policy:tag"}
+            imgTag: "ci-12443789174-20241221084552" # {"$imagepolicy": "flux-system:project-001-wf-stag-1-app-image-policy:tag"}
+            imgMigrationTag: "ci-12443789174-20241221084457" # {"$imagepolicy": "flux-system:project-001-wf-stag-1-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
