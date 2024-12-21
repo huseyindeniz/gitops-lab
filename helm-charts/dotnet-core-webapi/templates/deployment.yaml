@@ -9,6 +9,9 @@ metadata:
   name: {{ include "dotnet-core-webapi.fullname" . }}-deployment
   namespace: {{ include "dotnet-core-webapi.namespace" . }}
   labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
+  annotations:
+    environment: {{ .Values.environment | quote }}
+    notifications.argoproj.io/subscribe.project-001-wf-on-sync-succeeded: "true"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
