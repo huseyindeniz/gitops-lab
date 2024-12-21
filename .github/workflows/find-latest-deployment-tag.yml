@@ -34,37 +34,50 @@ jobs:
       
       - name: Get ISO timestamp for cutoff
         id: time_calc
-        run: echo "cutoff_time=$(date --utc --date='${{ inputs.last_day }}' +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
-
+        run: |
+          # Get the cutoff time in UTC
+          cutoff_time=$(date --utc --date="${{ inputs.last_day }}" +%Y-%m-%dT%H:%M:%SZ)
+          echo "Calculated cutoff time: $cutoff_time"
+          echo "cutoff_time=$cutoff_time" >> $GITHUB_ENV
+          echo "env_name is: ${{ inputs.env_name }}"
+          
       - name: Debug - Print all comments
         run: |
-          echo "PR Comments:"
-          gh pr view "$PR_NUMBER" --json comments --jq '.comments | .[] | .body'
+          echo "PR Comments (with createdAt, author, and date filter):"
+          gh pr view "$PR_NUMBER" --json comments --jq '
+            .comments | 
+            .[] | 
+            select(
+              .createdAt > "${{ env.cutoff_time }}" and
+              .author.login == "github-actions"
+            ) | 
+            "\(.createdAt) - \(.author.login): \(.body)"'
+          echo "Cutoff time: ${{ env.cutoff_time }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Find Comment with Deployment tag
         id: fetch-recent-comments
-        run: | 
+        run: |
           PR_NUMBER="${{ inputs.pr_number }}"
-          LAST_DAY=$cutoff_time
-          
+          LAST_DAY="${{ env.cutoff_time }}"
+        
           # Fetch latest comment matching the time condition, pattern, and author
-          LATEST_COMMENT=$(gh pr view "$PR_NUMBER" --json comments --jq \
-            ".comments | sort_by(.updatedAt) | reverse | .[] | \
+          LATEST_VALID_COMMENT=$(gh pr view "$PR_NUMBER" --json comments --jq \
+            ".comments | sort_by(.createdAt) | reverse | .[] | \
             select( \
-              .updatedAt > \"$LAST_DAY\" and \
-              .author.login == \"github-actions[bot]\" and \
-              (.body != null and .body != \"\") and \
-              (.body | test(\"Published image: msa1-wf-api-${{ inputs.env_name }}:ci-[0-9]+-[0-9]+\")) \
-            ) | .body" | head -n 1)
-
-          if [[ -z $VALID_COMMENT ]]; then
+              .createdAt > \"$LAST_DAY\" and \
+              .author.login == \"github-actions\" and \
+              (.body | test(\"^Published image: msa1-wf-api-${{ inputs.env_name }}\")) \
+            ) | .body"
+          )
+        
+          if [[ -z "$LATEST_VALID_COMMENT" ]]; then
             echo "No valid comment found."
             exit 1
           else
-            echo "Latest valid deployment tag found: $VALID_COMMENT"
-            echo "comment_body=$VALID_COMMENT" >> $GITHUB_ENV
+            echo "Latest valid deployment tag found: $LATEST_VALID_COMMENT"
+            echo "comment_body=$LATEST_VALID_COMMENT" >> $GITHUB_ENV
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
