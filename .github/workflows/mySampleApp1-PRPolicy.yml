@@ -28,7 +28,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const { owner, repo } = context.repo;
-            const sha = context.payload.issue.pull_request.head.sha; 
+            const sha = context.payload.pull_request.head.sha; 
             await github.rest.repos.createCommitStatus({
               owner: owner,
               repo: repo,
