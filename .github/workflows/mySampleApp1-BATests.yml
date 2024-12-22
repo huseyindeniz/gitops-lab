@@ -25,7 +25,6 @@ jobs:
         else
           echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
         fi
-        echo "selected env: ${{ env.SELECTED_ENV }}"
         
     - name: Determine pr number
       run: |
@@ -34,7 +33,6 @@ jobs:
         else
           echo "SELECTED_PR=${{ github.event.inputs.pr_number }}" >> $GITHUB_ENV
         fi
-        echo "selected pr: ${{ env.SELECTED_PR }}"
         
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -56,6 +54,23 @@ jobs:
     runs-on: ubuntu-latest
     needs: [behaviour-tests]
     steps:
+
+      - name: Determine environment
+        run: |
+          if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            echo "SELECTED_ENV=${{ github.event.client_payload.environment }}" >> $GITHUB_ENV
+          else
+            echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+          fi
+        
+      - name: Determine pr number
+        run: |
+          if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            echo "SELECTED_PR=${{ github.event.client_payload.pr_number }}" >> $GITHUB_ENV
+          else
+            echo "SELECTED_PR=${{ github.event.inputs.pr_number }}" >> $GITHUB_ENV
+          fi
+        
       - name: Set PR Status to Success
         uses: actions/github-script@v6
         with:
