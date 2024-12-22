@@ -66,53 +66,53 @@ module "project001" {
 }
 
 
-resource "kubernetes_secret" "flux_github_pat" {
-  metadata {
-    name      = "github-pat-secret"
-    namespace = "project-001-wf-local-stag-1"
-  }
+# resource "kubernetes_secret" "flux_github_pat" {
+#   metadata {
+#     name      = "github-pat-secret"
+#     namespace = "project-001-wf-local-stag-1"
+#   }
 
-  data = {
-    github_pat = var.flux_github_pat
-  }
+#   data = {
+#     github_pat = var.flux_github_pat
+#   }
 
-  type = "Opaque"
-}
+#   type = "Opaque"
+# }
 
-resource "kubernetes_config_map" "project_001_wf_local_stag_1_notifications_cm" {
-  metadata {
-    name      = "project-001-wf-local-stag-1-notifications-cm"
-    namespace = "project-001-wf-local-stag-1"
-  }
+# resource "kubernetes_config_map" "project_001_wf_local_stag_1_notifications_cm" {
+#   metadata {
+#     name      = "project-001-wf-local-stag-1-notifications-cm"
+#     namespace = "project-001-wf-local-stag-1"
+#   }
 
-  data = {
-    "subscriptions"             = <<EOF
-      - recipients:
-        - trigger-ba-tests
-      triggers:
-        - project-001-wf-on-sync-succeeded
-      EOF
-    "template.trigger-ba-tests" = <<EOF
-      webhook:
-        trigger-ba-tests:
-          method: POST
-          url: https://api.github.com/repos/huseyindeniz/gitops-lab/dispatches
-          headers:
-            - name: Authorization
-              value: ${var.flux_github_pat}
-            - name: Content-Type
-              value: application/json
-          body: |
-            {
-              "event_type": "mysampleapp1-ba-tests",
-              "client_payload": {
-                "app_name": "{{.app.metadata.name}}",
-                "environment": "stag-2",
-                "image_tag": "{{.app.status.sync.revision}}"
-                "pr_number": "8"
-              }
-            }
-      EOF
-  }
-}
+#   data = {
+#     "subscriptions"             = <<EOF
+#       - recipients:
+#         - trigger-ba-tests
+#       triggers:
+#         - project-001-wf-on-sync-succeeded
+#       EOF
+#     "template.trigger-ba-tests" = <<EOF
+#       webhook:
+#         trigger-ba-tests:
+#           method: POST
+#           url: https://api.github.com/repos/huseyindeniz/gitops-lab/dispatches
+#           headers:
+#             - name: Authorization
+#               value: ${var.flux_github_pat}
+#             - name: Content-Type
+#               value: application/json
+#           body: |
+#             {
+#               "event_type": "mysampleapp1-ba-tests",
+#               "client_payload": {
+#                 "app_name": "{{.app.metadata.name}}",
+#                 "environment": "stag-2",
+#                 "image_tag": "{{.app.status.sync.revision}}"
+#                 "pr_number": "8"
+#               }
+#             }
+#       EOF
+#   }
+# }
 
