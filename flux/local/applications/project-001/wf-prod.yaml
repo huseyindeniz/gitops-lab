@@ -22,7 +22,7 @@ spec:
             host: "wf-prod-canary.local"
             strategy: "canary" # standard, bluegreen, canary
             imgTag: "ci-12303940874-20241212200708" # {"$imagepolicy": "flux-system:project-001-wf-prod-canary-app-image-policy:tag"}
-            imgMigrationTag: "ci-12303940874-20241212200620" # {"$imagepolicy": "flux-system:project-001-wf-prod-canary-migration-image-policy:tag"}
+            imgMigrationTag: "ci-12453987008-20241222115354" # {"$imagepolicy": "flux-system:project-001-wf-prod-canary-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
