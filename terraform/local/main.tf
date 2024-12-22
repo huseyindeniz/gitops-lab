@@ -65,6 +65,20 @@ module "project001" {
   }
 }
 
+
+resource "kubernetes_secret" "flux_github_pat" {
+  metadata {
+    name      = "github-pat-secret"
+    namespace = "project-001-wf-local-stag-1"
+  }
+
+  data = {
+    github_pat = var.flux_github_pat
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_config_map" "project_001_wf_local_stag_1_notifications_cm" {
   metadata {
     name      = "project-001-wf-local-stag-1-notifications-cm"
@@ -74,7 +88,7 @@ resource "kubernetes_config_map" "project_001_wf_local_stag_1_notifications_cm" 
   data = {
     "subscriptions"             = <<EOF
       - recipients:
-        - webhook:https://api.github.com/repos/huseyindeniz/gitops-lab/dispatches
+        - trigger-ba-tests
       triggers:
         - project-001-wf-on-sync-succeeded
       EOF
@@ -82,7 +96,7 @@ resource "kubernetes_config_map" "project_001_wf_local_stag_1_notifications_cm" 
       webhook:
         trigger-ba-tests:
           method: POST
-          url: https://api.github.com/repos/OWNER/REPO/dispatches
+          url: https://api.github.com/repos/huseyindeniz/gitops-lab/dispatches
           headers:
             - name: Authorization
               value: ${var.flux_github_pat}
