@@ -12,7 +12,7 @@ on:
         required: true
         type: environment
       pr_number:
-        description: "Pull request number (required for comments)"
+        description: "Pull request number"
         required: false
         type: string
 
@@ -20,6 +20,19 @@ jobs:
          
   publish-wf-migration-image:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - weatherForecast-api
+          - weatherForecast-migration
+        include:
+          - service: weatherForecast-api
+            image_name_prefix: msa1-wf-api
+            docker_file: apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.fitness
+          - service: weatherForecast-migration
+            image_name_prefix: msa1-wf-migration
+            docker_file: apps/my-sample-app-1/dotnet-services/migration-bundle/weather-forecast/Dockerfile
+            
     steps:
       - name: Determine environment
         run: |
@@ -36,62 +49,22 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: docker.io
-          username: ${{ secrets.DOCKER_HUB_USERNAME }} # Store your Docker Hub username in GitHub Secrets
-          password: ${{ secrets.DOCKER_HUB_TOKEN }} # Store your Docker Hub access token or password in GitHub Secrets
-      - name: Build and push migration Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: apps/my-sample-app-1/dotnet-services
-          file: apps/my-sample-app-1/dotnet-services/migration-bundle/weather-forecast/Dockerfile
-          push: true
-          tags: |
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
-      - name: Log out from Docker Hub
-        run: docker logout docker.io
-      - name: Add PR comment
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pr_number }}
-        run: |
-          gh pr comment ${{ github.event.inputs.pr_number }} \
-          --body "Published image: msa1-wf-migration-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-   # Step 2: Build and push API image (depends on migration image)      
-  publish-wf-api:
-    runs-on: ubuntu-latest
-    needs: [publish-wf-migration-image]
-    steps:
-      - name: Determine environment
-        run: |
-          echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
-      - name: Get current timestamp
-        run: |
-          export LC_ALL=C
-          echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV    
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          registry: docker.io
-          username: ${{ secrets.DOCKER_HUB_USERNAME }} # Store your Docker Hub username in GitHub Secrets
-          password: ${{ secrets.DOCKER_HUB_TOKEN }} # Store your Docker Hub access token or password in GitHub Secrets
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: apps/my-sample-app-1/dotnet-services
-          file: apps/my-sample-app-1/dotnet-services/mySampleApp1.weatherForecast.API/Dockerfile
+          file: ${{ matrix.docker_file }}
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
+            docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ matrix.image_name_prefix }}-${{ env.SELECTED_ENV }}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}
       - name: Log out from Docker Hub
         run: docker logout docker.io
       - name: Add PR comment
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pr_number }}
         run: |
           gh pr comment ${{ github.event.inputs.pr_number }} \
-          --body "Published image: msa1-wf-api-${{env.SELECTED_ENV}}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}"
+          --body "🎉 Published image: ${{ matrix.image_name_prefix }}-${{ env.SELECTED_ENV }}:ci-${{ github.run_id }}-${{ env.TIMESTAMP }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
