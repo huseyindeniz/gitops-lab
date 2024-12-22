@@ -99,7 +99,7 @@ resource "kubernetes_config_map" "project_001_wf_local_stag_1_notifications_cm" 
           url: https://api.github.com/repos/huseyindeniz/gitops-lab/dispatches
           headers:
             - name: Authorization
-              value: ${kubernetes_secret.flux_github_pat.metadata[0].name}
+              value: ${var.flux_github_pat}
             - name: Content-Type
               value: application/json
           body: |
