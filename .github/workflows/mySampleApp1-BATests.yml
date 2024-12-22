@@ -9,7 +9,10 @@ on:
         description: "Select the environment"
         required: true
         type: environment
-
+      pr_number:
+        description: "Enter the PR number"
+        required: true
+        type: string
 jobs:
   behaviour-tests:
     runs-on: arc-runner
@@ -22,7 +25,15 @@ jobs:
         else
           echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
         fi
-          
+
+    - name: Determine pr number
+      run: |
+        if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+          echo "SELECTED_PR=${{ github.event.client_payload.pr_number }}" >> $GITHUB_ENV
+        else
+          echo "SELECTED_PR=${{ github.event.inputs.pr_number }}" >> $GITHUB_ENV
+        fi
+        
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
@@ -36,7 +47,7 @@ jobs:
       working-directory: ./apps/my-sample-app-1/mySampleApp1.behaviourTests
      
     - name: Run tests
-      run: npm run test:${{env.SELECTED_ENV}}
+      run: npm run test:${{ env.SELECTED_ENV }}
       working-directory: ./apps/my-sample-app-1/mySampleApp1.behaviourTests
 
   pr_status:
@@ -46,9 +57,17 @@ jobs:
       - name: Set PR Status to Success
         uses: actions/github-script@v6
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { owner, repo } = context.repo;
+            // Fetch the latest commit SHA for the provided PR number
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner,
+              repo,
+              pull_number: ${{ env.SELECTED_PR }}
+            });
+            const sha = pullRequest.head.sha; // Get the SHA of the latest commit in the PR
+
             const sha = context.payload.pull_request.head.sha; 
             await github.rest.repos.createCommitStatus({
               owner: owner,
