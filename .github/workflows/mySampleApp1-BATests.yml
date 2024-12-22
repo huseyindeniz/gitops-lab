@@ -67,8 +67,6 @@ jobs:
               pull_number: ${{ env.SELECTED_PR }}
             });
             const sha = pullRequest.head.sha; // Get the SHA of the latest commit in the PR
-
-            const sha = context.payload.pull_request.head.sha; 
             await github.rest.repos.createCommitStatus({
               owner: owner,
               repo: repo,
