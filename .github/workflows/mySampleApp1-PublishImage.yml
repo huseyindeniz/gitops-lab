@@ -18,7 +18,7 @@ on:
 
 jobs:
          
-  publish-wf-migration-image:
+  publish-image:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,7 +28,7 @@ jobs:
         include:
           - service: weatherForecast-api
             image_name_prefix: msa1-wf-api
-            docker_file: apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.fitness
+            docker_file: apps/my-sample-app-1/dotnet-services/mySampleApp1.weatherForecast.API/Dockerfile
           - service: weatherForecast-migration
             image_name_prefix: msa1-wf-migration
             docker_file: apps/my-sample-app-1/dotnet-services/migration-bundle/weather-forecast/Dockerfile
