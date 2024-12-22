@@ -97,10 +97,10 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
   - ✅ Unit Tests (on github runners)
   - ✅ Integration Tests (on github runners)
-  - 🔲 Fitness Tests (on github runners)
+  - ✅ Fitness Tests (on github runners)
   - ✅ BA Tests (on arc runners)
 
-- 🔲 Create a Staging CI/CD Pipeline
+- ✅ Create a Staging CI/CD Pipeline
 - 🔲 Create a Production CI/CD Pipeline
 
 ### Enhanced Observability
