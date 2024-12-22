@@ -1,6 +1,8 @@
 name: MySampleApp1 - BA Tests
 
 on:
+  repository_dispatch:
+    types: [mysampleapp1-ba-tests]    
   workflow_dispatch:
     inputs:
       environment:
@@ -15,7 +17,11 @@ jobs:
     steps:
     - name: Determine environment
       run: |
-        echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+        if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+          echo "SELECTED_ENV=${{ github.event.client_payload.environment }}" >> $GITHUB_ENV
+        else
+          echo "SELECTED_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+        fi
           
     - name: Setup Node.js
       uses: actions/setup-node@v3
