@@ -8,6 +8,7 @@ spec:
     - list:
         elements:
           - envName: prod-bluegreen
+            enabled: false
             servicePort: 6001
             servicePreviewPort: 6002
             host: "wf-prod-bg.local"
@@ -17,6 +18,7 @@ spec:
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: prod-canary
+            enabled: false
             servicePort: 6003
             servicePreviewPort: 6004
             host: "wf-prod-canary.local"
@@ -30,6 +32,7 @@ spec:
   template:
     metadata:
       name: "project-001-wf-{{.envName}}"
+    when: "{{ eq .enabled true }}"
     spec:
       project: default
       source:
