@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: jupyterlab-app
+  name: jupyterhub-app
   namespace: argo-local
 spec:
   generators: []
@@ -9,17 +9,17 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: "jupyterlab-app"
+      name: "jupyterhub-app"
     spec:
       project: default
       source:
-        repoURL: https://maastrichtu-ids.github.io/dsri-helm-charts
-        chart: jupyterlab
-        targetRevision: 0.1.38
+        repoURL: https://hub.jupyter.org/helm-chart/
+        chart: jupyterhub
+        targetRevision: 5.2.1
         helm:
           valueFiles:
             - values.yaml
-            - $valuesRef/flux/wsl/values/jupyterlab-values.yaml
+            - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "default"
