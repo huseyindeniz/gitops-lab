@@ -14,7 +14,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        # - $valuesRef/flux/wsl/values/busybox-values.yaml
+        - $valuesRef/flux/wsl/values/busybox-values.yaml
   syncPolicy:
     automated:
       prune: true
