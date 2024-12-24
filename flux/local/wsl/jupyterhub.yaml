@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: jupyterhub-app
-  namespace: default
+  namespace: argo-local
 spec:
   generators: []
   goTemplate: true
