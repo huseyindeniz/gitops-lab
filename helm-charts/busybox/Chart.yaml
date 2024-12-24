@@ -1,0 +1,4 @@
+apiVersion: v2
+name: busybox
+description: Minimal Helm chart for BusyBox
+version: 0.1.0

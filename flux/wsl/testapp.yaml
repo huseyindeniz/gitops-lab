@@ -1,27 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: busybox-app
+  name: test-busybox-appset
 spec:
-  project: default
-  destination:
-    server: "https://172.17.0.5:8443"
-    namespace: argo-wsl
-  source:
-    repoURL: https://jfelten.github.io/helm-charts/charts
-    chart: busybox
-    targetRevision: 0.1.0
-    helm:
-      valueFiles:
-        - values.yaml
-        - $valuesRef/flux/wsl/values/busybox-values.yaml
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-      allowEmpty: false
-    retry:
-      limit: 1
-      backoff:
-        duration: 10s
-        maxDuration: 30s
+  generators:
+    - list:
+        elements:
+          - test
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  template:
+    metadata:
+      name: "test-busybox"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/huseyindeniz/gitops-lab.git
+        targetRevision: main
+        path: "helm-charts/busybox"
+      destination:
+        server: "https://172.17.0.5:8443"
+        namespace: argo-wsl
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        retry:
+          limit: 1
