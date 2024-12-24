@@ -39,4 +39,3 @@ variable "flux_github_token" {
   sensitive   = true
   type        = string
 }
-

@@ -18,7 +18,7 @@ resource "argocd_application" "argo_wsl_root_applications" {
 
     destination {
       server    = var.wsl_cluster_server
-      namespace = "wsl-cluster"
+      namespace = "argo-wsl"
     }
 
     sync_policy {
