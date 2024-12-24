@@ -10,7 +10,7 @@ resource "argocd_application" "argo_wsl_root_applications" {
     source {
       repo_url        = local.gitopslab_repo_url
       target_revision = "main"
-      path            = "${var.flux_path}/wsl"
+      path            = "flux/wsl"
       directory {
         recurse = true
       }
