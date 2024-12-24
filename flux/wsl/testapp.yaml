@@ -6,7 +6,7 @@ spec:
   generators:
     - list:
         elements:
-          - test
+          - test: test
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
