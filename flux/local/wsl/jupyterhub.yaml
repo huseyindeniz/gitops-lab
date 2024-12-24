@@ -1,34 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
+kind: Application
 metadata:
-  name: jupyterhub-app
-  namespace: default
+  name: jupyterhub
+  namespace: argo-wsl
 spec:
-  generators: []
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
-  template:
-    metadata:
-      name: "jupyterhub-app"
-    spec:
-      project: default
-      source:
-        repoURL: https://hub.jupyter.org/helm-chart/
-        chart: jupyterhub
-        targetRevision: 5.2.1
-        helm:
-          valueFiles:
-            - values.yaml
-            - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
-      destination:
-        server: "https://172.17.0.5:8443"
-        namespace: "default"
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-          allowEmpty: false
-        retry:
-          limit: 1
-        syncOptions:
-          - SkipHooksOnError=true
+  project: default
+  source:
+    repoURL: https://hub.jupyter.org/helm-chart/
+    chart: jupyterhub
+    targetRevision: 5.2.1
+    helm:
+      valueFiles:
+        - values.yaml
+        - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
+  destination:
+    server: "https://172.17.0.5:8443"
+    namespace: argo-wsl
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 1
+    syncOptions:
+      - SkipHooksOnError=true
