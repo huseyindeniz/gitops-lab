@@ -8,15 +8,19 @@ spec:
   destination:
     server: "https://172.17.0.5:8443"
     namespace: argo-wsl
-  template:
-    spec:
-      containers:
-        - name: nvidia-smi
-          image: nvidia/cuda:11.8.0-base-ubuntu22.04
-          command: ["nvidia-smi"]
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "4Gi"
-              nvidia.com/gpu: "1"
-      restartPolicy: Never
+  containers:
+    - name: nvidia-smi
+      image: nvidia/cuda:11.8.0-base-ubuntu22.04
+      command: ["nvidia-smi"]
+      resources:
+        limits:
+          cpu: "500m"
+          memory: "4Gi"
+          nvidia.com/gpu: "1"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 1
