@@ -8,7 +8,10 @@ spec:
   source:
     repoURL: https://hub.jupyter.org/helm-chart/
     chart: jupyterhub
+    path: ""
     targetRevision: 4.0.0
+    directory:
+      recurse: true
     helm:
       valueFiles:
         - values.yaml
