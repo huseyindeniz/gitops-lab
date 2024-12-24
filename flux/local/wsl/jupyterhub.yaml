@@ -5,29 +5,28 @@ metadata:
   namespace: default
 spec:
   generators:
-    - list:
-        elements:
-          - name: "jupyterhub-app"
-            namespace: "default"
-            revision: "5.2.1"
+    - cluster:
+        selector:
+          matchLabels:
+            kubernetes.io/cluster-service: "true"
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: "{{name}}"
+      name: "jupyterhub-app"
     spec:
       project: default
       source:
         repoURL: https://hub.jupyter.org/helm-chart/
         chart: jupyterhub
-        targetRevision: "{{revision}}"
+        targetRevision: "5.2.1"
         helm:
           valueFiles:
             - values.yaml
             - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
       destination:
         server: "https://172.17.0.5:8443"
-        namespace: "{{namespace}}"
+        namespace: "default"
       syncPolicy:
         automated:
           prune: true
