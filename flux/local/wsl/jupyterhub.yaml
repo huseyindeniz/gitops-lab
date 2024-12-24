@@ -2,20 +2,18 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: jupyterhub-app
-  namespace: argo-wsl
 spec:
   project: default
   source:
     repoURL: https://hub.jupyter.org/helm-chart/
     chart: jupyterhub
     path: ""
-    targetRevision: 4.0.0
+    targetRevision: 3.3.8
     directory:
       recurse: true
     helm:
       valueFiles:
         - values.yaml
-        - $valuesRef/flux/local/wsl/values/jupyterhub-values.yaml
   destination:
     server: "https://172.17.0.5:8443"
     namespace: argo-wsl
