@@ -2,13 +2,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: jupyterhub-app
-  namespace: wsl-cluster
+  namespace: default
 spec:
   generators:
     - list:
         elements:
           - name: "jupyterhub-app"
-            namespace: "wsl-cluster"
+            namespace: "default"
             revision: "4.0.0"
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
