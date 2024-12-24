@@ -1,39 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
+kind: Application
 metadata:
   name: jupyterhub-app
   namespace: default
 spec:
-  generators:
-    - list:
-        elements:
-          - name: "jupyterhub-app"
-            namespace: "default"
-            revision: "4.0.0"
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
-  template:
-    metadata:
-      name: "{{ name }}"
-    spec:
-      project: default
-      source:
-        repoURL: https://hub.jupyter.org/helm-chart/
-        chart: jupyterhub/jupyterhub
-        targetRevision: "{{ revision }}"
-        helm:
-          valueFiles:
-            - values.yaml
-            - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
-      destination:
-        server: "https://172.17.0.5:8443"
-        namespace: "{{ namespace }}"
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-          allowEmpty: false
-        retry:
-          limit: 1
-        syncOptions:
-          - SkipHooksOnError=true
+  project: default
+  source:
+    repoURL: https://hub.jupyter.org/helm-chart/
+    chart: jupyterhub/jupyterhub
+    targetRevision: 4.0.0
+    helm:
+      valueFiles:
+        - values.yaml
+        - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
+  destination:
+    server: "https://172.17.0.5:8443"
+    namespace: "{{ namespace }}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 1
+      backoff:
+        duration: 10s # Time between retries (e.g., 10 seconds)
+        maxDuration: 30s # Maximum time between retries (e.g., 30 seconds)
+    syncOptions:
+      - SkipHooksOnError=true
