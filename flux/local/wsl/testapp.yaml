@@ -9,7 +9,8 @@ spec:
     namespace: argo-wsl
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    chart: busybox
+    chart: pytorch
+    targetRevision: 4.3.0
     helm:
       values: |
         command: "echo 'Hello, World!' && sleep 3600"
