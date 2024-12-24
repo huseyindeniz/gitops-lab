@@ -1,9 +1,10 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: gpu-test-job
+  name: gpu-test-app
   namespace: argo-local
 spec:
+  project: default
   destination:
     server: "https://172.17.0.5:8443"
     namespace: argo-wsl
