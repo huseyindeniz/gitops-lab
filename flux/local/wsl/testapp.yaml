@@ -10,7 +10,6 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: busybox
-    targetRevision: 10.0.0 # Replace with the latest chart version
     helm:
       values: |
         command: "echo 'Hello, World!' && sleep 3600"
