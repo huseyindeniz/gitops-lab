@@ -12,8 +12,6 @@ spec:
           command: ["nvidia-smi"]
           resources:
             limits:
-              cpu: "500m"
-              memory: "4Gi"
               nvidia.com/gpu: "1"
       restartPolicy: Never
   backoffLimit: 0

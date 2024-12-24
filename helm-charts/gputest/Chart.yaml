@@ -1,0 +1,4 @@
+apiVersion: v2
+name: gputest
+description: Minimal Helm chart for gpu test on cluster
+version: 0.1.0

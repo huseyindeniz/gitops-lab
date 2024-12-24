@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: test-busybox-appset
+  name: test-gpu-appset
 spec:
   generators:
     - list:
@@ -11,13 +11,13 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: "test-busybox-app"
+      name: "test-gpu-app"
     spec:
       project: default
       source:
         repoURL: https://github.com/huseyindeniz/gitops-lab.git
         targetRevision: main
-        path: "helm-charts/busybox"
+        path: "helm-charts/gputest"
       destination:
         server: "https://172.17.0.5:8443"
         namespace: argo-wsl
