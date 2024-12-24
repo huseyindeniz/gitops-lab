@@ -15,7 +15,7 @@ spec:
         - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
   destination:
     server: "https://172.17.0.5:8443"
-    namespace: "{{ namespace }}"
+    namespace: default
   syncPolicy:
     automated:
       prune: true
