@@ -2,6 +2,7 @@
 # kind: Application
 # metadata:
 #   name: busybox-app
+#   namespace: argo-local
 # spec:
 #   project: default
 #   destination:
