@@ -12,7 +12,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
+        - $valuesRef/flux/local/wsl/values/jupyterhub-values.yaml
   destination:
     server: "https://172.17.0.5:8443"
     namespace: argo-wsl
