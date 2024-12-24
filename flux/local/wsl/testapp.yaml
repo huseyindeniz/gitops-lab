@@ -2,8 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: busybox-app
+  namespace: argo-local
 spec:
   project: default
+  destination:
+    name: wsl-cluster-local
+    namespace: argo-wsl
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: busybox
@@ -11,9 +15,6 @@ spec:
     helm:
       values: |
         command: "echo 'Hello, World!' && sleep 3600"
-  destination:
-    server: "https://172.17.0.5:8443"
-    namespace: argo-wsl
   syncPolicy:
     automated:
       prune: true

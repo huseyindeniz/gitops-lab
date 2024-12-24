@@ -2,10 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: gpu-test-job
-  namespace: argo-wsl
+  namespace: argo-local
 spec:
   destination:
-    server: "https://172.17.0.5:8443"
+    name: wsl-cluster-local
     namespace: argo-wsl
   template:
     spec:
