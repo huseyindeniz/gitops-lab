@@ -5,28 +5,29 @@ metadata:
   namespace: default
 spec:
   generators:
-    - cluster:
-        selector:
-          matchLabels:
-            name: wsl-cluster-local
+    - list:
+        elements:
+          - name: "jupyterhub-app"
+            namespace: "default"
+            revision: "5.2.1"
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: "jupyterhub-app"
+      name: "{{ name }}"
     spec:
       project: default
       source:
         repoURL: https://hub.jupyter.org/helm-chart/
         chart: jupyterhub
-        targetRevision: "5.2.1"
+        targetRevision: "{{ revision }}"
         helm:
           valueFiles:
             - values.yaml
             - $valuesRef/flux/wsl/values/jupyterhub-values.yaml
       destination:
         server: "https://172.17.0.5:8443"
-        namespace: "default"
+        namespace: "{{ namespace }}"
       syncPolicy:
         automated:
           prune: true
