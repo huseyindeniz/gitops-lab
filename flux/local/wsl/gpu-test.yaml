@@ -4,6 +4,9 @@ metadata:
   name: gpu-test-job
   namespace: argo-wsl
 spec:
+  destination:
+    server: "https://172.17.0.5:8443"
+    namespace: argo-wsl
   template:
     spec:
       containers:
