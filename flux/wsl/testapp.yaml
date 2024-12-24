@@ -11,7 +11,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: "test-busybox"
+      name: "test-busybox-app"
     spec:
       project: default
       source:
