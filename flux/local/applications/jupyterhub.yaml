@@ -15,8 +15,8 @@ spec:
       valueFiles:
         - values.yaml
   destination:
-    server: "https://172.17.0.5:8443"
-    namespace: argo-wsl
+    server: "https://kubernetes.default.svc"
+    namespace: argo-local
   syncPolicy:
     automated:
       prune: true
