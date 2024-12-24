@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: busybox-app
-  namespace: argo-local
+  namespace: argo-wsl
 spec:
   project: default
   destination:
