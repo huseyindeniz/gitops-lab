@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: test-busybox-appset
-  namespace: argo-wsl
 spec:
   generators:
     - list:

@@ -17,8 +17,10 @@ resource "argocd_application" "argo_wsl_root_applications" {
     }
 
     destination {
-      server    = var.wsl_cluster_server
-      namespace = "argo-wsl"
+      # server    = var.wsl_cluster_server
+      # namespace = "argo-wsl"
+      server    = "https://kubernetes.default.svc"
+      namespace = var.argo_namespace
     }
 
     sync_policy {
