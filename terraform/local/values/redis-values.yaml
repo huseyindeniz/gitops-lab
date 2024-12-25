@@ -1,0 +1,16 @@
+architecture: standalone
+
+replica:
+  replicaCount: 2
+
+auth:
+  enabled: true
+  password: "12345"
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: "standard"
+
+metrics:
+  enabled: true
