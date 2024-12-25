@@ -29,11 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: ${{ fromJson(github.event.inputs.service) || 
-          [
-            'weatherForecast-api',
-            'weatherForecast-migration'
-          ] }}
+        service: ${{ fromJson(github.event.inputs.service) }}
         include:
           - service: weatherForecast-api
             image_name_prefix: msa1-wf-api
