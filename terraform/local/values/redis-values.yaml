@@ -1,16 +1,20 @@
 architecture: standalone
 
 replica:
-  replicaCount: 2
+  replicaCount: 1
 
 auth:
   enabled: true
   password: "12345"
 
-persistence:
+volumePermissions:
   enabled: true
-  size: 1Gi
-  storageClass: "standard"
+
+master:
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: "standard"
 
 metrics:
   enabled: true
