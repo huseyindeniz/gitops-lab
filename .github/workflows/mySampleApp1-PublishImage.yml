@@ -15,16 +15,25 @@ on:
         description: "Pull request number"
         required: false
         type: string
-
+      service:
+        description: "Select service(s) to build. Leave blank for all."
+        required: false
+        type: choice
+        options:
+          - weatherForecast-api
+          - weatherForecast-migration  
+          
 jobs:
          
   publish-image:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service:
-          - weatherForecast-api
-          - weatherForecast-migration
+        service: ${{ fromJson(github.event.inputs.service) || 
+          [
+            'weatherForecast-api',
+            'weatherForecast-migration'
+          ] }}
         include:
           - service: weatherForecast-api
             image_name_prefix: msa1-wf-api
