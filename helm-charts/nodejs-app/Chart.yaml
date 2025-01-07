@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nodejs-app
+description: generic nodejs app with ngnix proxy_pass
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

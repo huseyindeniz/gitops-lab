@@ -11,6 +11,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:docker": "tsc && vite build --mode docker",
+    "build:staging": "tsc && vite build --mode staging",
     "lint": "eslint . --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
