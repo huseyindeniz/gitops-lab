@@ -6,25 +6,14 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build${BUILD_ENV}
+RUN npm run build:${BUILD_ENV}
 # Prune dev dependencies to save space
 RUN npm prune --production
 
 # Runtime image
 FROM nginx:alpine AS final
 
-ARG BACKEND_URL=
-
 COPY --from=build /app/build /usr/share/nginx/html
-COPY --from=build /app/nginx/nginx.conf /etc/nginx/nginx.conf
-
-# RUN cat /etc/nginx/nginx.conf
-ENV PROXY_PASS=${BACKEND_URL}
-
-# Replace placeholder with actual URL in the nginx config
-RUN envsubst '${PROXY_PASS}' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp \
-    && cat /etc/nginx/nginx.conf.tmp \
-    && mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

@@ -28,9 +28,9 @@ services:
   proxy:
     build:
       context: ./client
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.local
       args:
-        BUILD_ENV: :docker
+        BUILD_ENV: docker
         BACKEND_URL: http://host.docker.internal:2567
     ports:
       - 8080:80
