@@ -1,11 +1,11 @@
-name: SampleGame - Build and push Docker images
+name: SampleGame Server - Build and push Docker images
 
 on:
   workflow_dispatch:
 
 jobs:
          
-  publish-server:
+  build-push:
     runs-on: ubuntu-latest
     steps:
       - name: Get current timestamp
