@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: huseyindeniz/sample-game-client-staging
+  pullPolicy: Always
+  tag: "20250107184508"
+
+nameOverride: "sample-game-client"
+fullnameOverride: "sample-game-client-staging"
+
+podAnnotations: {}
+podLabels: {}
+
+service:
+  type: LoadBalancer
+  port: 80
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: sample-game-client-staging.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
