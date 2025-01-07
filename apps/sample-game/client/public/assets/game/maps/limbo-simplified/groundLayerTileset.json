@@ -1,0 +1,41 @@
+{
+	"textures": [
+		{
+			"image": "groundLayerTileset.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 4096,
+				"h": 2560
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "limbo-ground",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4096,
+						"h": 2560
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 2560
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 4096,
+						"h": 2560
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:7b2f3813ef78805b7f28a2f4fe8edd72:0661b8ef48a2093c618390c81f220d0f:41861668ca81fff72647c5bac516944b$"
+	}
+}

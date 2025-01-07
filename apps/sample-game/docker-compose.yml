@@ -1,0 +1,44 @@
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - 6380:6379
+    command: ["redis-server"]
+    networks:
+      - sample-game-app-network
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  game-server:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+      args:
+        BUILD_ENV: docker
+    ports:
+      - 2567:2567
+    networks:
+      - sample-game-app-network
+    depends_on:
+      - redis
+
+  proxy:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+      args:
+        BUILD_ENV: :docker
+        BACKEND_URL: http://host.docker.internal:2567
+    ports:
+      - 8080:80
+    depends_on:
+      - game-server
+    networks:
+      - sample-game-app-network
+
+networks:
+  sample-game-app-network:
+    driver: bridge

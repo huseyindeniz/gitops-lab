@@ -1,0 +1,570 @@
+{
+	"textures": [
+		{
+			"image": "tilesetTank.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 431,
+				"h": 744
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "panel",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 420,
+						"h": 82
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 420,
+						"h": 82
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 420,
+						"h": 82
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tank-radar",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 319,
+						"h": 438
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 319,
+						"h": 438
+					},
+					"frame": {
+						"x": 1,
+						"y": 85,
+						"w": 319,
+						"h": 438
+					},
+					"anchor": {
+						"x": 0.00940439,
+						"y": 0.490868
+					}
+				},
+				{
+					"filename": "blackSmoke01",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 239,
+						"h": 218
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 239,
+						"h": 218
+					},
+					"frame": {
+						"x": 1,
+						"y": 525,
+						"w": 239,
+						"h": 218
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "gauge2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 108,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 108,
+						"h": 144
+					},
+					"frame": {
+						"x": 322,
+						"y": 85,
+						"w": 108,
+						"h": 144
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "gauge3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 108,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 108,
+						"h": 144
+					},
+					"frame": {
+						"x": 322,
+						"y": 231,
+						"w": 108,
+						"h": 144
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "gauge1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 107,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 107,
+						"h": 144
+					},
+					"frame": {
+						"x": 322,
+						"y": 377,
+						"w": 107,
+						"h": 144
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tank-turret-asmodeus",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 322,
+						"y": 523,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.28985,
+						"y": 0.48387
+					}
+				},
+				{
+					"filename": "crosshair",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 393,
+						"y": 523,
+						"w": 32,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tank-turret-beelzebub",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 242,
+						"y": 525,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.28985,
+						"y": 0.48387
+					}
+				},
+				{
+					"filename": "tank-turret-belphegor",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 313,
+						"y": 556,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.28985,
+						"y": 0.48387
+					}
+				},
+				{
+					"filename": "tank-turret-leviethan",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 242,
+						"y": 558,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.28985,
+						"y": 0.48387
+					}
+				},
+				{
+					"filename": "light-off",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 384,
+						"y": 557,
+						"w": 24,
+						"h": 24
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "gauge1-pointer",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 32
+					},
+					"frame": {
+						"x": 410,
+						"y": 557,
+						"w": 12,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.470588,
+						"y": 0.804348
+					}
+				},
+				{
+					"filename": "light-on",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 384,
+						"y": 583,
+						"w": 24,
+						"h": 24
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tank-turret-lucifer",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 313,
+						"y": 589,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.28985,
+						"y": 0.48387
+					}
+				},
+				{
+					"filename": "tank-turret-mammon",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 242,
+						"y": 591,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.28985,
+						"y": 0.48387
+					}
+				},
+				{
+					"filename": "tank-turret-satan",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 313,
+						"y": 622,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.28985,
+						"y": 0.48387
+					}
+				},
+				{
+					"filename": "tank-turret",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 69,
+						"h": 31
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 31
+					},
+					"frame": {
+						"x": 242,
+						"y": 624,
+						"w": 69,
+						"h": 31
+					},
+					"anchor": {
+						"x": 0.289855,
+						"y": 0.483871
+					}
+				},
+				{
+					"filename": "power-off",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 53,
+						"h": 55
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 53,
+						"h": 55
+					},
+					"frame": {
+						"x": 242,
+						"y": 657,
+						"w": 53,
+						"h": 55
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "sniper-shell",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 128,
+						"h": 128
+					},
+					"spriteSourceSize": {
+						"x": 38,
+						"y": 57,
+						"w": 52,
+						"h": 13
+					},
+					"frame": {
+						"x": 242,
+						"y": 714,
+						"w": 52,
+						"h": 13
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "power-on",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 53,
+						"h": 55
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 53,
+						"h": 55
+					},
+					"frame": {
+						"x": 297,
+						"y": 657,
+						"w": 53,
+						"h": 55
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "tank-base",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 66,
+						"h": 52
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 66,
+						"h": 52
+					},
+					"frame": {
+						"x": 352,
+						"y": 655,
+						"w": 66,
+						"h": 52
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:8de3ddbbd09ca32a60f6b3c2df32cdfe:1cd97e24227ad5777e2afae7162ea706:a75d1ba547b593ff32de5abec50c50e7$"
+	}
+}

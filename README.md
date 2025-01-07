@@ -86,6 +86,13 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - ✅ Configure multi-staging environments usable by all apps
 - ✅ Create/Configure Github Arc Runners
 
+### Create Helm Charts
+
+- ✅ Generic dotnet core webapi app
+- ✅ GPU test app
+- 🔲 Generic static website
+- 🔲 Generic node app
+
 ### Build a Comprehensive CI/CD Pipeline
 
 - ✅ Manage application deployments via Argo CD and Helm
@@ -116,6 +123,11 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 - ✅ Perform load testing for performance validation
 
+### Gaming
+
+- ✅ Install Colyseus Server on the Kubernetes cluster to manage and deploy multiplayer game servers.
+- ✅ Deploy a Phaser 3 game that uses the Colyseus client to interact with the Colyseus server for proper testing and demonstration of multiplayer functionality.
+
 ### AI/ML Support
 
 - ✅ GPU support for AI/ML training and inference pipelines
@@ -125,11 +137,6 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 - 🔲 Deploy a stateful Avalanche Node on the cloud using Kubernetes StatefulSets.
 - 🔲 Deploy a stable Avalanche CLI environment on the cloud, accessible via SSH for managing Avalanche Subnets and network operations.
-
-### Gaming
-
-- 🔲 Install Colyseus Server on the Kubernetes cluster to manage and deploy multiplayer game servers.
-- 🔲 Deploy a Phaser 3 game that uses the Colyseus client to interact with the Colyseus server for proper testing and demonstration of multiplayer functionality.
 
 ## Demonstrations and Scenarios
 
@@ -176,6 +183,10 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 ### Monitoring with Prometheus and Grafana
 
 ![Sample Prometheus+Grafana Dashboard](./docs/images/screenshots/grafana-dashboard-001.png)
+
+### Multiplayer (pVp) Game (Colysues + Phaser)
+
+![pVp Game](./docs/images/screenshots/pvp-game.png)
 
 ## Developer Workflow
 
