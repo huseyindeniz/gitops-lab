@@ -1,0 +1,7 @@
+build
+loadtest
+nginx
+node_modules
+test
+Dockerfile
+docker-compose.yml
