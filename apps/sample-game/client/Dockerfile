@@ -1,6 +1,7 @@
 # Base image
 FROM node:alpine AS build
 ARG BUILD_ENV=
+ENV BUILD_ENV=${BUILD_ENV}
 
 WORKDIR /app
 COPY package*.json ./
