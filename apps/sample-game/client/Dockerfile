@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build:${BUILD_ENV}
+RUN sh -c "npm run build:${BUILD_ENV}"
 # Prune dev dependencies to save space
 RUN npm prune --production
 
