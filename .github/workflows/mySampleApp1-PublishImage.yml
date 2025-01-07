@@ -15,16 +15,16 @@ on:
         description: "Pull request number"
         required: false
         type: string
-
+          
 jobs:
          
   publish-image:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service:
+        service:          
           - weatherForecast-api
-          - weatherForecast-migration
+          - weatherForecast-migration  
         include:
           - service: weatherForecast-api
             image_name_prefix: msa1-wf-api
