@@ -26,9 +26,9 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: apps/sample-game/server
-          file: Dockerfile
+          file: apps/sample-game/server/Dockerfile
           build-args: |
-            BUILD_ENV = staging
+            BUILD_ENV=staging
           push: true
           tags: |
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/sample-game-server-staging:${{ env.TIMESTAMP }}
