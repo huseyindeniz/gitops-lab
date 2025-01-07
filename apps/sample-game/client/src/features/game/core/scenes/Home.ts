@@ -4,7 +4,7 @@ import log from 'loglevel';
 import { GamerServerAPI } from '@/services/gameserver/GameServerAPI';
 
 import { SCENES } from '../config/Scenes';
-import { GameDebugText } from '../entities/Debug/GameDebugText';
+import { GameDebugText } from '../entities/GameDebug/GameDebugText';
 import { RemoteEnemy } from '../entities/Remote/RemoteEnemy';
 import { RemotePlayer } from '../entities/Remote/RemotePlayer';
 import { Preloader } from '../utils/Preloader';
