@@ -50,7 +50,6 @@ spec:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
                 name: {{ $fullName }}
-                targetPort: .Values.service.targetPort
                 port:
                   number: {{ $svcPort }}
               {{- else }}
