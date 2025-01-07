@@ -28,7 +28,7 @@ jobs:
           context: apps/sample-game/client
           file: apps/sample-game/client/Dockerfile
           build-args: |
-            BUILD_ENV=:staging
+            BUILD_ENV=staging
           push: true
           tags: |
             docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/sample-game-client-staging:${{ env.TIMESTAMP }}
