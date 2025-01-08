@@ -14,9 +14,10 @@ podLabels: {}
 service:
   type: LoadBalancer
   port: 2567
+  targetPort: 2567
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations:
     {}
