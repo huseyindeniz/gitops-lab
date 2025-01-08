@@ -4,7 +4,7 @@ replica:
   replicaCount: 1
 
 auth:
-  enabled: true
+  enabled: false
   password: "12345"
 
 volumePermissions:
