@@ -40,8 +40,8 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           env:
-            -name: TEST_ROOM_CAPACITY
-             value: {{ .Values.env.TEST_ROOM_CAPACITY }}
+            - name: TEST_ROOM_CAPACITY
+              value: {{ .Values.env.TEST_ROOM_CAPACITY }}
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
