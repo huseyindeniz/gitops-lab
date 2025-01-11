@@ -13,11 +13,11 @@ podLabels: {}
 
 resources:
   requests:
-    cpu: "100m"
-    memory: "128Mi"
+    cpu: "500m"
+    memory: "1Gi"
   limits:
-    cpu: "200m"
-    memory: "256Mi"
+    cpu: "1"
+    memory: "2Gi"
 
 service:
   type: LoadBalancer
@@ -41,7 +41,7 @@ ingress:
 
 autoscaling:
   enabled: true
-  minReplicas: 1
+  minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 60
   targetMemoryUtilizationPercentage: 80
