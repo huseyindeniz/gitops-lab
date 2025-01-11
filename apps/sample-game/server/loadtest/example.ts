@@ -4,6 +4,9 @@ import { EGameState, GameState, TestRoomState } from "./types";
 
 export async function main(options: Options) {
   const client = new Client(options.endpoint);
+
+  console.log(options);
+
   const room: Room = await client.joinOrCreate(options.roomName, {
     // your join options here...
   });
