@@ -15,6 +15,7 @@ RUN npm prune --production
 FROM nginx:alpine AS final
 
 COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/nginx/ngix.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
