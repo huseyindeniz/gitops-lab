@@ -4,6 +4,7 @@ import { playground } from "@colyseus/playground";
 
 import { TestRoom } from "./game/rooms/TestRoom";
 import { LocalPresence, RedisPresence } from "colyseus";
+import { RedisDriver } from "@colyseus/redis-driver";
 
 console.log("NODE_ENV: ", process.env.NODE_ENV);
 console.log("REDIS_HOST_URL: ", process.env.REDIS_HOST_URL);
@@ -19,6 +20,7 @@ export default config({
             host: process.env.REDIS_HOST_URL,
             port: Number(process.env.REDIS_HOST_PORT),
           }),
+    driver: new RedisDriver(),
   },
 
   initializeGameServer: (gameServer) => {
