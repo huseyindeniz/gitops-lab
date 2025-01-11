@@ -1,3 +1,6 @@
+env:
+  TEST_ROOM_CAPACITY: 8
+
 replicaCount: 1
 
 image:
