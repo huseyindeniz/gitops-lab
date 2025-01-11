@@ -3,7 +3,12 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 
 import { TestRoom } from "./game/rooms/TestRoom";
-import { LocalPresence, RedisPresence } from "colyseus";
+import {
+  LocalDriver,
+  LocalPresence,
+  RedisPresence,
+  ServerOptions,
+} from "colyseus";
 import { RedisDriver } from "@colyseus/redis-driver";
 
 console.log("NODE_ENV: ", process.env.NODE_ENV);
@@ -11,17 +16,28 @@ console.log("REDIS_HOST_URL: ", process.env.REDIS_HOST_URL);
 console.log("REDIS_HOST_PORT: ", process.env.REDIS_HOST_PORT);
 console.log("TEST_ROOM_CAPACITY: ", process.env.TEST_ROOM_CAPACITY);
 
+let options: ServerOptions = {
+  presence: new LocalPresence(),
+  driver: new LocalDriver(),
+};
+
+if (
+  process.env.NODE_ENV !== "local" &&
+  process.env.NODE_ENV !== "development"
+) {
+  options = {
+    presence: new RedisPresence({
+      host: process.env.REDIS_HOST_URL,
+      port: Number(process.env.REDIS_HOST_PORT),
+    }),
+    driver: new RedisDriver({
+      host: process.env.REDIS_HOST_URL,
+      port: Number(process.env.REDIS_HOST_PORT),
+    }),
+  };
+}
 export default config({
-  options: {
-    presence:
-      process.env.NODE_ENV === "local" || process.env.NODE_ENV === "development"
-        ? new LocalPresence()
-        : new RedisPresence({
-            host: process.env.REDIS_HOST_URL,
-            port: Number(process.env.REDIS_HOST_PORT),
-          }),
-    driver: new RedisDriver(),
-  },
+  options: options,
 
   initializeGameServer: (gameServer) => {
     /**
