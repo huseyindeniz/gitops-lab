@@ -1,5 +1,5 @@
 env:
-  TEST_ROOM_CAPACITY: 80
+  TEST_ROOM_CAPACITY: 8
 
 replicaCount: 1
 
