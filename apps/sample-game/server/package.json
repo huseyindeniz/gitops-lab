@@ -11,7 +11,7 @@
   "scripts": {
     "start": "tsx watch src/index.ts",
     "loadtest": "tsx loadtest/example.ts --room test_room --numClients 4",
-    "loadtest:cluster": "tsx loadtest/example.ts --room test_room --numClients 500 --endpoint ws://sample-game-server-staging.local",
+    "loadtest:cluster": "tsx loadtest/example.ts --room test_room --numClients 80 --endpoint ws://sample-game-server-staging.local",
     "build": "npm run clean && tsc",
     "clean": "rimraf build",
     "test": "mocha -r tsx test/**_test.ts --exit --timeout 15000"
