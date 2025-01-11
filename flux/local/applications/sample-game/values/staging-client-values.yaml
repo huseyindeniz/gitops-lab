@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: huseyindeniz/sample-game-client-staging
   pullPolicy: Always
-  tag: "20250111085526"
+  tag: "20250111090018"
 
 nameOverride: "sample-game-client"
 fullnameOverride: "sample-game-client-staging"
