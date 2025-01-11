@@ -8,6 +8,7 @@ import { LocalPresence, RedisPresence } from "colyseus";
 console.log("NODE_ENV: ", process.env.NODE_ENV);
 console.log("REDIS_HOST_URL: ", process.env.REDIS_HOST_URL);
 console.log("REDIS_HOST_PORT: ", process.env.REDIS_HOST_PORT);
+console.log("TEST_ROOM_CAPACITY: ", process.env.TEST_ROOM_CAPACITY);
 
 export default config({
   options: {
