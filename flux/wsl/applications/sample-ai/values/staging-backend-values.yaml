@@ -5,9 +5,9 @@ env:
 replicaCount: 1
 
 image:
-  repository: sample-ai-backend # not published to docker hub, exist in my local docker, image size is 14.8GB
+  repository: huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "20250119171609"
 
 nameOverride: "sample-ai-backend"
 fullnameOverride: "sample-ai-backend-staging"
