@@ -6,8 +6,8 @@ metadata:
 spec:
   generators:
     - list:
-        elements:
-          - envName: staging
+        elements: []
+        #  - envName: staging
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
