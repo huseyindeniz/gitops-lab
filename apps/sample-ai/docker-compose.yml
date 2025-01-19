@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+      args:
+        BUILD_ENV: docker
+        PORT: 8000
+    ports:
+      - 8000:8000
+    networks:
+      - sample-ai-app-network
+    volumes:
+      - H:/volumes/sample-ai-backend/:/app/data/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+      args:
+        BUILD_ENV: docker
+    ports:
+      - 8080:80
+    networks:
+      - sample-ai-app-network
+
+networks:
+  sample-ai-app-network:
+    driver: bridge

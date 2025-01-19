@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: sample-ai-frontend-wsl-appset-staging
+  namespace: argo-local
+spec:
+  generators:
+    - list:
+        elements:
+          - envName: staging
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  template:
+    metadata:
+      name: "sample-ai-frontend-{{.envName}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/huseyindeniz/gitops-lab.git
+        targetRevision: main
+        path: "helm-charts/static-website"
+        helm:
+          valueFiles:
+            - values.yaml
+            - $valuesRef/flux/wsl/applications/sample-ai/values/staging-frontend-values.yaml
+      destination:
+        server: "https://172.17.0.5:8443"
+        namespace: "sample-ai-frontend-wsl-{{ .envName }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        retry:
+          limit: 1
+        syncOptions:
+          - SkipHooksOnError=true # Ensures Argo CD skips retries if a Helm hook fails
