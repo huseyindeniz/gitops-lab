@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: sample-ai-frontend # not published to docker hub, exist in my local docker
+  repository: huseyindeniz/sample-ai-frontend-staging
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "20250119151704"
 
 nameOverride: "sample-ai-frontend"
 fullnameOverride: "sample-ai-frontend-staging"
