@@ -13,5 +13,6 @@ resource "kubernetes_persistent_volume" "wsl_shared_volume_pv" {
       }
     }
     persistent_volume_reclaim_policy = "Delete"
+    storage_class_name               = "default"
   }
 }
