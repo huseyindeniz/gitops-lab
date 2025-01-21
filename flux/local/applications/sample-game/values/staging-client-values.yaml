@@ -13,7 +13,7 @@ podLabels: {}
 
 service:
   type: LoadBalancer
-  port: 8080
+  port: 7001
   targetPort: 80
 
 ingress:
