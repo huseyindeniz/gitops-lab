@@ -46,11 +46,13 @@ autoscaling:
   targetMemoryUtilizationPercentage: 80
 
 volumeMounts:
-  - name: sample-ai-backend-volume
-    mountPath: /app/data
-    subPath: sample-ai-backend
+  []
+  # - name: sample-ai-backend-volume
+  #   mountPath: /app/data
+  #   subPath: sample-ai-backend
 
 volumes:
-  - name: sample-ai-backend-volume
-    persistentVolumeClaim:
-      claimName: sample-ai-backend-staging-pvc
+  []
+  # - name: sample-ai-backend-volume
+  #   persistentVolumeClaim:
+  #     claimName: sample-ai-backend-staging-pvc
