@@ -12,4 +12,4 @@ spec:
     requests:
       storage: 10Gi # Must match PV capacity
   volumeName: wsl-shared-volume-pv # Explicitly bind to the existing PV
-  storageClassName: ""
+  storageClassName: "default"
