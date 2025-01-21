@@ -2,7 +2,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sample-ai-backend-pvc
-  labels: ""
+  labels: 
+    {{- include "python-app.labels" . | nindent 4 }}""
 spec:
   accessModes:
     - ReadWriteOnce
