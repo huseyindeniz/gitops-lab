@@ -5,9 +5,9 @@ env:
 replicaCount: 1
 
 image:
-  repository: huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
+  repository: ghcr.io/huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
   pullPolicy: IfNotPresent
-  tag: "20250119171609"
+  tag: "20250122144712"
 
 nameOverride: "sample-ai-backend"
 fullnameOverride: "sample-ai-backend-staging"
