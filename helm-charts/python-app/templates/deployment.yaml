@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "python-app.labels" . | nindent 4 }}
 spec:
+  progressDeadlineSeconds: {{ .Values.progressDeadlineSeconds | default 600 }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}

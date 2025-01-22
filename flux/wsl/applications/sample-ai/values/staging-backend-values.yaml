@@ -2,6 +2,8 @@ env:
   FLASK_ENV: "staging"
   PORT: 8000
 
+progressDeadlineSeconds: 1800
+
 replicaCount: 1
 
 image:
