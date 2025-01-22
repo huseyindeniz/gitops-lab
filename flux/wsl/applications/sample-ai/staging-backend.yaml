@@ -35,4 +35,4 @@ spec:
           limit: 1
         syncOptions:
           - SkipHooksOnError=true # Ensures Argo CD skips retries if a Helm hook fails
-          - Timeout=30m0s
+          - Timeout=50m0s
