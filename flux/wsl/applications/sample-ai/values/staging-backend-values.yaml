@@ -50,7 +50,7 @@ autoscaling:
 volumeMounts:
   - name: sample-ai-backend-volume
     mountPath: /app/data
-    subPath: sample-ai-backend
+    # subPath: sample-ai-backend
 
 volumes:
   - name: sample-ai-backend-volume

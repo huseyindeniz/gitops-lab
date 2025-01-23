@@ -7,25 +7,24 @@ spec:
   generators:
     - list:
         elements:
-          []
-          # - envName: prod-bluegreen
-          #   servicePort: 6001
-          #   servicePreviewPort: 6002
-          #   host: "wf-prod-bg.local"
-          #   strategy: "bluegreen" # standard, bluegreen, canary
-          #   imgTag: "ci-12333323117-20241214214209" # {"$imagepolicy": "flux-system:project-001-wf-prod-bluegreen-app-image-policy:tag"}
-          #   imgMigrationTag: "ci-12333323117-20241214214126" # {"$imagepolicy": "flux-system:project-001-wf-prod-bluegreen-migration-image-policy:tag"}
-          #   migrationAction: "apply" # apply, reset, rollback
-          #   targetMigration: "" # if rollback selected, set target migration name
-          # - envName: prod-canary
-          #   servicePort: 6003
-          #   servicePreviewPort: 6004
-          #   host: "wf-prod-canary.local"
-          #   strategy: "canary" # standard, bluegreen, canary
-          #   imgTag: "ci-12303940874-20241212200708" # {"$imagepolicy": "flux-system:project-001-wf-prod-canary-app-image-policy:tag"}
-          #   imgMigrationTag: "ci-12303940874-20241212200620" # {"$imagepolicy": "flux-system:project-001-wf-prod-canary-migration-image-policy:tag"}
-          #   migrationAction: "apply" # apply, reset, rollback
-          #   targetMigration: "" # if rollback selected, set target migration name
+          - envName: prod-bluegreen
+            servicePort: 6001
+            servicePreviewPort: 6002
+            host: "wf-prod-bg.local"
+            strategy: "bluegreen" # standard, bluegreen, canary
+            imgTag: "ci-12333323117-20241214214209" # {"$imagepolicy": "flux-system:project-001-wf-prod-bluegreen-app-image-policy:tag"}
+            imgMigrationTag: "ci-12333323117-20241214214126" # {"$imagepolicy": "flux-system:project-001-wf-prod-bluegreen-migration-image-policy:tag"}
+            migrationAction: "apply" # apply, reset, rollback
+            targetMigration: "" # if rollback selected, set target migration name
+          - envName: prod-canary
+            servicePort: 6003
+            servicePreviewPort: 6004
+            host: "wf-prod-canary.local"
+            strategy: "canary" # standard, bluegreen, canary
+            imgTag: "ci-12303940874-20241212200708" # {"$imagepolicy": "flux-system:project-001-wf-prod-canary-app-image-policy:tag"}
+            imgMigrationTag: "ci-12303940874-20241212200620" # {"$imagepolicy": "flux-system:project-001-wf-prod-canary-migration-image-policy:tag"}
+            migrationAction: "apply" # apply, reset, rollback
+            targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
