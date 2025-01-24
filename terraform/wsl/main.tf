@@ -1,34 +1,34 @@
-resource "kubernetes_persistent_volume" "wsl_shared_volume_pv" {
+resource "kubernetes_persistent_volume" "sample_ai_backend_volume_pv" {
   metadata {
-    name = "wsl-shared-volume-pv"
+    name = "sample-ai-backend-volume-pv"
   }
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
     capacity = {
-      storage = "10Gi"
+      storage = "2Gi"
     }
     persistent_volume_source {
       host_path {
-        path = "/mnt/h/volumes/"
+        path = "/mnt/h/volumes/sample-ai-backend"
         type = "DirectoryOrCreate"
       }
     }
-    persistent_volume_reclaim_policy = "Retain"
+    persistent_volume_reclaim_policy = "Delete"
     storage_class_name               = "standard"
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "wsl_shared_volume_pvc" {
+resource "kubernetes_persistent_volume_claim" "sample_ai_backend_volume_pvc" {
   metadata {
-    name = "wsl-shared-volume-pvc"
+    name = "sample-ai-backend-volume-pvc"
   }
 
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
 
     resources {
       requests = {
-        storage = "10Gi"
+        storage = "2Gi"
       }
     }
   }
