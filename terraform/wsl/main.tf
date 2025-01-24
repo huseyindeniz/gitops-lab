@@ -69,3 +69,33 @@ resource "kubernetes_pod" "debug_pod" {
 
   depends_on = [kubernetes_persistent_volume_claim.sample_ai_backend_volume_pvc]
 }
+
+resource "kubernetes_pod" "debug_pod_2" {
+  metadata {
+    name      = "debug-pod-2"
+    namespace = kubernetes_namespace.sample_ai_backend_wsl_staging.metadata[0].name
+  }
+
+  spec {
+    container {
+      name    = "debug-container"
+      image   = "busybox"
+      command = ["sleep", "3600"]
+
+      volume_mount {
+        name       = "my-pvc"
+        mount_path = "/app/data"
+      }
+    }
+
+    volume {
+      name = "my-pvc"
+
+      persistent_volume_claim {
+        claim_name = "sample-ai-backend-volume-pvc"
+      }
+    }
+  }
+
+  depends_on = [kubernetes_persistent_volume_claim.sample_ai_backend_volume_pvc]
+}
