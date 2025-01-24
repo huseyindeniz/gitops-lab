@@ -4,7 +4,7 @@ env:
 
 progressDeadlineSeconds: 1800
 
-replicaCount: 1
+replicaCount: 0
 
 image:
   repository: ghcr.io/huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
@@ -50,7 +50,8 @@ autoscaling:
 
 volumeMounts:
   - name: sample-ai-backend-volume
-    mountPath: /app/data
+    mountPath: /app/data/models/isnet-general-use.pth
+    subPath: sample-ai-backend/models/isnet-general-use.pth
 
 volumes:
   - name: sample-ai-backend-volume
