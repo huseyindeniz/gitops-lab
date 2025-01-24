@@ -64,4 +64,6 @@ resource "kubernetes_pod" "debug_pod" {
       }
     }
   }
+
+  depends_on = [kubernetes_persistent_volume_claim.sample_ai_backend_volume_pvc]
 }
