@@ -20,16 +20,19 @@ resource "kubernetes_persistent_volume" "sample_ai_backend_volume_pv" {
 
 resource "kubernetes_persistent_volume_claim" "sample_ai_backend_volume_pvc" {
   metadata {
-    name = "sample-ai-backend-volume-pvc"
+    name      = "sample-ai-backend-volume-pvc"
+    namespace = kubernetes_namespace.sample_ai_backend_wsl_staging.metadata[0].name
   }
 
   spec {
-    access_modes = ["ReadWriteOnce"]
-
+    access_modes       = ["ReadWriteOnce"]
+    storage_class_name = "standard"
     resources {
       requests = {
         storage = "2Gi"
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.sample_ai_backend_wsl_staging]
 }

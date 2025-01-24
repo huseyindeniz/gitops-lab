@@ -55,4 +55,4 @@ volumeMounts:
 volumes:
   - name: sample-ai-backend-volume
     persistentVolumeClaim:
-      claimName: sample_ai_backend_volume_pvc
+      claimName: sample-ai-backend-volume-pvc
