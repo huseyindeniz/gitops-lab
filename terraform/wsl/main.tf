@@ -9,7 +9,7 @@ resource "kubernetes_persistent_volume" "sample_ai_backend_volume_pv" {
     }
     persistent_volume_source {
       host_path {
-        path = "/mnt/h/volumes"
+        path = "/mnt/h/volumes/sample-ai-backend"
         type = "DirectoryOrCreate"
       }
     }
@@ -47,12 +47,14 @@ resource "kubernetes_pod" "debug_pod" {
     container {
       name    = "debug-container"
       image   = "busybox"
-      command = ["sleep", "3600"]
+      command = ["/bin/sh", "-c"]
+      args = [
+        "mkdir -p /app/data/models /app/data/outputs /app/data/uploads && sleep 3600"
+      ]
 
       volume_mount {
         name       = "my-pvc"
-        mount_path = "/app/data/models/isnet-general-use.pth"
-        sub_path   = "sample-ai-backend/models/isnet-general-use.pth"
+        mount_path = "/app/data"
       }
     }
 
