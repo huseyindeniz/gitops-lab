@@ -1,6 +1,6 @@
 env:
   FLASK_ENV: "staging"
-  COMMAND: "check"
+  COMMAND: "app"
   PORT: 8000
   ALLOWED_EXTENSIONS: "png,jpg,jpeg"
   MODELS_FOLDER: "/app/data/models"

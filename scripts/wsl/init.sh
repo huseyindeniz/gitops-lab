@@ -21,4 +21,4 @@ minikube ssh "ls -l $MINIKUBE_DEST_PATH" -p wsl-cluster
 #kubectl exec -n sample-ai-backend-wsl-staging debug-pod -- mkdir -p /app/data/outputs
 #kubectl exec -n sample-ai-backend-wsl-staging debug-pod -- mkdir -p /app/data/uploads
 
-#kubectl cp /mnt/h/volumes/sample-ai-backend/models/isnet-general-use.pth sample-ai-backend-wsl-staging/debug-pod:/app/data/models/isnet-general-use.pth
+#kubectl cp /mnt/h/volumes/sample-ai-backend/models/isnet-general-use.pth sample-ai-backend-wsl-staging/sample-ai-backend-staging-864d548f78-vbxrk:/app/data/models/isnet-general-use.pth
