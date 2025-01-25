@@ -192,7 +192,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ![pVp Game](./docs/images/screenshots/pvp-game.png)
 
-### Samle AI/ML App
+### Sample AI/ML App (pytorch - on GPU)
 
 ![sample ai/ml app](./docs/images/screenshots/ai-ml-demo.gif)
 
