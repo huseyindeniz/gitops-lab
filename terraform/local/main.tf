@@ -54,16 +54,16 @@ module "local_arc" {
 }
 
 
-module "project001" {
-  source                      = "../modules/project001"
-  env_list                    = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
-  app_ns_prefix_project001_wf = "project-001-wf-local"
+# module "project001" {
+#   source                      = "../modules/project001"
+#   env_list                    = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
+#   app_ns_prefix_project001_wf = "project-001-wf-local"
 
-  providers = {
-    kubernetes = kubernetes
-    helm       = helm
-  }
-}
+#   providers = {
+#     kubernetes = kubernetes
+#     helm       = helm
+#   }
+# }
 
 
 # resource "kubernetes_secret" "flux_github_pat" {

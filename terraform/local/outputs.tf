@@ -11,9 +11,9 @@ output "argo_workflows_local_service_account_token" {
   depends_on  = [module.local_argo]
 }
 
-output "project_001_wf_db_info" {
-  value = module.project001.weather_forecast_postgresql_db_info
+# output "project_001_wf_db_info" {
+#   value = module.project001.weather_forecast_postgresql_db_info
 
-  sensitive  = true
-  depends_on = [module.project001]
-}
+#   sensitive  = true
+#   depends_on = [module.project001]
+# }
