@@ -13,3 +13,6 @@ minikube cp "$MODEL_FILE_SOURCE" "$MINIKUBE_DEST_PATH" -p wsl-cluster
 
 echo "Verifying the file copy..."
 minikube ssh "ls -l $MINIKUBE_DEST_PATH" -p wsl-cluster
+
+echo "creating CRDs..."
+kubectl apply -f crds.yaml

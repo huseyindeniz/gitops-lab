@@ -1,6 +1,11 @@
 env:
   FLASK_ENV: "staging"
+  COMMAND: "check"
   PORT: 8000
+  ALLOWED_EXTENSIONS: "png,jpg,jpeg"
+  MODELS_FOLDER: "/app/data/models"
+  UPLOAD_FOLDER: "/app/data/uploads"
+  OUTPUT_FOLDER: "/app/data/outputs"
 
 progressDeadlineSeconds: 1800
 
@@ -9,7 +14,7 @@ replicaCount: 0
 image:
   repository: ghcr.io/huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
   pullPolicy: IfNotPresent
-  tag: "20250124165727"
+  tag: "20250125083854"
 
 nameOverride: "sample-ai-backend"
 fullnameOverride: "sample-ai-backend-staging"
