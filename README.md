@@ -134,6 +134,7 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - ✅ GPU support for AI/ML training and inference pipelines
 - 🔲 Create a sample AI/ML application that demonstrates both training and inference pipelines using GPU support. (use/integrate https://github.com/xuebinqin/DIS )
   - ✅ inference
+  - 🔲 Install and configure a local Docker image registry (Harbor) to manage and store large Docker images efficiently.
   - 🔲 training
 
 ### Blockchain
@@ -190,6 +191,10 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 ### Multiplayer (pVp) Game (Colysues + Phaser)
 
 ![pVp Game](./docs/images/screenshots/pvp-game.png)
+
+### Samle AI/ML App
+
+![sample ai/ml app](./docs/images/screenshots/ai-ml-demo.gif)
 
 ## Developer Workflow
 
