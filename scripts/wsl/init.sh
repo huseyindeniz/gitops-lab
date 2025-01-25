@@ -14,5 +14,11 @@ minikube cp "$MODEL_FILE_SOURCE" "$MINIKUBE_DEST_PATH" -p wsl-cluster
 echo "Verifying the file copy..."
 minikube ssh "ls -l $MINIKUBE_DEST_PATH" -p wsl-cluster
 
-echo "creating CRDs..."
-kubectl apply -f crds.yaml
+#echo "creating CRDs..."
+#kubectl apply -f crds.yaml
+
+#kubectl exec -n sample-ai-backend-wsl-staging debug-pod -- mkdir -p /app/data/models
+#kubectl exec -n sample-ai-backend-wsl-staging debug-pod -- mkdir -p /app/data/outputs
+#kubectl exec -n sample-ai-backend-wsl-staging debug-pod -- mkdir -p /app/data/uploads
+
+#kubectl cp /mnt/h/volumes/sample-ai-backend/models/isnet-general-use.pth sample-ai-backend-wsl-staging/debug-pod:/app/data/models/isnet-general-use.pth

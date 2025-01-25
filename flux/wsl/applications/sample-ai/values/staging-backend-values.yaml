@@ -9,7 +9,7 @@ env:
 
 progressDeadlineSeconds: 1800
 
-replicaCount: 0
+replicaCount: 1
 
 image:
   repository: ghcr.io/huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB

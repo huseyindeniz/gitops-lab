@@ -47,10 +47,7 @@ resource "kubernetes_pod" "debug_pod" {
     container {
       name    = "debug-container"
       image   = "busybox"
-      command = ["/bin/sh", "-c"]
-      args = [
-        "mkdir -p /app/data/models /app/data/outputs /app/data/uploads && sleep 3600"
-      ]
+      command = ["sleep", "3600"]
 
       volume_mount {
         name       = "my-pvc"
