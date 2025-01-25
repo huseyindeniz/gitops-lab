@@ -3,9 +3,14 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
-      args:
-        BUILD_ENV: docker
-        PORT: 8000
+    environment:
+      FLASK_ENV: docker
+      COMMAND: check
+      PORT: 8000
+      ALLOWED_EXTENSIONS: png,jpg,jpeg
+      MODELS_FOLDER: /app/data/models
+      UPLOAD_FOLDER: /app/data/uploads
+      OUTPUT_FOLDER: /app/data/outputs
     ports:
       - 8000:8000
     networks:

@@ -3,14 +3,15 @@ from pathlib import Path
 from flask import Flask, jsonify, send_file
 import torch
 from dotenv import load_dotenv
-from remove_background import inference
+from remove_background import process_image
 from upload import upload_file
 import os
 from flask_cors import CORS
 
 APP_ENV = os.getenv('FLASK_ENV', "development")
 env_path = Path.cwd().joinpath(f'.env.{APP_ENV}')
-load_dotenv(env_path)
+if env_path.exists():
+    load_dotenv(env_path)
 
 app = Flask(__name__)
 
@@ -36,24 +37,9 @@ def upload():
     return upload_file()
 
 @app.route('/process/<filename>', methods=['POST'])
-def process_image(filename):
+def process(filename):
     try:
-        # Process the image (remove background)
-        # processed_image_path = remove_background(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-        image_path = os.path.join(app.config['UPLOAD_FOLDER'],filename)
-        print(image_path)
-        im_rgba = inference(image_path)
-        print(type(im_rgba))
-        im_rgba.save(os.path.join(app.config['OUTPUT_FOLDER'],filename), "PNG", quality=70)
-        # Return the processed image
-        # return send_from_directory(app.config['OUTPUT_FOLDER'], im_rgba)
-        # response = make_response(im_rgba)
-        # response.headers.set('Content-Type', 'image/png')
-        # return response
-        img_io = BytesIO()
-        im_rgba.save(img_io, "PNG", quality=70)
-        img_io.seek(0)
-        return send_file(img_io, mimetype='image/png', download_name="test.png")
+        return send_file(process_image(filename), mimetype='image/png', download_name="test.png")
     except Exception as e:
         return jsonify({"error": f"Failed to process the image: {str(e)}"}), 500
     

@@ -90,8 +90,9 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 - ✅ Generic dotnet core webapi app
 - ✅ GPU test app
-- 🔲 Generic static website
-- 🔲 Generic node app
+- ✅ Generic static website
+- ✅ Generic node app
+- ✅ Generic python/flask app
 
 ### Build a Comprehensive CI/CD Pipeline
 

@@ -26,9 +26,6 @@ jobs:
         with:
           context: apps/sample-ai/backend
           file: apps/sample-ai/backend/Dockerfile
-          build-args: |
-            BUILD_ENV=staging
-            PORT=8000
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/sample-ai-backend-staging:${{ env.TIMESTAMP }}

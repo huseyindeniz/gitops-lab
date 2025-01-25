@@ -1,3 +1,4 @@
+from io import BytesIO
 import os
 from pathlib import Path
 from PIL import Image
@@ -8,15 +9,19 @@ from torch.autograd import Variable
 from torchvision import transforms
 import torch.nn.functional as F
 from isnet import ISNetDIS
+from flask import current_app
 
 # project imports
-from data_loader_cache import normalize, im_reader, im_preprocess 
-
-from flask import current_app
+from data_loader_cache import normalize, im_reader, im_preprocess
 
 #Helpers
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-  
+
+APP_ENV = os.getenv('FLASK_ENV', "development")
+env_path = Path.cwd().joinpath(f'.env.{APP_ENV}')
+if env_path.exists():
+    load_dotenv(env_path)
+    
 class GOSNormalize(object):
     '''
     Normalize the Image using torch.transforms
@@ -53,7 +58,9 @@ def build_model(hypar,device):
     net.to(device)
 
     if(hypar["restore_model"]!=""):
-        net.load_state_dict(torch.load(hypar["model_path"]+"/"+hypar["restore_model"], map_location=device))
+        net.load_state_dict(torch.load(
+            os.path.join(hypar["model_path"],hypar["restore_model"])
+            , map_location=device))
         net.to(device)
     net.eval()  
     return net
@@ -86,32 +93,26 @@ def predict(net, inputs_val, shapes_val, hypar, device):
 
     if device == 'cuda': torch.cuda.empty_cache()
     return (pred_val.detach().cpu().numpy()*255).astype(np.uint8) # it is the mask we need
-    
-APP_ENV = os.getenv('FLASK_ENV', "development")
-env_path = Path.cwd().joinpath(f'.env.{APP_ENV}')
-load_dotenv(env_path)
 
-# Set Parameters
-hypar = {} # paramters for inferencing
+# Set parameters
+hypar = {
+    "model_path": os.getenv('MODELS_FOLDER', 'models'),
+    "restore_model": "isnet-general-use.pth",
+    "interm_sup": False,
+    "model_digit": "full",
+    "seed": 0,
+    "cache_size": [1024, 1024],
+    "input_size": [1024, 1024],
+    "crop_size": [1024, 1024],
+    "model": ISNetDIS(),
+}
 
-hypar["model_path"] = os.getenv('MODELS_FOLDER', 'models') ## load trained weights from this path
-hypar["restore_model"] = "isnet-general-use.pth" ## name of the to-be-loaded weights
-hypar["interm_sup"] = False ## indicate if activate intermediate feature supervision
-
-##  choose floating point accuracy --
-hypar["model_digit"] = "full" ## indicates "half" or "full" accuracy of float number
-hypar["seed"] = 0
-
-hypar["cache_size"] = [1024, 1024] ## cached input spatial resolution, can be configured into different size
-
-## data augmentation parameters ---
-hypar["input_size"] = [1024, 1024] ## mdoel input spatial size, usually use the same value hypar["cache_size"], which means we don't further resize the images
-hypar["crop_size"] = [1024, 1024] ## random crop size from the input, it is usually set as smaller than hypar["cache_size"], e.g., [920,920] for data augmentation
-
-hypar["model"] = ISNetDIS()
-
- # Build Model
-net = build_model(hypar, device)
+# Build the model
+try:
+    net = build_model(hypar, device)
+except RuntimeError as e:
+    net = None  # Ensure the app doesn't crash entirely
+    current_app.logger.error(f"Critical error building model: {e}")
 
 
 def inference(image):
@@ -127,3 +128,19 @@ def inference(image):
   im_rgba.putalpha(pil_mask)
   return im_rgba
   #return [im_rgba, pil_mask]
+
+def process_image(filename):
+    if not net:
+        current_app.logger.error("Attempted to process an image without a loaded model.")
+        return BytesIO()  # Return an empty response or handle gracefully
+    try:
+        image_path = os.path.join(current_app.config['UPLOAD_FOLDER'],filename)
+        im_rgba = inference(image_path)
+        im_rgba.save(os.path.join(current_app.config['OUTPUT_FOLDER'],filename), "PNG", quality=70)
+        img_io = BytesIO()
+        im_rgba.save(img_io, "PNG", quality=70)
+        img_io.seek(0)
+        return img_io
+    except Exception as e:
+        current_app.logger.error(f"Error processing image: {e}")
+        return BytesIO()  # Return an empty response  

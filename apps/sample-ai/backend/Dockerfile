@@ -1,11 +1,13 @@
 # Base image
 FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 
-# Set ARGs and ENVs
-ARG PORT=
-ARG BUILD_ENV=
-ENV PORT=${PORT}
-ENV FLASK_ENV=${BUILD_ENV}
+ENV FLASK_ENV=
+ENV COMMAND=
+ENV PORT=
+ENV ALLOWED_EXTENSIONS=
+ENV MODELS_FOLDER=
+ENV UPLOAD_FOLDER=
+ENV OUTPUT_FOLDER=
 
 # Install necessary tools and dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
@@ -38,4 +40,14 @@ COPY . .
 EXPOSE ${PORT}
 
 # Run the Flask app in the activated environment
-CMD ["/bin/bash", "-c", "source /opt/conda/etc/profile.d/conda.sh && conda activate sample_ai_backend && flask run --host=0.0.0.0 --port=${PORT}"]
+CMD ["/bin/bash", "-c", " \
+    source /opt/conda/etc/profile.d/conda.sh && \
+    conda activate sample_ai_backend && \
+    if [ \"$COMMAND\" = \"check\" ]; then \
+    python check.py; \
+    elif [ \"$COMMAND\" = \"app\" ]; then \
+    flask run --host=0.0.0.0 --port=$PORT; \
+    else \
+    echo 'Invalid COMMAND specified: $COMMAND' && exit 1; \
+    fi \
+    "]
