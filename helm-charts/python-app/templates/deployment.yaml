@@ -43,8 +43,18 @@ spec:
           env:
             - name: FLASK_ENV
               value: "{{ .Values.env.FLASK_ENV }}"              
+            - name: COMMAND
+              value: "{{ .Values.env.COMMAND }}"              
             - name: PORT
               value: "{{ .Values.env.PORT }}"              
+            - name: ALLOWED_EXTENSIONS
+              value: "{{ .Values.env.ALLOWED_EXTENSIONS }}"              
+            - name: MODELS_FOLDER
+              value: "{{ .Values.env.MODELS_FOLDER }}"              
+            - name: UPLOAD_FOLDER
+              value: "{{ .Values.env.UPLOAD_FOLDER }}"              
+            - name: OUTPUT_FOLDER
+              value: "{{ .Values.env.OUTPUT_FOLDER }}"              
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
