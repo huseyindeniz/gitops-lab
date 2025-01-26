@@ -45,6 +45,10 @@ resource "kubernetes_manifest" "harbor_certificate" {
       "dnsNames" = [
         "localhost",
         "harbor-staging-core",
+        "harbor-staging-jobservice",
+        "harbor-staging-registry",
+        "harbor-staging-portal",
+        "harbor-staging-trivy",
         "harbor-staging-core.harbor-staging.svc.cluster.local"
       ]
       "issuerRef" = {
