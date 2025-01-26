@@ -16,12 +16,15 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://helm.goharbor.io
-        targetRevision: "1.16.2"
-        chart: "harbor"
+        repoURL: https://github.com/huseyindeniz/gitops-lab.git
+        targetRevision: main
+        path: flux/wsl/applications/harbor/values
         helm:
+          repo: https://helm.goharbor.io
+          chart: harbor
+          version: "1.16.2"
           valueFiles:
-            - $valuesRef/flux/wsl/applications/harbor/values/harbor-values.yaml
+            - harbor-values.yaml
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "harbor-{{ .envName }}"
