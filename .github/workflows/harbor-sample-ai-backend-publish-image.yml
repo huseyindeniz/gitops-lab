@@ -7,26 +7,14 @@ jobs:
   build-push:
     runs-on: arc-runner-wsl
     steps:
+      - name: Buildah Action
+        uses: redhat-actions/buildah-build@v2
       - name: Get current timestamp
         run: |
           export LC_ALL=C
           echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y iptables
-          sudo apt-get install -y fuse-overlayfs
-          sudo apt-get install -y kmod
-          export XDG_RUNTIME_DIR="/tmp/runtime-dir"
-          mkdir -p $XDG_RUNTIME_DIR
-          sudo chmod 777 $XDG_RUNTIME_DIR
-      - name: Set up Docker
-        uses: docker/setup-docker-action@v4
-        with:
-          version: "27.5.1"
-          rootless: true
       - name: Login to Harbor
         uses: docker/login-action@v2
         with:
