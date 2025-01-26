@@ -18,7 +18,7 @@ spec:
       source:
         repoURL: https://helm.goharbor.io
         targetRevision: "1.16.2"
-        chart: "harbor"
+        chart: "harbor/harbor"
         helm:
           valueFiles:
             - $valuesRef/flux/wsl/applications/harbor/values/harbor-values.yaml
