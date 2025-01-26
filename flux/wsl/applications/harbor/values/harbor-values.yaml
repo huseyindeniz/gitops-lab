@@ -134,7 +134,7 @@ persistence:
       # StorageClass will be used (the default).
       # Set it to "-" to disable dynamic provisioning
       storageClass: ""
-      subPath: "harbor"
+      subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
       annotations: {}
@@ -151,7 +151,7 @@ persistence:
     database:
       existingClaim: ""
       storageClass: ""
-      subPath: ""
+      subPath: "db"
       accessMode: ReadWriteOnce
       size: 1Gi
       annotations: {}
