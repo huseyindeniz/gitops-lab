@@ -39,8 +39,8 @@ module "local_monitoring" {
 }
 
 module "local_arc" {
-  source = "../modules/arc-runners"
-
+  source          = "../modules/arc-runners"
+  name            = "arc-runner"
   github_repo_url = "https://github.com/${var.flux_github_org}/${var.flux_github_repository}"
   github_arc_pat  = var.github_arc_pat
 

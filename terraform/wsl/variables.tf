@@ -39,3 +39,9 @@ variable "flux_github_token" {
   sensitive   = true
   type        = string
 }
+
+variable "github_arc_pat" {
+  description = "GitHub arc PAT"
+  sensitive   = true
+  type        = string
+}

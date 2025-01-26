@@ -1,4 +1,4 @@
-name: Actions Runner Controller Demo
+name: arc-runner test
 on:
   workflow_dispatch:
 
@@ -7,4 +7,4 @@ jobs:
     runs-on: arc-runner
     steps:
       - name: greeting
-        run: echo "🎉 This job uses runner scale set runners!"
+        run: echo "🎉 This job uses arc-runner!"

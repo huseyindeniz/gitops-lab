@@ -1,0 +1,10 @@
+name: arc-runner-wsl test
+on:
+  workflow_dispatch:
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: arc-runner-wsl
+    steps:
+      - name: greeting
+        run: echo "🎉 This job uses arc-runner-wsl!"

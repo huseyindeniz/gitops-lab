@@ -1,3 +1,8 @@
+variable "name" {
+  description = "Arc Runner Name"
+  type        = string
+}
+
 variable "github_repo_url" {
   description = "GitHub Repo Urls"
   type        = string

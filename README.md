@@ -176,6 +176,10 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ![Canary Deployment 3](./docs/images/screenshots/canary-003.png)
 
+### Arc Runners
+
+![arc runners](./docs/images/screenshots/arc-runners.png)
+
 ### Hello Argo Workflows
 
 ![Hello Argo Workflows](./docs/images/screenshots/hello-workflows.gif)

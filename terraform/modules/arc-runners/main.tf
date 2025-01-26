@@ -58,7 +58,7 @@ resource "helm_release" "arc_scale_set" {
 # }
 
 resource "helm_release" "arc_runner" {
-  name       = "arc-runner"
+  name       = var.name
   repository = "oci://ghcr.io/actions/actions-runner-controller-charts"
   chart      = "gha-runner-scale-set"
   namespace  = kubernetes_namespace.arc_runners.metadata[0].name
