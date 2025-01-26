@@ -31,3 +31,26 @@ module "harbor_postgresql" {
 
   depends_on = [kubernetes_namespace.harbor_staging]
 }
+
+resource "kubernetes_manifest" "harbor_certificate" {
+  manifest = {
+    "apiVersion" = "cert-manager.io/v1"
+    "kind"       = "Certificate"
+    "metadata" = {
+      "name"      = "harbor-internal-tls"
+      "namespace" = kubernetes_namespace.harbor_staging.metadata[0].name
+    }
+    "spec" = {
+      "secretName" = "harbor-internal-tls" # This secret will store the TLS cert and key
+      "dnsNames" = [
+        "localhost",
+        "harbor-staging-core",
+        "harbor-staging-core.harbor-staging.svc.cluster.local"
+      ]
+      "issuerRef" = {
+        "name" = "selfsigned-cluster-issuer" # Replace with the name of your ClusterIssuer
+        "kind" = "ClusterIssuer"             # Use "Issuer" if it's namespace-scoped
+      }
+    }
+  }
+}
