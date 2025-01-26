@@ -7,27 +7,19 @@ jobs:
   build-push:
     runs-on: arc-runner-wsl
     steps:
-      - name: Buildah Action
-        uses: redhat-actions/buildah-build@v2
       - name: Get current timestamp
         run: |
           export LC_ALL=C
           echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Login to Harbor
-        uses: docker/login-action@v2
+      - name: Publish Docker image to Harbor
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
+          name: sample-ai-backend-staging
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
           registry: core.harbor.domain
-          username: "admin"
-          password: "Harbor12345"
-      - name: Build and push Docker image to my local Harbor
-        uses: docker/build-push-action@v4
-        with:
+          tags: ${{ env.TIMESTAMP }}
+          dockerfile: apps/sample-ai/backend/Dockerfile
           context: apps/sample-ai/backend
-          file: apps/sample-ai/backend/Dockerfile
-          push: true
-          tags: |
-            core.harbor.domain/library/sample-ai-backend-staging:${{ env.TIMESTAMP }}
-      - name: Log out from Harbor
-        run: docker logout ghcr.io
