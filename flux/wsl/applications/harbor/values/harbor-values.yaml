@@ -50,7 +50,7 @@ expose:
     labels: {}
   clusterIP:
     # The name of ClusterIP service
-    name: harbor
+    name: core.harbor.domain
     # The ip address of the ClusterIP service (leave empty for acquiring dynamic ip)
     staticClusterIP: ""
     ports:
