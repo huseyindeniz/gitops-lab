@@ -936,10 +936,10 @@ database:
     host: "harbor-staging-postgresql"
     port: "5432"
     username: "user_harbor"
-    password: "moDCtY(n03S[VPa(" # get it from k8s secret later
+    password: ""
     coreDatabase: "registry"
     # if using existing secret, the key must be "password"
-    existingSecret: ""
+    existingSecret: "harbor-staging-postgres-password"
     # "disable" - No SSL
     # "require" - Always SSL (skip verification)
     # "verify-ca" - Always SSL (verify that the certificate presented by the
