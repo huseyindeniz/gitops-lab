@@ -13,13 +13,18 @@ jobs:
           echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: install certificates
+        run: |
+          openssl s_client -connect harbor-staging-registry.harbor-staging.svc.cluster.local:5000 -showcerts </dev/null 2>/dev/null | openssl x509 -outform PEM > harbor-ca.crt
+          sudo cp harbor-ca.crt /usr/local/share/ca-certificates/harbor-ca.crt
+          sudo update-ca-certificates
       - name: Publish Docker image to Harbor
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: sample-ai-backend-staging
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
-          registry: http://harbor-staging-registry.harbor-staging.svc.cluster.local:5000
+          registry: harbor-staging-registry.harbor-staging.svc.cluster.local:5000
           tags: ${{ env.TIMESTAMP }}
           dockerfile: apps/sample-ai/backend/Dockerfile
           context: apps/sample-ai/backend
