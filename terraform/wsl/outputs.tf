@@ -6,3 +6,8 @@ output "argocd_manager_token" {
 
   depends_on = [kubernetes_secret.argocd_manager_token]
 }
+
+output "harbor_postgresql_info" {
+  value     = module.harbor_postgresql
+  sensitive = true
+}
