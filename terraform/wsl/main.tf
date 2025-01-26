@@ -58,3 +58,10 @@ resource "kubernetes_manifest" "harbor_certificate" {
     }
   }
 }
+
+resource "kubernetes_secret" "harbor_tls" {
+  metadata {
+    name      = "harbor-internal-tls"
+    namespace = kubernetes_namespace.harbor_staging.metadata[0].name
+  }
+}

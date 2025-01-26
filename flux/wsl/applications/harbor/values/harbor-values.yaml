@@ -291,43 +291,43 @@ internalTLS:
   # core related cert configuration
   core:
     # secret name for core's tls certs
-    secretName: "harbor-internal-tls-q7l8b"
+    secretName: "harbor-internal-tls"
     # Content of core's TLS cert file, only available when `certSource` is "manual"
     crt: ""
     # Content of core's TLS key file, only available when `certSource` is "manual"
-    key: "tls.key"
+    key: ""
   # jobservice related cert configuration
   jobservice:
     # secret name for jobservice's tls certs
-    secretName: "harbor-internal-tls-q7l8b"
+    secretName: "harbor-internal-tls"
     # Content of jobservice's TLS key file, only available when `certSource` is "manual"
     crt: ""
     # Content of jobservice's TLS key file, only available when `certSource` is "manual"
-    key: "tls.key"
+    key: ""
   # registry related cert configuration
   registry:
     # secret name for registry's tls certs
-    secretName: "harbor-internal-tls-q7l8b"
+    secretName: "harbor-internal-tls"
     # Content of registry's TLS key file, only available when `certSource` is "manual"
     crt: ""
     # Content of registry's TLS key file, only available when `certSource` is "manual"
-    key: "tls.key"
+    key: ""
   # portal related cert configuration
   portal:
     # secret name for portal's tls certs
-    secretName: "harbor-internal-tls-q7l8b"
+    secretName: "harbor-internal-tls"
     # Content of portal's TLS key file, only available when `certSource` is "manual"
     crt: ""
     # Content of portal's TLS key file, only available when `certSource` is "manual"
-    key: "tls.key"
+    key: ""
   # trivy related cert configuration
   trivy:
     # secret name for trivy's tls certs
-    secretName: "harbor-internal-tls-q7l8b"
+    secretName: "harbor-internal-tls"
     # Content of trivy's TLS key file, only available when `certSource` is "manual"
     crt: ""
     # Content of trivy's TLS key file, only available when `certSource` is "manual"
-    key: "tls.key"
+    key: ""
 
 ipFamily:
   # ipv6Enabled set to true if ipv6 is enabled in cluster, currently it affected the nginx related component
