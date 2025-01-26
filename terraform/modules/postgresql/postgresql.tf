@@ -16,7 +16,7 @@ resource "kubernetes_secret" "postgresql_password_secret" {
 
   data = {
     POSTGRES_PASSWORD = base64encode(random_password.postgresql_password.result) # Reference the generated password
-    PASSWORD          = base64encode(random_password.postgresql_password.result) # Reference the generated password
+    password          = base64encode(random_password.postgresql_password.result) # Reference the generated password
   }
 
   type = "Opaque"
