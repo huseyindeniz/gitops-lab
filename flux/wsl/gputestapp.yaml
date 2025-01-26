@@ -1,21 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: test-gpu-app
-  namespace: argo-wsl
+  name: test-gpu-appset
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/huseyindeniz/gitops-lab.git
-    targetRevision: main
-    path: "helm-charts/gputest"
-  destination:
-    server: "https://172.17.0.5:8443"
-    namespace: argo-wsl
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-      allowEmpty: false
-    retry:
-      limit: 1
+  generators:
+    - list:
+        elements:
+          - test: test
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  template:
+    metadata:
+      name: "test-gpu-app"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/huseyindeniz/gitops-lab.git
+        targetRevision: main
+        path: "helm-charts/gputest"
+      destination:
+        server: "https://172.17.0.5:8443"
+        namespace: argo-wsl
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        retry:
+          limit: 1
