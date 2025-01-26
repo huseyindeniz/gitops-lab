@@ -50,7 +50,7 @@ expose:
     labels: {}
   clusterIP:
     # The name of ClusterIP service
-    name: core.harbor.domain
+    name: core-harbor-domain
     # The ip address of the ClusterIP service (leave empty for acquiring dynamic ip)
     staticClusterIP: ""
     ports:
@@ -109,7 +109,7 @@ expose:
 # the IP address of k8s node
 #
 # If Harbor is deployed behind the proxy, set it as the URL of proxy
-externalURL: https://core.harbor.domain
+externalURL: https://core-harbor-domain
 
 # The persistence is enabled by default and a default StorageClass
 # is needed in the k8s cluster to provision volumes dynamically.
