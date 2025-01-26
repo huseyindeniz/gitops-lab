@@ -19,7 +19,7 @@ jobs:
           name: sample-ai-backend-staging
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
-          registry: core.harbor.domain
+          registry: harbor-staging-core
           tags: ${{ env.TIMESTAMP }}
           dockerfile: apps/sample-ai/backend/Dockerfile
           context: apps/sample-ai/backend
