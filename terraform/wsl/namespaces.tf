@@ -5,6 +5,12 @@ resource "kubernetes_namespace" "argo_cd" {
   }
 }
 
+resource "kubernetes_namespace" "harbor_staging" {
+  metadata {
+    name = "harbor-staging"
+  }
+}
+
 resource "kubernetes_namespace" "sample_ai_backend_wsl_staging" {
   metadata {
     name = "sample-ai-backend-wsl-staging"
