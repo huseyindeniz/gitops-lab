@@ -21,7 +21,7 @@ spec:
         chart: "harbor"
         helm:
           valueFiles:
-            - https://github.com/huseyindeniz/gitops-lab/blob/main/flux/wsl/applications/harbor/values/harbor-values.yaml
+            - git::https://github.com/huseyindeniz/gitops-lab.git//flux/wsl/applications/harbor/values/harbor-values.yaml
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "harbor-{{ .envName }}"
