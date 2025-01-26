@@ -16,7 +16,7 @@ expose:
     # The tls certificate can be generated manually or by cert manager
     # 3) none: configure no tls certificate for the ingress. If the default
     # tls certificate is configured in the ingress controller, choose this option
-    certSource: secret
+    certSource: auto
     auto:
       # The common name used to generate the certificate, it's necessary
       # when the type isn't "ingress"
@@ -25,7 +25,7 @@ expose:
       # The name of secret which contains keys named:
       # "tls.crt" - the certificate
       # "tls.key" - the private key
-      secretName: "harbor-internal-tls"
+      secretName: ""
   ingress:
     hosts:
       core: core.harbor.domain
@@ -291,7 +291,7 @@ internalTLS:
   # core related cert configuration
   core:
     # secret name for core's tls certs
-    secretName: ""
+    secretName: "harbor-internal-tls"
     # Content of core's TLS cert file, only available when `certSource` is "manual"
     crt: ""
     # Content of core's TLS key file, only available when `certSource` is "manual"
