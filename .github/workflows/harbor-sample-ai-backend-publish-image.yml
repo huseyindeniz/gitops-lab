@@ -26,6 +26,7 @@ jobs:
         uses: docker/setup-docker-action@v4
         with:
           version: "27.5.1"
+          rootless: true
       - name: Login to Harbor
         uses: docker/login-action@v2
         with:
