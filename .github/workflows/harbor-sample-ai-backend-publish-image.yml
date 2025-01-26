@@ -21,7 +21,7 @@ jobs:
           sudo apt-get install -y kmod
           export XDG_RUNTIME_DIR="/tmp/runtime-dir"
           mkdir -p $XDG_RUNTIME_DIR
-          chmod 700 $XDG_RUNTIME_DIR
+          sudo chmod 777 $XDG_RUNTIME_DIR
       - name: Set up Docker
         uses: docker/setup-docker-action@v4
         with:
