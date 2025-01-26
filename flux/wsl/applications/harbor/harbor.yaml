@@ -15,13 +15,16 @@ spec:
       name: "harbor-{{.envName}}"
     spec:
       project: default
-      source:
-        repoURL: https://helm.goharbor.io
-        targetRevision: "1.16.2"
-        chart: "harbor"
-        helm:
-          valueFiles:
-            - git::https://github.com/huseyindeniz/gitops-lab.git//flux/wsl/applications/harbor/values/harbor-values.yaml
+      sources:
+        - repoURL: https://helm.goharbor.io
+          targetRevision: "1.16.2"
+          chart: harbor
+          helm:
+            valueFiles:
+              - "$values/flux/wsl/applications/harbor/values/harbor-values.yaml"
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          ref: values
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "harbor-{{ .envName }}"
