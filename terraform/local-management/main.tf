@@ -45,3 +45,11 @@ resource "kubernetes_manifest" "argocd_vs" {
   manifest   = yamldecode(file("${path.module}/values/argocd-virtualservice.yaml"))
   depends_on = [module.local_argo, kubernetes_manifest.istio_gateway]
 }
+
+resource "flux_bootstrap_git" "flux_bootstrap" {
+  embedded_manifests = true
+  path               = var.flux_path
+  components_extra   = ["image-reflector-controller", "image-automation-controller"]
+
+  depends_on = [module.local_argo]
+}
