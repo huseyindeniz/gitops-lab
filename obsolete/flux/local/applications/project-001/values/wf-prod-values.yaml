@@ -1,0 +1,135 @@
+environment: "prod"
+namespace: "project-001-wf-local" # Base namespace for deployments
+
+config:
+  ASPNETCORE_ENVIRONMENT: "Development" # Add any application-specific configurations here
+
+argo:
+  repoURL: https://github.com/huseyindeniz/gitops-lab.git # Repository URL for your chart
+  targetRevision: "main" # Git branch or tag to deploy
+  chartPath: "helm-charts/dotnet-core-webapi" # Path to the chart directory in the repo
+  server: "https://kubernetes.default.svc"
+
+# Deployment configuration
+replicaCount: 2
+# Resource requests and limits (optional)
+resources:
+  app:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+  migration:
+    requests:
+      cpu: "200m"
+      memory: "1Gi"
+    limits:
+      cpu: "600m"
+      memory: "4Gi"
+
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+  stabilizationWindowSeconds: 60
+  scaleDownType: "Pods"
+  scaleDownValue: 1
+  scaleDownPeriodSeconds: 60
+  scaleUpType: "Percent"
+  scaleUpValue: 100
+  scaleUpPeriodSeconds: 15
+
+vpa:
+  enabled: true
+  updateMode: "Auto"
+  minAllowed:
+    cpu: "100m"
+    memory: "128Mi"
+  maxAllowed:
+    cpu: "2000m"
+    memory: "4Gi"
+
+service:
+  type: LoadBalancer # Options: ClusterIP, NodePort, LoadBalancer
+  port: 80 # External port for the service
+  targetPort: 8080 # Internal port the app listens on
+  annotations: {} # Optional, e.g., annotations for load balancers or service meshes
+
+ingress:
+  enabled: true
+  annotations: {} # Add any specific annotations
+  tls: false # Toggle for enabling TLS
+  tlsSecret: "" # Specify TLS secret if TLS is enabled
+
+image:
+  repository: "huseyindeniz/msa1-wf"
+  pullPolicy: IfNotPresent
+
+imageRepository:
+  namespace: "flux-system"
+  interval: "1m0s"
+
+imagePolicy:
+  namespace: "flux-system"
+  app:
+    filterTags:
+      pattern: "^ci-(\\d+)-(\\d{14})$"
+      extract: "$2"
+    policy:
+      order: "asc"
+  migration:
+    filterTags:
+      pattern: "^ci-(\\d+)-(\\d{14})$"
+      extract: "$2"
+    policy:
+      order: "asc"
+
+imageUpdateAutomation:
+  namespace: "flux-system"
+  interval: "5m0s"
+  gitRepository: "https://github.com/huseyindeniz/gitops-lab.git"
+  branch: "main"
+  authorEmail: "huseyindenizkivrak@gmail.com"
+  authorName: "Flux Automation Bot"
+  updatePath: "flux/local/applications/project-001/wf-prod.yaml" # Path for updates
+  strategy: "Setters"
+
+migration:
+  enabled: true
+  action: "apply"
+  targetMigration: ""
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+
+database:
+  host: "your-database-host"
+  port: "5432"
+  name: "your-database-name"
+  user: "db-user"
+  passwordKey: "db-password"
+
+# Configuration for blue-green deployment
+blueGreen:
+  autoPromotionEnabled: true
+  autoPromotionSeconds: 600
+  previewReplicaCount: 1
+
+# Configuration for canary deployment
+canary:
+  steps:
+    - setWeight: 25
+    - pause:
+        duration: 300
+    - setWeight: 50
+    - pause:
+        duration: 300
+    - setWeight: 100

@@ -1,0 +1,23 @@
+server:
+  ingress:
+    enabled: false
+
+controller:
+  replicaCount: 1
+
+repoServer:
+  replicaCount: 1
+
+applicationSet:
+  enabled: true
+
+rbac:
+  policy: |
+    g, admin, role:admin
+
+notifications:
+  enabled: true
+
+crds:
+  install: true
+  keep: false

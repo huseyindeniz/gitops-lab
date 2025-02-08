@@ -1,0 +1,1 @@
+kubectl port-forward service/kubernetes-dashboard 60001:80 -n kubernetes-dashboard

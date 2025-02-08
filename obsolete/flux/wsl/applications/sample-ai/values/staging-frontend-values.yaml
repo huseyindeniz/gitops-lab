@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: huseyindeniz/sample-ai-frontend-staging
+  pullPolicy: IfNotPresent
+  tag: "20250119151704"
+
+nameOverride: "sample-ai-frontend"
+fullnameOverride: "sample-ai-frontend-staging"
+
+podAnnotations: {}
+podLabels: {}
+
+service:
+  type: LoadBalancer
+  port: 7051
+  targetPort: 80
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: sample-ai-frontend-staging.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

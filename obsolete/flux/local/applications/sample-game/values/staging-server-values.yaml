@@ -1,0 +1,50 @@
+env:
+  TEST_ROOM_CAPACITY: 8
+
+replicaCount: 1
+
+image:
+  repository: huseyindeniz/sample-game-server-staging
+  pullPolicy: IfNotPresent
+  tag: "20250111134815"
+
+nameOverride: "sample-game-server"
+fullnameOverride: "sample-game-server-staging"
+
+podAnnotations: {}
+podLabels: {}
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "500Mi"
+  limits:
+    cpu: "500m"
+    memory: "1Gi"
+
+service:
+  type: LoadBalancer
+  port: 2567
+  targetPort: 2567
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+    nginx.ingress.kubernetes.io/websocket-services: "sample-game-server-staging-service"
+    nginx.ingress.kubernetes.io/proxy-set-header-Upgrade: "$http_upgrade"
+    nginx.ingress.kubernetes.io/proxy-set-header-Connection: "upgrade"
+    nginx.ingress.kubernetes.io/proxy-set-header-Host: "$host"
+  hosts:
+    - host: sample-game-server-staging.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 80

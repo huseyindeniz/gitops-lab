@@ -5,7 +5,7 @@ services:
       dockerfile: ./Dockerfile
     environment:
       FLASK_ENV: docker
-      COMMAND: check
+      COMMAND: app
       PORT: 8000
       ALLOWED_EXTENSIONS: png,jpg,jpeg
       MODELS_FOLDER: /app/data/models
@@ -16,7 +16,7 @@ services:
     networks:
       - sample-ai-app-network
     volumes:
-      - H:/volumes/sample-ai-backend/:/app/data/
+      - /mnt/d/volumes/sample-ai-backend/:/app/data/
     deploy:
       resources:
         reservations:

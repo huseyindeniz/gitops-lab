@@ -1,0 +1,1 @@
+minikube stop --profile local-management

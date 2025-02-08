@@ -1,0 +1,7 @@
+server:
+  ingress:
+    enabled: false  # Disable ingress completely
+  service:
+    type: ClusterIP  # Keep it internal, managed by Istio VirtualService
+  extraArgs:
+    - --insecure  # Use only if testing without HTTPS for now

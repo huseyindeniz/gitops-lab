@@ -1,0 +1,1 @@
+minikube delete --profile local-production

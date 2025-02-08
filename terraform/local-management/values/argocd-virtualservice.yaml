@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: argocd-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "argocd.management.local"
+  gateways:
+    - istio-ingress-gateway
+  http:
+    - route:
+        - destination:
+            host: argo-cd-argocd-server.argocd.svc.cluster.local  # Check if this service name matches your Argo CD service
+            port:
+              number: 80

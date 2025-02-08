@@ -30,9 +30,14 @@ services:
       - mysampleapp1-network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - DB__HOST=postgres
+      - DB__PORT=5432
+      - DB__NAME=dev-db
+      - DB__USER=postgres
+      - DB__PASSWORD=postgres      
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/mySampleApp1.weatherForecast.API.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=12345
     ports:
       - "5054:8080"
