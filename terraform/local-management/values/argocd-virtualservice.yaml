@@ -9,8 +9,11 @@ spec:
   gateways:
     - istio-ingress-gateway
   http:
-    - route:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
         - destination:
-            host: argo-cd-argocd-server.argocd.svc.cluster.local  # Check if this service name matches your Argo CD service
+            host: harbor-local-portal.harbor.svc.cluster.local
             port:
               number: 80
