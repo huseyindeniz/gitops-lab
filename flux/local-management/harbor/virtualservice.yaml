@@ -14,7 +14,7 @@ spec:
             prefix: "/api/"
       route:
         - destination:
-            host: harbor-harbor-core.harbor.svc.cluster.local
+            host: harbor-local-core.harbor.svc.cluster.local
             port:
               number: 80
     - match:
@@ -22,7 +22,7 @@ spec:
             prefix: "/c/"
       route:
         - destination:
-            host: harbor-harbor-core.harbor.svc.cluster.local
+            host: harbor-local-core.harbor.svc.cluster.local
             port:
               number: 80
     - match:
@@ -30,6 +30,6 @@ spec:
             exact: "/"
       route:
         - destination:
-            host: harbor-harbor-portal.harbor.svc.cluster.local
+            host: harbor-local-portal.harbor.svc.cluster.local
             port:
               number: 80
