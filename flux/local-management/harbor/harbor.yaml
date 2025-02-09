@@ -7,7 +7,7 @@ spec:
   generators:
     - list:
         elements:
-          - envName: staging
+          - envName: local
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   template:
@@ -27,7 +27,7 @@ spec:
           ref: values
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: "harbor-{{ .envName }}"
+        namespace: "harbor"
       syncPolicy:
         automated:
           prune: true

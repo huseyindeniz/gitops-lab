@@ -9,3 +9,9 @@ resource "kubernetes_namespace" "argocd" {
     name = var.argo_namespace
   }
 }
+
+resource "kubernetes_namespace" "harbor" {
+  metadata {
+    name = var.harbor_namespace
+  }
+}
