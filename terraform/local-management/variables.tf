@@ -53,3 +53,9 @@ variable "local_staging_cluster_bearer_token" {
   sensitive = true
   type      = string
 }
+
+variable "local_staging_cluster_server_url" {
+  sensitive = true
+  type      = string
+  default   = "https://172.17.0.5:8443"
+}

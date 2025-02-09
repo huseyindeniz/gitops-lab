@@ -8,7 +8,7 @@ minikube start \
   --profile local-staging
 
 # Copy cluster cert to the shared certs folder
-cp ~/.minikube/profiles/local-staging/apiserver.crt ~/certs/local-staging.crt
+cp ~/.minikube/profiles/local-staging/apiserver.crt ~/certs/local-staging.pem
 
 minikube addons enable metrics-server -p local-staging
 minikube addons enable dashboard -p local-staging
