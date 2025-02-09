@@ -27,7 +27,7 @@ spec:
               number: 80
     - match:
         - uri:
-            prefix: "/"
+            exact: "/"
       route:
         - destination:
             host: harbor-harbor-portal.harbor.svc.cluster.local
