@@ -21,7 +21,7 @@ spec:
         - uri:
             prefix: "/"
       route:
-          - destination:
+        - destination:
             host: harbor-local-portal.harbor.svc.cluster.local
             port:
               number: 80
