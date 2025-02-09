@@ -13,4 +13,4 @@ spec:
         - destination:
             host: harbor-local-portal.harbor.svc.cluster.local
             port:
-              number: 8080
+              number: 80
