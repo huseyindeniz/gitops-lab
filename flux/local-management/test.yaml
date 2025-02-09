@@ -6,6 +6,9 @@ metadata:
 spec:
   project: default
   source:
+    repoURL: ""  # Empty repoURL as we're not using a Git repository
+    targetRevision: HEAD  # Since there's no Git commit or branch, it defaults to HEAD
+    path: ""  # No path is needed for inline resources
     inline:
       apiVersion: apps/v1
       kind: Deployment
