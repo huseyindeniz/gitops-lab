@@ -14,10 +14,17 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = ">= 1.7.0"
     }
-
+    github = {
+      source  = "integrations/github"
+      version = ">= 6.1"
+    }
     flux = {
       source  = "fluxcd/flux"
       version = ">= 1.4"
+    }
+    argocd = {
+      source  = "argoproj-labs/argocd"
+      version = "7.1.0"
     }
   }
 }

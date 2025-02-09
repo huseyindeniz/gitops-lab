@@ -14,18 +14,17 @@ module "local_istio" {
 
   istio_base_values_file = "${path.module}/values/istio-base.yaml"
   istiod_values_file     = "${path.module}/values/istio-istiod.yaml"
+  gateway_host           = "*.management.local"
+  tls_secret_name        = "management-local-tls-secret"
+  issuer_name            = "selfsigned-issuer"
+  issuer_namespace       = kubernetes_namespace.istio.metadata.0.name
 
   providers = {
     kubernetes = kubernetes
     helm       = helm
   }
 
-  depends_on = [kubernetes_namespace.istio]
-}
-
-resource "kubernetes_manifest" "istio_gateway" {
-  manifest   = yamldecode(file("${path.module}/values/istio-gateway.yaml"))
-  depends_on = [module.local_istio]
+  depends_on = [kubernetes_namespace.istio, module.local_cert_manager]
 }
 
 module "local_argo" {
@@ -43,7 +42,7 @@ module "local_argo" {
 
 resource "kubernetes_manifest" "argocd_vs" {
   manifest   = yamldecode(file("${path.module}/values/argocd-virtualservice.yaml"))
-  depends_on = [module.local_argo, kubernetes_manifest.istio_gateway]
+  depends_on = [module.local_argo, module.local_istio]
 }
 
 resource "flux_bootstrap_git" "flux_bootstrap" {

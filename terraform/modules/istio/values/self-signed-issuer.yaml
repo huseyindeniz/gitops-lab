@@ -1,0 +1,7 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: "${issuer_name}"
+  namespace: "${issuer_namespace}"
+spec:
+  selfSigned: {}

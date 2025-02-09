@@ -12,4 +12,13 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "*.management.local"
+        - "${host}"
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: "${tls_secret_name}"
+      hosts:
+        - "${host}"

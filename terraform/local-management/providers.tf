@@ -15,6 +15,11 @@ provider "kubectl" {
   config_context = var.kubeconfig_context
 }
 
+provider "github" {
+  owner = var.flux_github_org
+  token = var.flux_github_pat
+}
+
 provider "flux" {
   kubernetes = {
     config_path    = var.kubeconfig_path
@@ -28,4 +33,11 @@ provider "flux" {
     }
     branch = "main"
   }
+}
+
+provider "argocd" {
+  server_addr = "argocd.management.local"
+  username    = "admin"
+  password    = var.argo_cd_admin_password
+  insecure    = true
 }

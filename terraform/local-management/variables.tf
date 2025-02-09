@@ -43,3 +43,13 @@ variable "flux_github_pat" {
   sensitive   = true
   type        = string
 }
+
+variable "argo_cd_admin_password" {
+  sensitive = true
+  type      = string
+}
+
+variable "argo_cd_token" {
+  sensitive = true
+  type      = string
+}
