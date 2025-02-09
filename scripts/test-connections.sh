@@ -2,9 +2,9 @@
 
 # Define cluster details
 declare -A cluster_data=(
-  ["local-management"]="58001 $HOME/certs/local-management.crt"
-  ["local-staging"]="58002 $HOME/certs/local-staging.crt"
-  ["local-production"]="58003 $HOME/certs/local-production.crt"
+  ["local-management"]="58001 $HOME/terraform/certs/local-management.crt"
+  ["local-staging"]="58002 $HOME/terraform/certs/local-staging.crt"
+  ["local-production"]="58003 $HOME/terraform/certs/local-production.crt"
 )
 
 # Check if cluster name is provided

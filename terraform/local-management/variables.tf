@@ -49,7 +49,7 @@ variable "argo_cd_admin_password" {
   type      = string
 }
 
-variable "argo_cd_token" {
+variable "local_staging_cluster_bearer_token" {
   sensitive = true
   type      = string
 }

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Cluster
+metadata:
+  name: local-staging-cluster
+  namespace: argocd
+spec:
+  server: localhost:58002
+  config:
+    bearerToken:
+      secretKeyRef:
+        name: staging-cluster-bearer-token
+        key: token
+    tlsClientConfig:
+      caData:
+        secretKeyRef:
+          name: staging-cluster-ca-cert
+          key: ca.pem

@@ -14,3 +14,15 @@ resource "argocd_cluster" "wsl_cluster" {
     }
   }
 }
+
+resource "argocd_cluster" "wsl_cluster" {
+  name   = "wsl-cluster-local"
+  server = var.wsl_cluster_server
+  config {
+    bearer_token = var.wsl_cluster_bearer_token
+    tls_client_config {
+      ca_data = file("certs/wsl-ca.pem")
+    }
+  }
+}
+
