@@ -1,48 +1,41 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: nginx-deployment
-  namespace: argocd
+  name: test-nginx-deployment
+  labels:
+    app: nginx
 spec:
-  project: default
-  source:
-    repoURL: ""  # Empty repoURL as we're not using a Git repository
-    targetRevision: HEAD  # Since there's no Git commit or branch, it defaults to HEAD
-    path: ""  # No path is needed for inline resources
-    inline:
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: test-nginx-deployment
-        namespace: "argocd"
-        labels:
-          app: nginx
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: nginx
-        template:
-          metadata:
-            labels:
-              app: nginx
-          spec:
-            containers:
-              - name: nginx
-                image: nginx:latest
-                ports:
-                  - containerPort: 80
-                resources:
-                  limits:
-                    memory: "128Mi"
-                    cpu: "500m"
-                  requests:
-                    memory: "64Mi"
-                    cpu: "250m"
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: argocd
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
