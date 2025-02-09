@@ -42,6 +42,8 @@ resource "kubernetes_manifest" "self_signed_issuer" {
     issuer_name      = var.issuer_name
     issuer_namespace = var.issuer_namespace
   }))
+
+  depends_on = [helm_release.istio_ingress]
 }
 
 resource "kubernetes_manifest" "self_signed_certificate" {
@@ -61,5 +63,5 @@ resource "kubernetes_manifest" "istio_gateway" {
     tls_secret_name = var.tls_secret_name
   }))
 
-  depends_on = [helm_release.istio_ingress]
+  depends_on = [kubernetes_manifest.self_signed_certificate]
 }

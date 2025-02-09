@@ -11,7 +11,7 @@ variable "kubeconfig_context" {
 }
 
 variable "istio_namespace" {
-  description = "The name of the Argo CD namespace"
+  description = "The name of the istio namespace"
   type        = string
 }
 
@@ -55,7 +55,16 @@ variable "local_staging_cluster_bearer_token" {
 }
 
 variable "local_staging_cluster_server_url" {
+  type    = string
+  default = "https://172.17.0.5:8443"
+}
+
+variable "local_production_cluster_bearer_token" {
   sensitive = true
   type      = string
-  default   = "https://172.17.0.5:8443"
+}
+
+variable "local_production_cluster_server_url" {
+  type    = string
+  default = "https://172.17.0.8:8443"
 }

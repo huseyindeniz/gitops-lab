@@ -32,3 +32,33 @@ resource "argocd_cluster" "local_staging_cluster" {
 
 
 # CLUSTER: local-production
+resource "kubernetes_secret" "production_cluster_bearer_token" {
+  metadata {
+    name = "production-cluster-bearer-token"
+  }
+  data = {
+    token = var.local_production_cluster_bearer_token
+  }
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "production_cluster_ca_cert" {
+  metadata {
+    name = "production-cluster-ca-cert"
+  }
+  data = {
+    "ca.pem" = filebase64("./certs/local-production.pem")
+  }
+  type = "Opaque"
+}
+
+resource "argocd_cluster" "local_production_cluster" {
+  name   = "local-production-cluster"
+  server = var.local_production_cluster_server_url
+  config {
+    bearer_token = kubernetes_secret.production_cluster_bearer_token.data["token"]
+    tls_client_config {
+      ca_data = base64decode(kubernetes_secret.production_cluster_ca_cert.data["ca.pem"])
+    }
+  }
+}

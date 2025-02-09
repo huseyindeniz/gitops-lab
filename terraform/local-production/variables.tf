@@ -7,7 +7,7 @@ variable "kubeconfig_path" {
 
 variable "kubeconfig_context" {
   type    = string
-  default = "local-staging"
+  default = "local-production"
 }
 
 variable "istio_namespace" {
