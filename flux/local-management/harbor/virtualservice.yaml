@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: harbor-vs
+  namespace: harbor
+spec:
+  hosts:
+    - "harbor.management.local"
+  gateways:
+    - istio-ingress-gateway
+  http:
+    - route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local  # Check if this service name matches your Argo CD service
+            port:
+              number: 80

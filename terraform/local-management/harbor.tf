@@ -8,41 +8,7 @@ module "harbor_postgresql" {
   db_name              = "registry"
   db_port              = 5432
   storage_size         = "1Gi"
-  pv_path              = "/mnt/data/harbor-staging"
+  pv_path              = "/mnt/data/harbor"
 
   depends_on = [kubernetes_namespace.harbor]
-}
-
-resource "kubernetes_manifest" "harbor_certificate" {
-  manifest = {
-    "apiVersion" = "cert-manager.io/v1"
-    "kind"       = "Certificate"
-    "metadata" = {
-      "name"      = "harbor-internal-tls"
-      "namespace" = kubernetes_namespace.harbor.metadata[0].name
-    }
-    "spec" = {
-      "secretName" = "harbor-internal-tls" # This secret will store the TLS cert and key
-      "dnsNames" = [
-        "localhost",
-        "harbor-local-core",
-        "harbor-local-jobservice",
-        "harbor-local-registry",
-        "harbor-local-portal",
-        "harbor-local-trivy",
-        "harbor-local-core.harbor.svc.cluster.local"
-      ]
-      "issuerRef" = {
-        "name" = "selfsigned-cluster-issuer" # Replace with the name of your ClusterIssuer
-        "kind" = "ClusterIssuer"             # Use "Issuer" if it's namespace-scoped
-      }
-    }
-  }
-}
-
-resource "kubernetes_secret" "harbor_tls" {
-  metadata {
-    name      = "harbor-internal-tls"
-    namespace = kubernetes_namespace.harbor.metadata[0].name
-  }
 }
