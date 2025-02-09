@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: core-harbor-domain.harbor.svc.cluster.local  # Check if this service name matches your Argo CD service
+            host: harbor-local-core
             port:
-              number: 8080
+              number: 80
