@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: harbor-local-portal.harbor.svc.cluster.local
+            host: core-harbor-domain.harbor.svc.cluster.local
             port:
               number: 80
