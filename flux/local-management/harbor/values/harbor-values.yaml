@@ -933,13 +933,13 @@ database:
       #    memory: 128Mi
       #    cpu: 100m
   external:
-    host: "harbor-staging-postgresql"
+    host: "harbor-postgresql"
     port: "5432"
     username: "user_harbor"
     password: ""
     coreDatabase: "registry"
     # if using existing secret, the key must be "password"
-    existingSecret: "harbor-staging-postgres-password"
+    existingSecret: "harbor-postgres-password"
     # "disable" - No SSL
     # "require" - Always SSL (skip verification)
     # "verify-ca" - Always SSL (verify that the certificate presented by the
