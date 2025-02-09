@@ -25,12 +25,12 @@ resource "kubernetes_manifest" "harbor_certificate" {
       "secretName" = "harbor-internal-tls" # This secret will store the TLS cert and key
       "dnsNames" = [
         "localhost",
-        "harbor-staging-core",
-        "harbor-staging-jobservice",
-        "harbor-staging-registry",
-        "harbor-staging-portal",
-        "harbor-staging-trivy",
-        "harbor-staging-core.harbor-staging.svc.cluster.local"
+        "harbor-local-core",
+        "harbor-local-jobservice",
+        "harbor-local-registry",
+        "harbor-local-portal",
+        "harbor-local-trivy",
+        "harbor-local-core.harbor.svc.cluster.local"
       ]
       "issuerRef" = {
         "name" = "selfsigned-cluster-issuer" # Replace with the name of your ClusterIssuer
