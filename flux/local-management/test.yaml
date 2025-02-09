@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: test-nginx-deployment
+  namespace: "argocd"
   labels:
     app: nginx
 spec:
@@ -31,6 +32,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: test-nginx-service
+  namespace: "argocd"
 spec:
   selector:
     app: nginx
