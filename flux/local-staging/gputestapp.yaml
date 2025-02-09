@@ -21,7 +21,7 @@ spec:
         path: "helm-charts/gputest"
       destination:
         server: "https://172.17.0.5:8443"
-        namespace: argo-wsl
+        namespace: default
       syncPolicy:
         automated:
           prune: true
