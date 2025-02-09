@@ -11,28 +11,22 @@ spec:
   http:
     - match:
         - uri:
-            prefix: "/api"
+            prefix: /api
       route:
         - destination:
             host: harbor-local-core.harbor.svc.cluster.local
             port:
               number: 80
-          rewrite:
-            uri: "/api"  # Preserve the path starting with /api
     - match:
         - uri:
-            exact: "/"  # Matches root path
+            exact: /
       route:
         - destination:
             host: harbor-local-portal.harbor.svc.cluster.local
             port:
               number: 80
-          rewrite:
-            uri: "/"  # Preserve the root path
     - route:
         - destination:
             host: harbor-local-portal.harbor.svc.cluster.local
             port:
               number: 80
-          rewrite:
-            uri: "/"  # Preserve the root path
