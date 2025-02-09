@@ -21,11 +21,11 @@ resource "kubernetes_secret" "staging_cluster_ca_cert" {
 
 resource "argocd_cluster" "local_staging_cluster" {
   name   = "local-staging-cluster"
-  server = "localhost:58002"
+  server = "https://172.17.0.5:8443"
   config {
-    bearer_token = var.local_staging_cluster_bearer_token
+    bearer_token = kubernetes_secret.staging_cluster_bearer_token.data["token"]
     tls_client_config {
-      ca_data = file("certs/local-staging.crt")
+      ca_data = base64decode(kubernetes_secret.staging_cluster_ca_cert.data["ca.pem"])
     }
   }
 }
