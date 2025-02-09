@@ -1,3 +1,17 @@
+data "http" "argocd_crds" {
+  for_each = toset([
+    "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.0/manifests/crds/application-crd.yaml",
+    "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.0/manifests/crds/applicationset-crd.yaml",
+    "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.0/manifests/crds/appproject-crd.yaml"
+  ])
+  url = each.value
+}
+
+resource "kubectl_manifest" "argocd_crds" {
+  for_each  = data.http.argocd_crds
+  yaml_body = each.value.body
+}
+
 resource "kubernetes_service_account" "argocd_manager" {
   metadata {
     name      = "argocd-manager"

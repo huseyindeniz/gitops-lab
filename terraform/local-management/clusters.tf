@@ -19,4 +19,16 @@ resource "kubernetes_secret" "staging_cluster_ca_cert" {
   type = "Opaque"
 }
 
+resource "argocd_cluster" "local_staging_cluster" {
+  name   = "local-staging-cluster"
+  server = "localhost:58002"
+  config {
+    bearer_token = var.local_staging_cluster_bearer_token
+    tls_client_config {
+      ca_data = file("certs/local-staging.crt")
+    }
+  }
+}
+
+
 # CLUSTER: local-production
