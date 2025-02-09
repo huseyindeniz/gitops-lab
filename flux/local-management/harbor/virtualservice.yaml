@@ -11,17 +11,25 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /api
+            prefix: "/api/"
       route:
         - destination:
-            host: harbor-local-core.harbor.svc.cluster.local
+            host: harbor-harbor-core.harbor.svc.cluster.local
             port:
               number: 80
     - match:
         - uri:
-            exact: /
+            prefix: "/c/"
       route:
         - destination:
-            host: harbor-local-portal.harbor.svc.cluster.local
+            host: harbor-harbor-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: harbor-harbor-portal.harbor.svc.cluster.local
             port:
               number: 80
