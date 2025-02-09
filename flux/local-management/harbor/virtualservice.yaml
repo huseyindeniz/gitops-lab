@@ -11,7 +11,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: "/api"
+            prefix: "/api/"
       route:
         - destination:
             host: harbor-local-core.harbor.svc.cluster.local
