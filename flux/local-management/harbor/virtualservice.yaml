@@ -27,6 +27,14 @@ spec:
               number: 80
     - match:
         - uri:
+            prefix: "/v2/"
+      route:
+        - destination:
+            host: harbor-local-registry.harbor.svc.cluster.local
+            port:
+              number: 5000              
+    - match:
+        - uri:
             exact: "/"
       route:
         - destination:
