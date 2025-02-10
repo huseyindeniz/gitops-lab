@@ -14,3 +14,21 @@ variable "istio_namespace" {
   description = "The name of the istio namespace"
   type        = string
 }
+
+variable "github_org" {
+  description = "GitHub organization"
+  type        = string
+  default     = "huseyindeniz"
+}
+
+variable "github_repository" {
+  description = "GitHub repository"
+  type        = string
+  default     = "gitops-lab"
+}
+
+variable "github_arc_pat" {
+  description = "GitHub arc PAT"
+  sensitive   = true
+  type        = string
+}

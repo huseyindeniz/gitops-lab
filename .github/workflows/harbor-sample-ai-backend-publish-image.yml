@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-push:
-    runs-on: arc-runner-wsl
+    runs-on: arc-runner-local-staging
     steps:
       - name: Get current timestamp
         run: |
@@ -19,7 +19,7 @@ jobs:
           name: sample-ai-backend-staging
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_PASSWORD }}
-          registry: harbor-staging-core.harbor-staging.svc.cluster.local
+          registry: harbor.management.local
           tags: ${{ env.TIMESTAMP }}
           dockerfile: apps/sample-ai/backend/Dockerfile
           context: apps/sample-ai/backend

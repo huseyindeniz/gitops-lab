@@ -4,7 +4,7 @@ on:
 
 jobs:
   Explore-GitHub-Actions:
-    runs-on: arc-runner
+    runs-on: arc-runner-local-staging
     steps:
       - name: greeting
-        run: echo "🎉 This job uses arc-runner!"
+        run: echo "🎉 This job uses arc-runner on local-staging cluster!"
