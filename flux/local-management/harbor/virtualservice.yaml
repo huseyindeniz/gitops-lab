@@ -28,6 +28,8 @@ spec:
     - match:
         - uri:
             prefix: "/v2"
+        - uri:
+            prefix: "/v2/"            
       route:
         - destination:
             host: harbor-local-registry.harbor.svc.cluster.local
