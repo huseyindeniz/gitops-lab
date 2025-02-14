@@ -34,10 +34,3 @@ provider "flux" {
     branch = "main"
   }
 }
-
-# provider "argocd" {
-#   server_addr = "argocd.management.local"
-#   username    = "admin"
-#   password    = var.argo_cd_admin_password
-#   insecure    = true
-# }

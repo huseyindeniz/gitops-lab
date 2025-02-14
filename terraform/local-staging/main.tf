@@ -1,3 +1,6 @@
+# CORE APPS WHICH WONT BE MANAGED BY ARGO CD
+
+# CERT MANAGER
 module "local_cert_manager" {
   source = "../modules/cert-manager"
 
@@ -8,6 +11,19 @@ module "local_cert_manager" {
   }
 }
 
+# METALLB
+module "local_metallb" {
+  source    = "../modules/metallb"
+  name      = var.metallb_name
+  namespace = kubernetes_namespace.metallb.metadata.0.name
+  providers = {
+    helm = helm
+  }
+
+  depends_on = [kubernetes_namespace.metallb]
+}
+
+# ISTIO
 module "local_istio" {
   source          = "../modules/istio"
   istio_namespace = kubernetes_namespace.istio.metadata.0.name
@@ -21,19 +37,6 @@ module "local_istio" {
   }
 
   depends_on = [kubernetes_namespace.istio]
-}
-
-module "local_metallb" {
-  source    = "../modules/metallb"
-  name      = "metallb"
-  namespace = kubernetes_namespace.metallb.metadata.0.name
-
-  providers = {
-    helm = helm
-  }
-
-  depends_on = [kubernetes_namespace.metallb]
-
 }
 
 resource "kubernetes_manifest" "metallb_configmap_pool" {

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: k8sdashboard-manifests
+  name: k8sdashboard-manifests-management
   namespace: argocd
 spec:
   project: default

@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-manifests-management
+  name: k8sdashboard-manifests-staging
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
-    path: "flux/manifests/local-management/argocd"
+    path: "flux/manifests/local-staging/k8sdashboard"
     targetRevision: main
   destination:
-    server: https://kubernetes.default.svc
+    server: "https://172.17.0.5:8443"
     namespace: argocd
   syncPolicy:
     automated:
