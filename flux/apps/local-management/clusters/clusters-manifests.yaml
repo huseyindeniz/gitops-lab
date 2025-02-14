@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-clusters
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - clusterName: "local-staging"
+            server: "https://172.17.0.5:8443"
+            secretRef:
+              name: "staging-cluster-bearer-token"
+              namespace: argocd
+              key: token
+            caDataRef:
+              name: "staging-cluster-ca-cert"
+              key: "ca.pem"
+          - clusterName: "local-production"
+            server: "https://172.17.0.8:8443"
+            secretRef:
+              name: "production-cluster-bearer-token"
+              namespace: argocd
+              key: token
+            caDataRef:
+              name: "production-cluster-ca-cert"
+              namespace: argocd
+              key: "ca.pem"
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]              
+  template:
+    metadata:
+      name: '{{clusterName}}-cluster-secret'
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+        targetRevision: HEAD
+        path: flux/manifests/local-management/clusters/{{clusterName}}
+        values:
+          clusterName: "{{clusterName}}"
+          server: "{{server}}"
+          bearerToken: "{{secretRef.bearerToken}}"
+          caData: "{{secretRef.caData}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

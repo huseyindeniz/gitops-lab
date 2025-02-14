@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: local-production-cluster-secret
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+type: Opaque
+stringData:
+  name: {{clusterName}}
+  server: {{server}}
+  config: |
+    {
+      "bearerToken": "{{bearerToken}}",
+      "tlsClientConfig": {
+        "insecure": false,
+        "caData": "{{caData}}"
+      }
+    }
