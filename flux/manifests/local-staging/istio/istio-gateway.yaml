@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: istio-ingress-gateway
+  name: istio-ingress-gateway-staging
   namespace: istio-system
 spec:
   selector:
