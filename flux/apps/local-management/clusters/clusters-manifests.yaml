@@ -9,11 +9,11 @@ spec:
         elements:
           - clusterName: "local-staging"
             server: "https://172.17.0.5:8443"
-            secretRef:
+            bearerTokenSecretRef:
               name: "staging-cluster-bearer-token"
               namespace: argocd
               key: token
-            caDataRef:
+            caDataSecretRef:
               name: "staging-cluster-ca-cert"
               key: "ca.pem"
           - clusterName: "local-production"
