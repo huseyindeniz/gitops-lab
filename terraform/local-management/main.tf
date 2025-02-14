@@ -48,6 +48,7 @@ module "local_argo" {
   providers = {
     kubernetes = kubernetes
     helm       = helm
+    argocd     = argocd
   }
 
   depends_on = [kubernetes_namespace.argocd]

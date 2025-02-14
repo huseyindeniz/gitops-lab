@@ -35,9 +35,9 @@ provider "flux" {
   }
 }
 
-# provider "argocd" {
-#   server_addr = "argocd.management.local"
-#   username    = "admin"
-#   password    = var.argo_cd_admin_password
-#   insecure    = true
-# }
+provider "argocd" {
+  server_addr = "argocd.management.local"
+  username    = "admin"
+  password    = var.argo_cd_admin_password
+  insecure    = true
+}
