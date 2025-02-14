@@ -36,7 +36,7 @@ spec:
       source:
         repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
         targetRevision: HEAD
-        path: flux/manifests/local-management/clusters/{{clusterName}}
+        path: flux/manifests/local-management/clusters/{{ .clusterName }}
         values:
           clusterName: "{{ .clusterName }}"
           server: "{{ .server }}"
