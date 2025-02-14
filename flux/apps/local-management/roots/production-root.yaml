@@ -18,3 +18,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+      syncOptions:
+        - retry-limit=5       
