@@ -21,7 +21,7 @@ spec:
           chart: harbor
           helm:
             valueFiles:
-              - "$values/flux/local-management/harbor/values/harbor-values.yaml"
+              - "$values/flux/apps/local-management/harbor/values/harbor-values.yaml"
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
           ref: values
