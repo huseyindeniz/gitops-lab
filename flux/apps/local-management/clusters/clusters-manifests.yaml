@@ -30,7 +30,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]              
   template:
     metadata:
-      name: '{{clusterName}}-cluster-secret'
+      name: '{{ .clusterName }}-cluster-secret'
     spec:
       project: default
       source:
