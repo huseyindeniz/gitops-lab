@@ -1,16 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-production-root
-  namespace: "argocd"
+  name: harbor-manifests
+  namespace: argocd
 spec:
   project: default
   source:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+    path: "flux/manifests/local-management/harbor"
     targetRevision: main
-    path: "flux/local-production"
-    directory:
-      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

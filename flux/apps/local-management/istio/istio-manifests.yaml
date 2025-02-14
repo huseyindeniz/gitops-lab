@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: harbor-manifests
+  name: istio-manifests
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
-    path: "flux/manifests/harbor"
+    path: "flux/manifests/local-management/istio"
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc

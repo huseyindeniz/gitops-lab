@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
     targetRevision: main
-    path: "flux/local-staging"
+    path: "flux/apps/local-staging"
     directory:
       recurse: true
   destination:

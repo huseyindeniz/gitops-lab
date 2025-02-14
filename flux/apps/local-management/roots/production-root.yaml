@@ -1,14 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-manifests
-  namespace: argocd
+  name: argo-production-root
+  namespace: "argocd"
 spec:
   project: default
   source:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
-    path: "flux/manifests/istio"
     targetRevision: main
+    path: "flux/apps/local-production"
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
