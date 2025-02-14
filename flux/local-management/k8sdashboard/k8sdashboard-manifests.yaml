@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/huseyindeniz/gitops-lab/flux/local-management/manifests"
-    path: "k8sdashboard"
+    repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+    path: "flux/manifests/k8sdashboard"
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc

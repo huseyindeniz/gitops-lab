@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/huseyindeniz/gitops-lab/flux/local-management/manifests"
-    path: "harbor"
+    repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+    path: "flux/manifests/harbor"
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
