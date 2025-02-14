@@ -35,7 +35,7 @@ spec:
               number: 5000              
     - match:
         - uri:
-            exact: "/"
+            prefix: "/"
       route:
         - destination:
             host: harbor-local-portal.harbor.svc.cluster.local
