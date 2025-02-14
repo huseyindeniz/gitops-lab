@@ -7,7 +7,7 @@ spec:
   hosts:
     - "harbor.management.local"
   gateways:
-    - istio-ingress-gateway
+    - istio-ingress-gateway-management
   http:
     - match:
         - uri:
