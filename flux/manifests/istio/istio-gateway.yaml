@@ -5,20 +5,20 @@ metadata:
   namespace: istio-system
 spec:
   selector:
-    app: istio-ingress
+    app: istio-ingress # this should match the label of the istio-ingressgateway deployment
   servers:
     - port:
         number: 80
         name: http
         protocol: HTTP
       hosts:
-        - "${host}"
+        - "*.management.local"
     - port:
         number: 443
         name: https
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: "${tls_secret_name}"
+        credentialName: "management-local-tls-secret"
       hosts:
-        - "${host}"
+        - "*.management.local"

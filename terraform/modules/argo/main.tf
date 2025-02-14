@@ -19,3 +19,4 @@ data "kubernetes_secret" "argo_cd_admin_secret" {
   }
   depends_on = [helm_release.argo_cd]
 }
+

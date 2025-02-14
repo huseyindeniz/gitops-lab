@@ -4,3 +4,4 @@ output "argo_cd_local_admin_password" {
   sensitive   = true
   depends_on  = [module.local_argo]
 }
+

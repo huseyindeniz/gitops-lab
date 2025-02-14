@@ -15,6 +15,16 @@ variable "istio_namespace" {
   type        = string
 }
 
+variable "metallb_name" {
+  description = "The name of the metalLB instance"
+  type        = string
+}
+
+variable "metallb_namespace" {
+  description = "The name of the metalLB namespace"
+  type        = string
+}
+
 variable "argo_namespace" {
   description = "The name of the Argo CD namespace"
   type        = string

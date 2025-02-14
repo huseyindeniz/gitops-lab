@@ -15,6 +15,11 @@ variable "istio_namespace" {
   type        = string
 }
 
+variable "metallb_namespace" {
+  description = "The name of the metalLB namespace"
+  type        = string
+}
+
 variable "github_org" {
   description = "GitHub organization"
   type        = string

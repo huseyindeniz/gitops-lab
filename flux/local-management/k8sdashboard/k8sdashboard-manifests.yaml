@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8sdashboard-manifests
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/huseyindeniz/flux/local-management/manifests"
+    path: "k8sdashboard"
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

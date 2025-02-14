@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: management-cluster-ingress
+  namespace: istio-system
+spec:
+  hosts:
+    - "argocd.management.local"
+    - "harbor.management.local"
+  location: MESH_EXTERNAL
+  ports:
+  - name: http
+    number: 80
+    protocol: HTTP
+  resolution: DNS
+  addresses:
+  - 172.17.0.51

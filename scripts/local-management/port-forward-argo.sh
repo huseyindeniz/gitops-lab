@@ -1,0 +1,1 @@
+kubectl port-forward service/argo-cd-argocd-server 40001:80 -n argocd
