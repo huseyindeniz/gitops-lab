@@ -6,27 +6,27 @@ metadata:
 spec:
   generators:
     - list:
-        elements:
-          - clusterName: "local-staging"
-            server: "https://172.17.0.5:8443"
-            bearerTokenSecretRef:
-              name: "staging-cluster-bearer-token"
-              namespace: argocd
-              key: token
-            caDataSecretRef:
-              name: "staging-cluster-ca-cert"
-              namespace: argocd
-              key: "ca.pem"
-          - clusterName: "local-production"
-            server: "https://172.17.0.8:8443"
-            bearerTokenSecretRef:
-              name: "production-cluster-bearer-token"
-              namespace: argocd
-              key: token
-            caDataSecretRef:
-              name: "production-cluster-ca-cert"
-              namespace: argocd
-              key: "ca.pem"
+        elements: []
+          # - clusterName: "local-staging"
+          #   server: "https://172.17.0.5:8443"
+          #   bearerTokenSecretRef:
+          #     name: "staging-cluster-bearer-token"
+          #     namespace: argocd
+          #     key: token
+          #   caDataSecretRef:
+          #     name: "staging-cluster-ca-cert"
+          #     namespace: argocd
+          #     key: "ca.pem"
+          # - clusterName: "local-production"
+          #   server: "https://172.17.0.8:8443"
+          #   bearerTokenSecretRef:
+          #     name: "production-cluster-bearer-token"
+          #     namespace: argocd
+          #     key: token
+          #   caDataSecretRef:
+          #     name: "production-cluster-ca-cert"
+          #     namespace: argocd
+          #     key: "ca.pem"
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]              
   template:
