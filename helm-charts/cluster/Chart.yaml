@@ -1,0 +1,4 @@
+apiVersion: v2
+name: cluster
+description: fake helm chart for clusters
+version: 0.1.0

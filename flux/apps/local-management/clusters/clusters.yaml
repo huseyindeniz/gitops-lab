@@ -37,7 +37,7 @@ spec:
       source:
         repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
         targetRevision: HEAD
-        path: flux/manifests/local-management/clusters/{{ .clusterName }}
+        path: "helm-charts/cluster"
         helm:
           valuesObject:
             clusterName: "{{ .clusterName }}"
