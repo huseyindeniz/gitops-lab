@@ -37,15 +37,16 @@ spec:
         repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
         targetRevision: HEAD
         path: flux/manifests/local-management/clusters/{{ .clusterName }}
-        values:
-          clusterName: "{{ .clusterName }}"
-          server: "{{ .server }}"
-          bearerTokenSecretName: "{{ .bearerTokenSecretRef.name }}"
-          bearerTokenSecretKey: "{{ .bearerTokenSecretRef.key }}"
-          bearerTokenSecretNamespace: "{{ .bearerTokenSecretRef.namespace }}"
-          caDataSecretName: "{{ .caDataSecretRef.name }}"
-          caDataSecretKey: "{{ .caDataSecretRef.key }}"
-          caDataSecretNamespaces: "{{ .caDataSecretRef.namespace }}"
+        helm:
+          valuesObject:
+            clusterName: "{{ .clusterName }}"
+            server: "{{ .server }}"
+            bearerTokenSecretName: "{{ .bearerTokenSecretRef.name }}"
+            bearerTokenSecretKey: "{{ .bearerTokenSecretRef.key }}"
+            bearerTokenSecretNamespace: "{{ .bearerTokenSecretRef.namespace }}"
+            caDataSecretName: "{{ .caDataSecretRef.name }}"
+            caDataSecretKey: "{{ .caDataSecretRef.key }}"
+            caDataSecretNamespaces: "{{ .caDataSecretRef.namespace }}"
       destination:
         server: https://kubernetes.default.svc
         namespace: argocd
