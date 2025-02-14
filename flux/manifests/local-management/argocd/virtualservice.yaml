@@ -7,7 +7,7 @@ spec:
   hosts:
     - "argocd.management.local"
   gateways:
-    - istio-ingress-gateway-management
+    - istio-ingress
   http:
     - route:
         - destination:

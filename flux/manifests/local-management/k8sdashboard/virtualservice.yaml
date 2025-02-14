@@ -7,7 +7,7 @@ spec:
   hosts:
     - "dashboard.management.local"
   gateways:
-    - istio-ingress-gateway-management
+    - istio-ingress
   http:
     - route:
         - destination:
