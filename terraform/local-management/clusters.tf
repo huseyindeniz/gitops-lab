@@ -16,7 +16,7 @@ resource "kubernetes_secret" "staging_cluster_ca_cert" {
     namespace = var.argo_namespace
   }
   data = {
-    "ca.pem" = filebase64("./certs/local-staging.pem")
+    "ca" = filebase64("./certs/local-staging.pem")
   }
   type = "Opaque"
 }
@@ -51,7 +51,7 @@ resource "kubernetes_secret" "production_cluster_ca_cert" {
     namespace = var.argo_namespace
   }
   data = {
-    "ca.pem" = filebase64("./certs/local-production.pem")
+    "ca" = filebase64("./certs/local-production.pem")
   }
   type = "Opaque"
 }

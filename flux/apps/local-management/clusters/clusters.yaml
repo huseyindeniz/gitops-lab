@@ -16,7 +16,7 @@ spec:
             caDataSecretRef:
               name: "staging-cluster-ca-cert"
               namespace: argocd
-              key: "ca.pem"
+              key: "ca"
           # - clusterName: "local-production"
           #   server: "https://172.17.0.8:8443"
           #   bearerTokenSecretRef:
@@ -26,7 +26,7 @@ spec:
           #   caDataSecretRef:
           #     name: "production-cluster-ca-cert"
           #     namespace: argocd
-          #     key: "ca.pem"
+          #     key: "ca"
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]              
   template:
