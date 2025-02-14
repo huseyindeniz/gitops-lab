@@ -7,13 +7,13 @@ metadata:
     argocd.argoproj.io/secret-type: cluster
 type: Opaque
 stringData:
-  name: {{clusterName}}
-  server: {{server}}
+  name: {{ .Values.clusterName }}
+  server: {{ .Values.server }}
   config: |
     {
-      "bearerToken": "{{bearerToken}}",
+      "bearerToken": "{{ .Values.bearerTokenSecretName}}",
       "tlsClientConfig": {
         "insecure": false,
-        "caData": "{{caData}}"
+        "caData": "{{ .Values.caDataSecretName}}"
       }
     }
