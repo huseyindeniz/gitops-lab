@@ -6,17 +6,17 @@ metadata:
 spec:
   generators:
     - list:
-        elements: []
-          # - clusterName: "local-staging"
-          #   server: "https://172.17.0.5:8443"
-          #   bearerTokenSecretRef:
-          #     name: "staging-cluster-bearer-token"
-          #     namespace: argocd
-          #     key: token
-          #   caDataSecretRef:
-          #     name: "staging-cluster-ca-cert"
-          #     namespace: argocd
-          #     key: "ca.pem"
+        elements: 
+          - clusterName: "local-staging"
+            server: "https://172.17.0.5:8443"
+            bearerTokenSecretRef:
+              name: "staging-cluster-bearer-token"
+              namespace: argocd
+              key: token
+            caDataSecretRef:
+              name: "staging-cluster-ca-cert"
+              namespace: argocd
+              key: "ca.pem"
           # - clusterName: "local-production"
           #   server: "https://172.17.0.8:8443"
           #   bearerTokenSecretRef:
@@ -47,7 +47,7 @@ spec:
             bearerTokenSecretNamespace: "{{ .bearerTokenSecretRef.namespace }}"
             caDataSecretName: "{{ .caDataSecretRef.name }}"
             caDataSecretKey: "{{ .caDataSecretRef.key }}"
-            caDataSecretNamespaces: "{{ .caDataSecretRef.namespace }}"
+            caDataSecretNamespace: "{{ .caDataSecretRef.namespace }}"
       destination:
         server: https://kubernetes.default.svc
         namespace: argocd
