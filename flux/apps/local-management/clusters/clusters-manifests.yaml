@@ -18,11 +18,11 @@ spec:
               key: "ca.pem"
           - clusterName: "local-production"
             server: "https://172.17.0.8:8443"
-            secretRef:
+            bearerTokenSecretRef:
               name: "production-cluster-bearer-token"
               namespace: argocd
               key: token
-            caDataRef:
+            caDataSecretRef:
               name: "production-cluster-ca-cert"
               namespace: argocd
               key: "ca.pem"
@@ -38,10 +38,14 @@ spec:
         targetRevision: HEAD
         path: flux/manifests/local-management/clusters/{{clusterName}}
         values:
-          clusterName: "{{clusterName}}"
-          server: "{{server}}"
-          bearerToken: "{{secretRef.bearerToken}}"
-          caData: "{{secretRef.caData}}"
+          clusterName: "{{ .clusterName }}"
+          server: "{{ .server }}"
+          bearerTokenSecretName: "{{ .bearerTokenSecretRef.name }}"
+          bearerTokenSecretKey: "{{ .bearerTokenSecretRef.key }}"
+          bearerTokenSecretNamespace: "{{ .bearerTokenSecretRef.namespace }}"
+          caDataSecretName: "{{ .caDataSecretRef.name }}"
+          caDataSecretKey: "{{ .caDataSecretRef.key }}"
+          caDataSecretNamespaces: "{{ .caDataSecretRef.namespace }}"
       destination:
         server: https://kubernetes.default.svc
         namespace: argocd

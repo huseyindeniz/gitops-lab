@@ -11,7 +11,7 @@ stringData:
   server: {{server}}
   config: |
     {
-      "bearerToken": "{{bearerToken}}",
+      "bearerToken": "{{bearerTokenSecretName}}",
       "tlsClientConfig": {
         "insecure": false,
         "caData": "{{caData}}"
