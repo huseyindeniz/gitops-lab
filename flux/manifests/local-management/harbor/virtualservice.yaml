@@ -11,14 +11,33 @@ spec:
   http:
     - match:
         - uri:
-            prefix: "/v2"
+            prefix: "/api/"
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/c/"
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/v2"          
       route:
         - destination:
             host: harbor-local-registry.harbor.svc.cluster.local
             port:
-              number: 5000
-    - route:
+              number: 5000              
+    - match:
+        - uri:
+            exact: "/"
+      route:
         - destination:
-            host: core-harbor-domain.harbor.svc.cluster.local
+            host: harbor-local-portal.harbor.svc.cluster.local
             port:
               number: 80
