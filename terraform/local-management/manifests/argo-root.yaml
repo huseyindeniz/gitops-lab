@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "argo-management-root"
+  namespace: "${argo_namespace}"
+spec:
+  project: "default"
+  source:
+    repoURL: "${gitopslab_repo_url}"
+    targetRevision: "main"
+    path: "${root_path}"
+    directory:
+      recurse: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: "${argo_namespace}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

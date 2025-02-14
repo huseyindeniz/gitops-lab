@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/huseyindeniz/flux/local-management/manifests"
+    repoURL: "https://github.com/huseyindeniz/gitops-lab/flux/local-management/manifests"
     path: "metallb"
     targetRevision: main
   destination:
