@@ -9,8 +9,8 @@ service:
     - name: http2
       port: 80
       protocol: TCP
-      targetPort: 80
+      targetPort: 8081
     - name: https
       port: 443
       protocol: TCP
-      targetPort: 443
+      targetPort: 44301
