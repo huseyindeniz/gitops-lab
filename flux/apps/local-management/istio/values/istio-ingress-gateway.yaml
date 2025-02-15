@@ -7,10 +7,10 @@ service:
       protocol: TCP
       targetPort: 15021
     - name: http2
-      port: 8081
+      port: 80
       protocol: TCP
       targetPort: 80
     - name: https
-      port: 44301
+      port: 443
       protocol: TCP
       targetPort: 443
