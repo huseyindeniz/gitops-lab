@@ -1,24 +1,24 @@
-# apiVersion: networking.istio.io/v1alpha3
-# kind: Gateway
-# metadata:
-#   name: istio-ingress
-#   namespace: istio-system
-# spec:
-#   selector:
-#     app: istio-ingress-staging-gateway # this should match the label of the istio-ingressgateway deployment
-#   servers:
-#     - port:
-#         number: 80
-#         name: http
-#         protocol: HTTP
-#       hosts:
-#         - "*.staging.local"
-#     - port:
-#         number: 443
-#         name: https
-#         protocol: HTTPS
-#       tls:
-#         mode: SIMPLE
-#         credentialName: "staging-local-tls-secret"
-#       hosts:
-#         - "*.staging.local"
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-ingress
+  namespace: istio-system
+spec:
+  selector:
+    app: istio-ingress-staging-gateway # this should match the label of the istio-ingressgateway deployment
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*.staging.local"
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: "staging-local-tls-secret"
+      hosts:
+        - "*.staging.local"
