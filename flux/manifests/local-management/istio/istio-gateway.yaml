@@ -8,13 +8,13 @@ spec:
     app: istio-ingress-management-gateway # this should match the label of the istio-ingressgateway deployment
   servers:
     - port:
-        number: 8081
+        number: 80
         name: http
         protocol: HTTP
       hosts:
         - "*.management.local"
     - port:
-        number: 44302
+        number: 443
         name: https
         protocol: HTTPS
       tls:

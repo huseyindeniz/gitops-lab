@@ -1,3 +1,16 @@
 service:
   type: LoadBalancer
   loadBalancerIP: "172.17.0.51"
+  ports:
+    - name: status-port
+      port: 15021
+      protocol: TCP
+      targetPort: 15021
+    - name: http2
+      port: 8081
+      protocol: TCP
+      targetPort: 80
+    - name: https
+      port: 44301
+      protocol: TCP
+      targetPort: 443
