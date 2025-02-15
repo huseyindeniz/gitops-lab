@@ -21,3 +21,10 @@ watch kubectl get pods -n default
 delete pod:
 
 kubectl delete pod debug-pod -n default
+
+check connection to management cluster:
+
+curl -v harbor.management.local:8081
+curl -vk https://harbor.management.local:44301
+nslookup harbor.management.local
+dig harbor.management.local
