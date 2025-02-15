@@ -8,7 +8,7 @@ spec:
     - "argocd.management.local"
     - "harbor.management.local"
   location: MESH_EXTERNAL
-  resolution: STATIC
+  resolution: NONE
   addresses:
   - 172.17.0.51
   ports:
