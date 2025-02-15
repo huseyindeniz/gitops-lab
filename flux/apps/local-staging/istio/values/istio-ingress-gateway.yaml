@@ -3,7 +3,7 @@ service:
   loadBalancerIP: "172.17.0.101"
   ports:
     - name: status-port
-      port: 15022
+      port: 15021
       protocol: TCP
       targetPort: 15021
     - name: http2
