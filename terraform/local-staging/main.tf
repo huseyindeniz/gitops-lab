@@ -50,17 +50,15 @@ module "local_arc" {
     helm       = helm
     kubectl    = kubectl
   }
-
-  depends_on = [module.local_istio]
 }
 
-resource "helm_release" "kiali" {
-  name       = "kiali"
-  repository = "https://kiali.org/helm-charts"
-  chart      = "kiali-server"
-  namespace  = kubernetes_namespace.istio.metadata.0.name
-  version    = "2.5.0"
-  values = [
-    file("${path.module}/values/kiali-values.yaml"),
-  ]
-}
+# resource "helm_release" "kiali" {
+#   name       = "kiali"
+#   repository = "https://kiali.org/helm-charts"
+#   chart      = "kiali-server"
+#   namespace  = kubernetes_namespace.istio.metadata.0.name
+#   version    = "2.5.0"
+#   values = [
+#     file("${path.module}/values/kiali-values.yaml"),
+#   ]
+# }
