@@ -8,7 +8,7 @@ spec:
     - "argocd.management.local"
     - "harbor.management.local"
   location: MESH_EXTERNAL
-  resolution: NONE
+  resolution: STATIC
   addresses:
   - 172.17.0.51
   ports:
@@ -17,4 +17,7 @@ spec:
       protocol: HTTP
     - name: https
       number: 44301  # Matches management ingress HTTPS port
-      protocol: HTTPS  
+      protocol: HTTPS
+  workloadSelector:
+    labels:
+      app: harbor-management      
