@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: kubernetes-dashboard.kubernetes-dashboard.svc.cluster.local  # Check if this service name matches your Argo CD service
+            host: kubernetes-dashboard.kubernetes-dashboard.svc.cluster.local  # Check if this service name matches your k8s dashboard service
             port:
               number: 80

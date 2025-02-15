@@ -1,3 +1,0 @@
-service:
-  type: LoadBalancer
-  loadBalancerIP: 172.17.0.101
