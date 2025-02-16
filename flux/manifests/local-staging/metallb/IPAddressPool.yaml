@@ -1,7 +1,7 @@
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: default
+  name: staging-ip-pool
   namespace: metallb-system
 spec:
   addresses:
