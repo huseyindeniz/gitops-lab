@@ -1,0 +1,9 @@
+replicaCount: 1
+
+image:
+  repository: nicolaka/netshoot
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Optionally define any resources if needed
+resources: {}

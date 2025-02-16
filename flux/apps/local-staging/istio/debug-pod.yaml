@@ -8,23 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://kubeshop.github.io/helm-charts
-    targetRevision: "1.2.3"
-    chart: utility-networking
-    helm:
-      parameters:
-        - name: image.repository
-          value: "praqma/network-multitool"
-        - name: image.tag
-          value: "latest"
-        - name: image.pullPolicy
-          value: "IfNotPresent"
-        - name: service.enabled
-          value: "false"
-        - name: containerSecurityContext.privileged
-          value: "true"
-        - name: command
-          value: "{sleep, infinity}"
+    repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+    targetRevision: main
+    path: "helm-charts/networking-debug-pod"
   destination:
     server: "https://172.17.0.5:8443"
     namespace: default

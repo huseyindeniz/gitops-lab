@@ -1,0 +1,6 @@
+apiVersion: v2
+name: debug-pod
+description: A Helm chart to deploy a debug pod with networking tools
+type: application
+version: 0.1.0
+appVersion: "latest"
