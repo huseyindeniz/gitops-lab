@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ext-vs-manifests-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+    path: "flux/manifests/local-staging/extvs"
+    targetRevision: main
+  destination:
+    server: "https://172.17.0.5:8443"
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
