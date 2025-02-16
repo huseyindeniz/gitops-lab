@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: "selfsigned-issuer"
-  namespace: "istio-system"
+  name: "${issuer_name}"
+  namespace: "${istio_namespace}"
 spec:
   selfSigned: {}

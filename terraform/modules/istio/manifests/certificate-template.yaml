@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${tls_secret_name}-certificate"
+  namespace: "${istio_namespace}"
+spec:
+  secretName: "${tls_secret_name}"
+  issuerRef:
+    name: "${issuer_name}"
+  dnsNames:
+    ${join("\n    - ", dns_names)}

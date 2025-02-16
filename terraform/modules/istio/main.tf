@@ -23,3 +23,39 @@ resource "helm_release" "istiod" {
 
   depends_on = [helm_release.istio_base]
 }
+
+resource "helm_release" "istio_ingress" {
+  name       = "istio-ingress"
+  namespace  = var.istio_namespace
+  repository = "https://istio-release.storage.googleapis.com/charts"
+  chart      = "gateway"
+  version    = "1.25.0-alpha.0"
+  values = [
+    file("${path.module}/values/istio-ingressgateway.yaml"),
+    var.istio_ingressgateway_values_file != "" ? file(var.istio_ingressgateway_values_file) : null,
+  ]
+
+  depends_on = [helm_release.istiod]
+}
+
+resource "kubernetes_manifest" "self_signed_issuer" {
+  manifest = yamldecode(templatefile("${path.module}/manifests/self-signed-issuer.yaml", {
+    istio_namespace = var.istio_namespace
+    issuer_name     = var.issuer_name
+  }))
+
+  depends_on = [helm_release.istio_ingress]
+}
+
+resource "kubernetes_manifest" "self_signed_certificate" {
+  manifest = yamldecode(templatefile("${path.module}/manifests/certificate-template.yaml", {
+    istio_namespace = var.istio_namespace
+    issuer_name     = var.issuer_name
+    tls_secret_name = var.tls_secret_name
+    dns_names       = var.dns_names
+  }))
+
+  depends_on = [kubernetes_manifest.self_signed_issuer]
+}
+
+
