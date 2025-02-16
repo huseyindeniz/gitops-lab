@@ -9,7 +9,7 @@ spec:
   location: MESH_EXTERNAL
   resolution: DNS
   addresses:
-  - 172.17.0.2
+  - 172.17.0.51
   ports:
     - name: http
       number: 8081  # Matches management ingress HTTP port
