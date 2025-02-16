@@ -13,6 +13,11 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-debug
+      annotations:
+        proxy.istio.io/config: |
+          proxyMetadata:
+            ISTIO_META_DNS_CAPTURE: "true"
+            ISTIO_META_DNS_AUTO_ALLOCATE: "true"
     spec:
       containers:
       - name: debug
