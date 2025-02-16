@@ -4,6 +4,8 @@ metadata:
   name: {{ .Release.Name }}-debug
   labels:
     app: {{ .Release.Name }}-debug
+  annotations:
+    sidecar.istio.io/inject: "true"     
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
