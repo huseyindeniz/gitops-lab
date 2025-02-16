@@ -13,8 +13,6 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-debug
-      annotations:
-        sidecar.istio.io/inject: "true"        
     spec:
       containers:
       - name: debug
