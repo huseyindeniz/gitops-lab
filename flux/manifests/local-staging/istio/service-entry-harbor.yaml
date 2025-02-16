@@ -7,7 +7,7 @@ spec:
   hosts:
     - "harbor.management.local"
   location: MESH_EXTERNAL
-  resolution: DNS
+  resolution: STATIC
   addresses:
   - 172.17.0.51
   ports:
