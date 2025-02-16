@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: nginx-app-for-debug
   namespace: argocd
+  annotations:
+    sidecar.istio.io/inject: "true"  
 spec:
   project: default
   source:

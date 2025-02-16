@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: istio-ingress # this should match the label of the istio-ingressgateway deployment
-  namespace: istio-system
+  namespace: "${istio_namespace}"
 spec:
   selector:
     app: istio-ingress # this should match the label of the istio-ingressgateway deployment
