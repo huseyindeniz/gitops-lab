@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: harbor-destination
+  namespace: istio-system
+spec:
+  host: harbor.management.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE

@@ -14,6 +14,7 @@ spec:
       labels:
         app: {{ .Release.Name }}-debug
       annotations:
+        sidecar.istio.io/inject: "true"
         proxy.istio.io/config: |
           proxyMetadata:
             ISTIO_META_DNS_CAPTURE: "true"
