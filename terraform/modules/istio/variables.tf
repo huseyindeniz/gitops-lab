@@ -28,7 +28,7 @@ variable "tls_secret_name" {
   type        = string
 }
 
-variable "dns_names" {
-  description = "List of DNS names for the issuer"
-  type        = list(string)
+variable "dns_name" {
+  description = "dns name"
+  type        = string
 }

@@ -27,7 +27,7 @@ module "local_metallb" {
 module "local_istio" {
   source                           = "../modules/istio"
   istio_namespace                  = kubernetes_namespace.istio.metadata.0.name
-  dns_names                        = ["*.staging.local"]
+  dns_name                         = "*.staging.local"
   issuer_name                      = "istio-selfsigned-issuer"
   tls_secret_name                  = "staging-local-tls-secret"
   istio_base_values_file           = "${path.module}/values/istio-base.yaml"
