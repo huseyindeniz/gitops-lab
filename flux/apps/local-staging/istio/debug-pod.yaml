@@ -9,16 +9,22 @@ spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 18.0.0
-    chart: nginx
+    targetRevision: "18.0.0"
+    chart: common
     helm:
       parameters:
-        - name: replicaCount
-          value: "1"
-        - name: service.type
-          value: ClusterIP
-        - name: service.port
-          value: "80"
+        - name: image.repository
+          value: "praqma/network-multitool"
+        - name: image.tag
+          value: "latest"
+        - name: image.pullPolicy
+          value: "IfNotPresent"
+        - name: service.enabled
+          value: "false"
+        - name: containerSecurityContext.privileged
+          value: "true"
+        - name: command
+          value: "{sleep, infinity}"
   destination:
     server: "https://172.17.0.5:8443"
     namespace: default
