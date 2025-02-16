@@ -11,7 +11,7 @@ spec:
     path: "helm-charts/networking-debug-pod"
   destination:
     server: "https://172.17.0.5:8443"
-    namespace: istio-system
+    namespace: default
   syncPolicy:
     automated:
       prune: true
