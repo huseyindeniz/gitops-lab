@@ -3,9 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-debug
   labels:
-    app: {{ .Release.Name }}-debug
-  annotations:
-    sidecar.istio.io/inject: "true"     
+    app: {{ .Release.Name }}-debug   
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
