@@ -14,3 +14,4 @@ service:
       port: 44301
       protocol: TCP
       targetPort: 443
+imagePullPolicy: IfNotPresent
