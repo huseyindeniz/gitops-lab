@@ -7,3 +7,9 @@ image:
 
 # Optionally define any resources if needed
 resources: {}
+
+# Service configuration (using ClusterIP)
+service:
+  type: ClusterIP
+  port: 80
+  

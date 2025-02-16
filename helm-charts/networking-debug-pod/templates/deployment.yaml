@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-debug
   labels:
-    app: {{ .Release.Name }}-debug   
+    app: {{ .Release.Name }}-debug
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -15,8 +15,16 @@ spec:
         app: {{ .Release.Name }}-debug
     spec:
       containers:
-      - name: debug-pod
+      - name: debug
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        # This command keeps the pod running indefinitely
-        command: ["sleep", "infinity"]
+        ports:
+          - containerPort: 80
+        command:
+          - /bin/sh
+          - -c
+          - |
+            # Start a simple HTTP server on port 80 using netcat.
+            while true; do
+              echo -e "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello World" | nc -lk -p 80;
+            done
