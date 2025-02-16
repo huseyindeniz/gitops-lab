@@ -18,6 +18,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
+    name: istio-ingress
   syncPolicy:
     automated:
       prune: true

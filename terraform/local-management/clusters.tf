@@ -3,7 +3,7 @@
 resource "kubernetes_secret" "cluster_local_staging_secret" {
   metadata {
     name      = "cluster-local-staging-secret"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata.0.name
     labels = {
       "argocd.argoproj.io/secret-type" = "cluster"
     }
@@ -22,13 +22,15 @@ resource "kubernetes_secret" "cluster_local_staging_secret" {
       }
     })
   }
+
+  depends_on = [kubernetes_namespace.argocd]
 }
 
 # CLUSTER: local-production
 resource "kubernetes_secret" "cluster_local_production_secret" {
   metadata {
     name      = "cluster-local-production-secret"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata.0.name
     labels = {
       "argocd.argoproj.io/secret-type" = "cluster"
     }
@@ -47,4 +49,6 @@ resource "kubernetes_secret" "cluster_local_production_secret" {
       }
     })
   }
+
+  depends_on = [kubernetes_namespace.argocd]
 }
