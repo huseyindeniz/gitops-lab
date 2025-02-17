@@ -1,3 +1,4 @@
 FROM nginx:alpine
-# Expose port 80 for HTTP traffic
-EXPOSE 80
+
+# Expose ports
+EXPOSE 80 443
