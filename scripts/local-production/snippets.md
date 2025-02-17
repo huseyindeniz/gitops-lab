@@ -1,3 +1,8 @@
+# Copy cluster cert to the shared certs folder
+cp ~/.minikube/profiles/local-production/apiserver.crt /mnt/d/github/gitops-lab/certs/local-production.pem
+cp ~/.minikube/profiles/local-production/apiserver.crt /mnt/d/github/gitops-lab/terraform/local-management/certs/local-production.pem
+
+
 create debug pod with:
 
 curl

@@ -28,9 +28,8 @@ resource "kubernetes_manifest" "self_signed_issuer" {
   manifest = yamldecode(templatefile("${path.module}/manifests/self-signed-issuer.yaml", {
     istio_namespace = var.istio_namespace
     issuer_name     = var.issuer_name
+    id              = helm_release.istiod.id // fake id for this resource to depend on the helm_release istiod
   }))
-
-  depends_on = [helm_release.istio_base]
 }
 
 resource "kubernetes_manifest" "self_signed_certificate" {
@@ -56,14 +55,4 @@ resource "helm_release" "istio_ingress" {
   ]
 
   depends_on = [kubernetes_manifest.self_signed_certificate]
-}
-
-resource "kubernetes_manifest" "istio_gateway" {
-  manifest = yamldecode(templatefile("${path.module}/manifests/istio-gateway.yaml", {
-    istio_namespace = var.istio_namespace
-    tls_secret_name = var.tls_secret_name
-    dns_name        = var.dns_name
-  }))
-
-  depends_on = [helm_release.istio_ingress]
 }
