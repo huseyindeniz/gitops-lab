@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: networking-debug-app
+  name: networking-debug-app-management
   namespace: argocd
 spec:
   project: default
@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: "helm-charts/networking-debug-pod"
   destination:
-    server: "https://172.17.0.5:8443"
+    server: "https://kubernetes.default.svc"
     namespace: "networking-test"
   syncPolicy:
     automated:

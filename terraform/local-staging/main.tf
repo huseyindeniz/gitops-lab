@@ -25,8 +25,14 @@ module "local_metallb" {
 
 resource "kubernetes_manifest" "metallb_ippool" {
   manifest = yamldecode(templatefile("${path.module}/manifests/IPAddressPool.yaml", {
-    ip_range = "172.17.0.50-172.17.0.99"
+    ip_range = "172.17.0.100-172.17.0.149"
     id       = module.local_metallb.id // fake id for this resource to depend on the module metallb
+  }))
+}
+
+resource "kubernetes_manifest" "metallb_bgpadvertisement" {
+  manifest = yamldecode(templatefile("${path.module}/manifests/BGPAdvertisement.yaml", {
+    id = module.local_metallb.id // fake id for this resource to depend on the module metallb
   }))
 }
 

@@ -31,3 +31,12 @@ resource "kubernetes_namespace" "harbor" {
 
   depends_on = [kubernetes_namespace.argocd]
 }
+
+resource "kubernetes_namespace" "networking_test" {
+  metadata {
+    name = "networking-test"
+    labels = {
+      "istio-injection" = "enabled"
+    }
+  }
+}
