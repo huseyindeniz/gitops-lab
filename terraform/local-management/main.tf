@@ -30,17 +30,23 @@ resource "kubernetes_manifest" "metallb_ippool" {
   }))
 }
 
-resource "kubernetes_manifest" "metallb_bgpadvertisement" {
-  manifest = yamldecode(templatefile("${path.module}/manifests/BGPAdvertisement.yaml", {
+resource "kubernetes_manifest" "metallb_l2advertisement" {
+  manifest = yamldecode(templatefile("${path.module}/manifests/L2Advertisement.yaml", {
     id = module.local_metallb.id // fake id for this resource to depend on the module metallb
   }))
 }
 
-resource "kubernetes_manifest" "metallb_bgppeer" {
-  manifest = yamldecode(templatefile("${path.module}/manifests/BGPPeer.yaml", {
-    id = module.local_metallb.id // fake id for this resource to depend on the module metallb
-  }))
-}
+# resource "kubernetes_manifest" "metallb_bgpadvertisement" {
+#   manifest = yamldecode(templatefile("${path.module}/manifests/BGPAdvertisement.yaml", {
+#     id = module.local_metallb.id // fake id for this resource to depend on the module metallb
+#   }))
+# }
+
+# resource "kubernetes_manifest" "metallb_bgppeer" {
+#   manifest = yamldecode(templatefile("${path.module}/manifests/BGPPeer.yaml", {
+#     id = module.local_metallb.id // fake id for this resource to depend on the module metallb
+#   }))
+# }
 
 # ISTIO
 module "local_istio" {
