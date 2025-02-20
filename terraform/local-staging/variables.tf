@@ -28,13 +28,11 @@ variable "metallb_namespace" {
 variable "github_org" {
   description = "GitHub organization"
   type        = string
-  default     = "huseyindeniz"
 }
 
 variable "github_repository" {
   description = "GitHub repository"
   type        = string
-  default     = "gitops-lab"
 }
 
 variable "github_arc_pat" {

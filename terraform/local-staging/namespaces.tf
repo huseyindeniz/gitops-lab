@@ -14,6 +14,7 @@ resource "kubernetes_namespace" "istio" {
   depends_on = [kubernetes_namespace.metallb]
 }
 
+# networking-test application
 resource "kubernetes_namespace" "networking_test" {
   metadata {
     name = "networking-test"

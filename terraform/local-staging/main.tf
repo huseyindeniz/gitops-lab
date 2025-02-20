@@ -23,32 +23,7 @@ module "local_metallb" {
   depends_on = [kubernetes_namespace.metallb]
 }
 
-# resource "kubernetes_manifest" "metallb_ippool" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/IPAddressPool.yaml", {
-#     ip_range = "172.17.0.100-172.17.0.149"
-#     id       = module.local_metallb.id // fake id for this resource to depend on the module metallb
-#   }))
-# }
-
-# resource "kubernetes_manifest" "metallb_l2advertisement" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/L2Advertisement.yaml", {
-#     id = module.local_metallb.id // fake id for this resource to depend on the module metallb
-#   }))
-# }
-
-# resource "kubernetes_manifest" "metallb_bgpadvertisement" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/BGPAdvertisement.yaml", {
-#     id = module.local_metallb.id // fake id for this resource to depend on the module metallb
-#   }))
-# }
-
-# resource "kubernetes_manifest" "metallb_bgppeer" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/BGPPeer.yaml", {
-#     id = module.local_metallb.id // fake id for this resource to depend on the module metallb
-#   }))
-# }
-
-# # ISTIO
+# ISTIO
 module "local_istio" {
   source                 = "../modules/istio"
   istio_namespace        = kubernetes_namespace.istio.metadata.0.name
@@ -63,27 +38,6 @@ module "local_istio" {
   depends_on = [kubernetes_namespace.istio]
 }
 
-# resource "kubernetes_manifest" "istio_gateway" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/istio-gateway.yaml", {
-#     istio_namespace = kubernetes_namespace.istio.metadata.0.name
-#     tls_secret_name = "staging-local-tls-secret"
-#     dns_name        = "*.staging.local"
-#     id              = module.local_istio.istioingress_id // fake id for this resource to depend on the module istio
-#   }))
-# }
-
-# resource "kubernetes_manifest" "virtual_service_k8sdashboard" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/k8s-dashboard-virtualservice.yaml", {
-#     id = module.local_istio.istioingress_id // fake id for this resource to depend on the module istio
-#   }))
-# }
-
-# resource "kubernetes_manifest" "service_entry_harbor" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/service-entry-harbor.yaml", {
-#   }))
-#   depends_on = [kubernetes_namespace.istio]
-# }
-
 # module "local_arc" {
 #   source          = "../modules/arc-runners"
 #   name            = "arc-runner-local-staging"
@@ -95,15 +49,4 @@ module "local_istio" {
 #     helm       = helm
 #     kubectl    = kubectl
 #   }
-# }
-
-# resource "helm_release" "kiali" {
-#   name       = "kiali"
-#   repository = "https://kiali.org/helm-charts"
-#   chart      = "kiali-server"
-#   namespace  = kubernetes_namespace.istio.metadata.0.name
-#   version    = "2.5.0"
-#   values = [
-#     file("${path.module}/values/kiali-values.yaml"),
-#   ]
 # }
