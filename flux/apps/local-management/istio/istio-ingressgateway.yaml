@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://istio-release.storage.googleapis.com/charts"
+    - repoURL: https://istio-release.storage.googleapis.com"
       targetRevision: "1.25.0-alpha.0"
-      chart: "istio-official/gateway"
+      chart: "gateway"
       helm:
         valueFiles:
           - "$values/flux/apps/local-management/istio/values/istio-ingressgateway-values.yaml"
