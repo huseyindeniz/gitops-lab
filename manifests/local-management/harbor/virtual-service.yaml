@@ -7,28 +7,61 @@ spec:
   hosts:
     - "harbor.management.local"
   gateways:
-    - istio-ingressgateway-management
+    - istio-ingressgateway-management    
   http:
-  - name: "core"
-    match:
-    - uri:
-        prefix: "/api"
-    - uri:
-        prefix: "/service"
-    - uri:
-        prefix: "/v2"
-    - uri:
-        prefix: "/chartrepo"
-    - uri:
-        prefix: "/c"
-    route:
-    - destination:
-        host: harbor-local-core.harbor.svc.cluster.local
-        port:
-          number: 80  
-  - name: "portal"
-    route:
-    - destination:
-        host: harbor-local-portal.harbor.svc.cluster.local
-        port:
-          number: 80
+    - match:
+        - uri:
+            prefix: "/api/"
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/service/"
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/chartrepo"
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/c/"
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/v1/"
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            prefix: "/v2/"          
+      route:
+        - destination:
+            host: harbor-local-core.harbor.svc.cluster.local
+            port:
+              number: 80              
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: harbor-local-portal.harbor.svc.cluster.local
+            port:
+              number: 80
