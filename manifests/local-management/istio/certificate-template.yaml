@@ -6,6 +6,6 @@ metadata:
 spec:
   secretName: "management-local-tls-secret"
   issuerRef:
-    name: "istio-selfsigned-issuer"
+    name: "istio-selfsigned-management-issuer"
   dnsNames:
     - "*.management.local"

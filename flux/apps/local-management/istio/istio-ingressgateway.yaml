@@ -8,7 +8,7 @@ spec:
   sources:
     - repoURL: https://istio-release.storage.googleapis.com/charts"
       targetRevision: "1.25.0-alpha.0"
-      chart: "gateway"
+      chart: "istio-official/gateway"
       helm:
         valueFiles:
           - "$values/flux/apps/local-management/istio/values/istio-ingressgateway-values.yaml"

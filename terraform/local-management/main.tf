@@ -98,16 +98,16 @@ module "local_argo" {
 #   }))
 # }
 
-# resource "kubernetes_manifest" "argo_management_root" {
-#   manifest = yamldecode(templatefile("${path.module}/manifests/argo-root.yaml", {
-#     argo_namespace     = kubernetes_namespace.argocd.metadata.0.name
-#     gitopslab_repo_url = local.gitopslab_repo_url
-#     id                 = module.local_argo.id // fake id for this resource to depend on the module argo
-#     root_path          = "${var.flux_path}/apps/local-management"
-#   }))
+resource "kubernetes_manifest" "argo_management_root" {
+  manifest = yamldecode(templatefile("${path.module}/manifests/argo-root.yaml", {
+    argo_namespace     = kubernetes_namespace.argocd.metadata.0.name
+    gitopslab_repo_url = local.gitopslab_repo_url
+    id                 = module.local_argo.id // fake id for this resource to depend on the module argo
+    root_path          = "${var.flux_path}/apps/local-management"
+  }))
 
-#   depends_on = [kubernetes_namespace.argocd]
-# }
+  depends_on = [kubernetes_namespace.argocd]
+}
 
 # resource "kubernetes_manifest" "virtual_service_harbor" {
 #   manifest = yamldecode(templatefile("${path.module}/manifests/harbor-virtualservice.yaml", {
