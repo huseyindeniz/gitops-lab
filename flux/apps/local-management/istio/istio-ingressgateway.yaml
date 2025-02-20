@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-ingressgateway-management
+  namespace: "argocd"
+spec:
+  project: default
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts"
+      targetRevision: "1.25.0-alpha.0"
+      chart: "gateway"
+      helm:
+        valueFiles:
+          - "$values/flux/apps/local-management/istio/values/istio-ingressgateway-values.yaml"
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 3
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m   

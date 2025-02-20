@@ -59,11 +59,6 @@ variable "flux_github_pat" {
   type        = string
 }
 
-variable "argo_cd_admin_password" {
-  sensitive = true
-  type      = string
-}
-
 variable "local_staging_cluster_bearer_token" {
   sensitive = true
   type      = string

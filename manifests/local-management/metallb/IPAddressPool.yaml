@@ -5,4 +5,4 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - "${ip_range}"
+  - "172.17.0.50-172.17.0.99"
