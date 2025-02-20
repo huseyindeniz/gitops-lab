@@ -7,27 +7,11 @@ spec:
   hosts:
     - "harbor.management.local"
   gateways:
-    - istio-ingressgateway-management    
+    - istio-ingressgateway-management
   http:
     - match:
         - uri:
             prefix: "/api/"
-      route:
-        - destination:
-            host: harbor-local-core.harbor.svc.cluster.local
-            port:
-              number: 80
-    - match:
-        - uri:
-            prefix: "/service/"
-      route:
-        - destination:
-            host: harbor-local-core.harbor.svc.cluster.local
-            port:
-              number: 80
-    - match:
-        - uri:
-            prefix: "/chartrepo"
       route:
         - destination:
             host: harbor-local-core.harbor.svc.cluster.local
@@ -43,20 +27,12 @@ spec:
               number: 80
     - match:
         - uri:
-            prefix: "/v1/"
+            prefix: "/v2"          
       route:
         - destination:
-            host: harbor-local-core.harbor.svc.cluster.local
+            host: harbor-local-registry.harbor.svc.cluster.local
             port:
-              number: 80
-    - match:
-        - uri:
-            prefix: "/v2/"          
-      route:
-        - destination:
-            host: harbor-local-core.harbor.svc.cluster.local
-            port:
-              number: 80              
+              number: 5000              
     - match:
         - uri:
             prefix: "/"
