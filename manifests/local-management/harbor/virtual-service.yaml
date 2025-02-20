@@ -17,12 +17,3 @@ spec:
             host: core-harbor-domain.harbor.svc.cluster.local
             port:
               number: 80
-  tls:
-    - match:
-        - uri:
-            prefix: "/"
-      route:
-        - destination:
-            host: core-harbor-domain.harbor.svc.cluster.local
-            port:
-              number: 443
