@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://istio-release.storage.googleapis.com"
+    - repoURL: https://istio-release.storage.googleapis.com/charts
       targetRevision: "1.25.0-alpha.0"
       chart: "gateway"
       helm:
@@ -27,4 +27,4 @@ spec:
       backoff:
         duration: 5s
         factor: 2
-        maxDuration: 1m   
+        maxDuration: 1m
