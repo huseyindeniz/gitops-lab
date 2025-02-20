@@ -7,9 +7,7 @@ spec:
   hosts:
     - "harbor.management.local"
   location: MESH_INTERNAL
-  resolution: DNS
-  addresses:
-  - 172.17.0.51
+  resolution: NONE
   ports:
     - name: http
       number: 8081  # Matches management ingress HTTP port
