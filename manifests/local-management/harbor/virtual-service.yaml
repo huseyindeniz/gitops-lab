@@ -9,12 +9,19 @@ spec:
   gateways:
     - istio-ingressgateway-management
   http:
-    - route:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
         - destination:
             host: core-harbor-domain.harbor.svc.cluster.local
             port:
               number: 80
-    - route:
+  tls:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
         - destination:
             host: core-harbor-domain.harbor.svc.cluster.local
             port:
