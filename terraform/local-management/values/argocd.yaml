@@ -7,16 +7,16 @@ server:
     type: ClusterIP  # Keep it internal, managed by Istio VirtualService
   extraArgs:
     - --insecure  # Use only if testing without HTTPS for now
-dex:
-  enabled: true
-  config:
-    connectors:
-      - type: github
-        id: github
-        name: GitHub
-        config:
-          clientID: "${github_oauth_client_id}"
-          clientSecret: $argocd/argocd-dex-server-secret:clientSecret
-          loadAllGroups: false
-          users:
-            - username: huseyindeniz
+cm:
+  dex:
+    config:
+      connectors:
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: "${github_oauth_client_id}"
+            clientSecret: $argocd/argocd-dex-server-secret:clientSecret
+            loadAllGroups: false
+            users:
+              - username: huseyindeniz
