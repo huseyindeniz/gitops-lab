@@ -14,6 +14,7 @@ applicationSet:
 rbac:
   policy: |
     g, admin, role:admin
+    g, github:huseyindeniz, role:developer
 
 notifications:
   enabled: true

@@ -38,10 +38,26 @@ module "local_istio" {
 }
 
 # ARGO CD
+
+resource "kubernetes_secret" "argo_cd_dex_secret" {
+  metadata {
+    name      = "argocd-dex-server-secret"
+    namespace = var.argo_namespace
+  }
+
+  data = {
+    "clientSecret" = base64encode(var.github_oauth_client_secret)
+  }
+
+  type = "Opaque"
+}
+
 module "local_argo" {
-  source              = "../modules/argo" # Reference to the argo module
-  argo_namespace      = kubernetes_namespace.argocd.metadata.0.name
-  argo_cd_values_file = "${path.module}/values/argocd.yaml"
+  source         = "../modules/argo" # Reference to the argo module
+  argo_namespace = kubernetes_namespace.argocd.metadata.0.name
+  argo_cd_values_file = templatefile("${path.module}/values/argocd.yaml", {
+    github_oauth_client_id = var.github_oauth_client_id
+  })
 
   providers = {
     kubernetes = kubernetes

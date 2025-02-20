@@ -7,7 +7,7 @@ resource "helm_release" "argo_cd" {
   namespace  = var.argo_namespace
   values = [
     file("${path.module}/values/values.yaml"),
-    var.argo_cd_values_file != "" ? file(var.argo_cd_values_file) : null,
+    var.argo_cd_values_file != "" ? var.argo_cd_values_file : null
   ]
 }
 

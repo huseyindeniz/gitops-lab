@@ -73,3 +73,14 @@ variable "local_production_cluster_bearer_token" {
 variable "local_production_cluster_server_url" {
   type = string
 }
+
+variable "github_oauth_client_id" {
+  description = "GitHub OAuth client ID"
+  type        = string
+}
+
+variable "github_oauth_client_secret" {
+  description = "GitHub OAuth client secret"
+  sensitive   = true
+  type        = string
+}
