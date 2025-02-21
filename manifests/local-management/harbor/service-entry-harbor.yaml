@@ -9,7 +9,7 @@ spec:
   location: MESH_INTERNAL
   resolution: DNS
   addresses:
-    - 172.17.0.51  # Same as your LoadBalancer IP  
+    -  10.244.2.4  # Same as your LoadBalancer IP  
   ports:
     - name: http
       number: 8081  # Matches management ingress HTTP port
