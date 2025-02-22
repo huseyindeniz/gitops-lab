@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
-  name: networking-debug-app-service-entry-1
+  name: networking-debug-app-service-entry-2
   namespace: istio-system
 spec:
   hosts:
