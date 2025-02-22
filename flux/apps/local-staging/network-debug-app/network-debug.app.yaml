@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: network-debug-app-staging-set
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: network-debug-app-management-local-3
+            customMessage: "network-debug-app:local-management:3"
+            namespace: networking-test
+          - name: network-debug-app-management-local-4
+            customMessage: "network-debug-app:local-management:4"
+            namespace: networking-test
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: default
+      sources:
+        - repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+          targetRevision: main
+          path: "helm-charts/networking-debug-pod"
+          helm:
+            values: |
+              customMessage: "{{customMessage}}"
+      destination:
+        server: "https://172.17.0.5:8443"
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

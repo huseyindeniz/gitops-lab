@@ -10,8 +10,8 @@ spec:
   resolution: DNS
   ports:
     - name: http
-      number: 8081
+      number: 8081 # this is the istio ingress gateway port not the fucking app port 
       protocol: HTTP
     - name: https
-      number: 44301
+      number: 44301 # this is the istio ingress gateway port not the fucking app port 
       protocol: HTTPS
