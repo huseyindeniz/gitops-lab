@@ -1,9 +1,9 @@
-apiVersion: metallb.io/v1beta1
-kind: BGPPeer
-metadata:
-  name: management-bgp-peer
-  namespace: metallb-system
-spec:
-  peerAddress: 172.17.0.1 # router IP address
-  peerASN: 65000  # ASN of the router
-  myASN: 65001  # ASN for the BGP speaker
+# apiVersion: metallb.io/v1beta1
+# kind: BGPPeer
+# metadata:
+#   name: management-bgp-peer
+#   namespace: metallb-system
+# spec:
+#   peerAddress: 172.17.0.5 # target cluster 
+#   peerASN: 65000  # ASN of the router
+#   myASN: 65001  # ASN for the BGP speaker
