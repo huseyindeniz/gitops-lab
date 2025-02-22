@@ -7,7 +7,9 @@ spec:
   hosts:
     - "harbor.management.local"
   location: MESH_INTERNAL
-  resolution: DNS 
+  resolution: DNS
+  addresses:
+    -  10.99.85.32  # Same as your LoadBalancer IP  
   ports:
     - name: http
       number: 8081  # Matches management ingress HTTP port
