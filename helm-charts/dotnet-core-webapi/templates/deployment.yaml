@@ -11,8 +11,8 @@ metadata:
   labels: {{ include "dotnet-core-webapi.labels" . | nindent 4 }}
   annotations:
     environment: {{ .Values.environment | quote }}
-    notifications.argoproj.io/subscribe: "project-001-wf-on-sync-succeeded"
-    notifications.argoproj.io/subscribe.project-001-wf-on-sync-succeeded: "true"
+    notifications.argoproj.io/subscribe: "{{ include "dotnet-core-webapi.name" . }}-on-sync-succeeded"
+    notifications.argoproj.io/subscribe.{{ include "dotnet-core-webapi.name" . }}-on-sync-succeeded: "true"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:

@@ -30,14 +30,14 @@ resources:
       memory: "4Gi"
 
 hpa:
-  enabled: true
+  enabled: false
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
 vpa:
-  enabled: true
+  enabled: false
   updateMode: "Auto"
   minAllowed:
     cpu: "100m"
@@ -47,7 +47,7 @@ vpa:
     memory: "4Gi"
 
 service:
-  type: LoadBalancer                # Options: ClusterIP, NodePort, LoadBalancer
+  type: ClusterIP                # Options: ClusterIP, NodePort, LoadBalancer
   port: 80                          # External port for the service
   targetPort: 8080                  # Internal port the app listens on
   annotations: {}                   # Optional, e.g., annotations for load balancers or service meshes
@@ -58,6 +58,11 @@ ingress:
   annotations: {}                       # Add any specific annotations
   tls: false                            # Toggle for enabling TLS
   tlsSecret: ""                         # Specify TLS secret if TLS is enabled
+
+virtualService:
+  enabled: true
+  hosts:
+    - "domain of the app"
 
 imageRepository:
   namespace: "flux-system"

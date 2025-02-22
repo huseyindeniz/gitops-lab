@@ -38,6 +38,7 @@ module "local_istio" {
   depends_on = [kubernetes_namespace.istio]
 }
 
+# GITHUB ARC RUNNERS
 module "local_arc" {
   source          = "../modules/arc-runners"
   name            = "arc-runner-local-staging"
@@ -50,3 +51,19 @@ module "local_arc" {
     kubectl    = kubectl
   }
 }
+
+# SAMPLE DOTNET APP
+module "local_sample_dotnet" {
+  source                         = "../modules/sample-dotnet"
+  env_list                       = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
+  app_ns_prefix_sample_dotnet_wf = "sample-dotnet-wf-staging"
+
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+  }
+}
+
+# SAMPLE GAME
+
+# SAMPLE AI
