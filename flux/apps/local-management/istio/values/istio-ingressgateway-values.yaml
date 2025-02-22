@@ -1,5 +1,6 @@
 service:
   type: LoadBalancer
+  loadBalancerIP: "172.17.0.51"
   ports:
     - name: status-port
       port: 15021
