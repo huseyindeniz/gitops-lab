@@ -32,5 +32,4 @@ spec:
           - |
             RESPONSE="{{ .Values.customMessage }}\n"
             LENGTH=$(printf "%s" "$RESPONSE" | wc -c)
-            # Using socat to properly listen and respond to incoming requests
-            socat TCP-LISTEN:80,reuseaddr,fork EXEC:"echo -ne HTTP/1.1 200 OK\\r\\nContent-Length: $LENGTH\\r\\n\\r\\n$RESPONSE",pty
+            socat TCP-LISTEN:80,reuseaddr,fork EXEC:"echo -ne 'HTTP/1.1 200 OK\r\nContent-Length: $LENGTH\r\n\r\n$RESPONSE'"
