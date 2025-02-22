@@ -15,5 +15,3 @@ spec:
     - name: https
       number: 44301
       protocol: HTTPS
-  gateways:
-    - istio-ingressgateway-management
