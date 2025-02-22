@@ -30,6 +30,8 @@ spec:
           - /bin/sh
           - -c
           - |
+            RESPONSE="{{ .Values.customMessage }}"
+            LENGTH=$(printf "%s" "$RESPONSE" | wc -c)
             while true; do
-              echo -e "HTTP/1.1 200 OK\r\nContent-Length: {{ .Values.customMessage | len }}\r\n\r\n{{ .Values.customMessage }}" | socat - TCP-LISTEN:80,reuseaddr,fork;
+              printf "HTTP/1.1 200 OK\r\nContent-Length: $LENGTH\r\n\r\n%s" "$RESPONSE" | socat - TCP-LISTEN:80,reuseaddr,fork;
             done
