@@ -14,6 +14,13 @@ resource "kubernetes_namespace" "istio" {
   depends_on = [kubernetes_namespace.metallb]
 }
 
+# HARBOR
+resource "kubernetes_namespace" "harbor" {
+  metadata {
+    name = var.harbor_namespace
+  }
+}
+
 # networking-test application
 resource "kubernetes_namespace" "networking_test" {
   metadata {

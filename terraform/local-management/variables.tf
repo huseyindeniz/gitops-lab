@@ -30,11 +30,6 @@ variable "argo_namespace" {
   type        = string
 }
 
-variable "harbor_namespace" {
-  description = "The name of the Harbor namespace"
-  type        = string
-}
-
 variable "flux_github_org" {
   description = "Flux GitHub organization"
   type        = string

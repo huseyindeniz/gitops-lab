@@ -26,15 +26,6 @@ resource "kubernetes_namespace" "argocd" {
   depends_on = [kubernetes_namespace.istio]
 }
 
-# HARBOR
-resource "kubernetes_namespace" "harbor" {
-  metadata {
-    name = var.harbor_namespace
-  }
-
-  depends_on = [kubernetes_namespace.argocd]
-}
-
 # networking-test application
 resource "kubernetes_namespace" "networking_test" {
   metadata {
