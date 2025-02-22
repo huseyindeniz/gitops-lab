@@ -7,5 +7,8 @@ resource "kubernetes_namespace" "arc_systems" {
 resource "kubernetes_namespace" "arc_runners" {
   metadata {
     name = "arc-runners"
+    labels = {
+      "istio-injection" = "enabled"
+    }
   }
 }

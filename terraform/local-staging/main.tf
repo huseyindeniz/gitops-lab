@@ -38,15 +38,15 @@ module "local_istio" {
   depends_on = [kubernetes_namespace.istio]
 }
 
-# module "local_arc" {
-#   source          = "../modules/arc-runners"
-#   name            = "arc-runner-local-staging"
-#   github_repo_url = local.gitopslab_repo_url
-#   github_arc_pat  = var.github_arc_pat
+module "local_arc" {
+  source          = "../modules/arc-runners"
+  name            = "arc-runner-local-staging"
+  github_repo_url = local.gitopslab_repo_url
+  github_arc_pat  = var.github_arc_pat
 
-#   providers = {
-#     kubernetes = kubernetes
-#     helm       = helm
-#     kubectl    = kubectl
-#   }
-# }
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+    kubectl    = kubectl
+  }
+}
