@@ -30,7 +30,6 @@ spec:
           - /bin/sh
           - -c
           - |
-            # Start a simple HTTP server on port 80 using netcat.
             while true; do
-              echo -e "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello World" | nc -lk -p 80;
+              echo -e "HTTP/1.1 200 OK\r\nContent-Length: {{ .Values.customMessage | len }}\r\n\r\n{{ .Values.customMessage }}" | socat - TCP-LISTEN:80,reuseaddr,fork;
             done

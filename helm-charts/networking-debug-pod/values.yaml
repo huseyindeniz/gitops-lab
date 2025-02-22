@@ -13,3 +13,4 @@ service:
   type: ClusterIP
   port: 80
   
+customMessage: "hello world from network-debug-app in cluster: "
