@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: network-debug-app-vs-3
+  namespace: istio-system
+spec:
+  hosts:
+    - "nda3.management.local"
+  http:
+    - route:
+        - destination:
+            host: network-debug-app-management-local-3-debug.networking-test.svc.cluster.local  # Check if this service name matches your Argo CD service
+            port:
+              number: 80

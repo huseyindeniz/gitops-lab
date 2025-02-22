@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: networking-debug-app-service-entry-4
+  namespace: istio-system
+spec:
+  hosts:
+    - "nda4.management.local"
+  location: MESH_INTERNAL
+  resolution: DNS
+  ports:
+    - name: http
+      number: 8081 # this is the istio ingress gateway port not the fucking app port 
+      protocol: HTTP
+    - name: https
+      number: 44301 # this is the istio ingress gateway port not the fucking app port 
+      protocol: HTTPS
