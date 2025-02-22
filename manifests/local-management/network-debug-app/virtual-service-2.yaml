@@ -6,8 +6,6 @@ metadata:
 spec:
   hosts:
     - "nda2.management.local"
-  gateways:
-    - istio-ingressgateway-management
   http:
     - route:
         - destination:

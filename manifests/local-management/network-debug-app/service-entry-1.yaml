@@ -10,7 +10,10 @@ spec:
   resolution: DNS
   ports:
     - name: http
-      number: 80
+      number: 8081
       protocol: HTTP
+    - name: https
+      number: 44301
+      protocol: HTTPS
   gateways:
     - istio-ingressgateway-management
