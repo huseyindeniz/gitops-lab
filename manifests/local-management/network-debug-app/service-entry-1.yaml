@@ -12,3 +12,5 @@ spec:
     - name: http
       number: 80
       protocol: HTTP
+  gateways:
+    - istio-ingressgateway-management
