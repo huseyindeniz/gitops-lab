@@ -5,10 +5,10 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "nda3.management.local"
+    - "nda3.staging.local"
   http:
     - route:
         - destination:
-            host: network-debug-app-management-local-3-debug.networking-test.svc.cluster.local  # Check if this service name matches your Argo CD service
+            host: network-debug-app-staging-local-3-debug.networking-test.svc.cluster.local  # Check if this service name matches your Argo CD service
             port:
               number: 80

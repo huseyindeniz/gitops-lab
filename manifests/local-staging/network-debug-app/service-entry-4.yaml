@@ -5,13 +5,13 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "nda4.management.local"
+    - "nda4.staging.local"
   location: MESH_INTERNAL
   resolution: DNS
   ports:
     - name: http
-      number: 8081 # this is the istio ingress gateway port not the fucking app port 
+      number: 8082 # this is the istio ingress gateway port not the fucking app port 
       protocol: HTTP
     - name: https
-      number: 44301 # this is the istio ingress gateway port not the fucking app port 
+      number: 44302 # this is the istio ingress gateway port not the fucking app port 
       protocol: HTTPS

@@ -7,11 +7,11 @@ spec:
   generators:
     - list:
         elements:
-          - name: network-debug-app-management-local-3
-            customMessage: "network-debug-app:local-management:3"
+          - name: network-debug-app-staging-local-3
+            customMessage: "network-debug-app:local-staging:3"
             namespace: networking-test
-          - name: network-debug-app-management-local-4
-            customMessage: "network-debug-app:local-management:4"
+          - name: network-debug-app-staging-local-4
+            customMessage: "network-debug-app:local-staging:4"
             namespace: networking-test
   template:
     metadata:
