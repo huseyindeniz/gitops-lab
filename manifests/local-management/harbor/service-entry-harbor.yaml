@@ -1,19 +1,19 @@
-apiVersion: networking.istio.io/v1beta1
-kind: ServiceEntry
-metadata:
-  name: harbor-service-entry
-  namespace: istio-system
-spec:
-  hosts:
-    - "harbor.management.local"
-  location: MESH_INTERNAL
-  resolution: DNS
-  addresses:
-    -  10.99.85.32  # Same as your LoadBalancer IP  
-  ports:
-    - name: http
-      number: 8081  # Matches management ingress HTTP port
-      protocol: HTTP
-    - name: https
-      number: 44301  # Matches management ingress HTTPS port
-      protocol: HTTPS
+# apiVersion: networking.istio.io/v1beta1
+# kind: ServiceEntry
+# metadata:
+#   name: harbor-service-entry
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - "harbor.management.local"
+#   location: MESH_INTERNAL
+#   resolution: DNS
+#   addresses:
+#     -  10.99.85.32  # Same as your LoadBalancer IP  
+#   ports:
+#     - name: http
+#       number: 8081  # Matches management ingress HTTP port
+#       protocol: HTTP
+#     - name: https
+#       number: 44301  # Matches management ingress HTTPS port
+#       protocol: HTTPS

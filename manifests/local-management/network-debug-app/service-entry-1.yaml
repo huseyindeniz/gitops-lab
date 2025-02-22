@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: networking-debug-app-service-entry-1
+  namespace: istio-system
+spec:
+  hosts:
+    - "nda1.management.local"
+  location: MESH_INTERNAL
+  resolution: DNS
+  ports:
+    - name: http
+      number: 80
+      protocol: HTTP

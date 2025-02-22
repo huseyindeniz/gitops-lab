@@ -1,43 +1,43 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: harbor-vs
-  namespace: istio-system
-spec:
-  hosts:
-    - "harbor.management.local"
-  gateways:
-    - istio-ingressgateway-management
-  http:
-    - match:
-        - uri:
-            prefix: "/api/"
-      route:
-        - destination:
-            host: harbor-local-core.harbor.svc.cluster.local
-            port:
-              number: 80
-    - match:
-        - uri:
-            prefix: "/c/"
-      route:
-        - destination:
-            host: harbor-local-core.harbor.svc.cluster.local
-            port:
-              number: 80
-    - match:
-        - uri:
-            prefix: "/v2"          
-      route:
-        - destination:
-            host: harbor-local-registry.harbor.svc.cluster.local
-            port:
-              number: 5000              
-    - match:
-        - uri:
-            prefix: "/"
-      route:
-        - destination:
-            host: harbor-local-portal.harbor.svc.cluster.local
-            port:
-              number: 80
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: harbor-vs
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - "harbor.management.local"
+#   gateways:
+#     - istio-ingressgateway-management
+#   http:
+#     - match:
+#         - uri:
+#             prefix: "/api/"
+#       route:
+#         - destination:
+#             host: harbor-local-core.harbor.svc.cluster.local
+#             port:
+#               number: 80
+#     - match:
+#         - uri:
+#             prefix: "/c/"
+#       route:
+#         - destination:
+#             host: harbor-local-core.harbor.svc.cluster.local
+#             port:
+#               number: 80
+#     - match:
+#         - uri:
+#             prefix: "/v2"          
+#       route:
+#         - destination:
+#             host: harbor-local-registry.harbor.svc.cluster.local
+#             port:
+#               number: 5000              
+#     - match:
+#         - uri:
+#             prefix: "/"
+#       route:
+#         - destination:
+#             host: harbor-local-portal.harbor.svc.cluster.local
+#             port:
+#               number: 80
