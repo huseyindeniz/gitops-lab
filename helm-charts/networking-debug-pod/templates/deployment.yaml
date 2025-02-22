@@ -32,4 +32,4 @@ spec:
           - |
             RESPONSE="{{ .Values.customMessage }}\n"
             LENGTH=$(printf "%s" "$RESPONSE" | wc -c)
-            socat TCP-LISTEN:80,reuseaddr EXEC:"echo -ne 'HTTP/1.1 200 OK\r\nContent-Length: $LENGTH\r\n\r\n$RESPONSE'"
+            socat TCP-LISTEN:80,reuseaddr,fork EXEC:"echo -ne 'HTTP/1.1 200 OK\r\nContent-Length: $LENGTH\r\n\r\n$RESPONSE'"
