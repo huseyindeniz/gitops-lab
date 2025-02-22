@@ -6,7 +6,7 @@ metadata:
 spec:
   hosts:
     - "nda1.management.local"
-  location: MESH_INTERNAL
+  location: MESH_EXTERNAL
   resolution: DNS
   ports:
     - name: http
