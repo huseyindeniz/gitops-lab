@@ -8,7 +8,7 @@ argo:
   repoURL: https://github.com/huseyindeniz/gitops-lab.git # Repository URL for your chart
   targetRevision: "main" # Git branch or tag to deploy
   chartPath: "helm-charts/dotnet-core-webapi" # Path to the chart directory in the repo
-  server: "https://kubernetes.default.svc"
+  server: "https://172.17.0.5:8443"
 
 # Deployment configuration
 replicaCount: 1
