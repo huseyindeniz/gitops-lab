@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: sample-dotnet-wf-staging-appset
-  namespace: argo-local
+  namespace: argocd
 spec:
   generators:
     - list:
