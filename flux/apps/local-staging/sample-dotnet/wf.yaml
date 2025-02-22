@@ -8,7 +8,7 @@ spec:
     - list:
         elements:
           - envName: stag-1
-            servicePort: 5001
+            servicePort: 80
             host: "wf-stag-1.staging.local"
             strategy: "standard" # standard, bluegreen, canary
             imgTag: "ci-12443789174-20241221084552" # {"$imagepolicy": "flux-system:project-001-wf-stag-1-app-image-policy:tag"}
@@ -16,7 +16,7 @@ spec:
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
-            servicePort: 5002
+            servicePort: 80
             host: "wf-stag-2.staging.local"
             strategy: "standard" # standard, bluegreen, canary
             imgTag: "ci-12453924093-20241222114212" # {"$imagepolicy": "flux-system:project-001-wf-stag-2-app-image-policy:tag"}
