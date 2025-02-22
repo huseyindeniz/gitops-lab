@@ -30,36 +30,39 @@ spec:
       name: "sample-dotnet-wf-staging-{{.envName}}"
     spec:
       project: default
-      source:
-        repoURL: https://github.com/huseyindeniz/gitops-lab.git
-        targetRevision: main
-        path: "helm-charts/dotnet-core-webapi"
-        helm:
-          valueFiles:
-            - values.yaml
-            - $valuesRef/flux/apps/local-staging/sample-dotnet/values/wf-values.yaml
-          valuesObject:
-            environment: "{{ .envName }}"
-            strategy: "{{ .strategy }}"
-            service:
-              port: "{{ .servicePort }}"
-            virtualService:
-              enabled: true
-              hosts: 
-                - "{{ .host }}"
-            image:
-              tag: "{{ .imgTag }}"
-            migration:
-              tag: "{{ .imgMigrationTag }}"
-              action: "{{ .migrationAction }}"
-              targetMigration: "{{ .targetMigration }}"
-            database:
-              host: "sample-dotnet-wf-staging-{{ .envName }}-postgresql"
-              port: "5432"
-              name: "db_{{ .envName }}"
-              user: "user_{{ .envName }}"
-              secretName: "sample-dotnet-wf-staging-{{ .envName }}-postgres-password"
-              passwordKey: "POSTGRES_PASSWORD"
+      sources:
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          path: "helm-charts/dotnet-core-webapi"
+          helm:
+            valueFiles:
+              - values.yaml
+              - $values/flux/apps/local-staging/sample-dotnet/values/wf-values.yaml
+            valuesObject:
+              environment: "{{ .envName }}"
+              strategy: "{{ .strategy }}"
+              service:
+                port: "{{ .servicePort }}"
+              virtualService:
+                enabled: true
+                hosts: 
+                  - "{{ .host }}"
+              image:
+                tag: "{{ .imgTag }}"
+              migration:
+                tag: "{{ .imgMigrationTag }}"
+                action: "{{ .migrationAction }}"
+                targetMigration: "{{ .targetMigration }}"
+              database:
+                host: "sample-dotnet-wf-staging-{{ .envName }}-postgresql"
+                port: "5432"
+                name: "db_{{ .envName }}"
+                user: "user_{{ .envName }}"
+                secretName: "sample-dotnet-wf-staging-{{ .envName }}-postgres-password"
+                passwordKey: "POSTGRES_PASSWORD"
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          ref: values
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "sample-dotnet-wf-staging-{{ .envName }}" # Use the environment suffix in the namespace
