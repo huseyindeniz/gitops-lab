@@ -71,35 +71,6 @@ image:
   repository: "huseyindeniz/msa1-wf"
   pullPolicy: IfNotPresent
 
-imageRepository:
-  namespace: "flux-system"
-  interval: "1m0s"
-
-imagePolicy:
-  namespace: "flux-system"
-  app:
-    filterTags:
-      pattern: "^ci-(\\d+)-(\\d{14})$"
-      extract: "$2"
-    policy:
-      order: "asc"
-  migration:
-    filterTags:
-      pattern: "^ci-(\\d+)-(\\d{14})$"
-      extract: "$2"
-    policy:
-      order: "asc"
-
-imageUpdateAutomation:
-  namespace: "flux-system"
-  interval: "5m0s"
-  gitRepository: "https://github.com/huseyindeniz/gitops-lab.git"
-  branch: "main"
-  authorEmail: "huseyindenizkivrak@gmail.com"
-  authorName: "Flux Automation Bot"
-  updatePath: "flux/apps/local-staging/sample-dotnet/wf.yaml" # Path for updates
-  strategy: "Setters"
-
 migration:
   enabled: true
   action: "apply"

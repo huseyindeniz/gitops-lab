@@ -64,38 +64,9 @@ virtualService:
   hosts:
     - "domain of the app"
 
-imageRepository:
-  namespace: "flux-system"
-  interval: "1m0s"
-
 image:
   repository: "your-docker-repo/app-image"
   pullPolicy: IfNotPresent
-
-imagePolicy:
-  namespace: "flux-system"
-  app:
-    filterTags:
-      pattern: "^\\d{14}$"
-      extract: "$0"
-    policy:
-      order: "asc"
-  migration:
-    filterTags:
-      pattern: "^\\d{14}$"
-      extract: "$0"
-    policy:
-      order: "asc"
-
-imageUpdateAutomation:
-  namespace: "flux-system"
-  interval: "5m0s"
-  gitRepository: "my-git-repo"
-  branch: "main"
-  authorEmail: "your-email@example.com"
-  authorName: "Automation Bot"
-  updatePath: "path to your manifest" # Path for updates
-  strategy: "Setters"
 
 migration:
   enabled: true
