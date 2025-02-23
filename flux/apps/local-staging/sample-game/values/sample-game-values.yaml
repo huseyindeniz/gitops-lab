@@ -8,7 +8,7 @@ nodejs-app:
   image:
     repository: huseyindeniz/sample-game-server-staging
     pullPolicy: IfNotPresent
-    tag: "20250223175638"
+    tag: "20250223180316"
 
   nameOverride: "sample-game-server"
   fullnameOverride: "sample-game-server-staging"
