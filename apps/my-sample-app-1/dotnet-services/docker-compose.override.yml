@@ -36,12 +36,12 @@ services:
       - DB__USER=postgres
       - DB__PASSWORD=postgres      
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_HTTPS_PORTS=8443
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=12345
     ports:
       - "5054:8080"
-      - "5055:8081"
+      - "5055:8443"
 
 volumes:
   postgres-data:

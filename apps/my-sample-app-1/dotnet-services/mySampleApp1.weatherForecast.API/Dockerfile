@@ -14,10 +14,6 @@ RUN chown -R appuser:appgroup /app
 # Switch to the non-root user
 USER appuser
 
-# Expose ports
-EXPOSE 8080
-EXPOSE 8081
-
 # Use the official .NET SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -45,6 +41,10 @@ FROM base AS final
 # Set the working directory and copy published files
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Expose ports
+EXPOSE 8080
+EXPOSE 8443
 
 # Set the entry point
 ENTRYPOINT ["dotnet", "mySampleApp1.weatherForecast.API.dll"]

@@ -34,7 +34,7 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORTS": "8081",
+        "ASPNETCORE_HTTPS_PORTS": "8443",
         "ASPNETCORE_HTTP_PORTS": "8080",
         "ASPNETCORE_Kestrel__Certificates__Default__Path": "/app/certs/mySampleApp1.weatherForecast.API.pfx",
         "ASPNETCORE_Kestrel__Certificates__Default__Password": "12345"
