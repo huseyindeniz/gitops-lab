@@ -19,8 +19,8 @@ spec:
             servicePort: 80
             host: "wf-stag-2.staging.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "ci-12453924093-20241222114212" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-image-policy:tag"}
-            imgMigrationTag: "ci-12453924093-20241222114209" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-migration-image-policy:tag"}
+            imgTag: "ci-13481649714-20250223091844" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-image-policy:tag"}
+            imgMigrationTag: "ci-13481649714-20250223091843" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
