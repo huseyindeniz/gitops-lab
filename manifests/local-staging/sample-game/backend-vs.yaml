@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: sample-dotnet-wf-staging-stag-1-service.sample-dotnet-wf-staging-stag-1.svc.cluster.local
+            host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
             port:
-              number: 80
+              number: 2567
