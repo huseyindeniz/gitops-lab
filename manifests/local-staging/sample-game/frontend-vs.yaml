@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: sample-game-server-client-service.sample-game-staging.svc.cluster.local
+            host: sample-game-client-staging-service.sample-game-staging.svc.cluster.local
             port:
               number: 80
