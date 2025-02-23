@@ -21,8 +21,6 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "dotnet-core-webapi.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-      annotations:
-        sidecar.istio.io/inject: "false"
     spec:
       containers:
         - name: db-migration

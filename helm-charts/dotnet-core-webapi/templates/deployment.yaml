@@ -23,9 +23,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "dotnet-core-webapi.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-      annotations:
-        sidecar.istio.io/inject: "false"        
+        app.kubernetes.io/instance: {{ .Release.Name }}      
     spec:
       containers:
         - image: {{ .Values.image.repository }}-api-{{ .Values.environment }}:{{ .Values.image.tag | default .Chart.AppVersion }}
