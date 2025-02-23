@@ -57,7 +57,7 @@ static-website:
   image:
     repository: huseyindeniz/sample-game-client-staging
     pullPolicy: IfNotPresent
-    tag: "20250223153322"
+    tag: "20250223181601"
 
   nameOverride: "sample-game-client"
   fullnameOverride: "sample-game-client-staging"
