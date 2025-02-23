@@ -15,7 +15,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: "1m0s"
-  image: "huseyindeniz/msa1-wf--migration-stag-1"
+  image: "huseyindeniz/msa1-wf-migration-stag-1"
 
 ---
 
@@ -36,4 +36,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: "1m0s"
-  image: "huseyindeniz/msa1-wf--migration-stag-2"
+  image: "huseyindeniz/msa1-wf-migration-stag-2"
