@@ -20,7 +20,9 @@ spec:
             Upgrade: "websocket"
             Connection: "Upgrade"
             Host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
+        response:
+          add:
             Access-Control-Allow-Origin: "*"
-            Access-Control-Allow-Methods: "GET, POST, PUT, DELETE"
+            Access-Control-Allow-Methods: "GET, POST, PUT, DELETE, OPTIONS"
             Access-Control-Allow-Headers: "Content-Type, Authorization"
             Access-Control-Allow-Credentials: "true"            
