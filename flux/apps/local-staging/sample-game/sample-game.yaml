@@ -18,7 +18,7 @@ spec:
       sources:
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          chart: sample-game
+          path: "helm-charts/sample-game"
           helm:
             valueFiles:
               - "$valuesRef/flux/apps/local-staging/sample-game/values/sample-game-values.yaml"
