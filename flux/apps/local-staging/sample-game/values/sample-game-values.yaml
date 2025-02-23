@@ -24,12 +24,12 @@ nodejs-app:
       memory: "1Gi"
 
   service:
-    type: LoadBalancer
+    type: ClusterIP
     port: 2567
     targetPort: 2567
 
   ingress:
-    enabled: true
+    enabled: false
     className: ""
     annotations:
       nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
@@ -65,12 +65,12 @@ static-website:
   podLabels: {}
 
   service:
-    type: LoadBalancer
-    port: 7001
+    type: ClusterIP
+    port: 80
     targetPort: 80
 
   ingress:
-    enabled: true
+    enabled: false
     className: ""
     annotations:
       {}
