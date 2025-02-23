@@ -9,7 +9,10 @@ spec:
   gateways:
     - istio-ingressgateway-staging
   http:
-    - route:
+    - match:
+        - uri:
+          prefix: "/"
+      route:
         - destination:
             host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
             port:
