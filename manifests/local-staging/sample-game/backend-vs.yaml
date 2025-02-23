@@ -5,7 +5,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "sample-game.staging.local"
+    - "api.sample-game.staging.local"
   gateways:
     - istio-ingressgateway-staging
   http:
