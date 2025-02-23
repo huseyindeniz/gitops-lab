@@ -10,8 +10,8 @@ spec:
           - envName: stag-1
             servicePort: 80
             host: "wf-stag-1.staging.local"
-            hpaEnabled: true
-            vpaEnabled: false
+            hpaEnabled: "true"
+            vpaEnabled: "false"
             strategy: "standard" # standard, bluegreen, canary
             imgTag: "ci-13481276849-20250223082812" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-1-image-policy:tag"}
             imgMigrationTag: "ci-13481276849-20250223082811" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-1-migration-image-policy:tag"}
@@ -20,8 +20,8 @@ spec:
           - envName: stag-2
             servicePort: 80
             host: "wf-stag-2.staging.local"
-            hpaEnabled: false
-            vpaEnabled: true
+            hpaEnabled: "false"
+            vpaEnabled: "true"
             strategy: "standard" # standard, bluegreen, canary
             imgTag: "ci-13481649714-20250223091844" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-image-policy:tag"}
             imgMigrationTag: "ci-13481649714-20250223091843" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-migration-image-policy:tag"}
@@ -45,9 +45,9 @@ spec:
             valuesObject:
               environment: "{{ .envName }}"
               hpa:
-                enabled: {{ .hpaEnabled }}
+                enabled: {{ .hpaEnabled | quote | toBool }}
               vpa:
-                enabled: {{ .vpaEnabled }}
+                enabled: {{ .vpaEnabled | quote | toBool }}
               strategy: "{{ .strategy }}"
               service:
                 port: "{{ .servicePort }}"
