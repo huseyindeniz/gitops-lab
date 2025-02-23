@@ -1,17 +1,11 @@
-environment: "prod"
 namespace: "sample-dotnet-wf-staging" # Base namespace for deployments
 
 config:
   ASPNETCORE_ENVIRONMENT: "Development" # Add any application-specific configurations here
 
-argo:
-  repoURL: https://github.com/huseyindeniz/gitops-lab.git # Repository URL for your chart
-  targetRevision: "main" # Git branch or tag to deploy
-  chartPath: "helm-charts/dotnet-core-webapi" # Path to the chart directory in the repo
-  server: "https://172.17.0.5:8443"
-
 # Deployment configuration
 replicaCount: 1
+
 # Resource requests and limits (optional)
 resources:
   app:
@@ -61,11 +55,6 @@ service:
 
 ingress:
   enabled: false
-
-virtualService:
-  enabled: true
-
-gateway: istio-ingressgateway-staging
 
 image:
   repository: "huseyindeniz/msa1-wf"

@@ -4,12 +4,6 @@ namespace: "your-app-namespace"          # Base namespace for deployments
 config:
   ASPNETCORE_ENVIRONMENT: "Development"             # Add any application-specific configurations here
 
-argo:
-  repoURL: "https://github.com/your-org/your-repo"  # Repository URL for your chart
-  targetRevision: "main"                            # Git branch or tag to deploy
-  chartPath: "path/to/chart"                        # Path to the chart directory in the repo
-  server: "https://kubernetes.default.svc" 
-
 replicaCount: 1
 
 # Resource requests and limits (optional)
@@ -58,11 +52,6 @@ ingress:
   annotations: {}                       # Add any specific annotations
   tls: false                            # Toggle for enabling TLS
   tlsSecret: ""                         # Specify TLS secret if TLS is enabled
-
-virtualService:
-  enabled: true
-  hosts:
-    - "domain of the app"
 
 image:
   repository: "your-docker-repo/app-image"
