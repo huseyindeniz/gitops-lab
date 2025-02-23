@@ -11,16 +11,16 @@ spec:
             servicePort: 80
             host: "wf-stag-1.staging.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "ci-12443789174-20241221084552" # {"$imagepolicy": "flux-system:sample-dotnet-wf-stag-1-app-image-policy:tag"}
-            imgMigrationTag: "ci-12443789174-20241221084457" # {"$imagepolicy": "flux-system:sample-dotnet-stag-1-migration-image-policy:tag"}
+            imgTag: "ci-12443789174-20241221084552" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-1-image-policy:tag"}
+            imgMigrationTag: "ci-12443789174-20241221084457" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-1-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
           - envName: stag-2
             servicePort: 80
             host: "wf-stag-2.staging.local"
             strategy: "standard" # standard, bluegreen, canary
-            imgTag: "ci-12453924093-20241222114212" # {"$imagepolicy": "flux-system:sample-dotnet-wf-stag-2-app-image-policy:tag"}
-            imgMigrationTag: "ci-12302208889-20241212180648" # {"$imagepolicy": "flux-system:sample-dotnet-wf-prod-stag-2-migration-image-policy:tag"}
+            imgTag: "ci-12453924093-20241222114212" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-image-policy:tag"}
+            imgMigrationTag: "ci-12302208889-20241212180648" # {"$imagepolicy": "flux-system:sample-dotnet-wf-staging-stag-2-migration-image-policy:tag"}
             migrationAction: "apply" # apply, reset, rollback
             targetMigration: "" # if rollback selected, set target migration name
   goTemplate: true
