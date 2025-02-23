@@ -45,9 +45,9 @@ spec:
             valuesObject:
               environment: "{{ .envName }}"
               hpa:
-                enabled: "{{ .hpaEnabled }}"
+                enabled: {{ .hpaEnabled }}
               vpa:
-                enabled: "{{ .vpaEnabled }}"
+                enabled: {{ .vpaEnabled }}
               strategy: "{{ .strategy }}"
               service:
                 port: "{{ .servicePort }}"
