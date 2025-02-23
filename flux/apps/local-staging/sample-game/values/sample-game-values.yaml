@@ -1,5 +1,6 @@
 nodejs-app:
   env:
+    NODE_ENV: staging
     TEST_ROOM_CAPACITY: 8
 
   replicaCount: 1
