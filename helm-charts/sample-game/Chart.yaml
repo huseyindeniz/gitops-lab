@@ -1,0 +1,14 @@
+apiVersion: v2
+name: sample-game
+description: helm chart for my sample-game app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+
+dependencies:
+  - name: nodejs-app
+    version: "0.1.0"
+    repository: "file://../nodejs-app"
+  - name: static-website
+    version: "0.1.0"
+    repository: "file://../static-website" 

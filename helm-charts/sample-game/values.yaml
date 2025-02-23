@@ -1,0 +1,5 @@
+nodejs-app:
+  nameOverride: "backend"
+
+static-website:
+  nameOverride: "frontend"

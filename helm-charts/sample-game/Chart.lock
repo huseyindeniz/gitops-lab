@@ -1,0 +1,9 @@
+dependencies:
+- name: nodejs-app
+  repository: file://../nodejs-app
+  version: 0.1.0
+- name: static-website
+  repository: file://../static-website
+  version: 0.1.0
+digest: sha256:a4b457619151945a9b44826d9dcbf506c1960f7cf664365509397616eb075f20
+generated: "2025-02-23T16:02:58.3470645+02:00"

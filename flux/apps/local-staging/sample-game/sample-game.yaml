@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: sample-game-staging
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - envName: staging
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  template:
+    metadata:
+      name: "sample-game-{{.envName}}"
+    spec:
+      project: default
+      sources:
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          chart: sample-game
+          helm:
+            valueFiles:
+              - "$valuesRef/flux/apps/local-staging/sample-game/values/sample-game-values.yaml"
+      destination:
+        server: "https://172.17.0.5:8443"
+        namespace: "sample-game-staging"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        retry:
+          limit: 1
+        syncOptions:
+          - SkipHooksOnError=true

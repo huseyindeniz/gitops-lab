@@ -54,10 +54,10 @@ export const options = {
 // about authoring k6 scripts.
 //
 export default function () {
-  http.get('http://localhost:5001/WeatherForecast');
+  // http.get('http://wf-stag-1.staging.local:8082/WeatherForecast');
+  // sleep(1);
+  http.get('http://wf-stag-2.staging.local:8082/WeatherForecast');
   sleep(1);
-  http.get('http://localhost:5002/WeatherForecast');
-  sleep(1);
-  http.get('http://localhost:6001/WeatherForecast');
-  sleep(1);
+  // http.get('http://localhost:6001/WeatherForecast');
+  // sleep(1);
 }
