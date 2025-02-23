@@ -1,5 +1,5 @@
 environment: "prod"
-namespace: "project-001-wf-local" # Base namespace for deployments
+namespace: "sample-dotnet-wf-staging" # Base namespace for deployments
 
 config:
   ASPNETCORE_ENVIRONMENT: "Development" # Add any application-specific configurations here
