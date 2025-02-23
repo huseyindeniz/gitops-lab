@@ -31,9 +31,3 @@ spec:
             host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
             port:
               number: 2567
-      headers:
-        request:
-          add:
-            Upgrade: "websocket"
-            Connection: "Upgrade"
-            Host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
