@@ -56,6 +56,8 @@ export default config({
       credentials: true,
     }));
 
+    app.options('*', cors());
+    
     /**
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
