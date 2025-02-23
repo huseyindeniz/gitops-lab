@@ -25,6 +25,7 @@
   "devDependencies": {
     "@colyseus/loadtest": "^0.15.7",
     "@colyseus/testing": "^0.15.4",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/matter-js": "^0.19.8",
     "@types/mocha": "^10.0.10",
