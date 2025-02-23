@@ -21,6 +21,13 @@ resource "kubernetes_namespace" "harbor" {
   }
 }
 
+# SAMPLE-GAME
+resource "kubernetes_namespace" "sample_game" {
+  metadata {
+    name = "sample-game-staging"
+  }
+}
+
 # networking-test application
 resource "kubernetes_namespace" "networking_test" {
   metadata {

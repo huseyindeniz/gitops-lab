@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sample-game-backend-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "api.sample-game.staging.local"
+  gateways:
+    - istio-ingressgateway-staging
+  http:
+    - route:
+        - destination:
+            host: sample-dotnet-wf-staging-stag-1-service.sample-dotnet-wf-staging-stag-1.svc.cluster.local
+            port:
+              number: 80
