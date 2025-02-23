@@ -21,6 +21,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "dotnet-core-webapi.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}  
+        istio-injection: "disabled"
     spec:
       containers:
         - name: db-migration
