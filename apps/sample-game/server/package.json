@@ -38,6 +38,7 @@
     "@colyseus/playground": "^0.15.17",
     "@colyseus/tools": "^0.15.49",
     "colyseus": "^0.15.57",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "install": "^0.13.0",
     "matter-js": "0.20.0",
