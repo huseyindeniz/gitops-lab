@@ -9,6 +9,24 @@ spec:
   gateways:
     - istio-ingressgateway-staging
   http:
+    # Handle OPTIONS preflight request (for CORS)
+    - match:
+        - method:
+            exact: "OPTIONS"
+      route:
+        - destination:
+            host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
+            port:
+              number: 2567
+      headers:
+        response:
+          add:
+            Access-Control-Allow-Origin: "*"
+            Access-Control-Allow-Methods: "GET, POST, PUT, DELETE, OPTIONS"
+            Access-Control-Allow-Headers: "Content-Type, Authorization"
+            Access-Control-Allow-Credentials: "true"
+
+    # Regular route handling
     - route:
         - destination:
             host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
@@ -25,4 +43,4 @@ spec:
             Access-Control-Allow-Origin: "*"
             Access-Control-Allow-Methods: "GET, POST, PUT, DELETE, OPTIONS"
             Access-Control-Allow-Headers: "Content-Type, Authorization"
-            Access-Control-Allow-Credentials: "true"            
+            Access-Control-Allow-Credentials: "true"
