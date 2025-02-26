@@ -12,23 +12,6 @@ spec:
     - match:
         - uri:
             prefix: "/"
-      corsPolicy:
-        allowOrigins:
-          - regex: ".*"  # Allow all origins, or set a specific domain
-        allowMethods:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-          - OPTIONS
-        allowHeaders:
-          - Authorization
-          - Content-Type
-        exposeHeaders:
-          - Authorization
-          - Content-Type
-        maxAge: "24h"
-        allowCredentials: true            
       route:
         - destination:
             host: sample-game-server-staging-service.sample-game-staging.svc.cluster.local
