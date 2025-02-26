@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: harbor
-  namespace: argo-local
+  name: sample-ai-staging
+  namespace: argocd
 spec:
   generators:
     - list:
@@ -12,22 +12,22 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   template:
     metadata:
-      name: "harbor-{{.envName}}"
+      name: "sample-ai-{{.envName}}"
     spec:
       project: default
       sources:
-        - repoURL: https://helm.goharbor.io
-          targetRevision: "1.16.2"
-          chart: harbor
-          helm:
-            valueFiles:
-              - "$values/flux/wsl/applications/harbor/values/harbor-values.yaml"
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          ref: values
+          path: "helm-charts/sample-ai"
+          helm:
+            valueFiles:
+              - "$values/flux/apps/local-staging/sample-ai/values/sample-ai-values.yaml"
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          ref: values              
       destination:
         server: "https://172.17.0.5:8443"
-        namespace: "harbor-{{ .envName }}"
+        namespace: "sample-ai-staging"
       syncPolicy:
         automated:
           prune: true

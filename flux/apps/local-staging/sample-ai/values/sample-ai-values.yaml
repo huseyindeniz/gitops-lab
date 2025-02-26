@@ -1,0 +1,103 @@
+python-app:
+  env:
+    FLASK_ENV: "staging"
+    COMMAND: "app"
+    PORT: 80
+    ALLOWED_EXTENSIONS: "png,jpg,jpeg"
+    MODELS_FOLDER: "/app/data/models"
+    UPLOAD_FOLDER: "/app/data/uploads"
+    OUTPUT_FOLDER: "/app/data/outputs"
+
+  progressDeadlineSeconds: 1800
+
+  replicaCount: 1
+
+  image:
+    repository: ghcr.io/huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
+    pullPolicy: IfNotPresent
+    tag: "20250125083854"
+
+  nameOverride: "sample-ai-backend"
+  fullnameOverride: "sample-ai-backend-staging"
+
+  podAnnotations: {}
+  podLabels: {}
+
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "2Gi"
+    limits:
+      cpu: "2"
+      memory: "4Gi"
+      nvidia.com/gpu: "1"
+
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+    hosts:
+      - host: sample-ai-backend-staging.local
+        paths:
+          - path: /
+            pathType: Prefix
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 60
+    targetMemoryUtilizationPercentage: 80
+
+  volumeMounts:
+    - name: sample-ai-backend-volume
+      mountPath: /app/data
+
+  volumes:
+    - name: sample-ai-backend-volume
+      persistentVolumeClaim:
+        claimName: sample-ai-backend-volume-pvc
+
+static-website:
+  replicaCount: 1
+
+  image:
+    repository: huseyindeniz/sample-ai-frontend-staging
+    pullPolicy: IfNotPresent
+    tag: "20250119151704"
+
+  nameOverride: "sample-ai-frontend"
+  fullnameOverride: "sample-ai-frontend-staging"
+
+  podAnnotations: {}
+  podLabels: {}
+
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+
+  ingress:
+    enabled: false
+    className: ""
+    annotations:
+      {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: sample-ai-frontend-staging.local
+        paths:
+          - path: /
+            pathType: Prefix
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
