@@ -1,0 +1,9 @@
+dependencies:
+- name: python-app
+  repository: file://../python-app
+  version: 0.1.0
+- name: static-website
+  repository: file://../static-website
+  version: 0.1.0
+digest: sha256:bbf469e8a692733b31fa560048b2029ffca216ef2c6f3b4d8eb9dd0103faee38
+generated: "2025-02-26T17:50:06.5554137+02:00"
