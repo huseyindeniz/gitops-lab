@@ -37,6 +37,15 @@ module "local_istio" {
   depends_on = [kubernetes_namespace.istio]
 }
 
+# FLUX
+resource "flux_bootstrap_git" "flux_bootstrap" {
+  embedded_manifests = true
+  path               = var.flux_path
+  components_extra   = ["image-reflector-controller", "image-automation-controller"]
+
+  depends_on = [module.local_argo]
+}
+
 # ARGO CD
 
 resource "kubernetes_secret" "argo_cd_dex_secret" {
@@ -79,12 +88,5 @@ resource "kubernetes_manifest" "argo_management_root" {
 }
 
 
-# FLUX
-resource "flux_bootstrap_git" "flux_bootstrap" {
-  embedded_manifests = true
-  path               = var.flux_path
-  components_extra   = ["image-reflector-controller", "image-automation-controller"]
 
-  depends_on = [module.local_argo]
-}
 
