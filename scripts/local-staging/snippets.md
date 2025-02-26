@@ -33,3 +33,7 @@ curl -v harbor.management.local:8081
 curl -vk https://harbor.management.local:44301
 nslookup harbor.management.local
 dig harbor.management.local
+
+
+minikube cp /mnt/d/volumes/sample-ai-backend/models/isnet-general-use.pth local-staging:/mnt/d/volumes/sample-ai-backend/models/isnet-general-use.pth -p local-staging -n local-staging
+

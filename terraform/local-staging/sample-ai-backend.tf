@@ -9,7 +9,7 @@ resource "kubernetes_persistent_volume" "sample_ai_backend_volume_pv" {
     }
     persistent_volume_source {
       host_path {
-        path = "/mnt/h/volumes/sample-ai-backend"
+        path = "/mnt/d/volumes/sample-ai-backend" # my host machine path where model files are stored
         type = "DirectoryOrCreate"
       }
     }
