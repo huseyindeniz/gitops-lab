@@ -15,7 +15,7 @@ if env_path.exists():
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 app.config['MODELS_FOLDER'] = os.getenv('MODELS_FOLDER', 'models')
 app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', 'uploads')
