@@ -15,7 +15,7 @@ python-app:
   image:
     repository: ghcr.io/huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
     pullPolicy: IfNotPresent
-    tag: "20250125083854"
+    tag: "20250227164319"
 
   nameOverride: "sample-ai-backend"
   fullnameOverride: "sample-ai-backend-staging"
