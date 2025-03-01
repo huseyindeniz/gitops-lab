@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sample-dotnet-wf-prod-bluegreen-preview-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "wf-bg-preview.prod.local"
+  gateways:
+    - istio-ingressgateway-production
+  http:
+    - route:
+        - destination:
+            host: sample-dotnet-wf-production-prod-bluegreen-preview-service.sample-dotnet-wf-production-prod-bluegreen.svc.cluster.local
+            port:
+              number: 80

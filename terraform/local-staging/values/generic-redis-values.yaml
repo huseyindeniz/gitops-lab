@@ -1,0 +1,22 @@
+architecture: standalone
+
+replica:
+  replicaCount: 1
+
+auth:
+  enabled: false
+  password: ""
+
+podSecurityContext:
+  enabled: false
+
+volumePermissions:
+  enabled: false # if podSecurityContext.enabled: true, volumePermissions.enabled: true
+
+master:
+  persistence:
+    enabled: false
+    existingClaim: "generic-redis-pvc"
+
+metrics:
+  enabled: true
