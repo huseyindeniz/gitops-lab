@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: sample-dotnet-wf-production-prod-bluegreen-image-repository
+  name: sample-dotnet-wf-prod-prod-bluegreen-image-repository
   namespace: flux-system
 spec:
   interval: "1m0s"
@@ -11,7 +11,7 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: sample-dotnet-wf-production-prod-bluegreen-migration-image-repository
+  name: sample-dotnet-wf-prod-prod-bluegreen-migration-image-repository
   namespace: flux-system
 spec:
   interval: "1m0s"
@@ -22,7 +22,7 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: sample-dotnet-wf-production-prod-canary-image-repository
+  name: sample-dotnet-wf-prod-prod-canary-image-repository
   namespace: flux-system
 spec:
   interval: "1m0s"
@@ -32,7 +32,7 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
-  name: sample-dotnet-wf-production-prod-canary-migration-image-repository
+  name: sample-dotnet-wf-prod-prod-canary-migration-image-repository
   namespace: flux-system
 spec:
   interval: "1m0s"
