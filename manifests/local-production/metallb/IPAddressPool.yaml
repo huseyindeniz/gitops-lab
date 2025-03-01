@@ -1,8 +1,8 @@
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
-  name: staging-ip-pool
+  name: production-ip-pool
   namespace: metallb-system
 spec:
   addresses:
-  - "172.17.0.50-172.17.0.99"
+  - "172.17.0.150-172.17.0.199"

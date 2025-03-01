@@ -1,3 +1,6 @@
+# CORE APPS WHICH WONT BE MANAGED BY ARGO CD
+
+# CERT MANAGER
 module "local_cert_manager" {
   source = "../modules/cert-manager"
 
@@ -8,21 +11,55 @@ module "local_cert_manager" {
   }
 }
 
-module "local_istio" {
-  source          = "../modules/istio"
-  istio_namespace = kubernetes_namespace.istio.metadata.0.name
+# METALLB
+module "local_metallb" {
+  source    = "../modules/metallb"
+  name      = var.metallb_name
+  namespace = kubernetes_namespace.metallb.metadata.0.name
+  providers = {
+    helm = helm
+  }
 
+  depends_on = [kubernetes_namespace.metallb]
+}
+
+# # ISTIO
+module "local_istio" {
+  source                 = "../modules/istio"
+  istio_namespace        = kubernetes_namespace.istio.metadata.0.name
   istio_base_values_file = "${path.module}/values/istio-base.yaml"
   istiod_values_file     = "${path.module}/values/istio-istiod.yaml"
-  gateway_host           = "*.prod.local"
-  tls_secret_name        = "production-local-tls-secret"
-  issuer_name            = "selfsigned-issuer"
-  issuer_namespace       = kubernetes_namespace.istio.metadata.0.name
 
   providers = {
     kubernetes = kubernetes
     helm       = helm
   }
 
-  depends_on = [kubernetes_namespace.istio, module.local_cert_manager]
+  depends_on = [kubernetes_namespace.istio]
+}
+
+# # GITHUB ARC RUNNERS
+module "local_arc" {
+  source          = "../modules/arc-runners"
+  name            = "arc-runner-local-production"
+  github_repo_url = local.gitopslab_repo_url
+  github_arc_pat  = var.github_arc_pat
+
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+    kubectl    = kubectl
+  }
+}
+
+# SAMPLE DOTNET APP
+module "local_sample_dotnet" {
+  source                         = "../modules/sample-dotnet"
+  env_list                       = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
+  app_ns_prefix_sample_dotnet_wf = "sample-dotnet-wf-staging"
+
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+  }
 }

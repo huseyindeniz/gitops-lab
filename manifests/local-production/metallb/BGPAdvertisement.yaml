@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: bgp-advertisement-production
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - production-ip-pool

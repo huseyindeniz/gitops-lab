@@ -6,6 +6,7 @@ replica:
 auth:
   enabled: false
   password: "12345"
+  usePasswordFiles: false
 
 volumePermissions:
   enabled: true

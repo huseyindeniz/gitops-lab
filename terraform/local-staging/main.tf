@@ -63,7 +63,3 @@ module "local_sample_dotnet" {
     helm       = helm
   }
 }
-
-# SAMPLE GAME
-
-# SAMPLE AI

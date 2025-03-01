@@ -13,4 +13,4 @@ service:
     - name: https
       port: 44303
       protocol: TCP
-      targetPort: 443  
+      targetPort: 443
