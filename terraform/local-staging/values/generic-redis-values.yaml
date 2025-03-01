@@ -8,14 +8,14 @@ auth:
   password: ""
 
 podSecurityContext:
-  enabled: false
+  enabled: true
 
 volumePermissions:
-  enabled: false # if podSecurityContext.enabled: true, volumePermissions.enabled: true
+  enabled: true # if podSecurityContext.enabled: true, volumePermissions.enabled: true
 
 master:
   persistence:
-    enabled: false
+    enabled: true
     existingClaim: "generic-redis-pvc"
 
 metrics:

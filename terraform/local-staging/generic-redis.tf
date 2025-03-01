@@ -61,7 +61,7 @@ resource "helm_release" "generic_redis" {
   chart            = "redis"
   version          = "20.6.0" # do not change it
   create_namespace = false
-  timeout          = 180
+  timeout          = 600
 
   values = [file("${path.module}/values/generic-redis-values.yaml")]
 

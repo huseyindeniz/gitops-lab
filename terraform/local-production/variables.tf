@@ -25,6 +25,11 @@ variable "metallb_namespace" {
   type        = string
 }
 
+variable "argocd_namespace" {
+  description = "The name of the argocd namespace - for rollouts"
+  type        = string
+}
+
 variable "harbor_namespace" {
   description = "The name of the Harbor namespace"
   type        = string

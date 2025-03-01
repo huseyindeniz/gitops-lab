@@ -52,6 +52,16 @@ module "local_arc" {
   }
 }
 
+module "local_argo_rollouts" {
+  source                    = "../modules/argo-rollouts"
+  argo_namespace            = var.argocd_namespace
+  argo_rollouts_values_file = "${path.module}/values/argo-rollouts-values.yaml"
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+  }
+}
+
 # SAMPLE DOTNET APP
 module "local_sample_dotnet" {
   source                         = "../modules/sample-dotnet"
