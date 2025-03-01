@@ -68,7 +68,7 @@ module "local_argo_rollouts" {
 module "local_sample_dotnet" {
   source                         = "../modules/sample-dotnet"
   env_list                       = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
-  app_ns_prefix_sample_dotnet_wf = "sample-dotnet-wf-production"
+  app_ns_prefix_sample_dotnet_wf = "sample-dotnet-wf-prod"
 
   providers = {
     kubernetes = kubernetes

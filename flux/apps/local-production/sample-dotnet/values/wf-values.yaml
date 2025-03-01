@@ -1,4 +1,4 @@
-namespace: "sample-dotnet-wf-production" # Base namespace for deployments
+namespace: "sample-dotnet-wf-prod" # Base namespace for deployments
 
 config:
   ASPNETCORE_ENVIRONMENT: "Development" # Add any application-specific configurations here

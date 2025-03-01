@@ -1,11 +1,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: sample-dotnet-wf-production-prod-bluegreen-image-policy
+  name: sample-dotnet-wf-prod-prod-bluegreen-image-policy
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: sample-dotnet-wf-production-prod-bluegreen-image-repository
+    name: sample-dotnet-wf-prod-prod-bluegreen-image-repository
   filterTags:
     pattern: "^ci-(\\d+)-(\\d{14})$"
     extract: "$2"
@@ -17,11 +17,11 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: sample-dotnet-wf-production-prod-bluegreen-migration-image-policy
+  name: sample-dotnet-wf-prod-prod-bluegreen-migration-image-policy
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: sample-dotnet-wf-production-prod-bluegreen-migration-image-repository
+    name: sample-dotnet-wf-prod-prod-bluegreen-migration-image-repository
   filterTags:
     pattern: "^ci-(\\d+)-(\\d{14})$"
     extract: "$2"
@@ -34,11 +34,11 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: sample-dotnet-wf-production-prod-canary-image-policy
+  name: sample-dotnet-wf-prod-prod-canary-image-policy
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: sample-dotnet-wf-production-prod-canary-image-repository
+    name: sample-dotnet-wf-prod-prod-canary-image-repository
   filterTags:
     pattern: "^ci-(\\d+)-(\\d{14})$"
     extract: "$2"
@@ -50,11 +50,11 @@ spec:
 apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
-  name: sample-dotnet-wf-production-prod-canary-migration-image-policy
+  name: sample-dotnet-wf-prod-prod-canary-migration-image-policy
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: sample-dotnet-wf-production-prod-canary-migration-image-repository
+    name: sample-dotnet-wf-prod-prod-canary-migration-image-repository
   filterTags:
     pattern: "^ci-(\\d+)-(\\d{14})$"
     extract: "$2"
