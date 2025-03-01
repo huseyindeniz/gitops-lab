@@ -1,4 +1,4 @@
-namespace: "sample-dotnet-wf-staging" # Base namespace for deployments
+namespace: "sample-dotnet-wf-production" # Base namespace for deployments
 
 config:
   ASPNETCORE_ENVIRONMENT: "Development" # Add any application-specific configurations here
@@ -24,7 +24,7 @@ resources:
       memory: "4Gi"
 
 hpa:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
@@ -38,7 +38,7 @@ hpa:
   scaleUpPeriodSeconds: 15
 
 vpa:
-  enabled: false
+  enabled: true
   updateMode: "Auto"
   minAllowed:
     cpu: "100m"

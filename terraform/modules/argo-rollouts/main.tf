@@ -7,6 +7,5 @@ resource "helm_release" "argo_rollouts" {
     file("${path.module}/values/values.yaml"),
     var.argo_rollouts_values_file != "" ? file(var.argo_rollouts_values_file) : null
   ]
-  depends_on = [helm_release.argo_cd]
 }
 
