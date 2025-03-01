@@ -1,1 +1,0 @@
-minikube pause -p local-cluster
