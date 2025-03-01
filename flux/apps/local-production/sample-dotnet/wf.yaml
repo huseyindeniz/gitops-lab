@@ -59,7 +59,7 @@ spec:
                 port: "5432"
                 name: "db_{{ .envName }}"
                 user: "user_{{ .envName }}"
-                secretName: "sample-dotnet-wf-local-{{ .envName }}-postgres-password"
+                secretName: "sample-dotnet-wf-prod-{{ .envName }}-postgres-password"
                 passwordKey: "POSTGRES_PASSWORD"
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
