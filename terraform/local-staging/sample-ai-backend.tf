@@ -9,7 +9,7 @@ resource "kubernetes_persistent_volume" "sample_ai_backend_volume_pv" {
     }
     persistent_volume_source {
       host_path {
-        path = "/mnt/d/volumes/sample-ai-backend" # my host machine path where model files are stored
+        path = "/mnt/data/shared/sample-ai-backend" # my host machine path where model files are stored
         type = "DirectoryOrCreate"
       }
     }
@@ -38,3 +38,33 @@ resource "kubernetes_persistent_volume_claim" "sample_ai_backend_volume_pvc" {
 
   depends_on = [kubernetes_persistent_volume.sample_ai_backend_volume_pv]
 }
+
+# resource "kubernetes_pod" "debug_pod" {
+#   metadata {
+#     name      = "debug-pod"
+#     namespace = kubernetes_namespace.sample_ai.metadata[0].name
+#   }
+
+#   spec {
+#     container {
+#       name    = "debug-container"
+#       image   = "busybox"
+#       command = ["sleep", "3600"]
+
+#       volume_mount {
+#         name       = "my-pvc"
+#         mount_path = "/app/data"
+#       }
+#     }
+
+#     volume {
+#       name = "my-pvc"
+
+#       persistent_volume_claim {
+#         claim_name = "sample-ai-backend-volume-pvc"
+#       }
+#     }
+#   }
+
+#   depends_on = [kubernetes_persistent_volume_claim.sample_ai_backend_volume_pvc]
+# }
