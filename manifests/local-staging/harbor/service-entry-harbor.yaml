@@ -10,8 +10,8 @@ spec:
   resolution: DNS
   ports:
     - name: http
-      number: 8082 # this is the istio ingress gateway port not the fucking app port 
+      number: 31670   # this is the istio ingress gateway internal port not the fucking external port 
       protocol: HTTP
     - name: https
-      number: 44302 # this is the istio ingress gateway port not the fucking app port 
+      number: 30488   # this is the istio ingress gateway port not the fucking external port 
       protocol: HTTPS
