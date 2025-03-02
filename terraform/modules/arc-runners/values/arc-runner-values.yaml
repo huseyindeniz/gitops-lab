@@ -25,9 +25,6 @@ template:
           - "/bin/sh"
           - "-c"
           - |
-            sudo dpkg-reconfigure ca-certificates
-            sudo sed -i '/^!/s/^.//g' /etc/ca-certificates.conf
-            sudo update-ca-certificates
             /home/runner/run.sh     
         volumeMounts:
           - name: istio-ca-cert-volume
