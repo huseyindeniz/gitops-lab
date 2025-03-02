@@ -8,6 +8,7 @@ spec:
     - "harbor.staging.local"
   gateways:
     - istio-ingressgateway-staging
+    - mesh
   http:
     - match:
         - uri:

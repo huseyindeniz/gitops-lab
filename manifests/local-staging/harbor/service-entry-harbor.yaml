@@ -1,17 +1,17 @@
-apiVersion: networking.istio.io/v1beta1
-kind: ServiceEntry
-metadata:
-  name: harbor-service-entry
-  namespace: istio-system
-spec:
-  hosts:
-    - "harbor.staging.local"
-  location: MESH_INTERNAL
-  resolution: DNS
-  ports:
-    - name: http
-      number: 31670   # this is the istio ingress gateway internal port not the fucking external port 
-      protocol: HTTP
-    - name: https
-      number: 30488   # this is the istio ingress gateway port not the fucking external port 
-      protocol: HTTPS
+# apiVersion: networking.istio.io/v1beta1
+# kind: ServiceEntry
+# metadata:
+#   name: harbor-service-entry
+#   namespace: istio-system
+# spec:
+#   hosts:
+#     - "harbor.staging.local"
+#   location: MESH_INTERNAL
+#   resolution: DNS
+#   ports:
+#     - name: http
+#       number: 31670   # this is the istio ingress gateway internal port not the fucking external port 
+#       protocol: HTTP
+#     - name: https
+#       number: 30488   # this is the istio ingress gateway port not the fucking external port 
+#       protocol: HTTPS
