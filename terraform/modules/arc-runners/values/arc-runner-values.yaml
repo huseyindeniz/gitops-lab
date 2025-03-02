@@ -21,14 +21,23 @@ template:
       - name: runner
         image: ghcr.io/actions/actions-runner:latest
         # command: ["/home/runner/run.sh"]
+        # command:
+        #   - "/bin/sh"
+        #   - "-c"
+        #   - |
+        #     sudo dpkg-reconfigure ca-certificates
+        #     sudo sed -i '/^!/s/^.//g' /etc/ca-certificates.conf
+        #     sudo update-ca-certificates
+        #     /home/runner/run.sh     
         command:
           - "/bin/sh"
           - "-c"
           - |
+            sudo update-ca-certificates
             /home/runner/run.sh     
         volumeMounts:
           - name: istio-ca-cert-volume
-            mountPath: "/usr/share/ca-certificates/istio-ca.crt"
+            mountPath: "/usr/local/share/ca-certificates/istio-ca.crt"
             subPath: ca.crt
     volumes:
       - name: work
