@@ -39,6 +39,22 @@ module "local_istio" {
 }
 
 # GITHUB ARC RUNNERS
+
+resource "kubernetes_secret" "istio_ca_cert" {
+  metadata {
+    name      = "istio-ca-cert"
+    namespace = "arc-runners"
+  }
+
+  data = {
+    "ca.crt" = file("${path.module}/certs/istio-cert.crt")
+  }
+
+  type = "Opaque"
+}
+
+
+
 module "local_arc" {
   source          = "../modules/arc-runners"
   name            = "arc-runner-local-staging"

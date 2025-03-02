@@ -2,6 +2,13 @@ minRunners: 1
 maxRunners: 10
 
 template:
+  metadata:
+    annotations:
+      sidecar.istio.io/inject: "true"
+      proxy.istio.io/config: |
+        proxyMetadata:
+          ISTIO_META_DNS_CAPTURE: "true"
+          ISTIO_META_DNS_AUTO_ALLOCATE: "true"
   spec:
     init-containers:
       - name: kube-init
@@ -9,11 +16,23 @@ template:
         command: ["sudo", "chown", "-R", "1001:123", "/home/runner/_work"]
         volumeMounts:
           - name: work
-            mountPath: /home/runner/_work
+            mountPath: /home/runner/_work                
     containers:
       - name: runner
         image: ghcr.io/actions/actions-runner:latest
-        command: ["/home/runner/run.sh"]
+        # command: ["/home/runner/run.sh"]
+        command:
+          - "/bin/sh"
+          - "-c"
+          - |
+            sudo dpkg-reconfigure ca-certificates
+            sudo sed -i '/^!/s/^.//g' /etc/ca-certificates.conf
+            sudo update-ca-certificates
+            /home/runner/run.sh     
+        volumeMounts:
+          - name: istio-ca-cert-volume
+            mountPath: "/usr/share/ca-certificates/istio-ca.crt"
+            subPath: ca.crt
     volumes:
       - name: work
         ephemeral:
@@ -24,3 +43,6 @@ template:
               resources:
                 requests:
                   storage: 1Gi
+      - name: istio-ca-cert-volume
+        secret:
+          secretName: istio-ca-cert

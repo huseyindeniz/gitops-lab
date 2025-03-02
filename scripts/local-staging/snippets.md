@@ -36,4 +36,3 @@ dig harbor.management.local
 
 
 minikube cp /mnt/d/volumes/sample-ai-backend/models/isnet-general-use.pth local-staging:/mnt/d/volumes/sample-ai-backend/models/isnet-general-use.pth -p local-staging -n local-staging
-

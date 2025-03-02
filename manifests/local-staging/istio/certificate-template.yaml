@@ -9,3 +9,5 @@ spec:
     name: "istio-selfsigned-staging-issuer"
   dnsNames:
     - "*.staging.local"
+  ipAddresses:
+      - "10.110.187.221"
