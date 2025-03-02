@@ -25,11 +25,6 @@ variable "metallb_namespace" {
   type        = string
 }
 
-variable "harbor_namespace" {
-  description = "The name of the Harbor namespace"
-  type        = string
-}
-
 variable "github_org" {
   description = "GitHub organization"
   type        = string

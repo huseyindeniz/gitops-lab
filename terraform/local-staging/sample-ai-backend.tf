@@ -1,3 +1,13 @@
+# SAMPLE-AI
+
+# Namespace
+resource "kubernetes_namespace" "sample_ai" {
+  metadata {
+    name = "sample-ai-staging"
+  }
+}
+
+# Persistent Volume
 resource "kubernetes_persistent_volume" "sample_ai_backend_volume_pv" {
   metadata {
     name = "sample-ai-backend-volume-pv"
@@ -20,6 +30,7 @@ resource "kubernetes_persistent_volume" "sample_ai_backend_volume_pv" {
   depends_on = [kubernetes_namespace.sample_ai]
 }
 
+# Persistent Volume Claim
 resource "kubernetes_persistent_volume_claim" "sample_ai_backend_volume_pvc" {
   metadata {
     name      = "sample-ai-backend-volume-pvc"
