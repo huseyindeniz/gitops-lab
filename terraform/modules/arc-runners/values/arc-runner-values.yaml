@@ -13,11 +13,17 @@ template:
     init-containers:
       - name: kube-init
         image: ghcr.io/actions/actions-runner:latest
-        command: ["sudo", "chown", "-R", "1001:123", "/home/runner/_work"]
+        # command: ["sudo", "chown", "-R", "1001:123", "/home/runner/_work"]
+        command:
+          - "/bin/sh"
+          - "-c"
+          - |
+            sudo chown -R 1001:123 /home/runner/_work
+            sudo usermod -aG docker runner      
         volumeMounts:
           - name: work
             mountPath: /home/runner/_work                
-    containers:
+    containers:  
       - name: runner
         image: ghcr.io/actions/actions-runner:latest
         # command: ["/home/runner/run.sh"]
@@ -34,11 +40,14 @@ template:
           - "-c"
           - |
             sudo update-ca-certificates
+            sudo chmod 666 /var/run/docker.sock
             /home/runner/run.sh     
         volumeMounts:
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/istio-ca.crt"
             subPath: ca.crt
+          - name: docker-sock
+            mountPath: /var/run/docker.sock            
     volumes:
       - name: work
         ephemeral:
@@ -48,7 +57,10 @@ template:
               storageClassName: "standard"
               resources:
                 requests:
-                  storage: 1Gi
+                  storage: 1Gi                
       - name: istio-ca-cert-volume
         secret:
           secretName: istio-ca-cert
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock       
