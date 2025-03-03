@@ -13,13 +13,21 @@ jobs:
           echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Publish Docker image to Harbor
-        uses: elgohr/Publish-Docker-Github-Action@v5
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Harbor
+        uses: docker/login-action@v2
         with:
-          name: sample-ai-backend-staging
+          registry: harbor.staging.local:44302
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_TOKEN }}
-          registry: harbor.staging.local:44302
-          tags: "${{ env.TIMESTAMP }}"
-          dockerfile: apps/sample-ai/backend/Dockerfile
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
           context: apps/sample-ai/backend
+          file: apps/sample-ai/backend/Dockerfile
+          push: true
+          tags: harbor.staging.local:44302/sample-ai-backend-staging:${{ env.TIMESTAMP }}
