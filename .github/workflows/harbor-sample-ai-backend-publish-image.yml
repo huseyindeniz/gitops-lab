@@ -13,14 +13,13 @@ jobs:
           echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build and Push with Kaniko
-        run: |
-          sudo mkdir -p /kaniko
-          sudo curl -L -o /kaniko/executor https://github.com/GoogleContainerTools/kaniko/releases/latest/download/executor
-          sudo chmod +x /kaniko/executor
-  
-          /kaniko/executor \
-            --context=apps/sample-ai/backend \
-            --dockerfile=apps/sample-ai/backend/Dockerfile \
-            --destination=harbor.staging.local:44302/library/sample-ai-backend-staging:${{ env.TIMESTAMP }} \
-            --insecure
+      - name: Publish Docker image to Harbor
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: harbor.staging.local/library/sample-ai-backend-staging
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_TOKEN }}
+          registry: harbor.staging.local:44302
+          tags: "${{ env.TIMESTAMP }}"
+          dockerfile: apps/sample-ai/backend/Dockerfile
+          context: apps/sample-ai/backend
