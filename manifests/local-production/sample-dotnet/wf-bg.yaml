@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: sample-dotnet-wf-production-prod-bluegreen-service.sample-dotnet-wf-production-prod-bluegreen.svc.cluster.local
+            host: sample-dotnet-wf-prod-prod-bluegreen-service.sample-dotnet-wf-prod-prod-bluegreen.svc.cluster.local
             port:
               number: 80

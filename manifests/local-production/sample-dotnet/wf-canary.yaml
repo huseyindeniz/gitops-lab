@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: sample-dotnet-wf-production-prod-canary-service.sample-dotnet-wf-production-prod-canary.svc.cluster.local
+            host: sample-dotnet-wf-prod-prod-canary-service.sample-dotnet-wf-prod-prod-canary.svc.cluster.local
             port:
               number: 80
