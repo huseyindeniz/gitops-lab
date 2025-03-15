@@ -1,12 +1,13 @@
 services:
-  backend:
+  inference-api:
     build:
-      context: ./backend
+      context: ./inference-api
       dockerfile: ./Dockerfile
     environment:
       FLASK_ENV: docker
       COMMAND: app
       PORT: 8000
+      RUN_ON_GPU: 0
       ALLOWED_EXTENSIONS: png,jpg,jpeg
       MODELS_FOLDER: /app/data/models
       UPLOAD_FOLDER: /app/data/uploads

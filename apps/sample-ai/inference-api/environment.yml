@@ -1,0 +1,14 @@
+name: sample_ai_inference_api
+channels:
+  - defaults
+dependencies:
+  - python=3.12.8
+  - pip=24.2
+  - pip:
+      - flask==3.1.0
+      - python-dotenv==1.0.1
+      - flask-cors==5.0.0
+      - onnxruntime-gpu==1.20.0
+      - numpy==2.2.0
+      - Pillow==11.1.0
+

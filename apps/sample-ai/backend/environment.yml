@@ -6,7 +6,6 @@ channels:
 dependencies:
   - python=3.12.8
   - pip=24.2
-  - cudatoolkit=11.8
   - pip:
       - torch==2.5.1
       - torchvision==0.20.1
@@ -19,3 +18,4 @@ dependencies:
       - tqdm==4.67.1
       - opencv-python==4.11.0.86
       - flask-cors==5.0.0
+      - onnx==1.16.1

@@ -15,7 +15,7 @@ from glob import glob
 
 import torch
 from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms, utils
+from torchvision import transforms
 from torchvision.transforms.functional import normalize
 import torch.nn.functional as F
 
