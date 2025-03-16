@@ -1,9 +1,9 @@
 dependencies:
-- name: inference-api
+- name: python-app
   repository: file://../python-app
   version: 0.1.0
-- name: frontend
+- name: static-website
   repository: file://../static-website
   version: 0.1.0
-digest: sha256:d6c9c5781551b0f52fad7385f609c1d8be99a612b5e3c09ca257ee2363c9eb5d
-generated: "2025-03-16T10:14:04.2214319+02:00"
+digest: sha256:b15798824b324bbf2a9798d74cb7dd50cf849de79507ec15223fb460d2674cb5
+generated: "2025-03-16T10:21:07.7648305+02:00"
