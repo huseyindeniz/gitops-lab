@@ -9,7 +9,7 @@ def load_model():
     model = ISNetDIS()  # Define the model class (should match the one used in your original code)
     
     # Assuming you have the model saved in a file like 'models/isnet-general-use.pth'
-    model_path = '/mnt/d/volumes/sample-ai-backend/models/isnet-general-use.pth'
+    model_path = '/mnt/d/volumes/shared/sample-ai-backend/models/isnet-general-use.pth'
     
     # Load the model's state_dict (weights)
     model.load_state_dict(torch.load(model_path, map_location=device))
@@ -26,7 +26,7 @@ def export_model_to_onnx(model):
     dummy_input = torch.randn(1, 3, 1024, 1024).to(device)  # Example dummy input (batch_size=1, 3 channels, 1024x1024 image)
     
     # Export the model to ONNX format
-    onnx_model_path = '/mnt/d/volumes/sample-ai-backend/models/model.onnx'
+    onnx_model_path = '/mnt/d/volumes/shared/sample-ai-backend/models/model.onnx'
     torch.onnx.export(model,               # model being run
                       dummy_input,        # model input (or a tuple for multiple inputs)
                       onnx_model_path,    # where to save the model

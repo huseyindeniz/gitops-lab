@@ -35,7 +35,7 @@ nslookup harbor.management.local
 dig harbor.management.local
 
 
-minikube cp /mnt/d/volumes/sample-ai-backend/models/isnet-general-use.pth local-staging:/mnt/d/volumes/sample-ai-backend/models/isnet-general-use.pth -p local-staging -n local-staging
+minikube cp /mnt/d/volumes/shared/sample-ai-backend/models/isnet-general-use.pth local-staging:/mnt/d/volumes/shared/sample-ai-backend/models/isnet-general-use.pth -p local-staging -n local-staging
 
 # extract istio cert
 kubectl get secret staging-local-tls-secret -n istio-system -o jsonpath='{.data.tls\.crt}' | base64 --decode > istio-ca.crt
