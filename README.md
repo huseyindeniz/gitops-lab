@@ -38,7 +38,7 @@ TODO: add more explanation here.
 | K8SDashboard      | ✅               | ✅             | ✅                          | -              |
 | ArgoCD            | ✅               | -              | -                           | -              |
 | Argo Rollouts     | -                | -              | ✅                          | -              |
-| Argo Workflows    | -                | 🔲             | ✅                          | -              |
+| Argo Workflows    | -                | 🔲             | 🔲                          | -              |
 | Flux              | ✅               | -              | -                           | -              |
 | ARC Runners       | -                | ✅             | ✅                          | -              |
 | Harbor            | -                | ✅             | 🔲                          | -              |
