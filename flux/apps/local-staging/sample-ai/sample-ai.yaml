@@ -25,6 +25,11 @@ spec:
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
           ref: values              
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          path: "raw-manifests/local-staging/sample-ai"
+          directory:
+            recurse: true
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "sample-ai-staging"
