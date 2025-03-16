@@ -16,7 +16,7 @@ inference-api:
   image:
     repository: ghcr.io/huseyindeniz/sample-ai-inference-api-staging # image size is 14.8GB, compresses size: 8.76GB
     pullPolicy: IfNotPresent
-    tag: "20250316115517"
+    tag: "20250316135546"
 
   nameOverride: "sample-ai-inference-api"
   fullnameOverride: "sample-ai-inference-api-staging"
