@@ -73,7 +73,7 @@ spec:
           ref: values
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          path: "raw-manifests/local-staging/sample-dotnet/{{ .envName }}"
+          path: "raw-manifests/local-staging/sample-dotnet"
           directory:
             recurse: true          
       destination:
