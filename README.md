@@ -7,69 +7,79 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - [![MySampleApp1 - FitnessTests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-FitnessTests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-FitnessTests.yml)
 - [![MySampleApp1 - BA Tests](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-BATests.yml/badge.svg)](https://github.com/huseyindeniz/gitops-lab/actions/workflows/mySampleApp1-BATests.yml)
 
+## Repository Structure
+
+| **dir name**  |                                           |
+| ------------- | ----------------------------------------- |
+| apps          | Holds sample applications code            |
+| flux          | holds argocd application manifests        |
+| helm-charts   | holds various helm charts                 |
+| host          | holds applications run on my host machine |
+| raw-manifests | holds various k8s resources               |
+| scripts       | holds various scripts                     |
+| terraform     | holds terraform files                     |
+
+TODO: add more explanation here.
+
+## Local Clusters
+
+| **TODO**          | local-management | local-staging  | local-production            | host           |
+| ----------------- | ---------------- | -------------- | --------------------------- | -------------- |
+| runs on           | wsl 2 ubuntu     | wsl 2 ubuntu   | wsl 2 ubuntu                | windows docker |
+| Minikube          | ✅               | ✅             | ✅                          | -              |
+| Terraform         | ✅               | ✅             | ✅                          | -              |
+| Helm              | ✅               | ✅             | ✅                          | -              |
+| reverse-proxy     | -                | -              | -                           | ✅             |
+| grafana           | -                | -              | -                           | ✅             |
+| environments      | -                | stag-1, stag-2 | prod-bluegreen, prod-canary | ✅             |
+| Cert Manager      | ✅               | ✅             | ✅                          | -              |
+| Istio             | ✅               | ✅             | ✅                          | -              |
+| MetalLB           | ✅               | ✅             | ✅                          | -              |
+| K8SDashboard      | ✅               | ✅             | ✅                          | -              |
+| ArgoCD            | ✅               | -              | -                           | -              |
+| Argo Rollouts     | -                | -              | ✅                          | -              |
+| Argo Workflows    | -                | 🔲             | ✅                          | -              |
+| Flux              | ✅               | -              | -                           | -              |
+| ARC Runners       | -                | ✅             | ✅                          | -              |
+| Harbor            | -                | ✅             | 🔲                          | -              |
+| minIO             | -                | 🔲             | 🔲                          | -              |
+| Prometheus        | 🔲               | 🔲             | 🔲                          | -              |
+| Loki              | 🔲               | 🔲             | 🔲                          | -              |
+| Open Telemetry    | 🔲               | 🔲             | 🔲                          | -              |
+| Tempo/Zipkin      | 🔲               | 🔲             | 🔲                          | -              |
+| Vault(hashicorp)  | 🔲               | 🔲             | 🔲                          | -              |
+| Velero            | 🔲               | 🔲             | 🔲                          | -              |
+| NVidia Triton     | -                | 🔲             | 🔲                          | -              |
+| Sample Dotnet App | -                | ✅             | ✅                          | -              |
+| Sample Game App   | -                | ✅             | -                           | -              |
+| Sample AI App     | -                | ✅             | -                           | -              |
+
+## Cloud Clusters
+
+| **TODO**             | EKS      | AKS     | GKE         | DOKS     |
+| -------------------- | -------- | ------- | ----------- | -------- |
+| CLI                  | ✅ (aws) | ✅ (az) | ✅ (gcloud) | 🔲 doctl |
+| VPC                  | ✅       | ✅      | ✅          | 🔲       |
+| Cluster              | ✅       | ✅      | ✅          | 🔲       |
+| Istio                | 🔲       | 🔲      | 🔲          | 🔲       |
+| K8SDashboard         | 🔲       | 🔲      | 🔲          | 🔲       |
+| ArgoCD               | -        | -       | -           | 🔲       |
+| Multiplayer Game App | -        | -       | -           | 🔲       |
+| AI App               | -        | -       | -           | 🔲       |
+
+## Helm Charts
+
+| **TODO**                       |     |
+| ------------------------------ | --- |
+| Generic dotnet core webapi app | ✅  |
+| Generic static website (nginx) | ✅  |
+| Generic nodejs app             | ✅  |
+| Generic python/flask app       | ✅  |
+| GPU test app                   | ✅  |
+| sample-game                    | ✅  |
+| sample-ai                      | ✅  |
+
 ## Goals
-
-- **Automate and Manage Infrastructure**:  
-  Leverage GitOps principles with Argo CD, Terraform, Helm, and Flux for:
-
-  - Consistent and version-controlled infrastructure management
-  - Automated image updates
-
-- **Build a Stable CI/CD Pipeline**:  
-  Create a robust pipeline with:
-
-  - Multi-staging environments and production rollouts (blue-green and canary) using Argo Rollouts and Helm
-  - Automated database migrations and easy rollback mechanisms
-  - Support for GPU-based workloads and AI/ML pipelines
-  - Multi-cloud deployments (AKS, EKS, GKE, DOKS) with Terraform and Kubernetes manifests
-
-- **Enhanced Observability**:  
-  Monitor deployments and performance with Prometheus and Grafana.
-
-- **Load Testing**:  
-  Validate system resilience and scalability under heavy traffic.
-
-## Tools
-
-| **Tool Name**      | **Classification**            | **Use Case**                                                                               |
-| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------ |
-| **Argo CD**        | Kubernetes Operator (GitOps)  | Synchronizes Kubernetes applications with Git repositories (declarative deployment)        |
-| **Terraform**      | Infrastructure as Code (IaC)  | Manages Kubernetes resources and cloud infrastructure (provisioning, lifecycle management) |
-| **Argo Rollouts**  | Deployment Strategies         | Manages advanced deployment strategies (e.g., canary, blue-green) in Kubernetes            |
-| **Flux**           | Continuous Deployment         | Automates container image tag updates in Git repositories                                  |
-| **Helm**           | Application Packaging         | Manages Kubernetes applications with packaged charts (configurable, reusable deployments)  |
-| **GitHub Actions** | CI/CD Pipelines (Build, Test) | Automates CI workflows for unit tests, integration tests, PR policies, etc.                |
-| **Argo Workflows** | CI/CD Pipeline Orchestration  | Orchestrates and manages multi-step, complex workflows across CI/CD pipelines              |
-
-## TODO
-
-### Install and Configure Tools
-
-- ✅ Minikube (windows and wsl)
-- ✅ Terraform (windows and wsl)
-- ✅ Helm (windows and wsl)
-- ✅ aws CLI (on windows)
-- ✅ az CLI (on windows)
-- ✅ gcloud CLI (on windows)
-- 🔲 doctl CLI (on windows)
-
-- **Cluster Setup**:
-
-  - ✅ Create local-cluster via windows minikube
-  - ✅ Create wsl-cluster via wsl minikube
-  - ✅ Configure aws CLI in `kubectl` profiles
-  - ✅ Configure az CLI in `kubectl` profiles
-  - ✅ Configure gcloud CLI in `kubectl` profiles
-  - 🔲 Configure doctl CLI in `kubectl` profiles
-  - ✅ Create EKS cluster (VPC and cluster creation via Terraform)
-  - ✅ Create AKS cluster (VPC and cluster creation via Terraform)
-  - ✅ Create GKE cluster (VPC and cluster creation via Terraform)
-  - 🔲 Create DOKS cluster (VPC and cluster creation via Terraform)
-  - ✅ Add wsl-cluster to ArgoCD
-  - 🔲 Install Argo CD on DOKS (Remote ArgoCD)
-  - 🔲 Add AKS cluster to Remote ArgoCD
-  - 🔲 Add EKS cluster to Remote ArgoCD
-  - 🔲 Add GKE cluster to Remote ArgoCD
 
 ### Automate and Manage Infrastructure
 
@@ -85,14 +95,6 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 - ✅ Create/Configure a generic .NET app Helm chart and use it for a service in the sample app
 - ✅ Configure multi-staging environments usable by all apps
 - ✅ Create/Configure Github Arc Runners
-
-### Create Helm Charts
-
-- ✅ Generic dotnet core webapi app
-- ✅ GPU test app
-- ✅ Generic static website
-- ✅ Generic node app
-- ✅ Generic python/flask app
 
 ### Build a Comprehensive CI/CD Pipeline
 
