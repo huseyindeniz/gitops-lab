@@ -6,11 +6,11 @@ metadata:
 spec:
   project: default
   sources:
-    repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
-    path: "raw-manifests/local-management/metallb"
-    targetRevision: main
-    directory:
-      recurse: true
+    - repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+      path: "raw-manifests/local-management/metallb"
+      targetRevision: main
+      directory:
+        recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
