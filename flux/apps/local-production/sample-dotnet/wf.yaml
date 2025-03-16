@@ -66,7 +66,7 @@ spec:
           ref: values
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          path: "raw-manifests/local-production/sample-dotnet"
+          path: "raw-manifests/local-production/sample-dotnet/{{ .envName }}"
           directory:
             recurse: true           
       destination:
