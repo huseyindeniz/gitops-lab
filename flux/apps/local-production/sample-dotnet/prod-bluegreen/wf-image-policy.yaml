@@ -28,36 +28,3 @@ spec:
   policy:
     numerical:
       order: "asc"
-
----
-
-apiVersion: image.toolkit.fluxcd.io/v1beta1
-kind: ImagePolicy
-metadata:
-  name: sample-dotnet-wf-prod-prod-canary-image-policy
-  namespace: flux-system
-spec:
-  imageRepositoryRef:
-    name: sample-dotnet-wf-prod-prod-canary-image-repository
-  filterTags:
-    pattern: "^ci-(\\d+)-(\\d{14})$"
-    extract: "$2"
-  policy:
-    numerical:
-      order: "asc"
-
----
-apiVersion: image.toolkit.fluxcd.io/v1beta1
-kind: ImagePolicy
-metadata:
-  name: sample-dotnet-wf-prod-prod-canary-migration-image-policy
-  namespace: flux-system
-spec:
-  imageRepositoryRef:
-    name: sample-dotnet-wf-prod-prod-canary-migration-image-repository
-  filterTags:
-    pattern: "^ci-(\\d+)-(\\d{14})$"
-    extract: "$2"
-  policy:
-    numerical:
-      order: "asc"

@@ -13,7 +13,7 @@ if env_path.exists():
 
 app = Flask(__name__)
 
-if(APP_ENV == "development" or APP_ENV == "docker"):
+if(APP_ENV == "development" or APP_ENV == "docker" or APP_ENV == "staging"):
     app.config['DEBUG'] = True
 
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)

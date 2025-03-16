@@ -25,6 +25,11 @@ spec:
           helm:
             values: |
               customMessage: "{{customMessage}}"
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          path: "raw-manifests/local-management/network-debug-app"
+          directory:
+            recurse: true               
       destination:
         server: "https://kubernetes.default.svc"
         namespace: '{{namespace}}'

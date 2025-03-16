@@ -15,6 +15,11 @@ spec:
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      path: "raw-manifests/local-production/istio"
+      directory:
+        recurse: true       
   destination:
     server: "https://172.17.0.8:8443"
     namespace: "istio-system"

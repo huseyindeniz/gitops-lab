@@ -64,6 +64,11 @@ spec:
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
           ref: values
+        - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+          targetRevision: main
+          path: "raw-manifests/local-production/sample-dotnet/{{ .envName }}"
+          directory:
+            recurse: true           
       destination:
         server: "https://172.17.0.8:8443"
         namespace: "sample-dotnet-wf-prod-{{ .envName }}" # Use the environment suffix in the namespace

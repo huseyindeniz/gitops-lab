@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: raw-manifests-production
+  name: metallb-management
   namespace: argocd
 spec:
   project: default
-  source:
+  sources:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
-    path: "manifests/local-production"
+    path: "raw-manifests/local-management/metallb"
     targetRevision: main
     directory:
       recurse: true
   destination:
-    server: "https://172.17.0.8:8443"
+    server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
     automated:
