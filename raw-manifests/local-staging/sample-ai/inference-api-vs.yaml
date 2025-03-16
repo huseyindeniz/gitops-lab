@@ -14,6 +14,6 @@ spec:
             prefix: "/"
       route:
         - destination:
-            host: sample-ai-inference-api-staging.sample-ai-staging.svc.cluster.local
+            host: sample-ai-inference-api-staging-service.sample-ai-staging.svc.cluster.local
             port:
               number: 80
