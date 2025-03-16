@@ -1,5 +1,5 @@
-python-app:
-  nameOverride: "backend"
+inference-api:
+  nameOverride: "inference-api"
 
-static-website:
+frontend:
   nameOverride: "frontend"

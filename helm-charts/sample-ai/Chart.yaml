@@ -6,9 +6,9 @@ version: 0.1.0
 appVersion: "1.0.0"
 
 dependencies:
-  - name: python-app
+  - name: inference-api
     version: "0.1.0"
     repository: "file://../python-app"
-  - name: static-website
+  - name: frontend
     version: "0.1.0"
     repository: "file://../static-website" 

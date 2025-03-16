@@ -1,8 +1,9 @@
-python-app:
+inference-api:
   env:
     FLASK_ENV: "staging"
     COMMAND: "app"
     PORT: 80
+    RUN_ON_GPU: "0"
     ALLOWED_EXTENSIONS: "png,jpg,jpeg"
     MODELS_FOLDER: "/app/data/models"
     UPLOAD_FOLDER: "/app/data/uploads"
@@ -13,12 +14,12 @@ python-app:
   replicaCount: 1
 
   image:
-    repository: ghcr.io/huseyindeniz/sample-ai-backend-staging # image size is 14.8GB, compresses size: 8.76GB
+    repository: ghcr.io/huseyindeniz/sample-ai-inference-api-staging # image size is 14.8GB, compresses size: 8.76GB
     pullPolicy: IfNotPresent
-    tag: "20250227164319"
+    tag: "20250315190619"
 
-  nameOverride: "sample-ai-backend"
-  fullnameOverride: "sample-ai-backend-staging"
+  nameOverride: "sample-ai-inference-api"
+  fullnameOverride: "sample-ai-inference-api-staging"
 
   podAnnotations: {}
   podLabels: {}
@@ -39,13 +40,6 @@ python-app:
 
   ingress:
     enabled: false
-    className: ""
-    annotations: {}
-    hosts:
-      - host: sample-ai-backend-staging.local
-        paths:
-          - path: /
-            pathType: Prefix
 
   autoscaling:
     enabled: false
@@ -63,7 +57,7 @@ python-app:
       persistentVolumeClaim:
         claimName: sample-ai-backend-volume-pvc
 
-static-website:
+frontend:
   replicaCount: 1
 
   image:

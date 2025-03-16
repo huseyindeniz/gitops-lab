@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: sample-ai-backend-vs
+  name: sample-ai-inference-api-vs
   namespace: istio-system
 spec:
   hosts:
@@ -14,6 +14,6 @@ spec:
             prefix: "/"
       route:
         - destination:
-            host: sample-ai-backend-staging.sample-ai-staging.svc.cluster.local
+            host: sample-ai-inference-api-staging.sample-ai-staging.svc.cluster.local
             port:
               number: 80
