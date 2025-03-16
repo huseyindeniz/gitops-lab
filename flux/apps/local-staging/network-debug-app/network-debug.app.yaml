@@ -8,9 +8,11 @@ spec:
     - list:
         elements:
           - name: network-debug-app-staging-local-3
+            rawManifestPath: local-3
             customMessage: "network-debug-app:local-staging:3"
             namespace: networking-test
           - name: network-debug-app-staging-local-4
+            rawManifestPath: local-4
             customMessage: "network-debug-app:local-staging:4"
             namespace: networking-test
   template:
@@ -27,7 +29,7 @@ spec:
               customMessage: "{{customMessage}}"
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          path: "raw-manifests/local-staging/network-debug-app"
+          path: "raw-manifests/local-staging/network-debug-app/{{rawManifestPath}}"
           directory:
             recurse: true              
       destination:
