@@ -31,7 +31,7 @@ TODO: add more explanation here.
 | Helm              | ✅               | ✅             | ✅                          | -              |
 | reverse-proxy     | -                | -              | -                           | ✅             |
 | grafana           | -                | -              | -                           | ✅             |
-| environments      | -                | stag-1, stag-2 | prod-bluegreen, prod-canary | ✅             |
+| environments      | -                | stag-1, stag-2 | prod-bluegreen, prod-canary | -              |
 | Cert Manager      | ✅               | ✅             | ✅                          | -              |
 | Istio             | ✅               | ✅             | ✅                          | -              |
 | MetalLB           | ✅               | ✅             | ✅                          | -              |
@@ -78,6 +78,23 @@ TODO: add more explanation here.
 | GPU test app                   | ✅  |
 | sample-game                    | ✅  |
 | sample-ai                      | ✅  |
+
+## Terraform Modules
+
+| **TODO**       |     |
+| -------------- | --- |
+| arc-runners    | ✅  |
+| argocd         | ✅  |
+| argo-rollouts  | ✅  |
+| argo-workflows | ✅  |
+| cert-manager   | ✅  |
+| flux           | ✅  |
+| istio          | ✅  |
+| k8s-dashboard  | ✅  |
+| metalLB        | ✅  |
+| monitoring     | ✅  |
+| postgresql     | ✅  |
+| redis          | ✅  |
 
 ## Goals
 
