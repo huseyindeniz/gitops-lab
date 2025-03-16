@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-dotnet-staging-raw-manifests
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
+      path: "raw-manifests/local-management/sample-dotnet/staging"
+      targetRevision: main
+      directory:
+        recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
