@@ -74,7 +74,7 @@ resource "helm_release" "arc_runner" {
   ]
 
   depends_on = [
-    helm_release.arc_scale_set
+    helm_release.arc_scale_set, kubernetes_persistent_volume_claim.arc_runner_work_pvc
   ]
 }
 
@@ -85,7 +85,7 @@ resource "kubernetes_cluster_role" "arc_runner_cluster_role" {
 
   rule {
     api_groups = [""]
-    resources  = ["pods", "services", "configmaps"]
+    resources  = ["pods", "services", "configmaps", "secrets"]
     verbs      = ["get", "list"]
   }
 
