@@ -1,7 +1,7 @@
 # Copy cluster cert to the shared certs folder
+
 cp ~/.minikube/profiles/local-staging/apiserver.crt /mnt/d/github/gitops-lab/certs/local-staging.pem
 cp ~/.minikube/profiles/local-staging/apiserver.crt /mnt/d/github/gitops-lab/terraform/local-management/certs/local-staging.pem
-
 
 create debug pod with:
 
@@ -11,7 +11,6 @@ dig
 wget
 tcpdump
 ip, netstat, nc, traceroute
-
 
 kubectl run debug-pod --image=nicolaka/netshoot --restart=Never -n default -- sleep 3600
 
@@ -34,8 +33,12 @@ curl -vk https://harbor.management.local:44301
 nslookup harbor.management.local
 dig harbor.management.local
 
-
 minikube cp /mnt/d/volumes/shared/sample-ai-backend/models/isnet-general-use.pth local-staging:/mnt/d/volumes/shared/sample-ai-backend/models/isnet-general-use.pth -p local-staging -n local-staging
 
 # extract istio cert
+
 kubectl get secret staging-local-tls-secret -n istio-system -o jsonpath='{.data.tls\.crt}' | base64 --decode > istio-ca.crt
+
+kubectl get secret istio-ca-secret -n istio-system -o jsonpath='{.data.root-cert\.pem}' | base64 --decode > istio-root-ca.crt
+
+cat istio-root-ca.crt istio-ca.crt > istio-full-chain.crt

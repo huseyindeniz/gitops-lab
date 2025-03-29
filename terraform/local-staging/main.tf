@@ -47,7 +47,7 @@ resource "kubernetes_secret" "istio_ca_cert" {
   }
 
   data = {
-    "ca.crt" = file("${path.module}/certs/istio-ca.crt")
+    "ca.crt" = file("${path.module}/certs/istio-full-chain.crt")
   }
 
   type = "Opaque"

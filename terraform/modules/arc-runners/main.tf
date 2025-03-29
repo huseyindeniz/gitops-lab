@@ -74,7 +74,7 @@ resource "helm_release" "arc_runner" {
   ]
 
   depends_on = [
-    helm_release.arc_scale_set, kubernetes_persistent_volume_claim.arc_runner_work_pvc
+    helm_release.arc_scale_set
   ]
 }
 

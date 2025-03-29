@@ -49,7 +49,7 @@ template:
           - |
             set -x
             sudo cp /usr/local/share/ca-certificates/istio-ca.crt /etc/ssl/certs/
-            sudo update-ca-certificates --fresh
+            sudo update-ca-certificates
             /home/runner/run.sh
         env:
           - name: DOCKER_HOST
