@@ -40,6 +40,25 @@ template:
             name: dind-etc
           - mountPath: /dind-home
             name: dind-home
+      - name: init-update-ca-certificates
+        image: ghcr.io/actions/actions-runner:latest
+        command:
+          - sh
+          - -c
+          - |
+            set -x
+            # Update certificates after Istio CA is present
+            update-ca-certificates
+            # Copy updated certs to the shared volume
+            cp -r /etc/ssl/certs/* /mnt/certs/
+        securityContext:
+          runAsUser: 0            
+        volumeMounts:
+          - name: certs-volume
+            mountPath: /mnt/certs
+          - name: istio-ca-cert-volume
+            mountPath: "/usr/local/share/ca-certificates/istio-ca.crt"
+            subPath: ca.crt            
     containers:
       - name: runner
         image: ghcr.io/actions/actions-runner:latest
@@ -48,14 +67,14 @@ template:
           - -c
           - |
             set -x
-            sudo cp /usr/local/share/ca-certificates/istio-ca.crt /etc/ssl/certs/
-            sudo update-ca-certificates
             /home/runner/run.sh
         env:
           - name: DOCKER_HOST
             value: unix:///home/runner/var/run/docker.sock
           - name: DOCKER_TLS_VERIFY
             value: "0"
+          - name: DOCKER_CERT_PATH
+            value: /usr/local/share/ca-certificates
         securityContext:
           privileged: true
           runAsUser: 1001
@@ -65,9 +84,14 @@ template:
             mountPath: /home/runner/_work
           - name: dind-sock
             mountPath: /home/runner/var/run
+          - name: certs-volume
+            mountPath: /etc/ssl/certs
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/istio-ca.crt"
-            subPath: ca.crt
+            subPath: ca.crt            
+          - name: istio-ca-cert-volume
+            mountPath: "/usr/local/share/ca-certificates/ca.pem"
+            subPath: ca.crt            
       - name: dind
         image: docker:dind-rootless
         args: ["dockerd", "--host=unix:///home/runner/var/run/docker.sock"]
@@ -85,7 +109,7 @@ template:
           - name: dind-etc
             mountPath: /etc
           - name: dind-home
-            mountPath: /home/runner
+            mountPath: /home/runner          
     volumes:
       - name: work
         emptyDir: {}
@@ -97,6 +121,8 @@ template:
         emptyDir: {}
       - name: dind-home
         emptyDir: {}
+      - name: certs-volume
+        emptyDir: {}        
       - name: istio-ca-cert-volume
         secret:
           secretName: istio-ca-cert
