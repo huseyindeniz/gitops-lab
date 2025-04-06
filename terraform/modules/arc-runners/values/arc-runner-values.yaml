@@ -36,10 +36,10 @@ template:
         securityContext:
           runAsUser: 0
         volumeMounts:
-          - mountPath: /dind-etc
-            name: dind-etc
-          - mountPath: /dind-home
-            name: dind-home
+          - name: dind-etc
+            mountPath: /dind-etc
+          - name: dind-home
+            mountPath: /dind-home
       - name: init-update-ca-certificates
         image: ghcr.io/actions/actions-runner:latest
         command:
@@ -71,10 +71,6 @@ template:
         env:
           - name: DOCKER_HOST
             value: unix:///home/runner/var/run/docker.sock
-          - name: DOCKER_TLS_VERIFY
-            value: "0"
-          - name: DOCKER_CERT_PATH
-            value: /usr/local/share/ca-certificates
         securityContext:
           privileged: true
           runAsUser: 1001
@@ -84,6 +80,7 @@ template:
             mountPath: /home/runner/_work
           - name: dind-sock
             mountPath: /home/runner/var/run
+            readOnly: true  
           - name: certs-volume
             mountPath: /etc/ssl/certs
           - name: istio-ca-cert-volume
@@ -91,10 +88,16 @@ template:
             subPath: ca.crt            
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/ca.pem"
-            subPath: ca.crt            
+            subPath: ca.crt           
+          - name: dind-etc
+            mountPath: /home/runner/etc-debug         
       - name: dind
         image: docker:dind-rootless
-        args: ["dockerd", "--host=unix:///home/runner/var/run/docker.sock"]
+        args:
+          - "dockerd"
+          - "--host=unix:///home/runner/var/run/docker.sock"
+          - "--insecure-registry=https://harbor.staging.local:44302"
+          - "--insecure-registry=http://harbor.staging.local:8082"
         securityContext:
           privileged: true
           runAsUser: 1001
@@ -109,7 +112,10 @@ template:
           - name: dind-etc
             mountPath: /etc
           - name: dind-home
-            mountPath: /home/runner          
+            mountPath: /home/runner
+          - name: istio-ca-cert-volume
+            mountPath: "/usr/local/share/ca-certificates/ca.pem"
+            subPath: ca.crt                    
     volumes:
       - name: work
         emptyDir: {}
