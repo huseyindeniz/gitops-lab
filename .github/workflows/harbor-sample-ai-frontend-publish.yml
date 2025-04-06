@@ -24,3 +24,5 @@ jobs:
           tags: "${{ env.TIMESTAMP }}"
           dockerfile: apps/sample-ai/frontend/Dockerfile
           context: apps/sample-ai/frontend
+          buildargs: |
+            BUILD_ENV=staging
