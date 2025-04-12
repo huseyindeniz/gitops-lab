@@ -23,7 +23,7 @@ jobs:
       - name: Login to Harbor registry
         run: |
           # Use the robot account to login to Harbor
-          docker login harbor.staging.local:44302 -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_TOKEN }}
+          docker login https://harbor.staging.local:44302 -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_TOKEN }}
       - name: Push Docker image to Harbor
         run: |
           # Push the image to Harbor
