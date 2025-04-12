@@ -114,6 +114,11 @@ secretKey: "not-a-secure-key"
 # If using existingSecretSecretKey, the key must be secretKey
 existingSecretSecretKey: ""
 
+containerSecurityContext:
+  privileged: false
+  runAsUser: 10000
+  runAsGroup: 10000
+
 # The proxy settings for updating trivy vulnerabilities from the Internet and replicating
 # artifacts from/to the registries that cannot be reached directly
 proxy:
