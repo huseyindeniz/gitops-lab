@@ -22,7 +22,7 @@ jobs:
           name: harbor.staging.local/library/sample-ai-frontend-staging
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_TOKEN }}
-          registry: https://harbor.staging.local:44302
+          registry: harbor.staging.local:8082
           tags: "${{ env.TIMESTAMP }}"
           dockerfile: apps/sample-ai/frontend/Dockerfile
           context: apps/sample-ai/frontend
