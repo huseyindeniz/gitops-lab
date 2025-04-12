@@ -13,6 +13,7 @@ jobs:
           export HARBOR_TOKEN=$(curl -s -X POST \
             "https://harbor.staging.local:44302/service/token?account=${{ secrets.HARBOR_USERNAME }}&client_id=docker&offline_token=true&service=harbor-registry" \
             -u "${{ secrets.HARBOR_USERNAME }}:${{ secrets.HARBOR_TOKEN }}" | jq -r .token)
+          echo "Harbor Token: $HARBOR_TOKEN"
           echo "HARBOR_TOKEN=${HARBOR_TOKEN}" >> $GITHUB_ENV
       - name: Login to Harbor registry (HTTPS)
         run: |

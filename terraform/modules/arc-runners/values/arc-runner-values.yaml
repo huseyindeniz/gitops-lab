@@ -115,7 +115,7 @@ template:
             mountPath: /home/runner
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/ca.pem"
-            subPath: ca.crt                    
+            subPath: ca.crt
     volumes:
       - name: work
         emptyDir: {}
