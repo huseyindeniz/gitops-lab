@@ -118,7 +118,7 @@ registry:
   initContainers:
     - name: init-registry
       image: busybox:1.35.0-uclibc
-      command: [ 'sh', '-c', "chown 10000:10000 /mnt/data/harbor-registry" ]
+      command: [ 'sh', '-c', "mkdir -p /mnt/data/harbor-registry/docker && chown 10000:10000 /mnt/data/harbor-registry/docker" ]
       volumeMounts:
         - name: registry-data
           mountPath: /mnt/data  # Mounting the PVC directory here
