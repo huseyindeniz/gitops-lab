@@ -18,8 +18,8 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: harbor.staging.local/library/sample-ai-frontend-staging
-          username: ${{ secrets.HARBOR_USERNAME }}
-          password: ${{ secrets.HARBOR_TOKEN }}
+          username: "admin"
+          password: "Harbor12345"
           registry: https://harbor.staging.local:44302
           tags: "${{ env.TIMESTAMP }}"
           dockerfile: apps/sample-ai/frontend/Dockerfile
