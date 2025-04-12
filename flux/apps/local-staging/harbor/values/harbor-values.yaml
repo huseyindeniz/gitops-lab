@@ -68,7 +68,7 @@ persistence:
     # must be "filesystem" if you want to use persistent volumes for registry
     type: filesystem
     filesystem:
-      rootdirectory: /storage
+      rootdirectory: /mnt/data/harbor-registry
       #maxthreads: 100
 
 # The initial password of Harbor admin. Change it from portal after launching Harbor
