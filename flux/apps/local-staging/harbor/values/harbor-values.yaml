@@ -31,12 +31,7 @@ persistence:
   resourcePolicy: "keep"
   persistentVolumeClaim:
     registry:
-      existingClaim: ""
-      storageClass: "standard"
-      subPath: ""
-      accessMode: ReadWriteOnce
-      size: 5Gi
-      annotations: {}
+      existingClaim: "harbor-registry-pvc"
     jobservice:
       jobLog:
         existingClaim: ""

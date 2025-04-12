@@ -7,6 +7,43 @@ resource "kubernetes_namespace" "harbor" {
   }
 }
 
+# REGISTRY PV
+
+resource "kubernetes_persistent_volume" "harbor_registry_pv" {
+  metadata {
+    name = "harbor-registry-pv"
+  }
+  spec {
+    capacity = {
+      storage = "20Gi"
+    }
+    access_modes = ["ReadWriteMany"]
+    persistent_volume_source {
+      host_path {
+        path = "/mnt/data/harbor-registry"
+      }
+    }
+  }
+}
+
+# REGISTRY PVC
+
+resource "kubernetes_persistent_volume_claim" "harbor_registry_pvc" {
+  metadata {
+    name      = "harbor-registry-pvc"
+    namespace = kubernetes_namespace.harbor.metadata[0].name
+  }
+  spec {
+    access_modes = ["ReadWriteMany"]
+    resources {
+      requests = {
+        storage = "20Gi"
+      }
+    }
+  }
+}
+
+
 # POSTGRESQL
 module "harbor_postgresql" {
   source = "../modules/postgresql"
