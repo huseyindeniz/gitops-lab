@@ -116,8 +116,8 @@ existingSecretSecretKey: ""
 
 containerSecurityContext:
   privileged: true
-  runAsUser: 1000
-  runAsGroup: 1000
+  runAsUser: 10000
+  runAsGroup: 10000
 
 # The proxy settings for updating trivy vulnerabilities from the Internet and replicating
 # artifacts from/to the registries that cannot be reached directly
