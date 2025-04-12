@@ -17,7 +17,7 @@ jobs:
       - name: Publish Docker image to Harbor
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
-          name: harbor.staging.local/library/sample-ai-frontend-staging
+          name: library/sample-ai-frontend-staging
           username: "admin"
           password: "Harbor12345"
           registry: https://harbor.staging.local:44302
