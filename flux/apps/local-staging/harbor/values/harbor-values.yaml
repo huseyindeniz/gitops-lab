@@ -114,11 +114,15 @@ secretKey: "not-a-secure-key"
 # If using existingSecretSecretKey, the key must be secretKey
 existingSecretSecretKey: ""
 
-containerSecurityContext:
-  privileged: false
-  allowPrivilegeEscalation: false
-  runAsNonRoot: true
-  
+registry:
+  initContainers:
+    - name: init-registry
+      image: busybox:1.35.0-uclibc
+      command: [ 'sh', '-c', "chown 10000:10000 /mnt/data/harbor-registry" ]
+      volumeMounts:
+        - name: registry-data
+          mountPath: /mnt/data  # Mounting the PVC directory here
+          subPath: harbor-registry  # Target the directory where data will be
 
 # The proxy settings for updating trivy vulnerabilities from the Internet and replicating
 # artifacts from/to the registries that cannot be reached directly
