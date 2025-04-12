@@ -56,7 +56,7 @@ spec:
         - destination:
             host: harbor-staging-core.harbor.svc.cluster.local
             port:
-              number: 5000              
+              number: 80              
     - match:
         - uri:
             prefix: "/"
