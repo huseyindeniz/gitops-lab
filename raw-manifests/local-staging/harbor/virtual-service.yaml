@@ -54,7 +54,7 @@ spec:
             prefix: "/v2/"          
       route:
         - destination:
-            host: harbor-staging-registry.harbor.svc.cluster.local
+            host: harbor-staging-core.harbor.svc.cluster.local
             port:
               number: 5000              
     - match:
