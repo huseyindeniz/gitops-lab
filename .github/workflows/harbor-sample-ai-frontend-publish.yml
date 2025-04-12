@@ -12,6 +12,8 @@ jobs:
         run: |
           export LC_ALL=C
           echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+          echo ${{ secrets.HARBOR_USERNAME }}
+          echo ${{ secrets.HARBOR_TOKEN }}
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Publish Docker image to Harbor
