@@ -1,0 +1,27 @@
+name: Harbor - SampleAI Frontend 2 - Build and push Docker images 
+
+on:
+  workflow_dispatch:
+
+jobs:
+         
+  build-push:
+    runs-on: arc-runner-local-staging
+    steps:
+      - name: Get current timestamp
+        run: |
+          export LC_ALL=C
+          echo "TIMESTAMP=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build Docker image
+        run: |
+          docker build -t harbor.staging.local/library/sample-ai-frontend-staging:${{ env.TIMESTAMP }} -f apps/sample-ai/frontend/Dockerfile apps/sample-ai/frontend
+      - name: Login to Harbor registry
+        run: |
+          # Use the robot account to login to Harbor
+          docker login harbor.staging.local:44302 -u ${{ secrets.HARBOR_USERNAME }} -p ${{ secrets.HARBOR_TOKEN }}
+      - name: Push Docker image to Harbor
+        run: |
+          # Push the image to Harbor
+          docker push harbor.staging.local/library/sample-ai-frontend-staging:${{ env.TIMESTAMP }}
