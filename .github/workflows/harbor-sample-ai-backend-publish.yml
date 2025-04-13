@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build-push:
     runs-on: arc-runner-local-staging
     steps:
@@ -16,10 +17,10 @@ jobs:
       - name: Publish Docker image to Harbor
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
-          name: harbor.staging.local/library/sample-ai-backend-staging
+          name: library/sample-ai-backend-staging
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_TOKEN }}
-          registry: harbor.staging.local:44302
+          registry: harbor.staging.local:8082
           tags: "${{ env.TIMESTAMP }}"
           dockerfile: apps/sample-ai/backend/Dockerfile
           context: apps/sample-ai/backend
