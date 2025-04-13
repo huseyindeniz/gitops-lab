@@ -1,7 +1,7 @@
 expose:
   type: nodePort
   tls:
-    enabled: false
+    enabled: true
   nodePort:
     name: harbor
     ports:
