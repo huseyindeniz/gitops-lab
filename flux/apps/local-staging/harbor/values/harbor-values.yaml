@@ -119,6 +119,8 @@ registry:
     - name: init-registry
       image: busybox:1.35.0-uclibc
       command: [ 'sh', '-c', "mkdir -p /mnt/data/harbor-registry/docker && chown 10000:10000 /mnt/data/harbor-registry/docker" ]
+      securityContext:
+        runAsUser: 0
       volumeMounts:
         - name: registry-data
           mountPath: /mnt/data/harbor-registry
