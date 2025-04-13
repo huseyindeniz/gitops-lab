@@ -61,9 +61,9 @@ frontend:
   replicaCount: 1
 
   image:
-    repository: huseyindeniz/sample-ai-frontend-staging
+    repository: harbor.staging.local/library/sample-ai-frontend-staging
     pullPolicy: IfNotPresent
-    tag: "20250226214657"
+    tag: "20250413070918"
 
   nameOverride: "sample-ai-frontend"
   fullnameOverride: "sample-ai-frontend-staging"
