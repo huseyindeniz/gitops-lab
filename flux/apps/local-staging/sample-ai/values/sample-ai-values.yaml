@@ -61,7 +61,7 @@ frontend:
   replicaCount: 1
 
   image:
-    repository: harbor.staging.local:8082/library/sample-ai-frontend-staging
+    repository: harbor.staging.local:44302/library/sample-ai-frontend-staging
     pullPolicy: IfNotPresent
     tag: "20250413070918"
 
