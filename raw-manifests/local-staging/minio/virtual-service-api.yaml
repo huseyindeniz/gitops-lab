@@ -9,7 +9,7 @@ spec:
   gateways:
     - istio-ingressgateway-staging
   http:
-      route:
+    - route:
         - destination:
             host: minio-staging.minio.svc.cluster.local
             port:
