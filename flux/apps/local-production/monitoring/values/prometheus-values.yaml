@@ -1,3 +1,14 @@
+server:
+  extraInitContainers:
+    - name: fix-permissions
+      image: busybox
+      command: ["sh", "-c", "chmod -R 777 /data"]
+      volumeMounts:
+        - name: storage-volume
+          mountPath: /data
+  persistentVolume:
+    enabled: true
+    existingClaim: prometheus-pvc
 alertmanager:
   enabled: false
 nodeExporter:
