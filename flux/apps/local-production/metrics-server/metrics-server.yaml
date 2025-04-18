@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metrics-server
+  name: metrics-server-production
   namespace: argocd
 spec:
   project: default
@@ -9,6 +9,10 @@ spec:
     repoURL: https://kubernetes-sigs.github.io/metrics-server/
     chart: metrics-server
     targetRevision: "3.12.2"
+    helm:
+      values: |
+        args:
+          - --kubelet-insecure-tls    
   destination:
     server: "https://172.17.0.8:8443"
     namespace: kube-system

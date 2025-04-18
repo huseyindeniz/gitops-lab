@@ -5,14 +5,17 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://kubernetes.github.io/dashboard/
-    chart: kubernetes-dashboard
-    targetRevision: 7.12.0
-    helm:
-      valueFiles:
-        - values.yaml
-        - $values/flux/apps/local-production/k8sdashboard/values/k8sdashboard-values.yaml
+  sources:
+    - repoURL: https://kubernetes.github.io/dashboard/
+      chart: kubernetes-dashboard
+      targetRevision: 7.12.0
+      helm:
+        valueFiles:
+          - values.yaml
+          - $values/flux/apps/local-production/k8sdashboard/values/k8sdashboard-values.yaml
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      ref: values          
   destination:
     server: "https://172.17.0.8:8443"
     namespace: kubernetes-dashboard
