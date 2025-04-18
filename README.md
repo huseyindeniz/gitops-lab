@@ -45,8 +45,8 @@ TODO: add more explanation here.
 | minIO             | -                | ✅             | -                           | -              |
 | Prometheus        | 🔲               | 🔲             | 🔲                          | -              |
 | Loki              | 🔲               | 🔲             | 🔲                          | -              |
-| Open Telemetry    | 🔲               | 🔲             | 🔲                          | -              |
-| Tempo/Zipkin      | 🔲               | 🔲             | 🔲                          | -              |
+| Tempo             | 🔲               | 🔲             | 🔲                          | -              |
+| OTel Colector     | 🔲               | 🔲             | 🔲                          | -              |
 | Vault(hashicorp)  | 🔲               | 🔲             | 🔲                          | -              |
 | Velero            | 🔲               | 🔲             | 🔲                          | -              |
 | NVidia Triton     | -                | 🔲             | 🔲                          | -              |

@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/prometheus.json": "file:///d%3A/github/gitops-lab/flux/apps/local-production/monitoring/prometheus.yaml"
+    }
+}
