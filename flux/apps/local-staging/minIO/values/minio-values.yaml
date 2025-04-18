@@ -3,10 +3,8 @@ auth:
   rootPassword: minioadmin
 persistence:
   existingClaim: minio-pvc
-securityContext:
+volumePermissions:
   enabled: true
-  fsGroup: 1001
-  runAsUser: 1001
 resources:
   limits:
     cpu: 300m
