@@ -14,7 +14,7 @@ spec:
             prefix: /api/
       route:
         - destination:
-            host: k8sdashboard-prod-api.kubernetes-dashboard.svc.cluster.local
+            host: k8sdashboard-prod-kubernetes-dashboard-api.kubernetes-dashboard.svc.cluster.local
             port:
               number: 8000
 
@@ -23,7 +23,7 @@ spec:
             prefix: /auth/
       route:
         - destination:
-            host: k8sdashboard-prod-auth.kubernetes-dashboard.svc.cluster.local
+            host: k8sdashboard-prod-kubernetes-dashboard-auth.kubernetes-dashboard.svc.cluster.local
             port:
               number: 8000
 
@@ -32,7 +32,7 @@ spec:
             prefix: /metrics/
       route:
         - destination:
-            host: k8sdashboard-prod-metrics-scraper.kubernetes-dashboard.svc.cluster.local
+            host: k8sdashboard-prod-kubernetes-dashboard-metrics-scraper.kubernetes-dashboard.svc.cluster.local
             port:
               number: 8000
 
@@ -41,6 +41,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: k8sdashboard-prod-web.kubernetes-dashboard.svc.cluster.local
+            host: k8sdashboard-prod-kubernetes-dashboard-web.kubernetes-dashboard.svc.cluster.local
             port:
               number: 8000
