@@ -10,5 +10,3 @@ nginx:
 
 kong:
   enabled: false
-
-protocolHttp: false

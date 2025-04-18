@@ -9,7 +9,37 @@ spec:
   gateways:
     - istio-ingressgateway-production
   http:
-    - route:
+    - match:
+        - uri:
+            prefix: /api/
+      route:
+        - destination:
+            host: kubernetes-dashboard-production-api.kubernetes-dashboard.svc.cluster.local
+            port:
+              number: 8000
+
+    - match:
+        - uri:
+            prefix: /auth/
+      route:
+        - destination:
+            host: kubernetes-dashboard-production-auth.kubernetes-dashboard.svc.cluster.local
+            port:
+              number: 8000
+
+    - match:
+        - uri:
+            prefix: /metrics/
+      route:
+        - destination:
+            host: kubernetes-dashboard-production-metrics-scraper.kubernetes-dashboard.svc.cluster.local
+            port:
+              number: 8000
+
+    - match:
+        - uri:
+            prefix: /
+      route:
         - destination:
             host: kubernetes-dashboard-production-web.kubernetes-dashboard.svc.cluster.local
             port:
