@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kubernetes-dashboard-production
+  name: k8sdashboard-prod
   namespace: argocd
 spec:
   project: default

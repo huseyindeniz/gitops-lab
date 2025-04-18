@@ -10,3 +10,6 @@ nginx:
 
 kong:
   enabled: false
+  proxy:
+    http:
+      enabled: true  
