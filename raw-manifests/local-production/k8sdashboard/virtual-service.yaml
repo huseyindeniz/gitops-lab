@@ -13,4 +13,4 @@ spec:
         - destination:
             host: k8sdashboard-prod-kong-proxy.kubernetes-dashboard.svc.cluster.local
             port:
-              number: 8000
+              number: 80
