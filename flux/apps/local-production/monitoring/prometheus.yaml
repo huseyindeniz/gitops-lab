@@ -12,7 +12,7 @@ spec:
       helm:
         valueFiles:
           - values.yaml
-          - $values/flux/apps/local-production/prometheus/values/prometheus-values.yaml
+          - $values/flux/apps/local-production/monitoring/values/prometheus-values.yaml
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
