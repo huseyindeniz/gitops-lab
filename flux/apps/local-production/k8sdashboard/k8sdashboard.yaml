@@ -15,7 +15,12 @@ spec:
           - $values/flux/apps/local-production/k8sdashboard/values/k8sdashboard-values.yaml
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      ref: values          
+      ref: values
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      path: "raw-manifests/local-production/k8sdashboard"
+      directory:
+        recurse: true         
   destination:
     server: "https://172.17.0.8:8443"
     namespace: kubernetes-dashboard

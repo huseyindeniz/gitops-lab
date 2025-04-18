@@ -11,8 +11,4 @@ nginx:
 kong:
   enabled: false
 
-# Expose via ClusterIP (for Istio routing)
 protocolHttp: true
-service:
-  type: ClusterIP
-  port: 80
