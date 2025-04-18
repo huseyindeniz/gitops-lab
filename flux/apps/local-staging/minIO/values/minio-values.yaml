@@ -6,7 +6,7 @@ persistence:
 securityContext:
   enabled: true
   fsGroup: 1001
-  runAsUser: 0
+  runAsUser: 1001
 resources:
   limits:
     cpu: 300m
