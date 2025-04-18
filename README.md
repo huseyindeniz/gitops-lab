@@ -38,10 +38,10 @@ TODO: add more explanation here.
 | K8SDashboard      | ✅               | ✅             | ✅                          | -              |
 | ArgoCD            | ✅               | -              | -                           | -              |
 | Argo Rollouts     | -                | -              | ✅                          | -              |
-| Argo Workflows    | -                | 🔲             | 🔲                          | -              |
+| Argo Workflows    | -                | 🔲             | -                           | -              |
 | Flux              | ✅               | -              | -                           | -              |
 | ARC Runners       | -                | ✅             | ✅                          | -              |
-| Harbor            | -                | ✅             | 🔲                          | -              |
+| Harbor            | -                | ✅             | -                           | -              |
 | minIO             | -                | 🔲             | 🔲                          | -              |
 | Prometheus        | 🔲               | 🔲             | 🔲                          | -              |
 | Loki              | 🔲               | 🔲             | 🔲                          | -              |
@@ -90,9 +90,7 @@ TODO: add more explanation here.
 | cert-manager   | ✅  |
 | flux           | ✅  |
 | istio          | ✅  |
-| k8s-dashboard  | ✅  |
 | metalLB        | ✅  |
-| monitoring     | ✅  |
 | postgresql     | ✅  |
 | redis          | ✅  |
 
@@ -218,6 +216,10 @@ TODO: add more explanation here.
 ### Sample AI/ML App (pytorch - on GPU)
 
 ![sample ai/ml app](./docs/images/screenshots/ai-ml-demo.gif)
+
+### Harbor
+
+![Harbor](./docs/images/screenshots/harbor.png)
 
 ## Developer Workflow
 
