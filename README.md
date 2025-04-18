@@ -42,7 +42,7 @@ TODO: add more explanation here.
 | Flux              | ✅               | -              | -                           | -              |
 | ARC Runners       | -                | ✅             | ✅                          | -              |
 | Harbor            | -                | ✅             | -                           | -              |
-| minIO             | -                | 🔲             | 🔲                          | -              |
+| minIO             | -                | ✅             | -                           | -              |
 | Prometheus        | 🔲               | 🔲             | 🔲                          | -              |
 | Loki              | 🔲               | 🔲             | 🔲                          | -              |
 | Open Telemetry    | 🔲               | 🔲             | 🔲                          | -              |
@@ -220,6 +220,10 @@ TODO: add more explanation here.
 ### Harbor
 
 ![Harbor](./docs/images/screenshots/harbor.png)
+
+### MinIO
+
+![MinIO](./docs/images/screenshots/minio.png)
 
 ## Developer Workflow
 
