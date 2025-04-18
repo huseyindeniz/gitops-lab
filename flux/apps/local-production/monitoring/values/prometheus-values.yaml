@@ -3,8 +3,7 @@ server:
     enabled: true
     existingClaim: prometheus-pvc
   securityContext:
-    runAsUser: 0
-    fsGroup: 0
+    runAsNonRoot: false
 alertmanager:
   enabled: false
 nodeExporter:
