@@ -1,0 +1,18 @@
+# Disable optional subcharts
+metrics-server:
+  enabled: false
+
+cert-manager:
+  enabled: false
+
+nginx:
+  enabled: false
+
+kong:
+  enabled: false
+
+# Expose via ClusterIP (for Istio routing)
+protocolHttp: true
+service:
+  type: ClusterIP
+  port: 80
