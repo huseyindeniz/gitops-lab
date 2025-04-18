@@ -5,13 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: registry-1.docker.io/bitnamicharts
-    chart: minio
-    targetRevision: 16.0.7
-    helm:
-      valueFiles:
-        - "$values/flux/apps/local-staging/minIO/values/minio-values.yaml"
+  sources:
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: minio
+      targetRevision: 16.0.7
+      helm:
+        valueFiles:
+          - "$values/flux/apps/local-staging/minIO/values/minio-values.yaml"
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      ref: values        
   destination:
     server: "https://172.17.0.5:8443"
     namespace: minio
