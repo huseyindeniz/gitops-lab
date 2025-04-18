@@ -1,7 +1,7 @@
 auth:
   rootUser: minioadmin
   rootPassword: minioadmin
-persistance:
+persistence:
   existingClaim: minio-pvc
 securityContext:
   enabled: true
