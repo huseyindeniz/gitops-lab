@@ -10,10 +10,8 @@ spec:
     chart: minio
     targetRevision: 16.0.7
     helm:
-      values: |
-        auth:
-          rootUser: minioadmin
-          rootPassword: minioadmin
+      valueFiles:
+        - "$values/flux/apps/local-staging/minIO/values/minio-values.yaml"
   destination:
     server: "https://172.17.0.5:8443"
     namespace: minio
