@@ -1,20 +1,6 @@
 server:
-  extraInitContainers:
-    - name: fix-permissions
-      image: busybox
-      command:
-        - sh
-        - -c
-        - |
-          # Ensure permissions are set for the /data directory
-          chmod -R 777 /data
-          chown -R 65534:65534 /data
-      volumeMounts:
-        - name: storage-volume
-          mountPath: /data
   persistentVolume:
-    enabled: true
-    existingClaim: prometheus-pvc
+    enabled: false
 alertmanager:
   enabled: false
 nodeExporter:
