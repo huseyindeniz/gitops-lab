@@ -3,3 +3,14 @@ auth:
   rootPassword: minioadmin
 persistance:
   existingClaim: minio-pvc
+securityContext:
+  enabled: true
+  fsGroup: 1001
+  runAsUser: 0
+resources:
+  limits:
+    cpu: 300m
+    memory: 512Mi
+  requests:
+    cpu: 256m
+    memory: 256Mi
