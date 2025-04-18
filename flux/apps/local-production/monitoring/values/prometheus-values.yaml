@@ -1,9 +1,3 @@
-server:
-  persistentVolume:
-    enabled: true
-    existingClaim: prometheus-pvc
-  securityContext:
-    runAsNonRoot: false
 alertmanager:
   enabled: false
 nodeExporter:
