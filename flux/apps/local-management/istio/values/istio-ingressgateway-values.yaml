@@ -14,3 +14,5 @@ service:
       port: 44301
       protocol: TCP
       targetPort: 443
+proxyMetadata:
+  ISTIO_META_MAX_REQUEST_HEADERS_KB: "32"  

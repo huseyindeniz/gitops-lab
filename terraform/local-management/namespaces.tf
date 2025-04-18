@@ -26,6 +26,13 @@ resource "kubernetes_namespace" "argocd" {
   depends_on = [kubernetes_namespace.istio]
 }
 
+# Dashboard
+resource "kubernetes_namespace" "dashboard" {
+  metadata {
+    name = "kubernetes-dashboard"
+  }
+}
+
 # networking-test application
 resource "kubernetes_namespace" "networking_test" {
   metadata {

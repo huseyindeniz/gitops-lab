@@ -14,6 +14,13 @@ resource "kubernetes_namespace" "istio" {
   depends_on = [kubernetes_namespace.metallb]
 }
 
+# Dashboard
+resource "kubernetes_namespace" "dashboard" {
+  metadata {
+    name = "kubernetes-dashboard"
+  }
+}
+
 # networking-test application
 resource "kubernetes_namespace" "networking_test" {
   metadata {

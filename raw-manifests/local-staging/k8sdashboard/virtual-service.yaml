@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: kubernetes-dashboard.kubernetes-dashboard.svc.cluster.local
+            host: k8sdashboard-staging-kong-proxy.kubernetes-dashboard.svc.cluster.local
             port:
               number: 80

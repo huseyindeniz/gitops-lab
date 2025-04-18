@@ -1,0 +1,15 @@
+# Disable optional subcharts
+metrics-server:
+  enabled: false
+
+cert-manager:
+  enabled: false
+
+nginx:
+  enabled: false
+
+kong:
+  enabled: true
+  proxy:
+    http:
+      enabled: true

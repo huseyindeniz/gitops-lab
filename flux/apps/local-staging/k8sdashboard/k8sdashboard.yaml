@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8sdashboard-staging
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://kubernetes.github.io/dashboard/
+      chart: kubernetes-dashboard
+      targetRevision: 7.12.0
+      helm:
+        valueFiles:
+          - values.yaml
+          - $values/flux/apps/local-staging/k8sdashboard/values/k8sdashboard-values.yaml
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      ref: values
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      path: "raw-manifests/local-staging/k8sdashboard"
+      directory:
+        recurse: true         
+  destination:
+    server: "https://172.17.0.5:8443"
+    namespace: kubernetes-dashboard
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

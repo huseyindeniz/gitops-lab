@@ -11,6 +11,4 @@ minikube start \
   --mount-string="/mnt/d/volumes/shared:/mnt/data/shared" \
   --profile local-production
 
-minikube addons enable metrics-server -p local-production
-minikube addons enable dashboard -p local-production
 minikube addons enable storage-provisioner -p local-production
