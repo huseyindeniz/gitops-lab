@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: prometheus-prod-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "prometheus.prod.local"
+  gateways:
+    - istio-ingressgateway-production
+  http:
+    - route:
+        - destination:
+            host: prometheus-prod-server.monitoring.svc.cluster.local
+            port:
+              number: 80
