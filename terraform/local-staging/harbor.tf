@@ -20,7 +20,8 @@ resource "kubernetes_persistent_volume" "harbor_registry_pv" {
     access_modes = ["ReadWriteMany"]
     persistent_volume_source {
       host_path {
-        path = "/mnt/data/harbor-registry"
+        path = "/mnt/data/shared/harbor-registry"
+        type = "DirectoryOrCreate"
       }
     }
   }

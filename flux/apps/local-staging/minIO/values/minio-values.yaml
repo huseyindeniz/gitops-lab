@@ -1,6 +1,6 @@
 auth:
-  rootUser: minioadmin
-  rootPassword: minioadmin
+  rootUser: minio
+  rootPassword: minio123
 persistence:
   existingClaim: minio-pvc
 volumePermissions:

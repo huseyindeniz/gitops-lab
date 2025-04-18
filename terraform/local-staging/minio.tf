@@ -17,7 +17,8 @@ resource "kubernetes_persistent_volume" "minio_pv" {
     access_modes = ["ReadWriteMany"]
     persistent_volume_source {
       host_path {
-        path = "/mnt/data/minio"
+        path = "/mnt/data/shared/minio"
+        type = "DirectoryOrCreate"
       }
     }
   }
