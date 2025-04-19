@@ -1,30 +1,30 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: mon-tempo-production
-#   namespace: argocd
-# spec:
-#   project: default
-#   sources:
-#     - repoURL: https://grafana.github.io/helm-charts
-#       chart: tempo
-#       targetRevision: 1.21.0
-#       helm:
-#         valueFiles:
-#           - values.yaml
-#           - $values/flux/apps/local-production/monitoring/values/tempo-values.yaml
-#     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
-#       targetRevision: main
-#       ref: values
-#     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
-#       targetRevision: main
-#       path: "raw-manifests/local-production/monitoring/tempo"
-#       directory:
-#         recurse: true
-#   destination:
-#     server: "https://172.17.0.8:8443"
-#     namespace: monitoring
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mon-tempo-production
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://grafana.github.io/helm-charts
+      chart: tempo
+      targetRevision: 1.21.0
+      helm:
+        valueFiles:
+          - values.yaml
+          - $values/flux/apps/local-production/monitoring/values/tempo-values.yaml
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      ref: values
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      path: "raw-manifests/local-production/monitoring/tempo"
+      directory:
+        recurse: true
+  destination:
+    server: "https://172.17.0.8:8443"
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
