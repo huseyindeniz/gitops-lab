@@ -1,5 +1,5 @@
-global:
-  deploymentMode: SingleBinary
+singleBinary:
+  replicas: 1
 loki:
   auth_enabled: false
   storage:
