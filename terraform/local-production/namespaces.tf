@@ -30,6 +30,14 @@ resource "kubernetes_namespace" "dashboard" {
   }
 }
 
+# Monitoring
+resource "kubernetes_namespace" "monitoring" {
+  metadata {
+    name = "monitoring"
+  }
+}
+
+
 # HARBOR
 resource "kubernetes_namespace" "harbor" {
   metadata {
