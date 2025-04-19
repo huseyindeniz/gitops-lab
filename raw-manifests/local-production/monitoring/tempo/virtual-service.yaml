@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: tempo-prod-server.monitoring.svc.cluster.local
+            host: tempo-prod.monitoring.svc.cluster.local
             port:
-              number: 80
+              number: 4318
