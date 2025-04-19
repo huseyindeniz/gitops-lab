@@ -21,3 +21,6 @@ loki:
         index:
           prefix: index_
           period: 24h
+  singleBinary:
+    persistence:
+      enabled: false
