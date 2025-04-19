@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: prometheus-prod-server.monitoring.svc.cluster.local
+            host: mon-prometheus-prod-server.monitoring.svc.cluster.local
             port:
               number: 80

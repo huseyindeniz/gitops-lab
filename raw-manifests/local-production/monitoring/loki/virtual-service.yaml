@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: loki-prod.monitoring.svc.cluster.local
+            host: mon-loki-prod.monitoring.svc.cluster.local
             port:
               number: 3100
