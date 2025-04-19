@@ -1,7 +1,7 @@
 loki:
   auth_enabled: false
   storage:
-    bucketnames:
+    bucketNames:
       chunks: loki-chunks
       ruler: loki-ruler
       admin: loki-admin
