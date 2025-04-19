@@ -43,12 +43,11 @@ TODO: add more explanation here.
 | ARC Runners       | -                | ✅             | ✅                          | -              |
 | Harbor            | -                | ✅             | -                           | -              |
 | minIO             | -                | ✅             | -                           | -              |
-| Prometheus        | 🔲               | 🔲             | 🔲                          | -              |
-| Loki              | 🔲               | 🔲             | 🔲                          | -              |
-| Tempo             | 🔲               | 🔲             | 🔲                          | -              |
-| OTel Colector     | 🔲               | 🔲             | 🔲                          | -              |
-| Vault(hashicorp)  | 🔲               | 🔲             | 🔲                          | -              |
-| Velero            | 🔲               | 🔲             | 🔲                          | -              |
+| Prometheus        | -                | ✅             | ✅                          | -              |
+| Loki              | -                | ✅             | ✅                          | -              |
+| Tempo             | -                | ✅             | ✅                          | -              |
+| Vault(hashicorp)  | -                | 🔲             | 🔲                          | -              |
+| Velero            | -                | 🔲             | 🔲                          | -              |
 | NVidia Triton     | -                | 🔲             | 🔲                          | -              |
 | Sample Dotnet App | -                | ✅             | ✅                          | -              |
 | Sample Game App   | -                | ✅             | -                           | -              |
