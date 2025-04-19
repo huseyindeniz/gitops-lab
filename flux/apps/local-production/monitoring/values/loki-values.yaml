@@ -1,5 +1,7 @@
 singleBinary:
   replicas: 1
+simpleScalable:
+  replicas: 0
 loki:
   auth_enabled: false
   storage:
