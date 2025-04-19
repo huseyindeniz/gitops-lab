@@ -13,4 +13,4 @@ spec:
         - destination:
             host: tempo-prod.monitoring.svc.cluster.local
             port:
-              number: 4318
+              number: 3100
