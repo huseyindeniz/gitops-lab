@@ -1,6 +1,5 @@
-deploymentMode: SingleBinary
+deploymentMode: single-binary
 loki:
   auth_enabled: false
   storage:
     type: filesystem
-  object_store: false
