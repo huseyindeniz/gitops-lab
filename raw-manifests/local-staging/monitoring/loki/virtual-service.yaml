@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: mon-loki-staging.monitoring.svc.cluster.local
+            host: mon-loki-staging-gateway.monitoring.svc.cluster.local
             port:
-              number: 3100
+              number: 80
