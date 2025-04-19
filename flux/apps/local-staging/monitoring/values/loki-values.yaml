@@ -4,7 +4,15 @@ loki:
   storage:
     type: s3
     s3:
-      bucket_name: loki
+      bucketnames: loki-store
+      endpoint: minio-staging.minio.svc.cluster.local:9000
+      access_key_id: minio
+      secret_access_key: minio123
+      insecure: true
+  object_store:
+    type: s3
+    s3:
+      bucketnames: loki-object-store
       endpoint: minio-staging.minio.svc.cluster.local:9000
       access_key_id: minio
       secret_access_key: minio123
