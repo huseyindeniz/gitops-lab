@@ -1,19 +1,9 @@
 deploymentMode: SingleBinary
 loki:
   auth_enabled: false
-  storage:
-    type: s3
-    s3:
-      bucketnames: loki-store
-      endpoint: minio-staging.minio.svc.cluster.local:9000
-      access_key_id: minio
-      secret_access_key: minio123
-      insecure: true
-  object_store:
-    type: s3
-    s3:
-      bucketnames: loki-object-store
-      endpoint: minio-staging.minio.svc.cluster.local:9000
-      access_key_id: minio
-      secret_access_key: minio123
-      insecure: true
+  commonStorageConfig:
+    bucketnames: loki-store
+    endpoint: minio-staging.minio.svc.cluster.local:9000
+    access_key_id: minio
+    secret_access_key: minio123
+    insecure: true
