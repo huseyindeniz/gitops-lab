@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/grafana/helm-charts
+    - repoURL: https://grafana.github.io/helm-charts
       chart: tempo
       targetRevision: 2.7.1
       helm:
