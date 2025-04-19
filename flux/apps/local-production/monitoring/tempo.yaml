@@ -1,0 +1,3 @@
+tempo:
+  reportingEnabled: false
+  retention: 24h
