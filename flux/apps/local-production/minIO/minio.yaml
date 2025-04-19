@@ -1,29 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mon-prometheus-production
+  name: minio-production
   namespace: argocd
 spec:
   project: default
   sources:
-    - repoURL: https://prometheus-community.github.io/helm-charts
-      chart: prometheus
-      targetRevision: 27.10.0
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: minio
+      targetRevision: 16.0.7
       helm:
         valueFiles:
-          - values.yaml
-          - $values/flux/apps/local-production/monitoring/values/prometheus-values.yaml
+          - "$values/flux/apps/local-production/minIO/values/minio-values.yaml"
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-production/monitoring/prometheus"
+      path: "raw-manifests/local-production/minio"
       directory:
         recurse: true
   destination:
     server: "https://172.17.0.8:8443"
-    namespace: monitoring
+    namespace: minio
   syncPolicy:
     automated:
       prune: true

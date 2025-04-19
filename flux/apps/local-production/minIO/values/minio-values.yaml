@@ -1,0 +1,14 @@
+auth:
+  rootUser: minio
+  rootPassword: minio123
+persistence:
+  existingClaim: minio-pvc
+volumePermissions:
+  enabled: true
+resources:
+  limits:
+    cpu: 300m
+    memory: 512Mi
+  requests:
+    cpu: 256m
+    memory: 256Mi

@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: tempo-prod-vs
+  name: tempo-production-vs
   namespace: istio-system
 spec:
   hosts:
@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: mon-tempo-prod.monitoring.svc.cluster.local
+            host: mon-tempo-production.monitoring.svc.cluster.local
             port:
               number: 3100
