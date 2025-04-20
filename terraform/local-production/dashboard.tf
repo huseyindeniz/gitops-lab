@@ -1,3 +1,9 @@
+resource "kubernetes_namespace" "dashboard" {
+  metadata {
+    name = "kubernetes-dashboard"
+  }
+}
+
 resource "kubernetes_service_account" "dashboard_admin" {
   metadata {
     name      = "admin-user"

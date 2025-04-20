@@ -5,7 +5,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "prometheus.prod.local"
+    - "prome.prod.local"
   gateways:
     - istio-ingressgateway-production
   http:
