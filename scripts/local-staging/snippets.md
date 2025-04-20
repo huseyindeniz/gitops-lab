@@ -42,3 +42,33 @@ kubectl get secret staging-local-tls-secret -n istio-system -o jsonpath='{.data.
 kubectl get secret istio-ca-secret -n istio-system -o jsonpath='{.data.root-cert\.pem}' | base64 --decode > istio-root-ca.crt
 
 cat istio-root-ca.crt istio-ca.crt > istio-full-chain.crt
+
+# test if loki working
+
+curl -X POST "http://loki.staging.local/loki/api/v1/push" -H "Content-Type: application/json" --data-raw '{
+"streams": [
+{
+"stream": {
+"job": "test",
+"level": "info"
+},
+"values": [
+[ "'$(date +%s%N)'", "hello from curl test ?" ]
+]
+}
+]
+}'
+
+# minio client usage
+
+# Add your local MinIO server
+
+mc alias set localminio http://api.minio.staging.local minio minio123
+
+# Make sure your model bucket exists
+
+mc mb localminio/triton-model-repo
+
+# Upload the unzipped model
+
+mc cp --recursive ./simple/ localminio/triton-model-repo/

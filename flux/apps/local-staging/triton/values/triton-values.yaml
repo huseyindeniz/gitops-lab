@@ -1,0 +1,7 @@
+modelRepository:
+  type: s3
+  s3:
+    awsAccessKeyId: minio
+    awsSecretAccessKey: minio123
+    bucketName: triton-model-repo
+    endpointUrl: minio-staging.minio.svc.cluster.local:9000

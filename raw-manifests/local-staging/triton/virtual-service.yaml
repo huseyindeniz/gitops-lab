@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: triton-staging-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "triton.staging.local"
+  gateways:
+    - istio-ingressgateway-staging
+  http:
+    - route:
+        - destination:
+            host: triton-staging.triton.svc.cluster.local
+            port:
+              number: 80

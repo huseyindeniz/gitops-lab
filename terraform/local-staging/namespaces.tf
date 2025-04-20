@@ -21,6 +21,12 @@ resource "kubernetes_namespace" "monitoring" {
   }
 }
 
+# Nvidia Triton
+resource "kubernetes_namespace" "triton" {
+  metadata {
+    name = "triton"
+  }
+}
 
 # networking-test application
 resource "kubernetes_namespace" "networking_test" {
