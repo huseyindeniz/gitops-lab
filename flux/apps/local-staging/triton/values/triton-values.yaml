@@ -5,3 +5,21 @@ modelRepository:
     awsSecretAccessKey: minio123
     bucketName: triton-model-repo
     endpointUrl: minio-staging.minio.svc.cluster.local:9000
+
+podSecurityContext:
+  runAsUser: 0
+  runAsGroup: 0
+  fsGroup: 0
+
+securityContext:
+  privileged: true
+  allowPrivilegeEscalation: true
+  capabilities:
+    add:
+      - SYS_ADMIN
+
+resources:
+  limits:
+    nvidia.com/gpu: 1
+  requests:
+    nvidia.com/gpu: 1

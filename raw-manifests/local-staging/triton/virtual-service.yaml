@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: triton-staging.triton.svc.cluster.local
+            host: nvidia-triton-staging-tritoninferenceserver.triton.svc.cluster.local
             port:
-              number: 80
+              number: 80000
