@@ -7,7 +7,7 @@ spec:
   project: default
   sources:
     - repoURL: https://helm.ngc.nvidia.com/nvidia
-      chart: triton-inference-server
+      chart: tritoninferenceserver
       targetRevision: 1.0.0
       helm:
         valueFiles:
