@@ -7,12 +7,3 @@ nodeExporter:
   enabled: true
 kubeStateMetrics:
   enabled: true
-
-scrape_configs:
-  - job_name: "triton"
-    metrics_path: /metrics
-    static_configs:
-      - targets:
-          [
-            "nvidia-triton-staging-triton-inference-server.triton.svc.cluster.local:8002",
-          ]
