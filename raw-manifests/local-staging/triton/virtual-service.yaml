@@ -9,8 +9,20 @@ spec:
   gateways:
     - istio-ingressgateway-staging
   http:
+    # 1) gRPC traffic → Triton’s gRPC port 8001
+    - match:
+        - headers:
+            content-type:
+              regex: "application/grpc.*"
+      route:
+        - destination:
+            host: nvidia-triton-staging-triton-inference-server.triton.svc.cluster.local
+            port:
+              number: 8001
+
+    # 2) everything else → Triton’s REST port 8000
     - route:
         - destination:
-            host: nvidia-triton-staging-tritoninferenceserver.triton.svc.cluster.local
+            host: nvidia-triton-staging-triton-inference-server.triton.svc.cluster.local
             port:
               number: 8000
