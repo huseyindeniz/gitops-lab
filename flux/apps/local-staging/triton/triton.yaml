@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/triton-inference-server/server.git
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "deploy/aws"
+      path: "helm-charts/ntis"
       helm:
         valueFiles:
           - values.yaml
