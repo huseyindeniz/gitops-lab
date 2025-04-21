@@ -10,6 +10,6 @@ service:
   type: ClusterIP
 
 secret:
-  region: "-"
+  region: us-east-1
   id: minio
   key: minio123
