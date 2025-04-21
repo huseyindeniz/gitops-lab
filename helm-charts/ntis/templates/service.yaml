@@ -34,6 +34,10 @@ metadata:
     chart: {{ template "triton-inference-server.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+  annotations:
+    prometheus.io/scrape: "true"      # ⬅ enable scraping
+    prometheus.io/port:   "8002"      # ⬅ metrics port
+    prometheus.io/path:   "/metrics"  # ⬅ scrape path
 spec:
   type: {{ .Values.service.type }}
   ports:
