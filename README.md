@@ -48,7 +48,7 @@ TODO: add more explanation here.
 | Tempo             | -                | ✅             | ✅                          | -              |
 | Vault(hashicorp)  | -                | 🔲             | 🔲                          | -              |
 | Velero            | -                | 🔲             | 🔲                          | -              |
-| NVidia Triton     | -                | 🔲             | 🔲                          | -              |
+| NVidia Triton     | -                | ✅             | -                           | -              |
 | Sample Dotnet App | -                | ✅             | ✅                          | -              |
 | Sample Game App   | -                | ✅             | -                           | -              |
 | Sample AI App     | -                | ✅             | -                           | -              |
