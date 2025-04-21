@@ -8,3 +8,8 @@ image:
 
 service:
   type: ClusterIP
+
+secret:
+  region: "-"
+  id: minio
+  key: minio123
