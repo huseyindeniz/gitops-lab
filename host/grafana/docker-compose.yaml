@@ -2,19 +2,19 @@ services:
   grafana:
     image: grafana/grafana-enterprise
     container_name: grafana
-    network_mode: host
+    ports:
+      - "3000:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_SERVER_ROOT_URL=http://grafana.local/
       - GF_PLUGINS_PREINSTALL=grafana-clock-panel
     volumes:
-      - grafana-storage:/var/lib/grafana    
+      - /mnt/d/volumes/grafana:/var/lib/grafana:rw
+    networks:
+      local_network:
+        ipv4_address: 172.19.0.101
 
-volumes:
-  grafana-storage:
-    driver: local
-    driver_opts:
-      type: none
-      device: /mnt/d/volumes/grafana
-      o: bind    
+networks:
+  local_network:
+    external: true      

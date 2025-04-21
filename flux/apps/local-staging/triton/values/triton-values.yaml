@@ -1,25 +1,10 @@
-modelRepository:
-  type: s3
-  s3:
-    awsAccessKeyId: minio
-    awsSecretAccessKey: minio123
-    bucketName: triton-model-repo
-    endpointUrl: minio-staging.minio.svc.cluster.local:9000
+replicaCount: 1
 
-podSecurityContext:
-  runAsUser: 0
-  runAsGroup: 0
-  fsGroup: 0
+image:
+  imageName: nvcr.io/nvidia/tritonserver:25.03-py3
+  pullPolicy: IfNotPresent
+  modelRepositoryPath: s3://minio-staging.minio.svc.cluster.local:9000/triton-model-repo
+  numGpus: 1
 
-securityContext:
-  privileged: true
-  allowPrivilegeEscalation: true
-  capabilities:
-    add:
-      - SYS_ADMIN
-
-resources:
-  limits:
-    nvidia.com/gpu: 1
-  requests:
-    nvidia.com/gpu: 1
+service:
+  type: ClusterIP
