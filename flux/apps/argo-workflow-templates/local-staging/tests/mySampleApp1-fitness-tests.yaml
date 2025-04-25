@@ -60,9 +60,7 @@ spec:
             mountPath: /src
         command: [sh, -c]
         args:
-          - |
-            cd /src
-            git clone --branch {{inputs.parameters.revision}} {{inputs.parameters.repo_url}} .
+          - cd /src && git clone --branch {{inputs.parameters.revision}} {{inputs.parameters.repo_url}} .
 
     - name: run-fitness-test
       inputs:
@@ -76,8 +74,8 @@ spec:
             mountPath: /src
         workingDir: /src/{{inputs.parameters.project_path}}
         command: [sh, -c]
-        args: |
-          dotnet restore
-          dotnet build --configuration Release --no-restore
-          chmod +x ./ci-test-run.sh
-          ./ci-test-run.sh
+        args:
+          - dotnet restore
+          - dotnet build --configuration Release --no-restore
+          - chmod +x ./ci-test-run.sh
+          - ./ci-test-run.sh
