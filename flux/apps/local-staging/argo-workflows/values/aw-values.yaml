@@ -1,0 +1,20 @@
+server:
+  authModes:
+    - server
+    - client
+  ingress:
+    enabled: false
+  serviceType: ClusterIP
+workflow:
+  serviceAccount:
+    create: true
+    name: "argo-workflows-sa"
+  rbac:
+    create: true
+controller:
+  workflowDefaults:
+    spec:
+      serviceAccountName: argo-workflows-sa
+crds:
+  install: true
+  keep: false

@@ -29,7 +29,7 @@ spec:
           targetRevision: main
           path: "raw-manifests/local-staging/harbor"
           directory:
-            recurse: true           
+            recurse: true
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "harbor"

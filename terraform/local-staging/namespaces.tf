@@ -28,6 +28,13 @@ resource "kubernetes_namespace" "triton" {
   }
 }
 
+# Argo Workflows
+resource "kubernetes_namespace" "argo_workflows" {
+  metadata {
+    name = "argo-workflows"
+  }
+}
+
 # networking-test application
 resource "kubernetes_namespace" "networking_test" {
   metadata {

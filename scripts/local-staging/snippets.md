@@ -99,3 +99,7 @@ curl -v -X POST http://triton.staging.local/v2/models/simple/infer \
 it should return
 
 {"model_name":"simple","model_version":"1","outputs":[{"name":"OUTPUT0","datatype":"INT32","shape":[1,16],"data":[0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]},{"name":"OUTPUT1","datatype":"INT32","shape":[1,16],"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}]}
+
+# argo workflows token
+
+kubectl -n argo-workflows get secret $(kubectl -n argo-workflows get sa argo-workflows-sa -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-workflows-staging-appset
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: minio
+      targetRevision: 16.0.7
+      helm:
+        valueFiles:
+          - "$values/flux/apps/local-staging/argo-workflows/values/aw-values.yaml"
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      ref: values
+    - repoURL: https://github.com/huseyindeniz/gitops-lab.git
+      targetRevision: main
+      path: "raw-manifests/local-staging/argo-workflows"
+      directory:
+        recurse: true
+  destination:
+    server: "https://172.17.0.5:8443"
+    namespace: argo-workflows
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

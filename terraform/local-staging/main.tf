@@ -53,8 +53,6 @@ resource "kubernetes_secret" "istio_ca_cert" {
   type = "Opaque"
 }
 
-
-
 module "local_arc" {
   source          = "../modules/arc-runners"
   name            = "arc-runner-local-staging"
