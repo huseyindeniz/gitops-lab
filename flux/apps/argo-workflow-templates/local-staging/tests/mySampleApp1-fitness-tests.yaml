@@ -24,7 +24,7 @@ spec:
             {
               "service": "weatherForecast",
               "project_path": "apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.fitness"
-            },
+            }
           ]
   templates:
     - name: main
