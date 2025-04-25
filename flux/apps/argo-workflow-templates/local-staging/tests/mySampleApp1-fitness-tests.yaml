@@ -8,7 +8,7 @@ spec:
     - metadata:
         name: git-shared-pvc
       spec:
-        accessModes: ["ReadWriteOnce"]
+        accessModes: ["ReadWriteMany"]
         resources:
           requests:
             storage: 1Gi
