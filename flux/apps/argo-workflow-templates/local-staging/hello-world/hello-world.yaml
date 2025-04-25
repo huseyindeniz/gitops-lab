@@ -1,7 +1,8 @@
-apiVersion: argoproj.io/v1
-kind: Workflow
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
 metadata:
-  generateName: hello-world-
+  name: hello-world-template
+  namespace: argo-workflows
 spec:
   entrypoint: hello-steps
   templates:
@@ -25,7 +26,6 @@ spec:
               parameters:
                 - name: message
                   value: "Hello from Step 3!"
-
     - name: whalesay
       inputs:
         parameters:
