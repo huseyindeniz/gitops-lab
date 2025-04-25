@@ -12,8 +12,8 @@ spec:
     directory:
       recurse: true
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: "https://172.17.0.5:8443"
+    namespace: argo-workflows
   syncPolicy:
     automated:
       prune: true
