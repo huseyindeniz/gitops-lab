@@ -15,15 +15,17 @@ controller:
   workflowDefaults:
     spec:
       serviceAccountName: argo-workflows-sa
-  workflow:
-    config:
-      artifactRepository:
-        s3:
-          bucket: argo-artifacts
-          endpoint: minio-staging.minio.svc.cluster.local:9000
-          insecure: true
-          accessKey: minio
-          secretKey: minio123
+  extraEnv:
+    - name: ARGO_ARTIFACT_BUCKET
+      value: argo-artifacts
+    - name: ARGO_ARTIFACT_ENDPOINT
+      value: minio-staging.minio.svc.cluster.local:9000
+    - name: ARGO_ARTIFACT_INSECURE
+      value: "true"
+    - name: ARGO_ARTIFACT_ACCESS_KEY
+      value: minio
+    - name: ARGO_ARTIFACT_SECRET_KEY
+      value: minio123
 crds:
   install: true
   keep: false
