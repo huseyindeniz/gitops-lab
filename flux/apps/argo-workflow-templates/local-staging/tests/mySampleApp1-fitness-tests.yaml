@@ -7,7 +7,6 @@ spec:
   arguments:
     parameters:
       - name: repo_url
-        default: "https://github.com/huseyindeniz/gitops-lab.git"
       - name: revision
         default: "main"
       - name: services
@@ -33,6 +32,9 @@ spec:
         - - name: fitness-tests
             template: run-fitness-test
             arguments:
+              artifacts:
+                - name: source-code
+                  from: "{{steps.clone-repo.outputs.artifacts.source-code}}"
               parameters:
                 - name: service
                   value: "{{item.service}}"
@@ -49,13 +51,14 @@ spec:
         image: alpine/git
         command: [sh, -c]
         args:
-          - cd /src && git clone --branch {{inputs.parameters.revision}} {{inputs.parameters.repo_url}} .
+          - |
+            mkdir -p /src && cd /src && git clone --branch {{inputs.parameters.revision}} {{inputs.parameters.repo_url}} .
       outputs:
         artifacts:
           - name: source-code
             path: /src
             archive:
-              none: {}
+              none: {} # optional, no compression
 
     - name: run-fitness-test
       inputs:
@@ -66,7 +69,7 @@ spec:
           - name: source-code
             path: /src
       container:
-        image: mcr.microsoft.com/dotnet/sdk:9.0
+        image: mcr.microsoft.com/dotnet/sdk:9.0-alpine
         workingDir: /src/{{inputs.parameters.project_path}}
         command: [sh, -c]
         args:
