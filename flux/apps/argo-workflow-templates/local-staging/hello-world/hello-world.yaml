@@ -8,29 +8,11 @@ spec:
   templates:
     - name: hello-steps
       steps:
-        - - name: step-one
-            template: whalesay
-            arguments:
-              parameters:
-                - name: message
-                  value: "Hello from Step 1!"
-        - - name: step-two
-            template: whalesay
-            arguments:
-              parameters:
-                - name: message
-                  value: "Hello from Step 2!"
-        - - name: step-three
-            template: whalesay
-            arguments:
-              parameters:
-                - name: message
-                  value: "Hello from Step 3!"
-    - name: whalesay
-      inputs:
-        parameters:
-          - name: message
-      container:
-        image: docker/whalesay:latest
-        command: [cowsay]
-        args: ["{{inputs.parameters.message}}"]
+        - name: print-message
+          inputs:
+            parameters:
+              - name: message
+          container:
+            image: busybox
+            command: [echo]
+            args: ["{{inputs.parameters.message}}"]
