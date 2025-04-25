@@ -4,14 +4,6 @@ metadata:
   name: my-sample-app-1-fitness-tests
 spec:
   entrypoint: main
-  volumeClaimTemplates:
-    - metadata:
-        name: git-shared-pvc
-      spec:
-        accessModes: ["ReadWriteMany"]
-        resources:
-          requests:
-            storage: 1Gi
   arguments:
     parameters:
       - name: repo_url
@@ -55,23 +47,26 @@ spec:
           - name: revision
       container:
         image: alpine/git
-        volumeMounts:
-          - name: git-shared-pvc
-            mountPath: /src
         command: [sh, -c]
         args:
           - cd /src && git clone --branch {{inputs.parameters.revision}} {{inputs.parameters.repo_url}} .
+      outputs:
+        artifacts:
+          - name: source-code
+            path: /src
+            archive:
+              none: {}
 
     - name: run-fitness-test
       inputs:
         parameters:
           - name: service
           - name: project_path
+        artifacts:
+          - name: source-code
+            path: /src
       container:
         image: mcr.microsoft.com/dotnet/sdk:9.0
-        volumeMounts:
-          - name: git-shared-pvc
-            mountPath: /src
         workingDir: /src/{{inputs.parameters.project_path}}
         command: [sh, -c]
         args:
