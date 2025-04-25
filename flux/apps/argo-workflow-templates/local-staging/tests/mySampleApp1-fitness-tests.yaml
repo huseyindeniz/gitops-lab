@@ -75,7 +75,8 @@ spec:
         workingDir: /src/{{inputs.parameters.project_path}}
         command: [sh, -c]
         args:
-          - dotnet restore
-          - dotnet build --configuration Release --no-restore
-          - chmod +x ./ci-test-run.sh
-          - ./ci-test-run.sh
+          - |
+            dotnet restore && \
+            dotnet build --configuration Release --no-restore && \
+            chmod +x ./ci-test-run.sh && \
+            ./ci-test-run.sh
