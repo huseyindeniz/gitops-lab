@@ -49,7 +49,7 @@ TODO: add more explanation here.
 | Vault(hashicorp)  | -                | 🔲             | 🔲                          | -              |
 | Velero            | -                | 🔲             | 🔲                          | -              |
 | NVidia Triton     | -                | ✅             | -                           | -              |
-| vLLM              | -                | 🔲             | -                           | -              |
+| Ollama            | -                | 🔲             | -                           | -              |
 | Sample Dotnet App | -                | ✅             | ✅                          | -              |
 | Sample Game App   | -                | ✅             | -                           | -              |
 | Sample AI App     | -                | ✅             | -                           | -              |

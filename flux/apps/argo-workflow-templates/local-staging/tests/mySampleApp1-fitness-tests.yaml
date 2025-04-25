@@ -1,0 +1,83 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: my-sample-app-1-fitness-tests
+spec:
+  entrypoint: main
+  volumeClaimTemplates:
+    - metadata:
+        name: git-shared-pvc
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+  arguments:
+    parameters:
+      - name: repo_url
+        default: "https://github.com/huseyindeniz/gitops-lab.git"
+      - name: revision
+        default: "main"
+      - name: services
+        default: |
+          [
+            {
+              "service": "weatherForecast",
+              "project_path": "apps/my-sample-app-1/dotnet-services/mySampleApp1.wf.tests.fitness"
+            },
+          ]
+  templates:
+    - name: main
+      steps:
+        - - name: clone-repo
+            template: git-clone
+            arguments:
+              parameters:
+                - name: repo_url
+                  value: "{{workflow.parameters.repo_url}}"
+                - name: revision
+                  value: "{{workflow.parameters.revision}}"
+
+        - - name: fitness-tests
+            template: run-fitness-test
+            arguments:
+              parameters:
+                - name: service
+                  value: "{{item.service}}"
+                - name: project_path
+                  value: "{{item.project_path}}"
+            withParam: "{{workflow.parameters.services}}"
+
+    - name: git-clone
+      inputs:
+        parameters:
+          - name: repo_url
+          - name: revision
+      container:
+        image: alpine/git
+        volumeMounts:
+          - name: git-shared-pvc
+            mountPath: /src
+        command: [sh, -c]
+        args:
+          - |
+            cd /src
+            git clone --branch {{inputs.parameters.revision}} {{inputs.parameters.repo_url}} .
+
+    - name: run-fitness-test
+      inputs:
+        parameters:
+          - name: service
+          - name: project_path
+      container:
+        image: mcr.microsoft.com/dotnet/sdk:9.0
+        volumeMounts:
+          - name: git-shared-pvc
+            mountPath: /src
+        workingDir: /src/{{inputs.parameters.project_path}}
+        command: [sh, -c]
+        args: |
+          dotnet restore
+          dotnet build --configuration Release --no-restore
+          chmod +x ./ci-test-run.sh
+          ./ci-test-run.sh
