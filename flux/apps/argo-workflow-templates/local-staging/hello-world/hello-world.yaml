@@ -4,15 +4,13 @@ metadata:
   name: hello-world-template
   namespace: argo-workflows
 spec:
-  entrypoint: hello-steps
+  entrypoint: print-message
   templates:
-    - name: hello-steps
-      steps:
-        - name: print-message
-          inputs:
-            parameters:
-              - name: message
-          container:
-            image: busybox
-            command: [echo]
-            args: ["{{inputs.parameters.message}}"]
+    - name: print-message
+      inputs:
+        parameters:
+          - name: message
+      container:
+        image: busybox
+        command: [echo]
+        args: ["{{inputs.parameters.message}}"]
