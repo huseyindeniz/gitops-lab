@@ -7,7 +7,8 @@ data "kubectl_file_documents" "cert_manager_crds_install" {
 }
 
 resource "kubectl_manifest" "cert_manager_crds" {
-  for_each  = data.kubectl_file_documents.cert_manager_crds_install.manifests
+  for_each = data.kubectl_file_documents.cert_manager_crds_install.manifests
+
   yaml_body = each.value
 
   depends_on = [kubernetes_namespace.cert_manager]
