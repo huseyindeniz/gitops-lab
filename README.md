@@ -38,7 +38,7 @@ TODO: add more explanation here.
 | K8SDashboard      | ✅               | ✅             | ✅                          | -              |
 | ArgoCD            | ✅               | -              | -                           | -              |
 | Argo Rollouts     | -                | -              | ✅                          | -              |
-| Argo Workflows    | -                | 🔲             | -                           | -              |
+| Argo Workflows    | -                | ✅             | -                           | -              |
 | Flux              | ✅               | -              | -                           | -              |
 | ARC Runners       | -                | ✅             | ✅                          | -              |
 | Harbor            | -                | ✅             | -                           | -              |
@@ -49,6 +49,7 @@ TODO: add more explanation here.
 | Vault(hashicorp)  | -                | 🔲             | 🔲                          | -              |
 | Velero            | -                | 🔲             | 🔲                          | -              |
 | NVidia Triton     | -                | ✅             | -                           | -              |
+| vLLM              | -                | 🔲             | -                           | -              |
 | Sample Dotnet App | -                | ✅             | ✅                          | -              |
 | Sample Game App   | -                | ✅             | -                           | -              |
 | Sample AI App     | -                | ✅             | -                           | -              |
