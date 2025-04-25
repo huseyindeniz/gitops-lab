@@ -62,8 +62,12 @@ spec:
               endpoint: minio-staging.minio.svc.cluster.local:9000
               bucket: argo-workflows-artifacts
               insecure: true
-              accessKey: minio
-              secretKey: minio123
+              accessKeySecret:
+                name: minio-creds
+                key: accesskey
+              secretKeySecret:
+                name: minio-creds
+                key: secretkey
 
     - name: run-fitness-test
       inputs:
@@ -77,8 +81,12 @@ spec:
               endpoint: minio-staging.minio.svc.cluster.local:9000
               bucket: argo-workflows-artifacts
               insecure: true
-              accessKey: minio
-              secretKey: minio123
+              accessKeySecret:
+                name: minio-creds
+                key: accesskey
+              secretKeySecret:
+                name: minio-creds
+                key: secretkey
       container:
         image: mcr.microsoft.com/dotnet/sdk:9.0-alpine
         workingDir: /src/{{inputs.parameters.project_path}}
