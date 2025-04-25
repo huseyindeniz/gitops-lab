@@ -58,16 +58,6 @@ spec:
         artifacts:
           - name: source-code
             path: /src
-            s3:
-              endpoint: minio-staging.minio.svc.cluster.local:9000
-              bucket: argo-workflows-artifacts
-              insecure: true
-              accessKeySecret:
-                name: minio-creds
-                key: accesskey
-              secretKeySecret:
-                name: minio-creds
-                key: secretkey
 
     - name: run-fitness-test
       inputs:
@@ -77,16 +67,7 @@ spec:
         artifacts:
           - name: source-code
             path: /src
-            s3:
-              endpoint: minio-staging.minio.svc.cluster.local:9000
-              bucket: argo-workflows-artifacts
-              insecure: true
-              accessKeySecret:
-                name: minio-creds
-                key: accesskey
-              secretKeySecret:
-                name: minio-creds
-                key: secretkey
+
       container:
         image: mcr.microsoft.com/dotnet/sdk:9.0-alpine
         workingDir: /src/{{inputs.parameters.project_path}}

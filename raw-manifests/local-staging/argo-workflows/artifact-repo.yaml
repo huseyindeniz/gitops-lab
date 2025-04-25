@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: artifact-repositories
+  namespace: argo-workflows
+  annotations:
+    workflows.argoproj.io/default-artifact-repository: default-v1
+data:
+  default-v1: |
+    s3:
+      bucket: argo-workflows-artifacts
+      endpoint: minio-staging.minio.svc.cluster.local:9000
+      insecure: true
+      accessKeySecret:
+        name: minio-creds
+        key: accesskey
+      secretKeySecret:
+        name: minio-creds
+        key: secretkey
