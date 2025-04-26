@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ollama-staging-vs
+  namespace: istio-system
+spec:
+  hosts:
+    - "ollama.staging.local"
+  gateways:
+    - istio-ingressgateway-staging
+  http:
+    - route:
+        - destination:
+            host: ollama-staging.minio.svc.cluster.local
+            port:
+              number: 11434
