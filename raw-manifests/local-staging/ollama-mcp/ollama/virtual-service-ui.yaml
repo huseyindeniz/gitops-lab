@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: ollama-staging.minio.svc.cluster.local
+            host: ollama-staging.ollama.svc.cluster.local
             port:
               number: 11434
