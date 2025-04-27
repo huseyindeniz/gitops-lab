@@ -1,0 +1,108 @@
+name: Version Bump on PR Merge
+
+on:
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull Request Number'
+        required: true
+
+permissions:
+  contents: write
+
+env: 
+  HUSKY: 0
+  
+jobs:
+  version_bump:
+    # This job will only run if the PR has been merged
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+        
+      # Get PR Number (from input if manually triggered, from event payload if triggered by PR)
+      - name: Set PR Number
+        id: pr_number
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            PR_NUMBER="${{ github.event.inputs.pr_number }}"
+          else
+            PR_NUMBER="${{ github.event.pull_request.number }}"
+          fi
+          echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          echo "PR_NUMBER=$PR_NUMBER"
+          
+      # Get PR Labels (manual trigger or PR closed)
+      - name: Get PR Labels
+        id: pr_labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "PR_NUMBER=$PR_NUMBER"
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            PR_LABELS=$(gh pr view $PR_NUMBER --json labels --jq '.labels[].name')
+            echo "PR_LABELS=$PR_LABELS" >> $GITHUB_ENV
+          else
+            PR_LABELS="${{ github.event.pull_request.labels }}"
+            echo "PR_LABELS=$PR_LABELS" >> $GITHUB_ENV
+          fi
+          echo "PR_LABELS=$PR_LABELS"
+          
+      # Check for semver labels and extract the value
+      - name: Check semver labels and extract version type
+        id: check_semver
+        run: |
+          # Define the allowed labels
+          ALLOWED_LABELS=("semver:major" "semver:minor" "semver:patch")
+          # Initialize a variable to track the matched label
+          MATCHED_LABEL=""
+          # Loop through the allowed labels and check if they are in PR_LABELS
+          for label in "${ALLOWED_LABELS[@]}"; do
+            if [[ "$PR_LABELS" == *"$label"* ]]; then
+              # If we already found a match, check for multiple matches
+              if [[ -n "$MATCHED_LABEL" ]]; then
+                echo "Error: Multiple semver labels found. Only one semver label is allowed."
+                exit 1
+              fi
+              MATCHED_LABEL="$label"
+            fi
+          done
+          
+          # Check if no label is found
+          if [[ -z "$MATCHED_LABEL" ]]; then
+            echo "Error: No semver labels found. Please add one of the following labels: semver:major, semver:minor, semver:patch."
+            exit 1
+          fi
+          
+          # Extract the version type (major, minor, patch)
+          VERSION_TYPE="${MATCHED_LABEL#semver:}"
+          echo "VERSION_TYPE=$VERSION_TYPE" >> $GITHUB_ENV
+          echo "VERSION_TYPE=$VERSION_TYPE"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.18.1'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: bump version
+        run: npm run release "${{ env.VERSION_TYPE }}"
+
+      - name: Commit and push version bump changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "chore: bump version to ${{ env.VERSION_TYPE }}"
+          add: "package.json"
+          push: true
+
+
+

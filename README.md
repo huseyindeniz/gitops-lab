@@ -49,10 +49,12 @@ TODO: add more explanation here.
 | Vault(hashicorp)  | -                | 🔲             | 🔲                          | -              |
 | Velero            | -                | 🔲             | 🔲                          | -              |
 | NVidia Triton     | -                | ✅             | -                           | -              |
-| Ollama            | -                | 🔲             | -                           | -              |
 | Sample Dotnet App | -                | ✅             | ✅                          | -              |
 | Sample Game App   | -                | ✅             | -                           | -              |
 | Sample AI App     | -                | ✅             | -                           | -              |
+| Ollama            | -                | ✅             | -                           | -              |
+| MCP Host          | -                | 🔲             | -                           | -              |
+| Sample LLM+MCP    | -                | 🔲             | -                           | -              |
 
 ## Cloud Clusters
 
