@@ -1,9 +1,0 @@
-services:
-  mcphost:
-    image: ghcr.io/huseyindeniz/sample-llm-mcp-mcphost-staging:v0.7.1
-    container_name: mcphost
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./sample-config.yaml:/config/config.yaml:ro   # Mount your config file
-    command: ["--config", "/config/config.yaml"]

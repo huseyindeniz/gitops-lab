@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Container } from '@mantine/core';
 
-import { ChatScreen } from './components/ChatScreen';
+import { Ollama } from '@/features/ollama/Ollama';
 
 export const OllamaChat: React.FC = () => {
   return (
     <Container ta="left">
-      <ChatScreen />
+      <Ollama mode="simple" />
     </Container>
   );
 };

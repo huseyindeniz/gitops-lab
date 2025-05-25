@@ -53,7 +53,6 @@ TODO: add more explanation here.
 | Sample Game App   | -                | ✅             | -                           | -              |
 | Sample AI App     | -                | ✅             | -                           | -              |
 | Ollama            | -                | ✅             | -                           | -              |
-| MCP Host          | -                | 🔲             | -                           | -              |
 | Sample LLM+MCP    | -                | 🔲             | -                           | -              |
 
 ## Cloud Clusters

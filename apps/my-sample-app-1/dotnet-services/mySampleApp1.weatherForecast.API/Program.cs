@@ -2,11 +2,9 @@
 using System.Text;
 
 using FluentValidation;
-using FluentValidation.AspNetCore;
 
 using Microsoft.EntityFrameworkCore;
 
-using mySampleApp1.weatherForecast.API.Validators;
 using mySampleApp1.weatherForecast.Domain.Interfaces;
 using mySampleApp1.weatherForecast.Domain.Services;
 using mySampleApp1.weatherForecast.Infra;
@@ -44,8 +42,6 @@ namespace mySampleApp1.weatherForecast.API
             });
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>(); // register validators
-            builder.Services.AddFluentValidationAutoValidation(); // the same old MVC pipeline behavior
-            builder.Services.AddFluentValidationClientsideAdapters();
 
             // Register ApplicationDbContext
             builder.Services.AddDbContextPool<ApplicationDbContext>(

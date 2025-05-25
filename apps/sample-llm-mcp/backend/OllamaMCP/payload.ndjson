@@ -1,0 +1,2 @@
+{"id":"0","type":"initialize","client":{"name":"TestClient","version":"1.0.0"}}
+{"id":"1","type":"tool-invocation","tool":"get-current-weather","input":{"latitude":41.015137,"longitude":28.979530}}

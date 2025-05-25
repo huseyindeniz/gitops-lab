@@ -1,0 +1,6 @@
+@OllamaMCPApi_HostAddress = http://localhost:5215
+
+GET {{OllamaMCPApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

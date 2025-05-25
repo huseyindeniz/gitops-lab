@@ -1,7 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 using AutoMapper;
 
 using FluentAssertions;
 
+using FluentValidation;
+using FluentValidation.Results;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Logging;
@@ -11,6 +17,7 @@ using Moq;
 using mySampleApp1.weatherForecast.API;
 using mySampleApp1.weatherForecast.API.Controllers;
 using mySampleApp1.weatherForecast.API.MappingProfiles;
+using mySampleApp1.weatherForecast.API.Models;
 using mySampleApp1.weatherForecast.API.ViewModels;
 using mySampleApp1.weatherForecast.Domain.DTOs;
 using mySampleApp1.weatherForecast.Domain.Entities;
@@ -26,6 +33,7 @@ namespace mySampleApp1.wf.tests.integration
     {
         private readonly Mock<IWeatherForecastRepository> _mockRepository;
         private readonly Mock<ILogger<WeatherForecastController>> _mockLogger;
+        private readonly Mock<IValidator<WeatherForecastCreateOrUpdateModel>> _mockValidator;
         private readonly IMapper _mapper;
         private readonly WeatherForecastService _weatherForecastService;
         private readonly WeatherForecastController _weatherForecastController;
@@ -36,6 +44,7 @@ namespace mySampleApp1.wf.tests.integration
             // Initialize mocks
             _mockRepository = new Mock<IWeatherForecastRepository>();
             _mockLogger = new Mock<ILogger<WeatherForecastController>>();
+            _mockValidator = new Mock<IValidator<WeatherForecastCreateOrUpdateModel>>();
 
             // Crate the AutoMapper
             var configuration = new MapperConfiguration(cfg =>
@@ -54,6 +63,7 @@ namespace mySampleApp1.wf.tests.integration
             // Create the WeatherForecastController
             _weatherForecastController = new WeatherForecastController(
                 _mockLogger.Object,
+                _mockValidator.Object,
                 _mapper,
                 _weatherForecastService
              );
@@ -107,6 +117,30 @@ namespace mySampleApp1.wf.tests.integration
             var viewModels = okResult.Value as List<WeatherForecastViewModel>;
             viewModels.Should().BeEmpty();
         }
+
+
+        // Model validation tests for CreateWeatherForecast endpoint
+        [Fact]
+        public async Task CreateWeatherForecast_ShouldReturnBadRequest_WhenModelIsInvalid()
+        {
+            // Arrange: Setup the mock validator to return validation errors
+            var invalidModel = new WeatherForecastCreateOrUpdateModel
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                TemperatureC = -300, // Invalid temperature
+                Summary = "Invalid summary"
+            };
+            _mockValidator.Setup(v => v.ValidateAsync(invalidModel, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new FluentValidation.Results.ValidationResult(new[] { new ValidationFailure("TemperatureC", "Temperature must be between -100 and 100") }));
+            
+            // Act: Make the request to the endpoint
+            var response = await _weatherForecastController.Create(invalidModel);
+            var okResult = response.Result as BadRequestObjectResult;
+            
+            // Assert: Check that the response is BadRequest
+            response.Result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
 
     }
 }

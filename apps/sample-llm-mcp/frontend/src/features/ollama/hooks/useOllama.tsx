@@ -1,21 +1,13 @@
 import { useState, useRef } from 'react';
 
-import { Paper, TextInput, Button, Text, Select, Stack } from '@mantine/core';
+import log from 'loglevel';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
 }
 
-const models = [{ value: 'mistral', label: 'Mistral' }];
-
-// Special token detection (optional handling)
-const isSpecialToken = (text: string): boolean => {
-  const trimmed = text.trim();
-  return trimmed.startsWith('<') && trimmed.endsWith('>');
-};
-
-export const ChatScreen = () => {
+export const useOllama = (url: string) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState<string>('');
   const [currentModel, setCurrentModel] = useState<string>('mistral');
@@ -26,6 +18,8 @@ export const ChatScreen = () => {
   const flushTimer = useRef<NodeJS.Timeout | null>(null); // timer
   const scrollRef = useRef<HTMLDivElement>(null); // for auto-scroll
 
+  const models = [{ value: 'mistral', label: 'Mistral' }];
+
   const sendPrompt = async () => {
     if (!input.trim()) {
       return;
@@ -35,7 +29,7 @@ export const ChatScreen = () => {
     setInput('');
     setIsLoading(true);
 
-    const response = await fetch('http://ollama.staging.local/api/generate', {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({ prompt: input, model: currentModel }),
       headers: { 'Content-Type': 'application/json' },
@@ -73,7 +67,7 @@ export const ChatScreen = () => {
             }
 
             if (!(trimmedLine.startsWith('{') && trimmedLine.endsWith('}'))) {
-              console.error(
+              log.error(
                 'Invalid JSON line (missing curly braces), stopping:',
                 trimmedLine
               );
@@ -88,18 +82,13 @@ export const ChatScreen = () => {
 
               if (chunkText) {
                 if (isSpecialToken(chunkText)) {
-                  console.log('Detected special token:', chunkText);
+                  log.info('Detected special token:', chunkText);
                   continue;
                 }
                 tokenBuffer.current += chunkText;
               }
             } catch (err) {
-              console.error(
-                'Failed to parse chunk:',
-                err,
-                'Line:',
-                trimmedLine
-              );
+              log.error('Failed to parse chunk:', err, 'Line:', trimmedLine);
               stopFlushTimer();
               setIsLoading(false);
               return;
@@ -156,57 +145,21 @@ export const ChatScreen = () => {
     }, 0);
   };
 
-  return (
-    <Stack gap="md" p="md">
-      <Select
-        label="Choose Model"
-        data={models}
-        value={currentModel}
-        onChange={value => {
-          setCurrentModel(value || 'mistral');
-        }}
-      />
-      <Paper
-        ref={scrollRef}
-        shadow="xs"
-        p="md"
-        radius="md"
-        h={400}
-        withBorder
-        style={{ overflowY: 'auto' }}
-      >
-        {messages.map((msg, idx) => (
-          <Text key={idx} c={msg.role === 'user' ? 'blue' : 'green'}>
-            <strong>{msg.role === 'user' ? 'You:' : 'Assistant:'}</strong>{' '}
-            {msg.content}
-          </Text>
-        ))}
-        {isLoading && (
-          <Text fs="italic" c="dimmed">
-            Assistant is typing...
-          </Text>
-        )}
-      </Paper>
-      <TextInput
-        placeholder="Type your message"
-        value={input}
-        onChange={e => {
-          setInput(e.currentTarget.value);
-        }}
-        onKeyDown={e => {
-          if (e.key === 'Enter') {
-            sendPrompt();
-          }
-        }}
-      />
-      <Button
-        onClick={() => {
-          sendPrompt();
-        }}
-        loading={isLoading}
-      >
-        Send
-      </Button>
-    </Stack>
-  );
+  const isSpecialToken = (text: string): boolean => {
+    const trimmed = text.trim();
+    return trimmed.startsWith('<') && trimmed.endsWith('>');
+  };
+
+  return {
+    models,
+    messages,
+    input,
+    currentModel,
+    isLoading,
+    sendPrompt,
+    setInput,
+    setCurrentModel,
+    scrollRef,
+    isSpecialToken,
+  };
 };

@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam linetype ortho
+
+package "Before MCP" {
+  [LLM] --> [Custom Code 1]
+  [LLM] --> [Custom Code 2]
+  [LLM] --> [Weather API]
+  note bottom of [LLM]
+    Custom integration per service
+    & per LLM
+  end note
+  note bottom of [Weather API]
+    Fragile – breaks on updates
+  end note
+}
+
+package "With MCP" {
+  [LLM_MCP] as "LLM"
+  [MCP]
+  [Clock API]
+  [Weather API MCP] as "Weather API"
+  [DB]
+
+  "LLM" --> MCP : Tool discovery\n+ invocation
+  MCP --> "Clock API"
+  MCP --> "Weather API"
+  MCP --> "DB"
+
+  note bottom of MCP
+    One-time standard integration\nReusable across LLMs
+  end note
+}
+
+@enduml

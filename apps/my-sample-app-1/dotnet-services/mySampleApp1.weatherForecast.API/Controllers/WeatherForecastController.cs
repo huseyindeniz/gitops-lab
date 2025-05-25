@@ -1,5 +1,7 @@
 using AutoMapper;
 
+using FluentValidation;
+
 using Microsoft.AspNetCore.Mvc;
 
 using mySampleApp1.weatherForecast.API.Models;
@@ -14,12 +16,14 @@ namespace mySampleApp1.weatherForecast.API.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IValidator<WeatherForecastCreateOrUpdateModel> _validator;
         private readonly IMapper _mapper;
         private readonly IWeatherForecastService _weatherForecastService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IMapper mapper, IWeatherForecastService weatherForecastService)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IValidator<WeatherForecastCreateOrUpdateModel> validator, IMapper mapper, IWeatherForecastService weatherForecastService)
         {
             _logger = logger;
+            _validator = validator;
             _weatherForecastService = weatherForecastService;
             _mapper = mapper;
         }
@@ -52,11 +56,17 @@ namespace mySampleApp1.weatherForecast.API.Controllers
         [ProducesResponseType(typeof(WeatherForecastResponseModel), StatusCodes.Status201Created)] // For successful creation
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // For invalid input
         [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For server errors
-        public async Task<ActionResult> Create([FromBody] WeatherForecastCreateOrUpdateModel model)
+        public async Task<ActionResult<WeatherForecastResponseModel>> Create([FromBody] WeatherForecastCreateOrUpdateModel model)
         {
-            if (!ModelState.IsValid)
+            var validationResult = await _validator.ValidateAsync(model);
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
                 return BadRequest(ModelState);
-
+            }
             var forecastDTO = _mapper.Map<WeatherForecastDTO>(model);
             var forecastId = await _weatherForecastService.AddForecastAsync(forecastDTO);
 
@@ -78,8 +88,15 @@ namespace mySampleApp1.weatherForecast.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For server errors
         public async Task<ActionResult> Update(int id, [FromBody] WeatherForecastCreateOrUpdateModel model)
         {
-            if (!ModelState.IsValid)
+            var validationResult = await _validator.ValidateAsync(model);
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
                 return BadRequest(ModelState);
+            }
 
             var existingForecast = await _weatherForecastService.GetForecastByIdAsync(id);
             if (existingForecast == null)
