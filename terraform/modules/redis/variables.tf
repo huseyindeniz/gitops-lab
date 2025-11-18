@@ -14,6 +14,7 @@ variable "storage_size" {
 }
 
 variable "pv_path" {
-  description = "Size of the storage for the redis database"
+  description = "DEPRECATED: Redis Operator manages its own storage. This variable is kept for backward compatibility but is not used."
   type        = string
+  default     = ""
 }

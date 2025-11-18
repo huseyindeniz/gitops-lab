@@ -171,18 +171,18 @@ trivy:
 database:
   type: external
   external:
-    host: "harbor-postgresql"
+    host: "harbor-pg-rw"  # CloudNativePG creates {cluster-name}-rw service
     port: "5432"
     username: "user_harbor"
     password: ""
     coreDatabase: "registry"
-    existingSecret: "harbor-postgres-password"
+    existingSecret: "harbor-pg-app"  # CloudNativePG creates this secret automatically
     sslmode: "disable"
 
 redis:
   type: external
   external:
-    addr: "harbor-redis-master.harbor.svc.cluster.local:6379"
+    addr: "harbor-redis.harbor.svc.cluster.local:6379"  # Redis Operator creates {redis-name} service
     # username field can be an empty string, and it will be authenticated against the default user
     username: ""
     password: ""

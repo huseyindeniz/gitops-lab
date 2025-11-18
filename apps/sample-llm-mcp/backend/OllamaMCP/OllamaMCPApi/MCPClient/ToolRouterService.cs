@@ -63,8 +63,6 @@ namespace OllamaMCPApi.MCPClient
             if (!_toolToClient.TryGetValue(toolName, out var client))
                 throw new KeyNotFoundException($"Tool '{toolName}' not found.");
 
-            var tools = await client.ListToolsAsync(); // why here, we need tool list in its own method
-
             // Wrap parameters in AIFunctionArguments so MCP client serializes properly
             var args = new AIFunctionArguments(parameters);
 

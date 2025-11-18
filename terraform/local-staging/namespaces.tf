@@ -10,8 +10,6 @@ resource "kubernetes_namespace" "istio" {
   metadata {
     name = var.istio_namespace
   }
-
-  depends_on = [kubernetes_namespace.metallb]
 }
 
 # Monitoring

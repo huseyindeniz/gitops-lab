@@ -3,6 +3,12 @@ variable "istio_namespace" {
   type        = string
 }
 
+variable "istio_version" {
+  description = "Istio Helm chart version (used for base, istiod, and gateway charts)"
+  type        = string
+  default     = "1.28.0"
+}
+
 variable "istio_base_values_file" {
   description = "Path to the istio base values file"
   type        = string

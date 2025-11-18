@@ -7,49 +7,60 @@ resource "random_password" "postgresql_password" {
   override_special = "!@#$%^&*()-_=+[]{};:,.<>?/~`" # Define allowed special characters
 }
 
-# PASSWORD SECRET
-resource "kubernetes_secret" "postgresql_password_secret" {
+# BOOTSTRAP SECRET FOR CLOUDNATIVEPG
+# CloudNativePG uses this secret during bootstrap to set the initial password
+# After bootstrap, CloudNativePG creates its own app secret: {cluster-name}-app
+resource "kubernetes_secret" "postgresql_bootstrap_secret" {
   metadata {
-    name      = "${var.resources_prefix}-postgres-password"
+    name      = "${var.resources_prefix}-pg-bootstrap"
     namespace = var.postgresql_namespace
   }
 
   data = {
-    POSTGRES_PASSWORD = base64encode(random_password.postgresql_password.result) # Reference the generated password
-    password          = base64encode(random_password.postgresql_password.result) # Reference the generated password
+    username = base64encode(var.db_user)
+    password = base64encode(random_password.postgresql_password.result)
   }
 
-  type = "Opaque"
+  type = "kubernetes.io/basic-auth"
 }
 
-resource "helm_release" "postgresql" {
-  name            = "${var.resources_prefix}-postgresql"
-  namespace       = var.postgresql_namespace
-  repository      = "https://charts.bitnami.com/bitnami"
-  chart           = "postgresql"
-  version         = "12.1.10"
-  cleanup_on_fail = true
-  values = [
-    yamlencode({
-      primary = {
-        persistence = {
-          existingClaim = kubernetes_persistent_volume_claim.postgresql_pvc.metadata[0].name
+# CLOUDNATIVEPG CLUSTER
+resource "kubernetes_manifest" "postgresql_cluster" {
+  manifest = {
+    apiVersion = "postgresql.cnpg.io/v1"
+    kind       = "Cluster"
+    metadata = {
+      name      = "${var.resources_prefix}-pg"
+      namespace = var.postgresql_namespace
+    }
+    spec = {
+      instances = 1 # Single instance for local development
+
+      storage = {
+        size         = var.storage_size
+        storageClass = "standard" # Default for Minikube
+      }
+
+      postgresql = {
+        parameters = {
+          max_connections = "100"
+          shared_buffers  = "256MB"
         }
       }
-      volumePermissions = {
-        enabled = true
+
+      bootstrap = {
+        initdb = {
+          database = var.db_name
+          owner    = var.db_user
+          secret = {
+            name = kubernetes_secret.postgresql_bootstrap_secret.metadata[0].name
+          }
+        }
       }
-      auth = {
-        username = var.db_user
-        password = base64encode(random_password.postgresql_password.result)
-        database = var.db_name
-      }
-      service = {
-        port = var.db_port
-      }
-    })
-  ]
+    }
+  }
+
   depends_on = [
-    kubernetes_persistent_volume_claim.postgresql_pvc
+    kubernetes_secret.postgresql_bootstrap_secret
   ]
 }

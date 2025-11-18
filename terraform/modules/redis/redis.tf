@@ -1,39 +1,37 @@
-resource "helm_release" "redis" {
-  name             = "${var.resources_prefix}-redis"
-  namespace        = var.redis_namespace
-  repository       = "oci://registry-1.docker.io/bitnamicharts"
-  chart            = "redis"
-  version          = "20.6.0" # do not change it
-  create_namespace = false
-  timeout          = 600
+# REDIS STANDALONE INSTANCE
+# Using OT-CONTAINER-KIT Redis Operator
+resource "kubernetes_manifest" "redis_standalone" {
+  manifest = {
+    apiVersion = "redis.redis.opstreelabs.in/v1beta2"
+    kind       = "Redis"
+    metadata = {
+      name      = "${var.resources_prefix}-redis"
+      namespace = var.redis_namespace
+    }
+    spec = {
+      kubernetesConfig = {
+        image = "quay.io/opstree/redis:v7.0.12"
+        imagePullPolicy = "IfNotPresent"
+      }
 
-  values = [
-    yamlencode({
-      architecture = "standalone"
-      replica = {
-        replicaCount = 1
-      }
-      auth = {
-        enabled : false
-        password : ""
-      }
-      podSecurityContext = {
-        enabled : true
-      }
-      volumePermissions = {
-        enabled : true # if podSecurityContext.enabled: true, volumePermissions.enabled: true
-      }
-      master = {
-        persistence = {
-          enabled       = true
-          existingClaim = kubernetes_persistent_volume_claim.redis_pvc.metadata[0].name
+      storage = {
+        volumeClaimTemplate = {
+          spec = {
+            accessModes = ["ReadWriteOnce"]
+            resources = {
+              requests = {
+                storage = var.storage_size
+              }
+            }
+            storageClassName = "standard" # Default for Minikube
+          }
         }
       }
-      metrics = {
-        enabled : true
-      }
-    })
-  ]
 
-  depends_on = [kubernetes_persistent_volume_claim.redis_pvc]
+      redisExporter = {
+        enabled = true
+        image   = "quay.io/opstree/redis-exporter:v1.44.0"
+      }
+    }
+  }
 }

@@ -30,6 +30,7 @@ variable "storage_size" {
 }
 
 variable "pv_path" {
-  description = "Size of the storage for the PostgreSQL database"
+  description = "DEPRECATED: CloudNativePG manages its own storage. This variable is kept for backward compatibility but is not used."
   type        = string
+  default     = ""
 }

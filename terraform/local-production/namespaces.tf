@@ -10,8 +10,6 @@ resource "kubernetes_namespace" "istio" {
   metadata {
     name = var.istio_namespace
   }
-
-  depends_on = [kubernetes_namespace.metallb]
 }
 
 # ARGO CD namespace for argo rollouts
@@ -19,8 +17,6 @@ resource "kubernetes_namespace" "argocd" {
   metadata {
     name = var.argocd_namespace
   }
-
-  depends_on = [kubernetes_namespace.istio]
 }
 
 # Monitoring

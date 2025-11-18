@@ -1,5 +1,6 @@
-# CLUSTER: local-staging
+# CLUSTER SECRETS - External cluster configurations for Argo CD
 
+# CLUSTER: local-staging
 resource "kubernetes_secret" "cluster_local_staging_secret" {
   metadata {
     name      = "cluster-local-staging-secret"
@@ -23,7 +24,7 @@ resource "kubernetes_secret" "cluster_local_staging_secret" {
     })
   }
 
-  depends_on = [kubernetes_namespace.argocd]
+  depends_on = [module.local_argo]
 }
 
 # CLUSTER: local-production
@@ -50,5 +51,5 @@ resource "kubernetes_secret" "cluster_local_production_secret" {
     })
   }
 
-  depends_on = [kubernetes_namespace.argocd]
+  depends_on = [module.local_argo]
 }

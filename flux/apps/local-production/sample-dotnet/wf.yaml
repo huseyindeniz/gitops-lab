@@ -55,12 +55,12 @@ spec:
                 action: "{{ .migrationAction }}"
                 targetMigration: "{{ .targetMigration }}"
               database:
-                host: "sample-dotnet-wf-prod-{{ .envName }}-postgresql"
+                host: "sample-dotnet-wf-prod-{{ .envName }}-pg-rw"  # CloudNativePG service
                 port: "5432"
                 name: "db_{{ .envName }}"
                 user: "user_{{ .envName }}"
-                secretName: "sample-dotnet-wf-prod-{{ .envName }}-postgres-password"
-                passwordKey: "POSTGRES_PASSWORD"
+                secretName: "sample-dotnet-wf-prod-{{ .envName }}-pg-app"  # CloudNativePG creates this
+                passwordKey: "password"  # CloudNativePG uses 'password' key
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
           ref: values

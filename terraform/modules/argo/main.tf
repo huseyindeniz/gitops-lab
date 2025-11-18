@@ -4,6 +4,7 @@ resource "helm_release" "argo_cd" {
   name       = "argo-cd"
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
+  version    = var.argocd_version
   namespace  = var.argo_namespace
   values = [
     file("${path.module}/values/values.yaml"),

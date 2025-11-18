@@ -3,6 +3,8 @@ resource "kubernetes_service_account" "dashboard_admin" {
     name      = "admin-user"
     namespace = kubernetes_namespace.dashboard.metadata[0].name
   }
+
+  depends_on = [kubernetes_namespace.dashboard]
 }
 
 resource "kubernetes_secret" "dashboard_admin_token" {
@@ -15,6 +17,8 @@ resource "kubernetes_secret" "dashboard_admin_token" {
   }
 
   type = "kubernetes.io/service-account-token"
+
+  depends_on = [kubernetes_service_account.dashboard_admin]
 }
 
 resource "kubernetes_cluster_role_binding" "dashboard_admin" {
@@ -33,4 +37,6 @@ resource "kubernetes_cluster_role_binding" "dashboard_admin" {
     name      = kubernetes_service_account.dashboard_admin.metadata[0].name
     namespace = kubernetes_service_account.dashboard_admin.metadata[0].namespace
   }
+
+  depends_on = [kubernetes_service_account.dashboard_admin]
 }

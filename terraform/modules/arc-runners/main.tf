@@ -15,6 +15,7 @@ resource "helm_release" "arc" {
   name       = "arc"
   repository = "https://actions-runner-controller.github.io/actions-runner-controller"
   chart      = "actions-runner-controller"
+  version    = var.arc_controller_version
   namespace  = kubernetes_namespace.arc_systems.metadata[0].name
 
   depends_on = [
@@ -26,6 +27,7 @@ resource "helm_release" "arc_scale_set" {
   name       = "arc-scale-set"
   repository = "oci://ghcr.io/actions/actions-runner-controller-charts"
   chart      = "gha-runner-scale-set-controller"
+  version    = var.arc_scale_set_controller_version
   namespace  = kubernetes_namespace.arc_systems.metadata[0].name
 
   depends_on = [
@@ -61,6 +63,7 @@ resource "helm_release" "arc_runner" {
   name       = var.name
   repository = "oci://ghcr.io/actions/actions-runner-controller-charts"
   chart      = "gha-runner-scale-set"
+  version    = var.arc_runner_scale_set_version
   namespace  = kubernetes_namespace.arc_runners.metadata[0].name
 
   values = [

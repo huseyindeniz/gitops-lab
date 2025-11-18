@@ -1,14 +1,49 @@
-auth:
-  rootUser: minio
-  rootPassword: minio123
-persistence:
-  existingClaim: minio-pvc
-volumePermissions:
-  enabled: true
-resources:
-  limits:
-    cpu: 300m
-    memory: 512Mi
-  requests:
-    cpu: 256m
-    memory: 256Mi
+# MinIO Tenant Configuration for Staging
+# Using MinIO Operator Tenant Helm Chart
+
+tenant:
+  name: minio-staging
+
+  # Configuration secret with root credentials
+  configuration:
+    name: minio-credentials
+
+  # Storage pools
+  pools:
+    - servers: 1
+      name: pool-0
+      volumesPerServer: 1
+      size: 10Gi
+      storageClassName: standard
+
+      resources:
+        requests:
+          cpu: 256m
+          memory: 256Mi
+        limits:
+          cpu: 300m
+          memory: 512Mi
+
+  # Console (MinIO UI)
+  console:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+
+  # Security settings
+  requestAutoCert: false
+
+  # Features
+  features:
+    bucketDNS: false
+
+# Root credentials secret
+secrets:
+  name: minio-credentials
+  accessKey: minio
+  secretKey: minio123
