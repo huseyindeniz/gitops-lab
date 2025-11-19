@@ -17,13 +17,13 @@ resource "helm_release" "cloudnative_pg_operator" {
   create_namespace = false
   cleanup_on_fail  = true
 
-  # Install in cluster-wide mode so it can manage PostgreSQL clusters in all namespaces
-  set {
-    name  = "config.clusterWide"
-    value = "true"
-  }
+  set = [
+    {
+      name  = "config.clusterWide"
+      value = "true"
+    }
+  ]
 
-  # Ensure operator is ready before Terraform continues
   wait    = true
   timeout = 300
 

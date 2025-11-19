@@ -1,1 +1,1 @@
-kubectl port-forward service/kubernetes-dashboard 60002:80 -n kubernetes-dashboard
+kubectl port-forward service/k8sdashboard-staging-kong-proxy 60002:80 -n kubernetes-dashboard

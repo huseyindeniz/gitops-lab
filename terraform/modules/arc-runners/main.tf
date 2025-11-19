@@ -11,27 +11,15 @@ resource "kubernetes_secret" "runner_secret" {
   type = "Opaque"
 }
 
-resource "helm_release" "arc" {
-  name       = "arc"
-  repository = "https://actions-runner-controller.github.io/actions-runner-controller"
-  chart      = "actions-runner-controller"
-  version    = var.arc_controller_version
-  namespace  = kubernetes_namespace.arc_systems.metadata[0].name
-
-  depends_on = [
-    kubernetes_secret.runner_secret
-  ]
-}
-
-resource "helm_release" "arc_scale_set" {
-  name       = "arc-scale-set"
+resource "helm_release" "arc_scale_set_controller" {
+  name       = "arc-scale-set-controller"
   repository = "oci://ghcr.io/actions/actions-runner-controller-charts"
   chart      = "gha-runner-scale-set-controller"
   version    = var.arc_scale_set_controller_version
   namespace  = kubernetes_namespace.arc_systems.metadata[0].name
 
   depends_on = [
-    helm_release.arc
+    kubernetes_secret.runner_secret
   ]
 }
 
@@ -77,7 +65,7 @@ resource "helm_release" "arc_runner" {
   ]
 
   depends_on = [
-    helm_release.arc_scale_set
+    helm_release.arc_scale_set_controller
   ]
 }
 

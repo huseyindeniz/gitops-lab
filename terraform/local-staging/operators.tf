@@ -7,6 +7,8 @@ module "cnpg_operator" {
 
   operator_namespace = "cnpg-system"
   operator_version   = module.versions.cnpg_operator_version
+
+  depends_on = [module.local_istio]
 }
 
 # Redis Operator for Redis management
@@ -15,6 +17,8 @@ module "redis_operator" {
 
   operator_namespace = "ot-operators"
   operator_version   = module.versions.redis_operator_version
+
+  depends_on = [module.cnpg_operator]
 }
 
 # MinIO Operator for object storage management
@@ -23,4 +27,6 @@ module "minio_operator" {
 
   operator_namespace = "minio-operator"
   operator_version   = module.versions.minio_operator_version
+
+  depends_on = [module.redis_operator]
 }

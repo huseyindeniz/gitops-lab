@@ -25,8 +25,8 @@ resource "kubernetes_secret" "postgresql_bootstrap_secret" {
 }
 
 # CLOUDNATIVEPG CLUSTER
-resource "kubernetes_manifest" "postgresql_cluster" {
-  manifest = {
+resource "kubectl_manifest" "postgresql_cluster" {
+  yaml_body = yamlencode({
     apiVersion = "postgresql.cnpg.io/v1"
     kind       = "Cluster"
     metadata = {
@@ -58,7 +58,7 @@ resource "kubernetes_manifest" "postgresql_cluster" {
         }
       }
     }
-  }
+  })
 
   depends_on = [
     kubernetes_secret.postgresql_bootstrap_secret

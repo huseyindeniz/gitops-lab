@@ -58,7 +58,12 @@ module "harbor_postgresql" {
   storage_size         = "1Gi"
   pv_path              = "/mnt/data/harbor-postgresql"
 
-  depends_on = [kubernetes_namespace.harbor]
+  providers = {
+    kubernetes = kubernetes
+    kubectl    = kubectl
+  }
+
+  depends_on = [module.cnpg_operator]
 }
 
 # REDIS
@@ -69,5 +74,10 @@ module "harbor_redis" {
   storage_size     = "1Gi"
   pv_path          = "/mnt/data/harbor-redis"
 
-  depends_on = [kubernetes_namespace.harbor]
+  providers = {
+    kubernetes = kubernetes
+    kubectl    = kubectl
+  }
+
+  depends_on = [module.redis_operator]
 }

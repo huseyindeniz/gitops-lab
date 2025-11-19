@@ -6,7 +6,6 @@ module "versions" {
 }
 
 # CERT MANAGER
-# Must wait for namespaces to be created first (it creates its own namespace internally)
 module "local_cert_manager" {
   source = "../modules/cert-manager"
 
@@ -18,12 +17,13 @@ module "local_cert_manager" {
     kubectl    = kubectl
   }
 
-  # Ensure basic namespaces are created first to avoid race conditions
   depends_on = [
     kubernetes_namespace.metallb,
     kubernetes_namespace.istio,
     kubernetes_namespace.monitoring,
-    kubernetes_namespace.networking_test
+    kubernetes_namespace.networking_test,
+    kubernetes_namespace.triton,
+    kubernetes_namespace.argo_workflows
   ]
 }
 
@@ -39,7 +39,7 @@ module "local_metallb" {
     helm = helm
   }
 
-  depends_on = [kubernetes_namespace.metallb]
+  depends_on = [module.local_cert_manager]
 }
 
 # ISTIO
@@ -56,23 +56,10 @@ module "local_istio" {
     helm       = helm
   }
 
-  depends_on = [kubernetes_namespace.istio]
+  depends_on = [module.local_metallb]
 }
 
 # GITHUB ARC RUNNERS
-
-resource "kubernetes_secret" "istio_ca_cert" {
-  metadata {
-    name      = "istio-ca-cert"
-    namespace = "arc-runners"
-  }
-
-  data = {
-    "ca.crt" = file("${path.module}/certs/istio-full-chain.crt")
-  }
-
-  type = "Opaque"
-}
 
 module "local_arc" {
   source          = "../modules/arc-runners"
@@ -89,16 +76,36 @@ module "local_arc" {
     helm       = helm
     kubectl    = kubectl
   }
+
+  depends_on = [module.minio_operator]
+}
+
+resource "kubernetes_secret" "istio_ca_cert" {
+  metadata {
+    name      = "istio-ca-cert"
+    namespace = "arc-runners"
+  }
+
+  data = {
+    "ca.crt" = file("${path.module}/certs/istio-full-chain.crt")
+  }
+
+  type = "Opaque"
+
+  depends_on = [module.local_arc]
 }
 
 # SAMPLE DOTNET APP
 module "local_sample_dotnet" {
   source                         = "../modules/sample-dotnet"
-  env_list                       = jsondecode(data.kubernetes_config_map.deployment_environments.data["environments"])
+  env_list                       = local.deployment_environments
   app_ns_prefix_sample_dotnet_wf = "sample-dotnet-wf-staging"
 
   providers = {
     kubernetes = kubernetes
     helm       = helm
+    kubectl    = kubectl
   }
+
+  depends_on = [module.local_arc]
 }

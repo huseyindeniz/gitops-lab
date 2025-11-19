@@ -1,7 +1,7 @@
 # REDIS STANDALONE INSTANCE
 # Using OT-CONTAINER-KIT Redis Operator
-resource "kubernetes_manifest" "redis_standalone" {
-  manifest = {
+resource "kubectl_manifest" "redis_standalone" {
+  yaml_body = yamlencode({
     apiVersion = "redis.redis.opstreelabs.in/v1beta2"
     kind       = "Redis"
     metadata = {
@@ -33,5 +33,5 @@ resource "kubernetes_manifest" "redis_standalone" {
         image   = "quay.io/opstree/redis-exporter:v1.44.0"
       }
     }
-  }
+  })
 }

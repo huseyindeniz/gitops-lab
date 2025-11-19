@@ -15,5 +15,10 @@ module "sample_game_redis" {
   storage_size     = "1Gi"
   pv_path          = "/mnt/data/sample-game-redis"
 
-  depends_on = [kubernetes_namespace.sample_game]
+  providers = {
+    kubernetes = kubernetes
+    kubectl    = kubectl
+  }
+
+  depends_on = [module.redis_operator]
 }

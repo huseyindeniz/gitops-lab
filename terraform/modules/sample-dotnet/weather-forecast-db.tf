@@ -12,6 +12,11 @@ module "weather_forecast_postgresql" {
   storage_size         = "1Gi"
   pv_path              = "/mnt/data/${var.app_ns_prefix_sample_dotnet_wf}-${each.key}"
 
+  providers = {
+    kubernetes = kubernetes
+    kubectl    = kubectl
+  }
+
   depends_on = [kubernetes_namespace.sample_dotnet_weather_forecast]
 }
 
