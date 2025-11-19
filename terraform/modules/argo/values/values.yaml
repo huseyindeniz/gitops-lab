@@ -20,5 +20,5 @@ notifications:
   enabled: true
 
 crds:
-  install: true
+  install: false
   keep: false

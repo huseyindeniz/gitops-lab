@@ -38,9 +38,7 @@ module "local_metallb" {
     helm = helm
   }
 
-  depends_on = [
-    kubernetes_namespace.metallb
-  ]
+  depends_on = [module.local_cert_manager]
 }
 
 # ISTIO
@@ -57,9 +55,7 @@ module "local_istio" {
     helm       = helm
   }
 
-  depends_on = [
-    kubernetes_namespace.istio
-  ]
+  depends_on = [module.local_metallb]
 }
 
 # ARGO CD
@@ -95,7 +91,7 @@ module "local_argo" {
   }
 
   depends_on = [
-    kubernetes_namespace.argocd,
+    module.local_istio,
     kubernetes_secret.argo_cd_dex_secret
   ]
 }
@@ -112,13 +108,12 @@ resource "kubectl_manifest" "argo_management_root" {
 }
 
 # FLUX
-resource "flux_bootstrap_git" "flux_bootstrap" {
-  embedded_manifests = true
-  path               = var.flux_path
-  components_extra   = ["image-reflector-controller", "image-automation-controller"]
 
-  depends_on = [
-    module.local_argo,
-    kubectl_manifest.argo_management_root
-  ]
-}
+# when al the previous resources created in 1 go, we will enable this
+# resource "flux_bootstrap_git" "flux_bootstrap" {
+#   embedded_manifests = true
+#   path               = var.flux_path
+#   components_extra   = ["image-reflector-controller", "image-automation-controller"]
+
+#   depends_on = [kubectl_manifest.argo_management_root]
+# }

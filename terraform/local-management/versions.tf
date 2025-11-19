@@ -22,5 +22,9 @@ terraform {
       source  = "fluxcd/flux"
       version = "~> 1.7"
     }
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.2"
+    }
   }
 }

@@ -9,11 +9,9 @@ resource "helm_release" "cert_manager" {
   set = [
     {
       name  = "crds.enabled"
-      value = "true"
-    },
-    {
-      name  = "crds.keep"
       value = "false"
     }
   ]
+
+  depends_on = [null_resource.cert_manager_crds]
 }

@@ -10,6 +10,8 @@ resource "helm_release" "argo_cd" {
     file("${path.module}/values/values.yaml"),
     var.argo_cd_values_file != "" ? var.argo_cd_values_file : null
   ]
+
+  depends_on = [null_resource.argocd_crds]
 }
 
 # Retrieve the initial admin password from the Argo CD secret
