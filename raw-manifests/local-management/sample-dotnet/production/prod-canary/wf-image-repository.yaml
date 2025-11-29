@@ -1,4 +1,4 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
   name: sample-dotnet-wf-prod-prod-canary-image-repository
@@ -8,7 +8,7 @@ spec:
   image: "huseyindeniz/msa1-wf-api-prod-canary"
 
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
   name: sample-dotnet-wf-prod-prod-canary-migration-image-repository

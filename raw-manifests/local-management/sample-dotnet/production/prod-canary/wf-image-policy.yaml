@@ -1,4 +1,4 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
   name: sample-dotnet-wf-prod-prod-canary-image-policy
@@ -14,7 +14,7 @@ spec:
       order: "asc"
 
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
   name: sample-dotnet-wf-prod-prod-canary-migration-image-policy

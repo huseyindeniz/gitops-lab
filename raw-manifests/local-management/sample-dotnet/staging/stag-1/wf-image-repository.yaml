@@ -1,4 +1,4 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
   name: sample-dotnet-wf-staging-stag-1-image-repository
@@ -8,7 +8,7 @@ spec:
   image: "huseyindeniz/msa1-wf-api-stag-1"
 
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
   name: sample-dotnet-wf-staging-stag-1-migration-image-repository
