@@ -12,3 +12,8 @@ output "dashboard_token" {
 
   depends_on = [kubernetes_secret.dashboard_admin_token]
 }
+
+output "sample_dotnet_wf_postgresql_db_info" {
+  value     = module.local_sample_dotnet.sample_dotnet_wf_postgresql_db_info
+  sensitive = true
+}

@@ -8,8 +8,7 @@ resource "random_password" "postgresql_password" {
 }
 
 # BOOTSTRAP SECRET FOR CLOUDNATIVEPG
-# CloudNativePG uses this secret during bootstrap to set the initial password
-# After bootstrap, CloudNativePG creates its own app secret: {cluster-name}-app
+# Used during initdb to set the initial password for the database owner
 resource "kubernetes_secret" "postgresql_bootstrap_secret" {
   metadata {
     name      = "${var.resources_prefix}-pg-bootstrap"
@@ -17,7 +16,26 @@ resource "kubernetes_secret" "postgresql_bootstrap_secret" {
   }
 
   data = {
-    username = base64encode(var.db_user)
+    username = var.db_user
+    password = base64encode(random_password.postgresql_password.result)
+  }
+
+  type = "kubernetes.io/basic-auth"
+}
+
+# APPLICATION SECRET FOR MANAGED ROLES
+# This secret is referenced by managed.roles and used by applications to connect
+resource "kubernetes_secret" "postgresql_app_secret" {
+  metadata {
+    name      = "${var.resources_prefix}-pg-app"
+    namespace = var.postgresql_namespace
+    labels = {
+      "cnpg.io/reload" = "true"
+    }
+  }
+
+  data = {
+    username = var.db_user
     password = base64encode(random_password.postgresql_password.result)
   }
 
@@ -57,10 +75,29 @@ resource "kubectl_manifest" "postgresql_cluster" {
           }
         }
       }
+
+      managed = {
+        roles = [
+          {
+            name            = var.db_user
+            ensure          = "present"
+            login           = true
+            superuser       = false
+            createdb        = false
+            createrole      = false
+            inherit         = true
+            connectionLimit = -1
+            passwordSecret = {
+              name = kubernetes_secret.postgresql_app_secret.metadata[0].name
+            }
+          }
+        ]
+      }
     }
   })
 
   depends_on = [
-    kubernetes_secret.postgresql_bootstrap_secret
+    kubernetes_secret.postgresql_bootstrap_secret,
+    kubernetes_secret.postgresql_app_secret
   ]
 }

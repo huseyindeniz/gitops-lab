@@ -1,15 +1,16 @@
-data "http" "argocd_crds" {
-  for_each = toset([
-    "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.0/manifests/crds/application-crd.yaml",
-    "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.0/manifests/crds/applicationset-crd.yaml",
-    "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.0/manifests/crds/appproject-crd.yaml"
-  ])
-  url = each.value
-}
+resource "null_resource" "argocd_crds" {
+  triggers = {
+    version = "v2.13.2"
+  }
 
-resource "kubectl_manifest" "argocd_crds" {
-  for_each  = data.http.argocd_crds
-  yaml_body = each.value.body
+  provisioner "local-exec" {
+    command = "kubectl apply -k https://github.com/argoproj/argo-cd/manifests/crds?ref=v2.13.2 && kubectl wait --for condition=established --timeout=300s crd/applications.argoproj.io && kubectl wait --for condition=established --timeout=300s crd/applicationsets.argoproj.io && kubectl wait --for condition=established --timeout=300s crd/appprojects.argoproj.io"
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "kubectl delete -k https://github.com/argoproj/argo-cd/manifests/crds?ref=v2.13.2 --ignore-not-found=true"
+  }
 }
 
 resource "kubernetes_service_account" "argocd_manager" {

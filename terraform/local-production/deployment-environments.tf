@@ -1,10 +1,14 @@
+locals {
+  deployment_environments = ["prod-bluegreen", "prod-canary"]
+}
+
 resource "kubernetes_config_map" "deployment_environments" {
   metadata {
     name = "deployment-environments"
   }
 
   data = {
-    "environments" = jsonencode(["prod-bluegreen", "prod-canary"])
+    "environments" = jsonencode(local.deployment_environments)
   }
 }
 

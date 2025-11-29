@@ -14,5 +14,5 @@ service:
       port: 44303
       protocol: TCP
       targetPort: 443
-proxyMetadata:
+env:
   ISTIO_META_MAX_REQUEST_HEADERS_KB: "32"      

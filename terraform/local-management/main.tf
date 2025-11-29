@@ -108,12 +108,10 @@ resource "kubectl_manifest" "argo_management_root" {
 }
 
 # FLUX
+resource "flux_bootstrap_git" "flux_bootstrap" {
+  embedded_manifests = true
+  path               = var.flux_path
+  components_extra   = ["image-reflector-controller", "image-automation-controller"]
 
-# when al the previous resources created in 1 go, we will enable this
-# resource "flux_bootstrap_git" "flux_bootstrap" {
-#   embedded_manifests = true
-#   path               = var.flux_path
-#   components_extra   = ["image-reflector-controller", "image-automation-controller"]
-
-#   depends_on = [kubectl_manifest.argo_management_root]
-# }
+  depends_on = [kubectl_manifest.argo_management_root]
+}
