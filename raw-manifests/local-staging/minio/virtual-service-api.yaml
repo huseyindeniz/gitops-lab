@@ -13,4 +13,16 @@ spec:
         - destination:
             host: minio.minio.svc.cluster.local
             port:
-              number: 80
+              number: 443
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: minio-api-staging-dr
+  namespace: istio-system
+spec:
+  host: minio.minio.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      insecureSkipVerify: true

@@ -43,9 +43,8 @@ tenant:
         cpu: 200m
         memory: 256Mi
 
-  # TLS settings - disable auto cert for HTTP access
-  certificate:
-    requestAutoCert: false
+  # Security settings
+  requestAutoCert: false
 
   # Buckets to create
   buckets:
