@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: minio-staging.minio.svc.cluster.local
+            host: minio-staging-console.minio.svc.cluster.local
             port:
-              number: 9001
+              number: 9443
