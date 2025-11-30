@@ -7,5 +7,4 @@ variable "operator_namespace" {
 variable "operator_version" {
   description = "MinIO operator Helm chart version"
   type        = string
-  default     = "6.0.4" # Latest stable version
 }

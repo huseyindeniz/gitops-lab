@@ -7,5 +7,4 @@ variable "operator_namespace" {
 variable "operator_version" {
   description = "Redis operator Helm chart version"
   type        = string
-  default     = "0.22.2" # Latest stable version
 }

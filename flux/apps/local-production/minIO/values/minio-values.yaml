@@ -32,9 +32,16 @@ tenant:
         fsGroup: 0
         runAsNonRoot: false
 
-  poolsMetadata:
-    annotations: {}
-    labels: {}
+  # Console (MinIO UI)
+  console:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
 
   # Security settings
   requestAutoCert: false

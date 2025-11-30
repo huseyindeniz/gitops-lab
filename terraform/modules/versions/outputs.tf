@@ -56,7 +56,7 @@ output "redis_operator_version" {
 
 output "minio_operator_version" {
   description = "MinIO operator Helm chart version"
-  value       = "6.0.4"
+  value       = "7.1.1"
 }
 
 # ============================================================================
@@ -103,7 +103,7 @@ output "all_versions" {
     # Operators
     cnpg_operator  = "0.26.1"
     redis_operator = "0.22.2"
-    minio_operator = "6.0.4"
+    minio_operator = "7.1.1"
 
     # ARC
     arc_controller              = "0.9.3"

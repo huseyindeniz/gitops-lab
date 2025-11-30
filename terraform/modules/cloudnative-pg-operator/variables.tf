@@ -7,5 +7,4 @@ variable "operator_namespace" {
 variable "operator_version" {
   description = "CloudNativePG operator Helm chart version"
   type        = string
-  default     = "0.26.1" # Latest stable version as of early 2025
 }
