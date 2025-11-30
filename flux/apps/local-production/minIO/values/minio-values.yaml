@@ -43,8 +43,15 @@ tenant:
         cpu: 200m
         memory: 256Mi
 
-  # Security settings
-  requestAutoCert: false
+  # TLS settings - disable auto cert for HTTP access
+  certificate:
+    requestAutoCert: false
+
+  # Buckets to create
+  buckets:
+    - name: loki-chunks
+    - name: loki-ruler
+    - name: loki-admin
 
   # Features
   features:
