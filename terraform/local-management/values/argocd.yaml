@@ -2,21 +2,22 @@ global:
   domain: "argocd.management.local:44301"
 server:
   ingress:
-    enabled: false  # Disable ingress completely
+    enabled: false # Disable ingress completely
   service:
-    type: ClusterIP  # Keep it internal, managed by Istio VirtualService
+    type: ClusterIP # Keep it internal, managed by Istio VirtualService
   extraArgs:
-    - --insecure  # Use only if testing without HTTPS for now
-cm:
-  dex:
-    config:
+    - --insecure # Use only if testing without HTTPS for now
+configs:
+  cm:
+    url: "https://argocd.management.local"
+    dex.config: |
       connectors:
         - type: github
           id: github
           name: GitHub
           config:
             clientID: "${github_oauth_client_id}"
-            clientSecret: $argocd/argocd-dex-server-secret:clientSecret
+            clientSecret: $argocd-dex-server-secret:clientSecret
             loadAllGroups: false
             users:
               - username: huseyindeniz

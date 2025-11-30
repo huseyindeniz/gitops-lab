@@ -23,37 +23,37 @@ TODO: add more explanation here.
 
 ## Local Clusters
 
-| **TODO**          | local-management | local-staging  | local-production            | host           |
-| ----------------- | ---------------- | -------------- | --------------------------- | -------------- |
-| runs on           | wsl 2 ubuntu     | wsl 2 ubuntu   | wsl 2 ubuntu                | windows docker |
-| Minikube          | ✅               | ✅             | ✅                          | -              |
-| Terraform         | ✅               | ✅             | ✅                          | -              |
-| Helm              | ✅               | ✅             | ✅                          | -              |
-| reverse-proxy     | -                | -              | -                           | ✅             |
-| grafana           | -                | -              | -                           | ✅             |
-| environments      | -                | stag-1, stag-2 | prod-bluegreen, prod-canary | -              |
-| Cert Manager      | ✅               | ✅             | ✅                          | -              |
-| Istio             | ✅               | ✅             | ✅                          | -              |
-| MetalLB           | ✅               | ✅             | ✅                          | -              |
-| K8SDashboard      | ✅               | ✅             | ✅                          | -              |
-| ArgoCD            | ✅               | -              | -                           | -              |
-| Argo Rollouts     | -                | -              | ✅                          | -              |
-| Argo Workflows    | -                | ✅             | -                           | -              |
-| Flux              | ✅               | -              | -                           | -              |
-| ARC Runners       | -                | ✅             | ✅                          | -              |
-| Harbor            | -                | ✅             | -                           | -              |
-| minIO             | -                | ✅             | -                           | -              |
-| Prometheus        | -                | ✅             | ✅                          | -              |
-| Loki              | -                | ✅             | ✅                          | -              |
-| Tempo             | -                | ✅             | ✅                          | -              |
-| Vault(hashicorp)  | -                | 🔲             | 🔲                          | -              |
-| Velero            | -                | 🔲             | 🔲                          | -              |
-| NVidia Triton     | -                | ✅             | -                           | -              |
-| Sample Dotnet App | -                | ✅             | ✅                          | -              |
-| Sample Game App   | -                | ✅             | -                           | -              |
-| Sample AI App     | -                | ✅             | -                           | -              |
-| Ollama            | -                | ✅             | -                           | -              |
-| Sample LLM+MCP    | -                | 🔲             | -                           | -              |
+| **TODO**                    | local-management | local-staging  | local-production            | host           |
+| --------------------------- | ---------------- | -------------- | --------------------------- | -------------- |
+| runs on                     | wsl 2 ubuntu     | wsl 2 ubuntu   | wsl 2 ubuntu                | windows docker |
+| Minikube                    | ✅               | ✅             | ✅                          | -              |
+| Terraform                   | ✅               | ✅             | ✅                          | -              |
+| Helm                        | ✅               | ✅             | ✅                          | -              |
+| reverse-proxy               | -                | -              | -                           | ✅             |
+| grafana                     | -                | -              | -                           | ✅             |
+| environments                | -                | stag-1, stag-2 | prod-bluegreen, prod-canary | -              |
+| Cert Manager                | ✅               | ✅             | ✅                          | -              |
+| Istio                       | ✅               | ✅             | ✅                          | -              |
+| MetalLB                     | ✅               | ✅             | ✅                          | -              |
+| K8SDashboard                | ✅               | ✅             | ✅                          | -              |
+| ArgoCD                      | ✅               | -              | -                           | -              |
+| Argo Rollouts               | -                | -              | ✅                          | -              |
+| Argo Workflows              | -                | ✅             | -                           | -              |
+| Flux                        | ✅               | -              | -                           | -              |
+| ARC Runners                 | -                | ✅             | ✅                          | -              |
+| Harbor                      | -                | ✅             | -                           | -              |
+| minIO                       | -                | ✅             | -                           | -              |
+| Prometheus                  | -                | ✅             | ✅                          | -              |
+| Loki                        | -                | ✅             | ✅                          | -              |
+| Tempo                       | -                | ✅             | ✅                          | -              |
+| Vault(hashicorp)            | -                | 🔲             | 🔲                          | -              |
+| Velero                      | -                | 🔲             | 🔲                          | -              |
+| NVidia Triton               | -                | ✅             | -                           | -              |
+| Sample Dotnet App           | -                | ✅             | ✅                          | -              |
+| Sample Multiplayer Game App | -                | ✅             | -                           | -              |
+| Sample AI Inference App     | -                | ✅             | -                           | -              |
+| Ollama                      | -                | ✅             | -                           | -              |
+| Sample AI Agent             | -                | 🔲             | -                           | -              |
 
 ## Cloud Clusters
 
@@ -66,7 +66,7 @@ TODO: add more explanation here.
 | K8SDashboard         | 🔲       | 🔲      | 🔲          | 🔲       |
 | ArgoCD               | -        | -       | -           | 🔲       |
 | Multiplayer Game App | -        | -       | -           | 🔲       |
-| AI App               | -        | -       | -           | 🔲       |
+| AI Agent             | -        | -       | -           | 🔲       |
 
 ## Helm Charts
 
@@ -82,18 +82,21 @@ TODO: add more explanation here.
 
 ## Terraform Modules
 
-| **TODO**       |     |
-| -------------- | --- |
-| arc-runners    | ✅  |
-| argocd         | ✅  |
-| argo-rollouts  | ✅  |
-| argo-workflows | ✅  |
-| cert-manager   | ✅  |
-| flux           | ✅  |
-| istio          | ✅  |
-| metalLB        | ✅  |
-| postgresql     | ✅  |
-| redis          | ✅  |
+| **TODO**                |     |
+| ----------------------- | --- |
+| arc-runners             | ✅  |
+| argocd                  | ✅  |
+| argo-rollouts           | ✅  |
+| argo-workflows          | ✅  |
+| cert-manager            | ✅  |
+| cloudnative-pg-operator | ✅  |
+| flux                    | ✅  |
+| istio                   | ✅  |
+| metalLB                 | ✅  |
+| minio-operator          | ✅  |
+| postgresql              | ✅  |
+| redis                   | ✅  |
+| redis-operator          | ✅  |
 
 ## Goals
 

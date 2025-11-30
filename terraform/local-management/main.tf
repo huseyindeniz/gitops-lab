@@ -64,10 +64,13 @@ resource "kubernetes_secret" "argo_cd_dex_secret" {
   metadata {
     name      = "argocd-dex-server-secret"
     namespace = var.argo_namespace
+    labels = {
+      "app.kubernetes.io/part-of" = "argocd"
+    }
   }
 
   data = {
-    "clientSecret" = base64encode(var.github_oauth_client_secret)
+    "clientSecret" = var.github_oauth_client_secret
   }
 
   type = "Opaque"

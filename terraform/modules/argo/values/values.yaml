@@ -11,10 +11,12 @@ repoServer:
 applicationSet:
   enabled: true
 
-rbac:
-  policy: |
-    g, admin, role:admin
-    g, github:huseyindeniz, role:developer
+configs:
+  rbac:
+    policy.csv: |
+      g, admin, role:admin
+      g, huseyindenizkivrak@gmail.com, role:admin
+    scopes: '[groups, email]'
 
 notifications:
   enabled: true
