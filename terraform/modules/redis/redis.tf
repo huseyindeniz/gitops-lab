@@ -10,8 +10,14 @@ resource "kubectl_manifest" "redis_standalone" {
     }
     spec = {
       kubernetesConfig = {
-        image = "quay.io/opstree/redis:v7.0.12"
+        image           = "quay.io/opstree/redis:v7.0.12"
         imagePullPolicy = "IfNotPresent"
+      }
+
+      securityContext = {
+        runAsUser  = 0
+        runAsGroup = 0
+        fsGroup    = 0
       }
 
       storage = {
