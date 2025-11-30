@@ -9,6 +9,10 @@ loki:
   containerSecurityContext:
     readOnlyRootFilesystem: false
   storage:
+    bucketNames:
+      chunks: loki-chunks
+      ruler: loki-ruler
+      admin: loki-admin
     type: s3
     s3:
       endpoint: minio.minio.svc.cluster.local:443
