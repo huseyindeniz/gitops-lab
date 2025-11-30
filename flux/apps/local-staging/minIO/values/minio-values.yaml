@@ -47,6 +47,13 @@ tenant:
   certificate:
     requestAutoCert: false
 
+  # Buckets to create
+  buckets:
+    - name: triton-model-repo
+    - name: loki-chunks
+    - name: loki-ruler
+    - name: loki-admin
+
   # Features
   features:
     bucketDNS: false
