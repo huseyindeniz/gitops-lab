@@ -13,3 +13,8 @@ kong:
   proxy:
     http:
       enabled: true
+
+# Fixed csrfKey to prevent OutOfSync on every ArgoCD sync
+app:
+  security:
+    csrfKey: "MTIz"
