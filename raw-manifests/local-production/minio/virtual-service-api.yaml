@@ -14,3 +14,14 @@ spec:
             host: minio.minio.svc.cluster.local
             port:
               number: 443
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: minio-api-prod-dr
+  namespace: istio-system
+spec:
+  host: minio.minio.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE

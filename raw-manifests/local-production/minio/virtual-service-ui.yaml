@@ -14,3 +14,14 @@ spec:
             host: minio-production-console.minio.svc.cluster.local
             port:
               number: 9443
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: minio-console-prod-dr
+  namespace: istio-system
+spec:
+  host: minio-production-console.minio.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
