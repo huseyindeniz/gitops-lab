@@ -76,7 +76,7 @@ module "local_arc" {
     kubectl    = kubectl
   }
 
-  depends_on = [module.minio_operator]
+  depends_on = [module.local_istio]
 }
 
 resource "kubernetes_secret" "istio_ca_cert" {
@@ -121,5 +121,5 @@ module "local_sample_dotnet" {
     kubectl    = kubectl
   }
 
-  depends_on = [module.local_argo_rollouts]
+  depends_on = [module.local_argo_rollouts, module.cnpg_operator]
 }

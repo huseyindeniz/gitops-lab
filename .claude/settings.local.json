@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "Bash(cat:*)",
+      "Bash(tree:*)",
+      "WebFetch(domain:www.hashicorp.com)",
+      "Skill(terraform-audit)",
+      "Skill(helm-charts-audit)",
+      "Skill(argocd-audit)",
+      "Bash(mkdir:*)",
+      "Bash(bash:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []
