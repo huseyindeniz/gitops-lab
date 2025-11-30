@@ -1,38 +1,12 @@
-deploymentMode: SingleBinary
 loki:
   auth_enabled: false
-  commonConfig:
-    replication_factor: 1
   storage:
-    bucketNames:
-      chunks: loki-chunks
-      ruler: loki-ruler
-      admin: loki-admin
+    type: filesystem
+  object_store:
     type: s3
     s3:
+      bucketnames: loki
       endpoint: minio.minio.svc.cluster.local:443
       access_key_id: minio
       secret_access_key: minio123
       insecure: true
-  schemaConfig:
-    configs:
-      - from: 2024-04-01
-        store: tsdb
-        object_store: s3
-        schema: v13
-        index:
-          prefix: index_
-          period: 24h
-singleBinary:
-  replicas: 1
-  persistence:
-    enabled: true
-    size: 1Gi
-  podSecurityContext:
-    fsGroup: 0
-    runAsGroup: 0
-    runAsNonRoot: false
-    runAsUser: 0
-  containerSecurityContext:
-    readOnlyRootFilesystem: false
-    allowPrivilegeEscalation: false
