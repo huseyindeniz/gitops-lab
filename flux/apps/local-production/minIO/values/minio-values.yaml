@@ -32,6 +32,10 @@ tenant:
         fsGroup: 0
         runAsNonRoot: false
 
+  poolsMetadata:
+    annotations: {}
+    labels: {}
+
   # Security settings
   requestAutoCert: false
 
