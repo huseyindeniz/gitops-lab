@@ -10,7 +10,7 @@ loki:
       admin: loki-admin
     type: s3
     s3:
-      endpoint: minio-staging.minio.svc.cluster.local:9000
+      endpoint: minio.minio.svc.cluster.local:443
       access_key_id: minio
       secret_access_key: minio123
       insecure: true
@@ -23,6 +23,16 @@ loki:
         index:
           prefix: index_
           period: 24h
-  singleBinary:
-    persistence:
-      enabled: false
+  podSecurityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    fsGroup: 0
+singleBinary:
+  persistence:
+    enabled: false
+  extraVolumes:
+    - name: data
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: data
+      mountPath: /var/loki
