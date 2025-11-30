@@ -49,21 +49,3 @@ tenant:
   # Features
   features:
     bucketDNS: false
-
-# Extra HTTP service for internal cluster access (Triton, Loki, etc.)
-extraResources:
-  - |
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: minio-http
-      namespace: minio
-    spec:
-      type: ClusterIP
-      ports:
-        - name: http-minio
-          port: 80
-          protocol: TCP
-          targetPort: 9000
-      selector:
-        v1.min.io/tenant: minio-staging
