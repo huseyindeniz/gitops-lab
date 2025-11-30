@@ -27,10 +27,10 @@ tenant:
           memory: 512Mi
 
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        runAsNonRoot: true
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+        runAsNonRoot: false
 
   # Security settings
   requestAutoCert: false
