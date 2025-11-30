@@ -27,3 +27,9 @@ singleBinary:
   replicas: 1
   persistence:
     enabled: false
+backend:
+  replicas: 0
+read:
+  replicas: 0
+write:
+  replicas: 0
