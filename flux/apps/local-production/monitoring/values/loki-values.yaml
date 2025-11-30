@@ -23,16 +23,16 @@ loki:
         index:
           prefix: index_
           period: 24h
-  podSecurityContext:
-    runAsUser: 0
-    runAsGroup: 0
-    fsGroup: 0
 singleBinary:
+  replicas: 1
   persistence:
-    enabled: false
-  extraVolumes:
-    - name: data
-      emptyDir: {}
-  extraVolumeMounts:
-    - name: data
-      mountPath: /var/loki
+    enabled: true
+    size: 1Gi
+  podSecurityContext:
+    fsGroup: 0
+    runAsGroup: 0
+    runAsNonRoot: false
+    runAsUser: 0
+  containerSecurityContext:
+    readOnlyRootFilesystem: false
+    allowPrivilegeEscalation: false
