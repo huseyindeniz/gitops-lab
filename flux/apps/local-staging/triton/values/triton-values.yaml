@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   imageName: nvcr.io/nvidia/tritonserver:25.03-py3
   pullPolicy: IfNotPresent
-  modelRepositoryPath: s3://minio-http.minio.svc.cluster.local/triton-model-repo
+  modelRepositoryPath: s3://minio.minio.svc.cluster.local/triton-model-repo
   numGpus: 1
 
 service:
