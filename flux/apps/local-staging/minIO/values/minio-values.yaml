@@ -4,9 +4,11 @@
 tenant:
   name: minio-staging
 
-  # Configuration secret with root credentials
-  configuration:
+  # Configuration secret with root credentials (new format since v5.0.15)
+  configSecret:
     name: minio-credentials
+    accessKey: minio
+    secretKey: minio123
 
   # Storage pools
   pools:
@@ -24,26 +26,9 @@ tenant:
           cpu: 300m
           memory: 512Mi
 
-  # Console (MinIO UI)
-  console:
-    replicas: 1
-    resources:
-      requests:
-        cpu: 100m
-        memory: 128Mi
-      limits:
-        cpu: 200m
-        memory: 256Mi
-
   # Security settings
   requestAutoCert: false
 
   # Features
   features:
     bucketDNS: false
-
-# Root credentials secret
-secrets:
-  name: minio-credentials
-  accessKey: minio
-  secretKey: minio123
