@@ -17,7 +17,9 @@ resource "kubernetes_persistent_volume" "harbor_registry_pv" {
     capacity = {
       storage = "20Gi"
     }
-    access_modes = ["ReadWriteMany"]
+    access_modes                     = ["ReadWriteMany"]
+    storage_class_name               = "standard"
+    persistent_volume_reclaim_policy = "Retain"
     persistent_volume_source {
       host_path {
         path = "/mnt/data/shared/harbor-registry"
@@ -25,6 +27,8 @@ resource "kubernetes_persistent_volume" "harbor_registry_pv" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.harbor]
 }
 
 # REGISTRY PVC
@@ -35,13 +39,16 @@ resource "kubernetes_persistent_volume_claim" "harbor_registry_pvc" {
     namespace = kubernetes_namespace.harbor.metadata[0].name
   }
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes       = ["ReadWriteMany"]
+    storage_class_name = "standard"
     resources {
       requests = {
         storage = "20Gi"
       }
     }
   }
+
+  depends_on = [kubernetes_persistent_volume.harbor_registry_pv]
 }
 
 
