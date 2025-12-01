@@ -117,6 +117,9 @@ template:
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/ca.pem"
             subPath: ca.crt
+          - name: istio-ca-cert-volume
+            mountPath: "/etc/docker/certs.d/harbor.staging.local:44302/ca.crt"
+            subPath: ca.crt
     volumes:
       - name: work
         emptyDir: {}
