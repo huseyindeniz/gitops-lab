@@ -14,7 +14,7 @@ inference-api:
   replicaCount: 1
 
   image:
-    repository: harbor.staging.local:30080/library/sample-ai-inference-api-staging
+    repository: harbor.staging.local:30443/library/sample-ai-inference-api-staging
     pullPolicy: IfNotPresent
     tag: "20251201205024"
 
