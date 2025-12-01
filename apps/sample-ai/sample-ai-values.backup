@@ -14,9 +14,9 @@ inference-api:
   replicaCount: 1
 
   image:
-    repository: harbor.staging.local:8082/library/sample-ai-inference-api-staging
+    repository: ghcr.io/huseyindeniz/sample-ai-inference-api-staging # image size is 14.8GB, compresses size: 8.76GB
     pullPolicy: IfNotPresent
-    tag: "20251201205024"
+    tag: "20250316135546"
 
   nameOverride: "sample-ai-inference-api"
   fullnameOverride: "sample-ai-inference-api-staging"
