@@ -19,52 +19,48 @@ ENV OUTPUT_FOLDER=
 
 # Install necessary tools and dependencies
 RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get update && apt-get install -y wget bzip2
+    apt-get update && apt-get install -y curl ca-certificates
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/go/dockerfile-user-best-practices/
 ARG UID=10001
 RUN adduser \
     --disabled-password \
     --gecos "" \
     --home "/home/appuser" \
     --shell "/sbin/nologin" \
-    --no-create-home \
     --uid "${UID}" \
     appuser
-
-# switch to the non-privileged user to run the application
-USER appuser
-
-# Install Miniconda
-WORKDIR /home/appuser
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh \
-    && bash miniconda.sh -b -p /home/appuser/miniconda \
-    && rm miniconda.sh \
-    && /home/appuser/miniconda/bin/conda clean --all --yes
-
-# Add Conda to PATH
-ENV PATH="/home/appuser/miniconda/bin:$PATH"
 
 # Set working directory
 WORKDIR /app
 
-# Copy environment file and application code
-COPY environment.yml .
+# Copy requirements and install dependencies
+COPY requirements.txt .
 
-# Create Conda environment
-RUN --mount=type=cache,target=/opt/conda/pkgs \
-    conda env create -f environment.yml -y && conda clean -afy
+# Install Python and dependencies using uv
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv python install 3.12 && \
+    uv venv && \
+    uv pip install -r requirements.txt
 
+# Copy application code
 COPY . .
+
+# Change ownership to appuser
+RUN chown -R appuser:appuser /app
+
+# Switch to the non-privileged user
+USER appuser
 
 # Expose the application port
 EXPOSE ${PORT}
 
-# Run the Flask app in the activated environment
+# Run the Flask app
 CMD ["/bin/bash", "-c", " \
-    source /home/appuser/miniconda/etc/profile.d/conda.sh && \
-    conda activate sample_ai_inference_api && \
+    source /app/.venv/bin/activate && \
     if [ \"$COMMAND\" = \"check\" ]; then \
     python check.py; \
     elif [ \"$COMMAND\" = \"app\" ]; then \
