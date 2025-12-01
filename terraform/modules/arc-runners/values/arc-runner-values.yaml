@@ -97,7 +97,8 @@ template:
           - "dockerd"
           - "--host=unix:///home/runner/var/run/docker.sock"
           - "--dns=10.96.0.10"
-          - "--insecure-registry=harbor.staging.local:30388"
+          - "--insecure-registry=https://harbor.staging.local:44302"
+          - "--insecure-registry=http://harbor.staging.local:8082"
         securityContext:
           privileged: true
           runAsUser: 1001
@@ -117,7 +118,7 @@ template:
             mountPath: "/usr/local/share/ca-certificates/ca.pem"
             subPath: ca.crt
           - name: istio-ca-cert-volume
-            mountPath: "/etc/docker/certs.d/harbor.staging.local:31278/ca.crt"
+            mountPath: "/etc/docker/certs.d/harbor.staging.local:44302/ca.crt"
             subPath: ca.crt
     volumes:
       - name: work

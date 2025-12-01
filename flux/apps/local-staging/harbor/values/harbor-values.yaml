@@ -1,7 +1,11 @@
 expose:
   type: nodePort
   tls:
-    enabled: false
+    enabled: true
+    auto:
+      # The common name used to generate the certificate, it's necessary
+      # when the type isn't "ingress"
+      commonName: "harbor.staging.local"
   nodePort:
     name: harbor
     ports:
@@ -12,7 +16,7 @@ expose:
         port: 443
         nodePort: 30443
     annotations: {}
-    labels: {}    
+    labels: {}
   clusterIP:
     name: core-harbor-domain
     staticClusterIP: ""
@@ -31,7 +35,7 @@ expose:
 # the value of "expose.clusterIP.name"
 #
 # If Harbor is deployed behind the proxy, set it as the URL of proxy
-externalURL: https://harbor.staging.local:31278
+externalURL: https://harbor.staging.local:44302
 
 persistence:
   enabled: true

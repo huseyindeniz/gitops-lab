@@ -137,7 +137,7 @@ resource "kubernetes_secret" "harbor_secret" {
     REGISTRY_HTTP_SECRET           = random_password.harbor_registry_secret.result
     REGISTRY_CREDENTIAL_PASSWORD   = random_password.harbor_registry_credential.result
     REGISTRY_PASSWD                = random_password.harbor_registry_credential.result
-    REGISTRY_HTPASSWD              = "harbor_registry_user:${bcrypt(random_password.harbor_registry_credential.result)}"
+    REGISTRY_HTPASSWD              = "harbor_registry_user:${random_password.harbor_registry_credential.bcrypt_hash}"
   }
 
   depends_on = [kubernetes_namespace.harbor]
