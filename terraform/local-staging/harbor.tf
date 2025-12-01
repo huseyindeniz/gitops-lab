@@ -88,3 +88,55 @@ module "harbor_redis" {
 
   depends_on = [module.redis_operator]
 }
+
+# HARBOR SECRETS
+
+resource "random_password" "harbor_secret_key" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "harbor_core_secret" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "harbor_jobservice_secret" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "harbor_registry_secret" {
+  length  = 16
+  special = false
+}
+
+resource "random_password" "harbor_xsrf_key" {
+  length  = 32
+  special = false
+}
+
+resource "random_password" "harbor_registry_credential" {
+  length  = 16
+  special = false
+}
+
+# Main Harbor secret
+resource "kubernetes_secret" "harbor_secret" {
+  metadata {
+    name      = "harbor-secret"
+    namespace = kubernetes_namespace.harbor.metadata[0].name
+  }
+
+  data = {
+    secretKey                      = random_password.harbor_secret_key.result
+    HARBOR_ADMIN_PASSWORD          = "Harbor12345"
+    CSRF_KEY                       = random_password.harbor_xsrf_key.result
+    secret                         = random_password.harbor_core_secret.result
+    JOBSERVICE_SECRET              = random_password.harbor_jobservice_secret.result
+    REGISTRY_HTTP_SECRET           = random_password.harbor_registry_secret.result
+    REGISTRY_CREDENTIAL_PASSWORD   = random_password.harbor_registry_credential.result
+  }
+
+  depends_on = [kubernetes_namespace.harbor]
+}

@@ -89,9 +89,8 @@ persistence:
 # The initial password of Harbor admin. Change it from portal after launching Harbor
 # or give an existing secret for it
 # key in secret is given via (default to HARBOR_ADMIN_PASSWORD)
-# existingSecretAdminPassword:
+existingSecretAdminPassword: "harbor-secret"
 existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
-harborAdminPassword: "Harbor12345"
 
 internalTLS:
   enabled: false
@@ -125,11 +124,15 @@ logLevel: info
 caSecretName: ""
 
 # The secret key used for encryption. Must be a string of 16 chars.
-secretKey: "not-a-secure-key"
 # If using existingSecretSecretKey, the key must be secretKey
-existingSecretSecretKey: ""
+existingSecretSecretKey: "harbor-secret"
 
 registry:
+  secret: ""
+  existingSecret: "harbor-secret"
+  existingSecretKey: REGISTRY_HTTP_SECRET
+  credentials:
+    existingSecret: "harbor-secret"
   initContainers:
     - name: init-registry
       image: busybox:1.35.0-uclibc
@@ -140,6 +143,19 @@ registry:
       volumeMounts:
         - name: registry-data
           mountPath: /mnt/data/harbor-registry
+
+core:
+  secret: ""
+  existingSecret: "harbor-secret"
+  existingSecretKey: secret
+  xsrfKey: ""
+  existingXsrfSecret: "harbor-secret"
+  existingXsrfSecretKey: CSRF_KEY
+
+jobservice:
+  secret: ""
+  existingSecret: "harbor-secret"
+  existingSecretKey: JOBSERVICE_SECRET
 
 # The proxy settings for updating trivy vulnerabilities from the Internet and replicating
 # artifacts from/to the registries that cannot be reached directly

@@ -96,6 +96,7 @@ template:
         args:
           - "dockerd"
           - "--host=unix:///home/runner/var/run/docker.sock"
+          - "--dns=10.96.0.10"
           - "--insecure-registry=https://harbor.staging.local:44302"
           - "--insecure-registry=http://harbor.staging.local:8082"
         securityContext:
