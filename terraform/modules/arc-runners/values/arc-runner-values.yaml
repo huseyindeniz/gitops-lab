@@ -25,6 +25,10 @@ template:
           - -c
           - |
             set -x
+            # Copy istio cert to CA certificates directory and update CA store
+            cp /tmp/istio-ca/ca.crt /usr/local/share/ca-certificates/istio-ca.crt
+            update-ca-certificates
+            # Now copy /etc with updated CA store to dind-etc
             cp -a /etc/. /dind-etc/
             echo 'runner:x:1001:1001:runner:/home/runner:/bin/ash' >> /dind-etc/passwd
             echo 'runner:x:1001:' >> /dind-etc/group
@@ -40,6 +44,8 @@ template:
             mountPath: /dind-etc
           - name: dind-home
             mountPath: /dind-home
+          - name: istio-ca-cert-volume
+            mountPath: /tmp/istio-ca
       - name: init-update-ca-certificates
         image: ghcr.io/actions/actions-runner:latest
         command:
@@ -136,4 +142,3 @@ template:
       - name: istio-ca-cert-volume
         secret:
           secretName: istio-ca-cert
-          secretNamespace: istio-system
