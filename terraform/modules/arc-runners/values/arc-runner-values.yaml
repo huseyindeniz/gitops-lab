@@ -52,13 +52,13 @@ template:
             # Copy updated certs to the shared volume
             cp -r /etc/ssl/certs/* /mnt/certs/
         securityContext:
-          runAsUser: 0            
+          runAsUser: 0
         volumeMounts:
           - name: certs-volume
             mountPath: /mnt/certs
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/istio-ca.crt"
-            subPath: ca.crt            
+            subPath: ca.crt
     containers:
       - name: runner
         image: ghcr.io/actions/actions-runner:latest
@@ -80,25 +80,25 @@ template:
             mountPath: /home/runner/_work
           - name: dind-sock
             mountPath: /home/runner/var/run
-            readOnly: true  
+            readOnly: true
           - name: certs-volume
             mountPath: /etc/ssl/certs
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/istio-ca.crt"
-            subPath: ca.crt            
+            subPath: ca.crt
           - name: istio-ca-cert-volume
             mountPath: "/usr/local/share/ca-certificates/ca.pem"
-            subPath: ca.crt           
+            subPath: ca.crt
           - name: dind-etc
-            mountPath: /home/runner/etc-debug         
+            mountPath: /home/runner/etc-debug
       - name: dind
         image: docker:dind-rootless
         args:
           - "dockerd"
           - "--host=unix:///home/runner/var/run/docker.sock"
           - "--dns=10.96.0.10"
-          - "--insecure-registry=https://harbor.staging.local:31278"
-          - "--insecure-registry=http://harbor.staging.local:30388"
+          - "--insecure-registry=https://harbor.staging.local:44302"
+          - "--insecure-registry=http://harbor.staging.local:8082"
         securityContext:
           privileged: true
           runAsUser: 1001
@@ -118,7 +118,7 @@ template:
             mountPath: "/usr/local/share/ca-certificates/ca.pem"
             subPath: ca.crt
           - name: istio-ca-cert-volume
-            mountPath: "/etc/docker/certs.d/harbor.staging.local:31278/ca.crt"
+            mountPath: "/etc/docker/certs.d/harbor.staging.local:44302/ca.crt"
             subPath: ca.crt
     volumes:
       - name: work
@@ -132,7 +132,7 @@ template:
       - name: dind-home
         emptyDir: {}
       - name: certs-volume
-        emptyDir: {}        
+        emptyDir: {}
       - name: istio-ca-cert-volume
         secret:
           secretName: istio-ca-cert
