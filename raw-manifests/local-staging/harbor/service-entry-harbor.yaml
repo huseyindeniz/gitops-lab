@@ -9,11 +9,11 @@ spec:
   location: MESH_INTERNAL
   resolution: DNS
   addresses:
-    - 10.110.187.221 # this is the cluster ip of the istio ingress gateway  
+    - 10.98.50.62 # cluster ip of istio-ingressgateway-staging
   ports:
     - name: http
-      number: 31670 # this is the istio ingress ingress cluster ip http port
+      number: 30388 # istio ingress gateway http NodePort
       protocol: HTTP
     - name: https
-      number: 30488 # this is the istio ingress ingress cluster ip https port
+      number: 31278 # istio ingress gateway https NodePort
       protocol: HTTPS
