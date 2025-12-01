@@ -2,10 +2,9 @@ expose:
   type: nodePort
   tls:
     enabled: true
-    auto:
-      # The common name used to generate the certificate, it's necessary
-      # when the type isn't "ingress"
-      commonName: "harbor.staging.local"
+    certSource: secret
+    secret:
+      secretName: "harbor-nginx-tls"
   nodePort:
     name: harbor
     ports:
@@ -148,6 +147,7 @@ core:
   secret: ""
   existingSecret: "harbor-secret"
   existingSecretKey: secret
+  secretName: "harbor-core-tls"
   xsrfKey: ""
   existingXsrfSecret: "harbor-secret"
   existingXsrfSecretKey: CSRF_KEY

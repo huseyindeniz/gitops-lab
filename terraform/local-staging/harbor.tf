@@ -142,3 +142,80 @@ resource "kubernetes_secret" "harbor_secret" {
 
   depends_on = [kubernetes_namespace.harbor]
 }
+
+# TLS Secrets for Harbor Core (token encryption)
+resource "tls_private_key" "harbor_core_token" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "tls_self_signed_cert" "harbor_core_token" {
+  private_key_pem = tls_private_key.harbor_core_token.private_key_pem
+
+  subject {
+    common_name = "harbor-token-ca"
+  }
+
+  validity_period_hours = 87600 # 10 years
+
+  allowed_uses = [
+    "digital_signature",
+    "key_encipherment",
+  ]
+}
+
+resource "kubernetes_secret" "harbor_core_tls" {
+  metadata {
+    name      = "harbor-core-tls"
+    namespace = kubernetes_namespace.harbor.metadata[0].name
+  }
+
+  type = "kubernetes.io/tls"
+
+  data = {
+    "tls.crt" = tls_self_signed_cert.harbor_core_token.cert_pem
+    "tls.key" = tls_private_key.harbor_core_token.private_key_pem
+  }
+
+  depends_on = [kubernetes_namespace.harbor]
+}
+
+# TLS Secrets for Harbor Nginx (external TLS)
+resource "tls_private_key" "harbor_nginx" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "tls_self_signed_cert" "harbor_nginx" {
+  private_key_pem = tls_private_key.harbor_nginx.private_key_pem
+
+  subject {
+    common_name = "harbor.staging.local"
+  }
+
+  dns_names = ["harbor.staging.local"]
+
+  validity_period_hours = 87600 # 10 years
+
+  allowed_uses = [
+    "digital_signature",
+    "key_encipherment",
+    "server_auth",
+  ]
+}
+
+resource "kubernetes_secret" "harbor_nginx_tls" {
+  metadata {
+    name      = "harbor-nginx-tls"
+    namespace = kubernetes_namespace.harbor.metadata[0].name
+  }
+
+  type = "kubernetes.io/tls"
+
+  data = {
+    "tls.crt" = tls_self_signed_cert.harbor_nginx.cert_pem
+    "tls.key" = tls_private_key.harbor_nginx.private_key_pem
+  }
+
+  depends_on = [kubernetes_namespace.harbor]
+}
