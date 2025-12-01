@@ -12,8 +12,8 @@ spec:
     - 10.98.50.62 # cluster ip of istio-ingressgateway-staging
   ports:
     - name: http
-      number: 80 # istio ingress gateway ClusterIP HTTP
+      number: 30388 # istio ingress gateway http NodePort
       protocol: HTTP
     - name: https
-      number: 443 # istio ingress gateway ClusterIP HTTPS
+      number: 31278 # istio ingress gateway https NodePort
       protocol: HTTPS
