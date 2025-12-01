@@ -9,11 +9,11 @@ spec:
   location: MESH_INTERNAL
   resolution: DNS
   addresses:
-    - 172.17.0.101 # LoadBalancer IP of istio-ingressgateway-staging
+    - 10.98.50.62 # cluster ip of istio-ingressgateway-staging
   ports:
     - name: http
-      number: 8082 # istio ingress gateway LoadBalancer HTTP
+      number: 80 # istio ingress gateway ClusterIP HTTP
       protocol: HTTP
     - name: https
-      number: 44302 # istio ingress gateway LoadBalancer HTTPS
+      number: 443 # istio ingress gateway ClusterIP HTTPS
       protocol: HTTPS
