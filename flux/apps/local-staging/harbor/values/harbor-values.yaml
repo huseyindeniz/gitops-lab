@@ -35,7 +35,7 @@ expose:
 # the value of "expose.clusterIP.name"
 #
 # If Harbor is deployed behind the proxy, set it as the URL of proxy
-externalURL: https://harbor.staging.local:44302
+externalURL: https://harbor.staging.local
 
 persistence:
   enabled: true
