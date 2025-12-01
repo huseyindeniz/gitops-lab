@@ -1,0 +1,14 @@
+[project]
+name = "inference-api"
+version = "0.1.0"
+description = "Sample AI Inference API"
+requires-python = "==3.12.*"
+dependencies = [
+    "flask>=3.1.0",
+    "python-dotenv>=1.0.1",
+    "flask-cors>=5.0.0",
+    "onnxruntime>=1.20.0",
+    "onnxruntime-gpu>=1.20.0",
+    "numpy>=2.2.0",
+    "pillow>=11.1.0",
+]

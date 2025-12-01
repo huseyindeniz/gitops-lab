@@ -2,3 +2,7 @@ Dockerfile
 models/
 outputs/
 uploads/
+.venv
+__pycache__
+*.pyc
+.git

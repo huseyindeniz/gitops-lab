@@ -17,7 +17,7 @@ services:
     networks:
       - sample-ai-app-network
     volumes:
-      - /mnt/d/volumes/shared/sample-ai-backend/:/app/data/
+      - D:/volumes/shared/sample-ai-backend/:/app/data/
     deploy:
       resources:
         reservations:

@@ -1,3 +1,4 @@
+.venv
 *.pth
 models/
 outputs/
