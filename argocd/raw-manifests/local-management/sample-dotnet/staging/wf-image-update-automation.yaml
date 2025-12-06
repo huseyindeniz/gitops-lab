@@ -10,7 +10,7 @@ spec:
     kind: GitRepository
     name: gitopslab
     namespace: flux-system
-    
+
   git:
     checkout:
       ref:
@@ -20,5 +20,5 @@ spec:
         email: "huseyindenizkivrak@gmail.com"
         name: "Flux Automation Bot"
   update:
-    path: "flux/apps/local-staging/sample-dotnet/wf.yaml"
+    path: "argocd/local-staging/sample-dotnet/wf.yaml"
     strategy: "Setters"
