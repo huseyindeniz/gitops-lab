@@ -82,7 +82,7 @@ persistence:
     # must be "filesystem" if you want to use persistent volumes for registry
     type: filesystem
     filesystem:
-      rootdirectory: /mnt/data/harbor-registry
+      rootdirectory: /mnt/data/shared/harbor-registry
       #maxthreads: 100
 
 # The initial password of Harbor admin. Change it from portal after launching Harbor
@@ -135,13 +135,14 @@ registry:
   initContainers:
     - name: init-registry
       image: busybox:1.35.0-uclibc
-      command: [ 'sh', '-c', "chown 10000:10000 /mnt/data/harbor-registry" ]
+      command:
+        ["sh", "-c", "chown 10000:10000 /mnt/data/shared/harbor-registry"]
       securityContext:
         runAsUser: 0
         runAsGroup: 0
       volumeMounts:
         - name: registry-data
-          mountPath: /mnt/data/harbor-registry
+          mountPath: /mnt/data/shared/harbor-registry
 
 core:
   secret: ""
@@ -187,18 +188,18 @@ trivy:
 database:
   type: external
   external:
-    host: "harbor-pg-rw"  # CloudNativePG creates {cluster-name}-rw service
+    host: "harbor-pg-rw" # CloudNativePG creates {cluster-name}-rw service
     port: "5432"
     username: "user_harbor"
     password: ""
     coreDatabase: "registry"
-    existingSecret: "harbor-pg-app"  # CloudNativePG creates this secret automatically
+    existingSecret: "harbor-pg-app" # CloudNativePG creates this secret automatically
     sslmode: "disable"
 
 redis:
   type: external
   external:
-    addr: "harbor-redis.harbor.svc.cluster.local:6379"  # Redis Operator creates {redis-name} service
+    addr: "harbor-redis.harbor.svc.cluster.local:6379" # Redis Operator creates {redis-name} service
     # username field can be an empty string, and it will be authenticated against the default user
     username: ""
     password: ""

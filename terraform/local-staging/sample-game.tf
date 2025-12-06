@@ -13,7 +13,7 @@ module "sample_game_redis" {
   resources_prefix = kubernetes_namespace.sample_game.metadata[0].name
   redis_namespace  = kubernetes_namespace.sample_game.metadata[0].name
   storage_size     = "1Gi"
-  pv_path          = "/mnt/data/sample-game-redis"
+  pv_path          = "/mnt/data/shared/sample-game-redis"
 
   providers = {
     kubernetes = kubernetes

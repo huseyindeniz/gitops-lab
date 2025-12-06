@@ -10,7 +10,7 @@ module "weather_forecast_postgresql" {
   db_name              = "db_${each.key}"   # Example: db_dev, db_test
   db_port              = 5432
   storage_size         = "1Gi"
-  pv_path              = "/mnt/data/${var.app_ns_prefix_sample_dotnet_wf}-${each.key}"
+  pv_path              = "/mnt/data/shared/${var.app_ns_prefix_sample_dotnet_wf}-${each.key}"
 
   providers = {
     kubernetes = kubernetes

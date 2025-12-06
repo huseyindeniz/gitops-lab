@@ -63,7 +63,7 @@ module "harbor_postgresql" {
   db_name              = "registry"
   db_port              = 5432
   storage_size         = "1Gi"
-  pv_path              = "/mnt/data/harbor-postgresql"
+  pv_path              = "/mnt/data/shared/harbor-postgresql"
 
   providers = {
     kubernetes = kubernetes
@@ -79,7 +79,7 @@ module "harbor_redis" {
   resources_prefix = kubernetes_namespace.harbor.metadata[0].name
   redis_namespace  = kubernetes_namespace.harbor.metadata[0].name
   storage_size     = "1Gi"
-  pv_path          = "/mnt/data/harbor-redis"
+  pv_path          = "/mnt/data/shared/harbor-redis"
 
   providers = {
     kubernetes = kubernetes

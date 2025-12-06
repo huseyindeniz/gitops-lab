@@ -1,3 +1,24 @@
+# POSTGRESQL PV
+resource "kubernetes_persistent_volume" "postgresql_pv" {
+  metadata {
+    name = "${var.resources_prefix}-pg-pv"
+  }
+  spec {
+    capacity = {
+      storage = var.storage_size
+    }
+    access_modes                     = ["ReadWriteOnce"]
+    storage_class_name               = "standard"
+    persistent_volume_reclaim_policy = "Retain"
+    persistent_volume_source {
+      host_path {
+        path = var.pv_path
+        type = "DirectoryOrCreate"
+      }
+    }
+  }
+}
+
 # RANDOM PASSWORD
 resource "random_password" "postgresql_password" {
   length  = 16   # Length of the password
@@ -98,6 +119,7 @@ resource "kubectl_manifest" "postgresql_cluster" {
 
   depends_on = [
     kubernetes_secret.postgresql_bootstrap_secret,
-    kubernetes_secret.postgresql_app_secret
+    kubernetes_secret.postgresql_app_secret,
+    kubernetes_persistent_volume.postgresql_pv
   ]
 }

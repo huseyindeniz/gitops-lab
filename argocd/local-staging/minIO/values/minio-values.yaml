@@ -15,8 +15,9 @@ tenant:
     - servers: 1
       name: pool-0
       volumesPerServer: 1
-      size: 10Gi
+      size: 40Gi
       storageClassName: standard
+      volumeName: minio-data-pv
 
       resources:
         requests:

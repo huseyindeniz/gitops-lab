@@ -1,3 +1,24 @@
+# REDIS PV
+resource "kubernetes_persistent_volume" "redis_pv" {
+  metadata {
+    name = "${var.resources_prefix}-redis-pv"
+  }
+  spec {
+    capacity = {
+      storage = var.storage_size
+    }
+    access_modes                     = ["ReadWriteOnce"]
+    storage_class_name               = "standard"
+    persistent_volume_reclaim_policy = "Retain"
+    persistent_volume_source {
+      host_path {
+        path = var.pv_path
+        type = "DirectoryOrCreate"
+      }
+    }
+  }
+}
+
 # REDIS STANDALONE INSTANCE
 # Using OT-CONTAINER-KIT Redis Operator
 resource "kubectl_manifest" "redis_standalone" {
@@ -29,7 +50,7 @@ resource "kubectl_manifest" "redis_standalone" {
                 storage = var.storage_size
               }
             }
-            storageClassName = "standard" # Default for Minikube
+            storageClassName = "standard"
           }
         }
       }
@@ -40,4 +61,6 @@ resource "kubectl_manifest" "redis_standalone" {
       }
     }
   })
+
+  depends_on = [kubernetes_persistent_volume.redis_pv]
 }

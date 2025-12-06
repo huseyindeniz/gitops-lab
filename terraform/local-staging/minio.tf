@@ -4,4 +4,23 @@ resource "kubernetes_namespace" "minio" {
   }
 }
 
-# PV and PVC removed - MinIO Operator manages its own storage via Tenant CRD
+# MinIO Data PV - persistent on host
+resource "kubernetes_persistent_volume" "minio_data_pv" {
+  metadata {
+    name = "minio-data-pv"
+  }
+  spec {
+    capacity = {
+      storage = "40Gi"
+    }
+    access_modes                     = ["ReadWriteOnce"]
+    storage_class_name               = ""
+    persistent_volume_reclaim_policy = "Retain"
+    persistent_volume_source {
+      host_path {
+        path = "/mnt/data/shared/minio"
+        type = "DirectoryOrCreate"
+      }
+    }
+  }
+}
