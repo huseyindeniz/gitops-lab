@@ -17,7 +17,7 @@ spec:
             namespace: networking-test
   template:
     metadata:
-      name: '{{name}}'
+      name: "{{name}}"
     spec:
       project: default
       sources:
@@ -29,12 +29,12 @@ spec:
               customMessage: "{{customMessage}}"
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          path: "raw-manifests/local-management/network-debug-app/{{rawManifestPath}}"
+          path: "argocd/raw-manifests/local-management/network-debug-app/{{rawManifestPath}}"
           directory:
-            recurse: true               
+            recurse: true
       destination:
         server: "https://kubernetes.default.svc"
-        namespace: '{{namespace}}'
+        namespace: "{{namespace}}"
       syncPolicy:
         automated:
           prune: true

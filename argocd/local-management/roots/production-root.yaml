@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-staging-root
+  name: argo-production-root
   namespace: "argocd"
 spec:
   project: default
   source:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
     targetRevision: main
-    path: "flux/apps/local-staging"
+    path: "argocd/local-production"
     directory:
       recurse: true
   destination:
@@ -23,4 +23,4 @@ spec:
       backoff:
         duration: 5s
         factor: 2
-        maxDuration: 1m      
+        maxDuration: 1m

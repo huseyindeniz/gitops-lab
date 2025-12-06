@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-production-root
+  name: argo-workflows-staging-root
   namespace: "argocd"
 spec:
   project: default
   source:
     repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
     targetRevision: main
-    path: "flux/apps/local-production"
+    path: "argocd/argo-workflow-templates/local-staging"
     directory:
       recurse: true
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    server: "https://172.17.0.5:8443"
+    namespace: argo-workflows
   syncPolicy:
     automated:
       prune: true
@@ -23,4 +23,4 @@ spec:
       backoff:
         duration: 5s
         factor: 2
-        maxDuration: 1m   
+        maxDuration: 1m
