@@ -11,15 +11,15 @@ spec:
       chart: "gateway"
       helm:
         valueFiles:
-          - "$values/flux/apps/local-staging/istio/values/istio-ingressgateway-values.yaml"
+          - "$values/argocd/local-staging/istio/values/istio-ingressgateway-values.yaml"
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-staging/istio"
+      path: "argocd/raw-manifests/local-staging/istio"
       directory:
-        recurse: true      
+        recurse: true
   destination:
     server: "https://172.17.0.5:8443"
     namespace: "istio-system"
@@ -32,4 +32,4 @@ spec:
       backoff:
         duration: 5s
         factor: 2
-        maxDuration: 1m   
+        maxDuration: 1m

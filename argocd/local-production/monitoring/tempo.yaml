@@ -12,13 +12,13 @@ spec:
       helm:
         valueFiles:
           - values.yaml
-          - $values/flux/apps/local-production/monitoring/values/tempo-values.yaml
+          - $values/argocd/local-production/monitoring/values/tempo-values.yaml
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-production/monitoring/tempo"
+      path: "argocd/raw-manifests/local-production/monitoring/tempo"
       directory:
         recurse: true
   destination:

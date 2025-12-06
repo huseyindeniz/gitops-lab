@@ -11,13 +11,13 @@ spec:
       targetRevision: 1.15.0
       helm:
         valueFiles:
-          - "$values/flux/apps/local-staging/ollama-mcp/values/ollama-values.yaml"
+          - "$values/argocd/local-staging/ollama-mcp/values/ollama-values.yaml"
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-staging/ollama-mcp/ollama"
+      path: "argocd/raw-manifests/local-staging/ollama-mcp/ollama"
       directory:
         recurse: true
   destination:

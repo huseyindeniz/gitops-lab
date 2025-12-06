@@ -9,15 +9,15 @@ GitOps Playground (K8S, Terraform, Argo CD, Helm, Github Workflows etc.)
 
 ## Repository Structure
 
-| **dir name**  |                                           |
-| ------------- | ----------------------------------------- |
-| apps          | Holds sample applications code            |
-| flux          | holds argocd application manifests        |
-| helm-charts   | holds various helm charts                 |
-| host          | holds applications run on my host machine |
-| raw-manifests | holds various k8s resources               |
-| scripts       | holds various scripts                     |
-| terraform     | holds terraform files                     |
+| **dir name**         |                                           |
+| -------------------- | ----------------------------------------- |
+| apps                 | Holds sample applications code            |
+| argocd/local-x       | holds argocd application manifests        |
+| argocd/raw-manifests | holds various k8s resources               |
+| helm-charts          | holds various helm charts                 |
+| host                 | holds applications run on my host machine |
+| scripts              | holds various scripts                     |
+| terraform            | holds terraform files                     |
 
 TODO: add more explanation here.
 

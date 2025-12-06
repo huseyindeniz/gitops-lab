@@ -21,15 +21,15 @@ spec:
           path: "helm-charts/sample-game"
           helm:
             valueFiles:
-              - "$values/flux/apps/local-staging/sample-game/values/sample-game-values.yaml"
+              - "$values/argocd/local-staging/sample-game/values/sample-game-values.yaml"
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
           ref: values
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          path: "raw-manifests/local-staging/sample-game"
+          path: "argocd/raw-manifests/local-staging/sample-game"
           directory:
-            recurse: true          
+            recurse: true
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "sample-game-staging"

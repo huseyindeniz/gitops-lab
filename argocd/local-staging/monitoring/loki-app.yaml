@@ -12,13 +12,13 @@ spec:
       helm:
         valueFiles:
           - values.yaml
-          - $values/flux/apps/local-staging/monitoring/values/loki-values.yaml
+          - $values/argocd/local-staging/monitoring/values/loki-values.yaml
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-staging/monitoring/loki"
+      path: "argocd/raw-manifests/local-staging/monitoring/loki"
       directory:
         recurse: true
   destination:

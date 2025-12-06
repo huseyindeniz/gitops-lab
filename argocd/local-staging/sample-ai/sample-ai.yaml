@@ -21,13 +21,13 @@ spec:
           path: "helm-charts/sample-ai"
           helm:
             valueFiles:
-              - "$values/flux/apps/local-staging/sample-ai/values/sample-ai-values.yaml"
+              - "$values/argocd/local-staging/sample-ai/values/sample-ai-values.yaml"
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          ref: values              
+          ref: values
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          path: "raw-manifests/local-staging/sample-ai"
+          path: "argocd/raw-manifests/local-staging/sample-ai"
           directory:
             recurse: true
       destination:

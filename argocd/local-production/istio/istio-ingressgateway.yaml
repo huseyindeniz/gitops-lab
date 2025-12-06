@@ -11,15 +11,15 @@ spec:
       chart: "gateway"
       helm:
         valueFiles:
-          - "$values/flux/apps/local-production/istio/values/istio-ingressgateway-values.yaml"
+          - "$values/argocd/local-production/istio/values/istio-ingressgateway-values.yaml"
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-production/istio"
+      path: "argocd/raw-manifests/local-production/istio"
       directory:
-        recurse: true       
+        recurse: true
   destination:
     server: "https://172.17.0.8:8443"
     namespace: "istio-system"

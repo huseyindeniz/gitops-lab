@@ -11,13 +11,13 @@ spec:
       targetRevision: 7.1.1
       helm:
         valueFiles:
-          - "$values/flux/apps/local-production/minIO/values/minio-values.yaml"
+          - "$values/argocd/local-production/minIO/values/minio-values.yaml"
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-production/minio"
+      path: "argocd/raw-manifests/local-production/minio"
       directory:
         recurse: true
   destination:

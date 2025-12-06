@@ -11,13 +11,13 @@ spec:
       targetRevision: 0.45.12
       helm:
         valueFiles:
-          - "$values/flux/apps/local-staging/argo-workflows/values/aw-values.yaml"
+          - "$values/argocd/local-staging/argo-workflows/values/aw-values.yaml"
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-staging/argo-workflows"
+      path: "argocd/raw-manifests/local-staging/argo-workflows"
       directory:
         recurse: true
   destination:

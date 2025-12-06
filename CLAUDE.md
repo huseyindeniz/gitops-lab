@@ -11,8 +11,8 @@ This is a GitOps playground repository demonstrating Kubernetes, Terraform, Argo
 - `apps/` - Sample applications (my-sample-app-1, sample-game, sample-ai, sample-llm-mcp)
 - `terraform/` - Infrastructure as Code for local clusters (local-management, local-staging, local-production) and cloud providers (AWS, Azure, GKE)
 - `helm-charts/` - Reusable Helm charts for various application types
-- `flux/` - Argo CD application manifests
-- `raw-manifests/` - Kubernetes resource definitions
+- `argocd/local-x` - Argo CD application manifests
+- `argocd/raw-manifests/` - Kubernetes resource definitions
 - `scripts/` - Utility scripts for cluster operations
 - `host/` - Applications running on the host machine
 
@@ -23,11 +23,13 @@ This is a GitOps playground repository demonstrating Kubernetes, Terraform, Argo
 Located in `apps/my-sample-app-1/dotnet-services/`
 
 **Architecture Pattern**: Clean Architecture with DDD principles
+
 - `Domain/` - Domain entities and interfaces (no dependencies)
 - `Infra/` - Infrastructure layer (EF Core, PostgreSQL)
 - `API/` - Web API layer (controllers, models, mapping profiles)
 
 **Technology Stack**:
+
 - .NET 9.0
 - Entity Framework Core 9.0 with PostgreSQL (Npgsql)
 - AutoMapper for object mapping
@@ -35,6 +37,7 @@ Located in `apps/my-sample-app-1/dotnet-services/`
 - Swagger/OpenAPI
 
 **Testing Projects**:
+
 - `mySampleApp1.wf.tests.unit/` - Unit tests
 - `mySampleApp1.wf.tests.integration/` - Integration tests
 - `mySampleApp1.wf.tests.fitness/` - Fitness tests
@@ -45,11 +48,13 @@ Located in `apps/my-sample-app-1/dotnet-services/`
 Located in `apps/sample-llm-mcp/backend/OllamaMCP/`
 
 **Key Component**: `ToolRouterService.cs` (OllamaMCPApi/MCPClient/)
+
 - Integrates with Model Context Protocol servers via multiple transports (stdio, SSE, HTTP)
 - Routes tool calls to appropriate MCP clients
 - Uses Microsoft.Extensions.AI and ModelContextProtocol.Client
 
 **Projects**:
+
 - `OllamaMCPApi/` - Main API project
 - `MCPSseServerExample/` - SSE server example
 - `MCPStreamableHttpExample/` - HTTP streaming example
@@ -147,17 +152,20 @@ terraform apply
 Located in `.github/workflows/`
 
 **Test Workflows** (run on GitHub-hosted runners):
+
 - `mySampleApp1-UnitTests.yml` - .NET unit tests
 - `mySampleApp1-IntegrationTests.yml` - .NET integration tests
 - `mySampleApp1-FitnessTests.yml` - .NET fitness tests
 
 **BA Tests** (run on self-hosted ARC runners in local-staging cluster):
+
 - `mySampleApp1-BATests.yml` - Cucumber/Playwright tests against deployed environments
 - Uses `arc-runner-local-staging` runner
 - Triggered via repository_dispatch or manual workflow_dispatch
 - Updates PR status on completion
 
 **Publish Workflows**:
+
 - `mySampleApp1-publish.yml` - Build and push .NET Docker images
 - `sample-game-client-publish.yml` / `sample-game-server-publish.yml` - Game deployments
 - `sample-ai-*-publish.yml` - AI app components
@@ -178,11 +186,13 @@ Located in `.github/workflows/`
 This repository uses Kubernetes Operators for managing stateful workloads. Operators are installed via Terraform and manage resources declaratively.
 
 **Installed Operators** (via `terraform/modules/`):
+
 - `cloudnative-pg-operator/` - CloudNativePG for PostgreSQL (Apache 2.0 license)
 - `redis-operator/` - OT-CONTAINER-KIT for Redis (Apache 2.0 license)
 - `minio-operator/` - MinIO Operator for object storage (AGPLv3 license)
 
 **How Operators Work**:
+
 1. Operator pods run continuously in dedicated namespaces (`cnpg-system`, `ot-operators`, `minio-operator`)
 2. Each operator watches for Custom Resource Definitions (CRDs) across all namespaces
 3. When a CRD is created (e.g., `Cluster` for PostgreSQL), the operator automatically creates and manages pods, services, and storage
@@ -193,11 +203,13 @@ This repository uses Kubernetes Operators for managing stateful workloads. Opera
 Located in `terraform/modules/`
 
 **Operators**:
+
 - `cloudnative-pg-operator/` - PostgreSQL operator installation
 - `redis-operator/` - Redis operator installation
 - `minio-operator/` - MinIO operator installation
 
 **Infrastructure**:
+
 - `arc-runners/` - GitHub Actions self-hosted runners
 - `argo/` - Argo CD installation
 - `argo-rollouts/` - Argo Rollouts for advanced deployments
@@ -207,6 +219,7 @@ Located in `terraform/modules/`
 - `metalLB/` - Load balancer for bare metal
 
 **Stateful Services** (managed by operators):
+
 - `postgresql/` - CloudNativePG Cluster CRD definitions with backward-compatible services
 - `redis/` - Redis Standalone CRD definitions with backward-compatible services
 
@@ -225,10 +238,12 @@ Located in `helm-charts/`
 ## Deployment Strategies
 
 ### Staging Environments
+
 - `stag-1` and `stag-2` available in local-staging cluster
 - Use Argo Workflows for orchestration
 
 ### Production Environments
+
 - `prod-bluegreen` - Blue/Green deployment strategy
 - `prod-canary` - Canary deployment with gradual rollout
 - Both use Argo Rollouts in local-production cluster
@@ -236,6 +251,7 @@ Located in `helm-charts/`
 ## Testing Strategy
 
 **Test Pyramid**:
+
 1. Unit tests (.NET xUnit) - Fast, isolated
 2. Integration tests (.NET with TestContainers) - Database integration
 3. Fitness tests (.NET) - API contract testing
@@ -246,14 +262,17 @@ Located in `helm-charts/`
 ## Architecture Patterns
 
 ### .NET Clean Architecture
+
 - **Domain Layer**: Pure business logic, no external dependencies
 - **Infrastructure Layer**: Database access via EF Core, implements domain interfaces
 - **API Layer**: ASP.NET Core controllers, DTOs/ViewModels, AutoMapper profiles, FluentValidation
 
 ### Dependency Flow
+
 API → Infra → Domain (dependencies point inward)
 
 ### Database Context
+
 - Uses EF Core Code First migrations
 - PostgreSQL with Npgsql provider
 - Domain entities in Domain project
