@@ -119,8 +119,8 @@ resource "kubernetes_secret" "flux_github_secret" {
   }
 
   data = {
-    "username"   = base64encode("flux-bot")
-    "password" = base64encode(var.flux_github_pat)
+    "username"   = "flux-bot"
+    "password" = var.flux_github_pat
   }
 
   type = "Opaque"

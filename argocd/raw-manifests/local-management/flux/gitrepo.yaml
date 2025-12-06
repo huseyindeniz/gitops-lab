@@ -6,6 +6,7 @@ metadata:
 spec:
   interval: 1m
   url: https://github.com/huseyindeniz/gitops-lab.git
-  branch: main
+  ref:
+    branch: main
   secretRef:
     name: flux-github-secret
