@@ -41,7 +41,7 @@ spec:
           helm:
             valueFiles:
               - values.yaml
-              - $values/flux/apps/local-staging/sample-dotnet/values/wf-values.yaml
+              - $values/argocd/local-staging/sample-dotnet/values/wf-values.yaml
             valuesObject:
               environment: "{{ .envName }}"
               hpa:
@@ -62,20 +62,20 @@ spec:
                 action: "{{ .migrationAction }}"
                 targetMigration: "{{ .targetMigration }}"
               database:
-                host: "sample-dotnet-wf-staging-{{ .envName }}-pg-rw"  # CloudNativePG service
+                host: "sample-dotnet-wf-staging-{{ .envName }}-pg-rw" # CloudNativePG service
                 port: "5432"
                 name: "db_{{ .envName }}"
                 user: "user_{{ .envName }}"
-                secretName: "sample-dotnet-wf-staging-{{ .envName }}-pg-app"  # CloudNativePG creates this
-                passwordKey: "password"  # CloudNativePG uses 'password' key
+                secretName: "sample-dotnet-wf-staging-{{ .envName }}-pg-app" # CloudNativePG creates this
+                passwordKey: "password" # CloudNativePG uses 'password' key
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
           ref: values
         - repoURL: https://github.com/huseyindeniz/gitops-lab.git
           targetRevision: main
-          path: "raw-manifests/local-staging/sample-dotnet/{{ .envName }}"
+          path: "argocd/raw-manifests/local-staging/sample-dotnet/{{ .envName }}"
           directory:
-            recurse: true          
+            recurse: true
       destination:
         server: "https://172.17.0.5:8443"
         namespace: "sample-dotnet-wf-staging-{{ .envName }}" # Use the environment suffix in the namespace
