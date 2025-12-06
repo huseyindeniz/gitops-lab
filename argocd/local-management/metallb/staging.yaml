@@ -7,7 +7,7 @@ spec:
   project: default
   sources:
     - repoURL: "https://github.com/huseyindeniz/gitops-lab.git"
-      path: "raw-manifests/local-staging/metallb"
+      path: "argocd/raw-manifests/local-staging/metallb"
       targetRevision: main
       directory:
         recurse: true
