@@ -16,7 +16,7 @@ inference-api:
   image:
     repository: harbor.staging.local:30443/library/sample-ai-inference-api-staging
     pullPolicy: IfNotPresent
-    tag: "20251201205024"
+    tag: "20251206182513"
     # from ghcr
     # repository: ghcr.io/huseyindeniz/sample-ai-inference-api-staging # image size is 14.8GB, compresses size: 8.76GB
     # pullPolicy: IfNotPresent
