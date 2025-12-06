@@ -8,7 +8,7 @@ resource "kubernetes_persistent_volume" "postgresql_pv" {
       storage = var.storage_size
     }
     access_modes                     = ["ReadWriteOnce"]
-    storage_class_name               = "standard"
+    storage_class_name               = ""
     persistent_volume_reclaim_policy = "Retain"
     persistent_volume_source {
       host_path {
@@ -77,7 +77,10 @@ resource "kubectl_manifest" "postgresql_cluster" {
 
       storage = {
         size         = var.storage_size
-        storageClass = "standard" # Default for Minikube
+        storageClass = ""
+        pvcTemplate = {
+          volumeName = "${var.resources_prefix}-pg-pv"
+        }
       }
 
       postgresql = {
