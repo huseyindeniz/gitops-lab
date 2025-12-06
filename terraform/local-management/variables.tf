@@ -30,20 +30,25 @@ variable "argo_namespace" {
   type        = string
 }
 
-variable "flux_github_org" {
-  description = "Flux GitHub organization"
+variable "flux_namespace" {
+  description = "The name of the Flux namespace"
   type        = string
 }
 
-variable "flux_github_repository" {
-  description = "Flux GitHub repository"
-  type        = string
-}
+# variable "flux_github_org" {
+#   description = "Flux GitHub organization"
+#   type        = string
+# }
 
-variable "flux_path" {
-  description = "Flux path"
-  type        = string
-}
+# variable "flux_github_repository" {
+#   description = "Flux GitHub repository"
+#   type        = string
+# }
+
+# variable "flux_path" {
+#   description = "Flux path"
+#   type        = string
+# }
 
 variable "flux_github_pat" {
   description = "Flux GitHub PAT"

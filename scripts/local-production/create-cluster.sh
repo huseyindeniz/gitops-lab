@@ -9,6 +9,7 @@ minikube start \
   --gpus all \
   --mount \
   --mount-string="/mnt/d/volumes/shared:/mnt/data/shared" \
+  --insecure-registry "harbor.production.local:30443" \
   --profile local-production
 
 minikube addons enable storage-provisioner -p local-production

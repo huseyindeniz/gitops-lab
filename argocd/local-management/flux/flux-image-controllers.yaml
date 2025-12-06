@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flux-image-controllers
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://fluxcd-community.github.io/helm-charts
+    chart: flux2
+    targetRevision: 2.17.2
+    helm:
+      values: |
+        components:
+          source-controller:
+            enabled: true
+          image-reflector-controller:
+            enabled: true
+          image-automation-controller:
+            enabled: true
+
+          kustomize-controller:
+            enabled: false
+          helm-controller:
+            enabled: false
+          notification-controller:
+            enabled: false
+
+        crds:
+          create: true
+
+        watchAllNamespaces: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: flux-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

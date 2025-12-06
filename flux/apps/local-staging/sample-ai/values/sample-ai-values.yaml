@@ -17,6 +17,13 @@ inference-api:
     repository: harbor.staging.local:30443/library/sample-ai-inference-api-staging
     pullPolicy: IfNotPresent
     tag: "20251201205024"
+    # from ghcr
+    # repository: ghcr.io/huseyindeniz/sample-ai-inference-api-staging # image size is 14.8GB, compresses size: 8.76GB
+    # pullPolicy: IfNotPresent
+    # tag: "20250316135546"
+  registryAuth:
+    - username: Admin
+    - password: Harbor12345 # this is local gitops lab, will be replaced as secret later
 
   nameOverride: "sample-ai-inference-api"
   fullnameOverride: "sample-ai-inference-api-staging"
@@ -82,8 +89,7 @@ frontend:
   ingress:
     enabled: false
     className: ""
-    annotations:
-      {}
+    annotations: {}
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     hosts:

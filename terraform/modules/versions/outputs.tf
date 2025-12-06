@@ -35,10 +35,10 @@ output "argo_rollouts_version" {
   value       = "2.40.5"
 }
 
-output "flux_version" {
-  description = "Flux version (if needed in future)"
-  value       = "2.12.0"
-}
+# output "flux_version" {
+#   description = "Flux version (if needed in future)"
+#   value       = "2.12.0"
+# }
 
 # ============================================================================
 # KUBERNETES OPERATORS

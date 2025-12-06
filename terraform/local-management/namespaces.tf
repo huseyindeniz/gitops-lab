@@ -26,6 +26,16 @@ resource "kubernetes_namespace" "argocd" {
   depends_on = [kubernetes_namespace.istio]
 }
 
+# FLUX
+resource "kubernetes_namespace" "flux" {
+  metadata {
+    name = var.flux_namespace
+  }
+
+  depends_on = [kubernetes_namespace.istio]
+}
+
+
 # Dashboard
 resource "kubernetes_namespace" "dashboard" {
   metadata {

@@ -12,15 +12,15 @@ spec:
       helm:
         valueFiles:
           - values.yaml
-          - $values/flux/apps/local-management/k8sdashboard/values/k8sdashboard-values.yaml
+          - $values/argocd/local-management/k8sdashboard/values/k8sdashboard-values.yaml
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
       ref: values
     - repoURL: https://github.com/huseyindeniz/gitops-lab.git
       targetRevision: main
-      path: "raw-manifests/local-management/k8sdashboard"
+      path: "argocd/raw-manifests/local-management/k8sdashboard"
       directory:
-        recurse: true         
+        recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: kubernetes-dashboard

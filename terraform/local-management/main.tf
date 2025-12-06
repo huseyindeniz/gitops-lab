@@ -104,17 +104,34 @@ resource "kubectl_manifest" "argo_management_root" {
     argo_namespace     = kubernetes_namespace.argocd.metadata.0.name
     gitopslab_repo_url = local.gitopslab_repo_url
     id                 = module.local_argo.id
-    root_path          = "${var.flux_path}/apps/local-management"
+    root_path          = "argocd/local-management"
   })
 
   depends_on = [module.local_argo]
 }
 
-# FLUX
-resource "flux_bootstrap_git" "flux_bootstrap" {
-  embedded_manifests = true
-  path               = var.flux_path
-  components_extra   = ["image-reflector-controller", "image-automation-controller"]
+# FLUX (as image updater only)
 
-  depends_on = [kubectl_manifest.argo_management_root]
+resource "kubernetes_secret" "flux_github_secret" {
+  metadata {
+    name      = "flux-github-secret"
+    namespace = var.flux_namespace
+  }
+
+  data = {
+    "username"   = base64encode("flux-bot")
+    "password" = base64encode(var.flux_github_pat)
+  }
+
+  type = "Opaque"
+
+  depends_on = [kubernetes_namespace.flux]
 }
+
+# resource "flux_bootstrap_git" "flux_bootstrap" {
+#   embedded_manifests = true
+#   path               = var.flux_path
+#   components_extra   = ["image-reflector-controller", "image-automation-controller"]
+
+#   depends_on = [kubectl_manifest.argo_management_root]
+# }
