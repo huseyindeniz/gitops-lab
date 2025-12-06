@@ -8,7 +8,7 @@ spec:
 
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: gitopslab
     namespace: flux-system
 
   git:
