@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build-push:
     runs-on: arc-runner-local-staging
     steps:
@@ -20,7 +19,7 @@ jobs:
           name: library/harbor-image-test
           username: ${{ secrets.HARBOR_USERNAME }}
           password: ${{ secrets.HARBOR_TOKEN }}
-          registry: harbor.staging.local:8082
+          registry: harbor.staging.local:443
           tags: "${{ env.TIMESTAMP }}"
           dockerfile: apps/harbor-image-test/Dockerfile
           context: apps/harbor-image-test

@@ -3,14 +3,12 @@ module "weather_forecast_postgresql" {
 
   source = "../postgresql"
 
-  # Pass environment-specific variables to the postgres module
-  resources_prefix     = "${var.app_ns_prefix_sample_dotnet_wf}-${each.key}" # Use env name as prefix
+  resources_prefix     = "${var.app_ns_prefix_sample_dotnet_wf}-${each.key}"
   postgresql_namespace = "${var.app_ns_prefix_sample_dotnet_wf}-${each.key}"
-  db_user              = "user_${each.key}" # Example: user_dev, user_test
-  db_name              = "db_${each.key}"   # Example: db_dev, db_test
+  db_user              = "user_${each.key}"
+  db_name              = "db_${each.key}"
   db_port              = 5432
   storage_size         = "1Gi"
-  pv_path              = "/mnt/data/shared/${var.app_ns_prefix_sample_dotnet_wf}-${each.key}"
 
   providers = {
     kubernetes = kubernetes

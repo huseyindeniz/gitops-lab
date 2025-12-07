@@ -1,24 +1,3 @@
-# POSTGRESQL PV
-resource "kubernetes_persistent_volume" "postgresql_pv" {
-  metadata {
-    name = "${var.resources_prefix}-pg-pv"
-  }
-  spec {
-    capacity = {
-      storage = var.storage_size
-    }
-    access_modes                     = ["ReadWriteOnce"]
-    storage_class_name               = ""
-    persistent_volume_reclaim_policy = "Retain"
-    persistent_volume_source {
-      host_path {
-        path = var.pv_path
-        type = "DirectoryOrCreate"
-      }
-    }
-  }
-}
-
 # RANDOM PASSWORD
 resource "random_password" "postgresql_password" {
   length  = 16   # Length of the password
@@ -38,7 +17,7 @@ resource "kubernetes_secret" "postgresql_bootstrap_secret" {
 
   data = {
     username = var.db_user
-    password = base64encode(random_password.postgresql_password.result)
+    password = random_password.postgresql_password.result
   }
 
   type = "kubernetes.io/basic-auth"
@@ -57,7 +36,7 @@ resource "kubernetes_secret" "postgresql_app_secret" {
 
   data = {
     username = var.db_user
-    password = base64encode(random_password.postgresql_password.result)
+    password = random_password.postgresql_password.result
   }
 
   type = "kubernetes.io/basic-auth"
@@ -77,10 +56,7 @@ resource "kubectl_manifest" "postgresql_cluster" {
 
       storage = {
         size         = var.storage_size
-        storageClass = ""
-        pvcTemplate = {
-          volumeName = "${var.resources_prefix}-pg-pv"
-        }
+        storageClass = "csi-hostpath-sc"
       }
 
       postgresql = {
@@ -122,7 +98,6 @@ resource "kubectl_manifest" "postgresql_cluster" {
 
   depends_on = [
     kubernetes_secret.postgresql_bootstrap_secret,
-    kubernetes_secret.postgresql_app_secret,
-    kubernetes_persistent_volume.postgresql_pv
+    kubernetes_secret.postgresql_app_secret
   ]
 }

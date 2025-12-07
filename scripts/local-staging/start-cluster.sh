@@ -2,3 +2,5 @@
 minikube start --profile local-staging
 
 minikube addons enable storage-provisioner -p local-staging
+minikube addons enable volumesnapshots -p local-staging
+minikube addons enable csi-hostpath-driver -p local-staging

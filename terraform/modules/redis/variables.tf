@@ -12,8 +12,3 @@ variable "storage_size" {
   description = "Size of the storage for the redis database"
   type        = string
 }
-
-variable "pv_path" {
-  description = "Host path for persistent storage"
-  type        = string
-}
